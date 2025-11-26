@@ -1,7 +1,8 @@
 [![](https://img.shields.io/badge/c++-black?logo=c++&style=for-the-badge)](https://learnxinyminutes.com/c++/)
+<img width="724" height="435" alt="image" src="https://github.com/user-attachments/assets/d8aac96f-7f6a-4147-8a65-35548bead835" />
 
 ## Axe game
-Game developed at course "Udemy: Cpp fundamentals".
+Game developed at course "Udemy: Cpp fundamentals". Use "A" and "D" to move the circle.
 
 ### Build
 ```shell
