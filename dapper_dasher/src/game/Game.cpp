@@ -1,22 +1,28 @@
 #pragma once
-#include "../common.hpp"
+#include "raylib.h"
+#include "../player/Player.cpp"
 
-void Game::start() {
-  InitWindow(windowWidth, windowHeight, "Dapper Dasher");
-  SetTargetFPS(60);
-  player.start();
-}
+class Game {
+  Player player;
 
-void Game::update() { player.update(); }
+public:
+  void start() {
+    InitWindow(windowWidth, windowHeight, "Dapper Dasher");
+    SetTargetFPS(60);
+    player.start();
+  }
 
-void Game::render() {
-  BeginDrawing();
-  ClearBackground(WHITE);
-  player.render();
-  EndDrawing();
-}
+  void update() { player.update(); }
 
-void Game::stop() {
-  player.stop();
-  CloseWindow();
-}
+  void render() {
+    BeginDrawing();
+    ClearBackground(WHITE);
+    player.render();    
+    EndDrawing();
+  }
+
+  void stop() {
+    player.stop();    
+    CloseWindow();    
+    }
+};
