@@ -1,6 +1,11 @@
-# glob select cpps and hpps
-file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS *.cpp)
-file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS *.hpp)
+set(SOURCE_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cpp"
+)
+set(HEADER_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/common.hpp"
+)
 target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES} ${HEADER_FILES})
 
 # enable #include without relative path
