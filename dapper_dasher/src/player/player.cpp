@@ -1,7 +1,7 @@
 #include "common.hpp"
 #include "player.hpp"
 #include "config.hpp"
-#include "timer.cpp"
+#include "timer.hpp"
 
 void Player::start() {};
 
