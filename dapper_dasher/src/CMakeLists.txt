@@ -1,3 +1,7 @@
+add_subdirectory(config)
+
+# library setup
+# ----------------------------------------------------------------------------------------
 set(SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cpp"
@@ -6,14 +10,43 @@ set(SOURCE_FILES
 set(HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/common.hpp"
 )
-target_sources(${PROJECT_NAME} PRIVATE ${SOURCE_FILES} ${HEADER_FILES})
+add_library(${LIBRARY_NAME} STATIC
+    ${SOURCE_FILES}
+    ${HEADER_FILES})
+target_link_libraries(${LIBRARY_NAME} PUBLIC
+    raylib)
 
 # enable #include without relative path
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/game")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/player")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/timer")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/game")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/player")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/timer")
 
 # include config.hpp
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_BINARY_DIR}/config")
-add_subdirectory(config)
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}/config")
+
+# executable setup
+# ----------------------------------------------------------------------------------------
+set(SOURCE_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
+)
+add_executable(${EXECUTABLE_NAME}
+  ${SOURCE_FILES}
+)
+target_link_libraries(${EXECUTABLE_NAME}
+  ${LIBRARY_NAME}
+  raylib)
+
+
+# output dir
+set_target_properties(${EXECUTABLE_NAME} PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+
+# some debug property
+set_property(TARGET ${EXECUTABLE_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:${EXECUTABLE_NAME}>)
+
+# copy resources
+add_custom_command(
+  TARGET ${EXECUTABLE_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${EXECUTABLE_NAME}>/resources
+)

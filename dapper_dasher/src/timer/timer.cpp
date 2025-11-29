@@ -1,27 +1,11 @@
 #pragma once
 #include "raylib.h"
+#include "timer.hpp"
 
-// Simple timer.
-class Timer {
-  double startTime = 0;
-  double endTime = 0;
-  
-public:
-  // set the endTime in seconds  
-  Timer(double endTime) {
-    this->endTime = endTime;    
-  }
+Timer::Timer(double endTime) { this->endTime = endTime; }
 
-  // start the timer  
-  void start() {
-    startTime = GetTime();
-  }
+void Timer::start() { startTime = GetTime(); }
 
-  bool isActive() {
-    return startTime != 0 && elapsed() <= endTime;
-  }
+bool Timer::isActive() { return startTime != 0 && elapsed() <= endTime; }
 
-  double elapsed() {
-    return GetTime() - startTime;    
-  }    
-};
+double Timer::elapsed() { return GetTime() - startTime; }

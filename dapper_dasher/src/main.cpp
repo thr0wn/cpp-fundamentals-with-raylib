@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <iostream>
 #include "raylib.h"
-#include "game.cpp"
+#include "game.hpp"
 
 int main() {
   Game game;
