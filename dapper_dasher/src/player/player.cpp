@@ -6,14 +6,19 @@
 #include "timer.hpp"
 #include "tile-controller.hpp"
 #include <cstdio>
+#include <cmath>
 
 void Player::start() {
   // tile related properties  
-  tile.width = 128;
-  tile.height = 128;
+  tile.width = PLAYER_TILE_WIDTH;
+  tile.height = PLAYER_TILE_HEIGHT;
   tile.x = 0;
-  tile.y = 0;  
-  position = Vector2{windowWidth/2 - tile.width/2, windowHeight - tile.height};  
+  tile.y = 0;
+  position =
+      Vector2{windowWidth / 2 - tile.width / 2, windowHeight - tile.height};
+
+  // animation
+  animationTimer.start();  
 };
 
 void Player::update() {
@@ -31,6 +36,13 @@ void Player::update() {
   }
   if (position.y > (windowHeight - tile.height)) {
     position.y = windowHeight - tile.height;
+  }
+
+  // animation
+  if (!animationTimer.isActive()) {
+    tile.x++;
+    tile.x = std::fmod(tile.x, 6.0f * PLAYER_TILE_WIDTH);
+    animationTimer.start();
   }
 }
 
