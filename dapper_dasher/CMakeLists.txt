@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
 # library and executable name definitions
-set(LIBRARY_NAME game)
+set(LIBRARY_NAME lib)
 set(EXECUTABLE_NAME exe)
 
 # Generate compile_commands.json

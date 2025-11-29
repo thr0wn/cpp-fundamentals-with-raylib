@@ -1,17 +1,17 @@
 #pragma once
-#include "common.hpp"
-#include "timer.hpp"
+#include "config.hpp"
+#include "entity.hpp"
 #include "raylib.h"
 
-class Player : public Entity {
-  float width = 50;
-  float height = 80;
+#define JUMP_TIME 0.25f
+#define INITIAL_GRAVITY 1000.0f
+#define JUMP_VELOCITY -500.0f
 
-  Vector2 position = Vector2{windowWidth/2 - width/2, windowHeight - height/2};
-  const float initialVelocity = 10.0f;
-  float velocity = initialVelocity;
-  float jumpVelocity = -10.0f;
-  Timer jumpTimer{.25f};
+class Player : public Entity {
+  Vector2 position;
+  const float gravity = INITIAL_GRAVITY;
+  float velocity = 0;
+  const float jumpVelocity = JUMP_VELOCITY;
 
 public:
   void start() override;

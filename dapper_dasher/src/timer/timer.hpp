@@ -2,14 +2,15 @@
 
 // Simple timer.
 class Timer {
-  double startTime = 0;
-  double endTime = 0;
+  double startTime;
+  double endTime;
 
 public:
-  // set the endTime in seconds  
-  Timer(double endTime);
-  // start the timer  
+  Timer(double endTIme);  
+  // Start the timer
   void start();
+  // Return true if elapsed time is less than endTime
   bool isActive();
+  // Elapsed time since start  
   double elapsed();    
 };

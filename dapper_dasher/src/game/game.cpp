@@ -1,10 +1,13 @@
+#include "config.hpp"
 #include "game.hpp"
 #include "player.hpp"
+#include "tile-controller.hpp"
 
 void Game::start() {
   InitWindow(windowWidth, windowHeight, "Dapper Dasher");
   SetTargetFPS(60);
   player.start();
+  TileController::start();
 }
 
 void Game::update() { player.update(); }
