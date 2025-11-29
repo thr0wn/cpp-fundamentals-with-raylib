@@ -1,10 +1,7 @@
 #include <cstdio>
 #include <iostream>
 #include "raylib.h"
-#include "./common.hpp"
-#include "./game/Game.cpp"
-#include "./player/Player.cpp"
-#include "./timer/Timer.cpp"
+#include "game.cpp"
 
 int main() {
   Game game;

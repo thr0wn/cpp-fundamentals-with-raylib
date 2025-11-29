@@ -1,6 +1,7 @@
 #pragma once
-#include "../common.hpp"
-#include "../timer/Timer.cpp"
+#include "config.hpp"
+#include "common.hpp"
+#include "timer.cpp"
 
 class Player : public Entity {
   float width = 50;

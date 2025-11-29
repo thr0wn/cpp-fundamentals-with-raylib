@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include "../player/Player.cpp"
+#include "player.cpp"
 
 class Game {
   Player player;
@@ -17,12 +17,12 @@ public:
   void render() {
     BeginDrawing();
     ClearBackground(WHITE);
-    player.render();    
+    player.render();
     EndDrawing();
   }
 
   void stop() {
-    player.stop();    
-    CloseWindow();    
-    }
+    player.stop();
+    CloseWindow();
+  }
 };
