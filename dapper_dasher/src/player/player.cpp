@@ -1,15 +1,8 @@
-#include "config.hpp"
 #include "player.hpp"
-#include "config.hpp"
-#include "raylib.h"
-#include "tile.hpp"
-#include "timer.hpp"
-#include "tile-controller.hpp"
-#include <cstdio>
-#include <cmath>
+#include "schedule-service.hpp"
 
 void Player::start() {
-  // tile related properties  
+  // tile related properties
   tile.width = PLAYER_TILE_WIDTH;
   tile.height = PLAYER_TILE_HEIGHT;
   tile.x = 0;
@@ -17,8 +10,12 @@ void Player::start() {
   position =
       Vector2{windowWidth / 2 - tile.width / 2, windowHeight - tile.height};
 
-  // animation
-  animationTimer.start();  
+  ScheduleService::repeat(
+      [this] {
+        tile.x++;
+        tile.x = std::fmod(tile.x, PLAYER_TOTAL_TILES);        
+      },
+      PLAYER_ANIMATION_TIME);
 };
 
 void Player::update() {
@@ -29,7 +26,7 @@ void Player::update() {
   }
 
   position.y += velocity * GetFrameTime();
-  
+
   // extremes
   if (position.y < 0) {
     position.y = 0;
@@ -37,17 +34,10 @@ void Player::update() {
   if (position.y > (windowHeight - tile.height)) {
     position.y = windowHeight - tile.height;
   }
-
-  // animation
-  if (!animationTimer.isActive()) {
-    tile.x++;
-    tile.x = std::fmod(tile.x, PLAYER_TOTAL_TILES);
-    animationTimer.start();
-  }
 }
 
 void Player::render() {
-  TileController::draw(tile, position, TileController::textures[TEXTURE_SCARFY]);
+  TileService::draw(TileService::textures[TEXTURE_SCARFY], tile, position);
 }
 
-void Player::stop() {};
+void Player::stop(){};

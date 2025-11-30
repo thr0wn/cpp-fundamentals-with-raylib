@@ -7,14 +7,18 @@ set(SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-controller.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.cpp"
 )
 set(HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/entity/entity.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-controller.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.hpp"
 )
 add_library(${LIBRARY_NAME} STATIC
     ${SOURCE_FILES}

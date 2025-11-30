@@ -3,17 +3,20 @@
 void Game::start() {
   InitWindow(windowWidth, windowHeight, "Dapper Dasher");
   SetTargetFPS(60);
-  TileController::start();
-
   // entities
   player.start();
   nebula.start();
+  // static
+  TileService::start();
+  ScheduleService::start();
 }
 
 void Game::update() {
   // entities
   player.update();
   nebula.update();
+  // static
+  ScheduleService::update();
 }
 
 void Game::render() {
@@ -21,14 +24,16 @@ void Game::render() {
   ClearBackground(WHITE);
   // entities
   player.render();
-  nebula.render();  
+  nebula.render();
   EndDrawing();
 }
 
 void Game::stop() {
-  TileController::stop();
   // entities
   player.stop();
-  nebula.stop();  
+  nebula.stop();
+  // static
+  TileService::stop();
+  ScheduleService::stop();
   CloseWindow();
 }

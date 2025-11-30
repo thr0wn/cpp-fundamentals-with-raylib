@@ -2,7 +2,8 @@
 #include "config.hpp"
 #include "nebula.hpp"
 #include "player.hpp"
-#include "tile-controller.hpp"
+#include "tile-service.hpp"
+#include "schedule-service.hpp"
 
 class Game {
   Player player;

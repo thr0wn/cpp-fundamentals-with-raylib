@@ -1,12 +1,4 @@
-#include "config.hpp"
 #include "nebula.hpp"
-#include "config.hpp"
-#include "raylib.h"
-#include "tile.hpp"
-#include "timer.hpp"
-#include "tile-controller.hpp"
-#include <cstdio>
-#include <cmath>
 
 void Nebula::start() {
   // tile related properties  
@@ -17,8 +9,12 @@ void Nebula::start() {
   position =
       Vector2{windowWidth + tile.width / 2, windowHeight - tile.height};
 
-  // animation
-  animationTimer.start();  
+  ScheduleService::repeat(
+      [this] {
+        tile.x++;
+        tile.x = std::fmod(tile.x, NEBULA_TOTAL_TILES);        
+      },
+      NEBULA_ANIMATION_TIME);
 };
 
 void Nebula::update() {
@@ -28,17 +24,10 @@ void Nebula::update() {
   if (position.x < 0) {
     position.x = windowWidth + tile.width/2;
   }
-
-  // animation
-  if (!animationTimer.isActive()) {
-    tile.x++;
-    tile.x = std::fmod(tile.x, NEBULA_TOTAL_TILES);
-    animationTimer.start();
-  }
 }
 
 void Nebula::render() {
-  TileController::draw(tile, position, TileController::textures[TEXTURE_NEBULA]);
+  TileService::draw(TileService::textures[TEXTURE_NEBULA], tile, position);
 }
 
 void Nebula::stop() {};
