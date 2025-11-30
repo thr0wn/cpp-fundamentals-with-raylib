@@ -21,3 +21,10 @@ public:
   float width = TILE_WIDTH;
   float height = TILE_HEIGHT;
 };
+
+class TileAnimation {
+public:
+  int sprite;
+  int spriteTotal;
+  int spriteRowSize;  
+};

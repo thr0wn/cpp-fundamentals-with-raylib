@@ -12,14 +12,19 @@ void Player::start() {
 
   ScheduleService::repeat(
       [this] {
-        tile.x++;
-        tile.x = std::fmod(tile.x, PLAYER_TOTAL_TILES);        
+        if (!isJumping()) {
+          tileAnimation.sprite++;
+          tileAnimation.sprite = std::fmod(
+              tileAnimation.sprite,
+              PLAYER_TILE_TOTAL); // 6x1 spritesheet, but with only 60 sprites
+          tile.x = tileAnimation.sprite;
+        }
       },
       PLAYER_ANIMATION_TIME);
 };
 
 void Player::update() {
-  if (IsKeyDown(KEY_SPACE) && position.y == (windowHeight - tile.height)) {
+  if (IsKeyDown(KEY_SPACE) && !isJumping()) {
     velocity = jumpVelocity;
   } else {
     velocity += gravity * GetFrameTime();
@@ -27,7 +32,7 @@ void Player::update() {
 
   position.y += velocity * GetFrameTime();
 
-  // extremes
+  // y borders
   if (position.y < 0) {
     position.y = 0;
   }
@@ -41,3 +46,5 @@ void Player::render() {
 }
 
 void Player::stop(){};
+
+bool Player::isJumping() { return position.y < (windowHeight - tile.height); }
