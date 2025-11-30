@@ -1,12 +1,16 @@
 #pragma once
 #include "tile.hpp"
 
-class Entity {
+class GameNode {
 public:
-  Tile tile;
   Vector2 position;  
   virtual void start() {};  
   virtual void update() {};  
   virtual void render() {};  
   virtual void stop() {};  
+};
+
+class GameNode2D: public GameNode {
+public:
+  Tile tile;
 };

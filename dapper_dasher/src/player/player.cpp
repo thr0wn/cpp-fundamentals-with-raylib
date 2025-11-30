@@ -1,5 +1,4 @@
 #include "player.hpp"
-#include "schedule-service.hpp"
 
 void Player::start() {
   // tile related properties
@@ -16,7 +15,7 @@ void Player::start() {
           tileAnimation.sprite++;
           tileAnimation.sprite = std::fmod(
               tileAnimation.sprite,
-              PLAYER_TILE_TOTAL); // 6x1 spritesheet, but with only 60 sprites
+              tileAnimation.spriteTotal); // 6x1 spritesheet, but with only 60 sprites
           tile.x = tileAnimation.sprite;
         }
       },

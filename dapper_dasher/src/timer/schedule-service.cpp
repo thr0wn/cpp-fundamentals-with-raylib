@@ -42,4 +42,5 @@ void ScheduleService::stop() {
     delete schedule->timer;
     delete schedule;
   }
+  ScheduleService::schedules.clear();
 }

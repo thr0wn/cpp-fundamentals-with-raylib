@@ -1,13 +1,14 @@
 #pragma once
 #include "config.hpp"
+#include "game-node.hpp"
 #include "nebula.hpp"
 #include "player.hpp"
+#include "background.hpp"
 #include "tile-service.hpp"
 #include "schedule-service.hpp"
 
 class Game {
-  Player player;
-  Nebula nebula;  
+  std::list<GameNode*> gameNodes;
   
 public:
   // start the game and run game entities

@@ -1,6 +1,4 @@
 #include "nebula.hpp"
-#include "config.hpp"
-#include <cstdio>
 
 void Nebula::start() {
   // tile related properties  
@@ -14,9 +12,9 @@ void Nebula::start() {
   ScheduleService::repeat(
       [this] {
         tileAnimation.sprite++;
-        tileAnimation.sprite = std::fmod(tileAnimation.sprite, NEBULA_TILE_TOTAL); // 8x8 spritesheet, but with only 60 sprites
-        tile.y = std::floor(tileAnimation.sprite/NEBULA_TILE_ROW_SIZE); // 8x8 spritesheet
-        tile.x = std::fmod(tileAnimation.sprite, NEBULA_TILE_ROW_SIZE); // 8 sprites per row
+        tileAnimation.sprite = std::fmod(tileAnimation.sprite, tileAnimation.spriteTotal); // 8x8 spritesheet, but with only 60 sprites
+        tile.y = std::floor(tileAnimation.sprite/tileAnimation.spriteRowSize); // 8x8 spritesheet
+        tile.x = std::fmod(tileAnimation.sprite, tileAnimation.spriteRowSize); // 8 sprites per row
       },
       NEBULA_ANIMATION_TIME);
 };

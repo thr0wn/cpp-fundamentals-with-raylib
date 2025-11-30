@@ -1,6 +1,6 @@
 #pragma once
 #include "config.hpp"
-#include "entity.hpp"
+#include "game-node.hpp"
 #include "raylib.h"
 #include "schedule-service.hpp"
 #include "tile-service.hpp"
@@ -17,12 +17,12 @@
 #define NEBULA_TILE_HEIGHT 100.0f
 
 // tile animation
-#define NEBULA_TILE_TOTAL 60
-#define NEBULA_TILE_ROW_SIZE 8
+#define NEBULA_SPRITE_TOTAL 60
+#define NEBULA_SPRITE_ROW_SIZE 8
 
-class Nebula : public Entity {
+class Nebula : public GameNode2D {
   const float velocity = INITIAL_VELOCITY;
-  TileAnimation tileAnimation = { 0, NEBULA_TILE_TOTAL, NEBULA_TILE_ROW_SIZE };  
+  TileAnimation tileAnimation = { 0, NEBULA_SPRITE_TOTAL, NEBULA_SPRITE_ROW_SIZE};  
 
 public:
   void start() override;

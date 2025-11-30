@@ -8,4 +8,5 @@ public:
   static void start();
   static void stop();
   static void draw(Texture texture, Tile tile, Vector2 position);
+  static void drawTexture(Texture texture, Vector2 position, float scale);  
 };

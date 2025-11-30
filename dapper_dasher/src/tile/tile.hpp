@@ -8,13 +8,13 @@
 
 typedef enum GameTexture {
   TEXTURE_SCARFY = 0,
-  TEXTURE_FOREGROUND,
   TEXTURE_FAR_BUILDING,
-  TEXTURE_BACK_BUILDINGS,
+  TEXTURE_BACK_BUILDING,
+  TEXTURE_NEAR_BUILDING,
   TEXTURE_NEBULA
 } GameTexture;
 
-class Tile: Rectangle {
+class Tile : Rectangle {
 public:
   float x;
   float y;
@@ -26,5 +26,5 @@ class TileAnimation {
 public:
   int sprite;
   int spriteTotal;
-  int spriteRowSize;  
+  int spriteRowSize;
 };
