@@ -1,9 +1,12 @@
 #pragma once
+#include "config.hpp"
+#include "nebula.hpp"
 #include "player.hpp"
 #include "tile-controller.hpp"
 
 class Game {
   Player player;
+  Nebula nebula;  
   
 public:
   // start the game and run game entities

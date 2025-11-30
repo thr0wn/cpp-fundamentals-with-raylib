@@ -1,6 +1,9 @@
 #pragma once
 #include "raylib.h"
 
+#define TILE_WIDTH 8
+#define TILE_HEIGHT 8
+
 #define NUMBER_OF_TEXTURES 5
 
 typedef enum GameTexture {
@@ -10,9 +13,6 @@ typedef enum GameTexture {
   TEXTURE_BACK_BUILDINGS,
   TEXTURE_NEBULA
 } GameTexture;
-
-#define TILE_WIDTH 8
-#define TILE_HEIGHT 8
 
 class Tile: Rectangle {
 public:

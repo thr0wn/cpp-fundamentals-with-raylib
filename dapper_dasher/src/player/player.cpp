@@ -26,7 +26,7 @@ void Player::update() {
     velocity = jumpVelocity;
   } else {
     velocity += gravity * GetFrameTime();
-  } 
+  }
 
   position.y += velocity * GetFrameTime();
   
@@ -41,7 +41,7 @@ void Player::update() {
   // animation
   if (!animationTimer.isActive()) {
     tile.x++;
-    tile.x = std::fmod(tile.x, 6.0f * PLAYER_TILE_WIDTH);
+    tile.x = std::fmod(tile.x, PLAYER_TOTAL_TILES);
     animationTimer.start();
   }
 }

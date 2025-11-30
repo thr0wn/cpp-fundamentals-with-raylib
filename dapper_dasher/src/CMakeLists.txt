@@ -4,16 +4,15 @@ add_subdirectory(config)
 # ----------------------------------------------------------------------------------------
 set(SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cpp"
-
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cpp"
-
+  "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cpp"
-
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-controller.cpp"
 )
 set(HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/entity/entity.hpp"
-
+  "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/player/player.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-controller.hpp"
 )
@@ -27,6 +26,7 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/entity")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/game")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/nebula")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/player")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/timer")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/tile")

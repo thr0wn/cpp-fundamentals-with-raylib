@@ -3,9 +3,10 @@
 
 class Entity {
 public:
-  Tile tile;  
-  virtual void start() = 0;  
-  virtual void update() = 0;  
-  virtual void render() = 0;  
-  virtual void stop() = 0;  
+  Tile tile;
+  Vector2 position;  
+  virtual void start() {};  
+  virtual void update() {};  
+  virtual void render() {};  
+  virtual void stop() {};  
 };

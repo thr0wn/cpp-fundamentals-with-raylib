@@ -9,9 +9,9 @@
 #define JUMP_VELOCITY -500.0f
 #define PLAYER_TILE_WIDTH 128
 #define PLAYER_TILE_HEIGHT 128
+#define PLAYER_TOTAL_TILES 6
 
 class Player : public Entity {
-  Vector2 position;
   const float gravity = INITIAL_GRAVITY;
   float velocity = 0;
   const float jumpVelocity = JUMP_VELOCITY;
