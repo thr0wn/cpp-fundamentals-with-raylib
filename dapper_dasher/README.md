@@ -21,5 +21,5 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./bui
 
 ### Watch with nodemon
 ```shell
-npx nodemon --exec "cmake --fresg -S . -B build && cmake --build build && ./build/dapper_dasher/exe" --watch src -e cpp,hpp,txt
+npx nodemon --exec "cmake -S . -B build && cmake --build build && ./build/dapper_dasher/exe" --watch src -e cpp,hpp,txt
 ```

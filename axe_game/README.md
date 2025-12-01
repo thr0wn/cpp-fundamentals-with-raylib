@@ -11,10 +11,15 @@ cmake -DCXX=g++ -S . -B ./build && cmake --build build
 
 ### Debug
 ```shell
-CXX=g++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/axe_game/axe_game
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/axe_game/axe_game
 ```
 
 ### Run
 ```shell
 ./build/axe_game/axe_game
+```
+
+### Watch with nodemon
+```shell
+npx nodemon --exec "cmake -S . -B build && cmake --build build && ./build/axe_game/axe_game" --watch src -e cpp,hpp,txt
 ```
