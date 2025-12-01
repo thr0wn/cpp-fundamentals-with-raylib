@@ -11,10 +11,15 @@ cmake -DCXX=g++ -S . -B ./build && cmake --build build
 
 ### Debug
 ```shell
-CXX=g++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/dapper_dasher/dapper_dasher
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/dapper_dasher/dapper_dasher
 ```
 
 ### Run
 ```shell
 ./build/dapper_dasher/dapper_dasher
+```
+
+### Watch with nodemon
+```shell
+npx nodemon --exec "cmake --fresg -S . -B build && cmake --build build && ./build/dapper_dasher/exe" --watch src -e cpp,hpp,txt
 ```
