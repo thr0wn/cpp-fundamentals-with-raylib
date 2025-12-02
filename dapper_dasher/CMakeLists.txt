@@ -32,5 +32,6 @@ FetchContent_Declare(
   FIND_PACKAGE_ARGS
 )
 FetchContent_MakeAvailable(raygui)
+add_subdirectory(${raygui_SOURCE_DIR}/projects/CMake)
 
 add_subdirectory(src)
