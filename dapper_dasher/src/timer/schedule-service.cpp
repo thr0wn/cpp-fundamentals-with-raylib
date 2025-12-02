@@ -1,5 +1,4 @@
 #include "schedule-service.hpp"
-#include "schedule.hpp"
 
 std::list<Schedule *> ScheduleService::schedules;
 

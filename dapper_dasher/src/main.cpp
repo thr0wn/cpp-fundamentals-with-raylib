@@ -7,7 +7,7 @@ int main() {
   Game game;
   
   game.start();  
-  while (!WindowShouldClose()) {
+  while (!game.shouldClose()) {
     game.update();
     game.render();    
   }

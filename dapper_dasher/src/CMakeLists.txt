@@ -3,21 +3,28 @@ add_subdirectory(config)
 # library setup
 # ----------------------------------------------------------------------------------------
 set(SOURCE_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.cpp"
 )
 set(HEADER_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game-node/game-node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.hpp"
@@ -38,6 +45,7 @@ target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/n
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/player")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/timer")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/tile")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ui")
 
 # include config.hpp
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}/config")
@@ -51,8 +59,7 @@ add_executable(${EXECUTABLE_NAME}
   ${SOURCE_FILES}
 )
 target_link_libraries(${EXECUTABLE_NAME}
-  ${LIBRARY_NAME}
-  raylib)
+  ${LIBRARY_NAME})
 
 
 # output dir

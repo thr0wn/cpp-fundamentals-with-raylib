@@ -1,6 +1,4 @@
 #include "tile-service.hpp"
-#include "raylib.h"
-#include "tile.hpp"
 
 const char *TileService::textureUrls[] = {
     "resources/textures/scarfy.png", "resources/textures/far-buildings.png",
@@ -22,10 +20,6 @@ void TileService::draw(Texture texture, Tile tile, Vector2 position) {
   Rectangle destiny = {position.x, position.y, tile.width, tile.height};
   Vector2 origin = {0, 0};
   DrawTexturePro(texture, source, destiny, origin, 0.0f, WHITE);
-}
-
-void TileService::drawTexture(Texture texture, Vector2 position, float scale) {
-  DrawTextureEx(texture, position, 0, scale, WHITE);
 }
 
 void TileService::stop() {

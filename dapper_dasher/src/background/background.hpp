@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "tile.hpp"
 #include "tile-service.hpp"
+#include "game-service.hpp"
 
 #define BACKGROUND_FAR_VELOCITY -30.0f;
 #define BACKGROUND_MID_VELOCITY -60.0f;
@@ -22,8 +23,9 @@ class Background : public GameNode {
 
   void setBackground(GameTexture gameTexture, Texture2D *texture,
                      Vector2 *position);
-
-  void moveBackground(Texture2D texture, Vector2 *position, float velocity);
+  
+  void updateTexture(Texture2D texture, Vector2 *position, float velocity);
+  void renderTexture(Texture2D texture, Vector2 position, float velocity);  
 
 public:
   void start() override;

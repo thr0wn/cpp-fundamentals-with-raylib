@@ -1,4 +1,5 @@
 #include "background.hpp"
+#include "raylib.h"
 
 void Background::start() {
   setBackground(TEXTURE_FAR_BUILDING, &texture, &position);
@@ -6,12 +7,16 @@ void Background::start() {
   setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
 }
 
-void Background::update() {}
+void Background::update() {
+  updateTexture(texture, &position, velocity);
+  updateTexture(textureMid, &positionMid, velocityMid);
+  updateTexture(textureNear, &positionNear, velocityNear);
+}
 
 void Background::render() {
-  moveBackground(texture, &position, velocity);
-  moveBackground(textureMid, &positionMid, velocityMid);
-  moveBackground(textureNear, &positionNear, velocityNear);
+  renderTexture(texture, position, velocity);
+  renderTexture(textureMid, positionMid, velocityMid);
+  renderTexture(textureNear, positionNear, velocityNear);  
 }
 
 void Background::stop() {}
@@ -23,13 +28,19 @@ void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
   position->y = 0;
 }
 
-void Background::moveBackground(Texture2D texture, Vector2 *position, float velocity) {
+void Background::updateTexture(Texture2D texture, Vector2 *position,
+                                float velocity) {
   if (position->x <= -3.0f * texture.width) {
     position->x = 0;
   }
   position->x += velocity * GetFrameTime();
-  Vector2 secondPosition = *position;
+}
+
+void Background::renderTexture(Texture2D texture, Vector2 position,
+                                float velocity) {
+  Color color = GameService::isStartUI() ? GRAY : WHITE;
+  Vector2 secondPosition = position;
   secondPosition.x += 3.0f * texture.width;
-  TileService::drawTexture(texture, *position, 3.0f);
-  TileService::drawTexture(texture, secondPosition, 3.0f);
+  DrawTextureEx(texture, position, 0, 3.0f, color);
+  DrawTextureEx(texture, secondPosition, 0, 3.0f, color);  
 }

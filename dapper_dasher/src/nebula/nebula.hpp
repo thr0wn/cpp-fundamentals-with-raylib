@@ -2,6 +2,7 @@
 #include "config.hpp"
 #include "game-node.hpp"
 #include "raylib.h"
+#include "game-service.hpp"
 #include "schedule-service.hpp"
 #include "tile-service.hpp"
 #include "tile.hpp"

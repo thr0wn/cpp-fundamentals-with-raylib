@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "game-service.hpp"
 
 void Player::start() {
   // tile related properties
@@ -15,7 +16,8 @@ void Player::start() {
           tileAnimation.sprite++;
           tileAnimation.sprite = std::fmod(
               tileAnimation.sprite,
-              tileAnimation.spriteTotal); // 6x1 spritesheet, but with only 60 sprites
+              tileAnimation
+                  .spriteTotal); // 6x1 spritesheet, but with only 60 sprites
           tile.x = tileAnimation.sprite;
         }
       },
@@ -41,6 +43,10 @@ void Player::update() {
 }
 
 void Player::render() {
+  GameState gameState = GameService::getGameState();
+  if (!gameState.started) {
+    return;
+  }
   TileService::draw(TileService::textures[TEXTURE_SCARFY], tile, position);
 }
 
