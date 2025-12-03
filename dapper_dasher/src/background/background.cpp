@@ -22,7 +22,7 @@ void Background::stop() {}
 
 void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
                                Vector2 *position) {
-  *texture = TileService::textures[gameTexture];
+  *texture = tileService::textures[gameTexture];
   position->x = 0;
   position->y = 0;
 }
@@ -37,7 +37,7 @@ void Background::updateTexture(Texture2D texture, Vector2 *position,
 
 void Background::renderTexture(Texture2D texture, Vector2 position,
                                 float velocity) {
-  Color color = GameService::isStartUI() ? GRAY : WHITE;
+  Color color = gameService::isStarted() ? WHITE : GRAY;
   Vector2 secondPosition = position;
   secondPosition.x += 3.0f * texture.width;
   DrawTextureEx(texture, position, 0, 3.0f, color);

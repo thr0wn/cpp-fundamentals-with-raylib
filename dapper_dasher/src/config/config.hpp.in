@@ -3,12 +3,21 @@
 #include <cstdint>
 #include <string_view>
 
-static constexpr std::string_view project_name = "@PROJECT_NAME@";
-static constexpr std::string_view project_version = "@PROJECT_VERSION@";
+namespace config {
+  static constexpr std::string_view project_name = "@PROJECT_NAME@";
+  static constexpr std::string_view project_version = "@PROJECT_VERSION@";
 
-static constexpr std::int32_t project_version_major{@PROJECT_VERSION_MAJOR@};
-static constexpr std::int32_t project_version_minor{@PROJECT_VERSION_MINOR@};
-static constexpr std::int32_t project_version_patch{@PROJECT_VERSION_PATCH@};
+  static constexpr std::int32_t project_version_major{@PROJECT_VERSION_MAJOR@};
+  static constexpr std::int32_t project_version_minor{@PROJECT_VERSION_MINOR@};
+  static constexpr std::int32_t project_version_patch{@PROJECT_VERSION_PATCH@};
 
-static constexpr const float windowWidth = 768.0f;
-static constexpr const float windowHeight = 576.0f;
+  // Window constants
+  static constexpr const float WINDOW_WIDTH = 768.0f;
+  static constexpr const float WINDOW_HEIGHT = 576.0f;
+
+  // Text constants
+  static constexpr const int TEXT_SIZE = 48;
+  static constexpr const int TEXT_COLOR = 0xffffffff;
+  static constexpr const int TEXT_UNIT_WITDH = (int) (0.55f * TEXT_SIZE);
+  static constexpr const int TEXT_UNIT_HEIGHT = (int) (1.2f * TEXT_SIZE);
+}

@@ -4,12 +4,8 @@
 #include "game/game-service.hpp"
 #include <string>
 
-// #define RAYGUI_IMPLEMENTATION
-// #include "raygui.h"
-
 #define START_TEXT_NEW_GAME "New Game"
 #define START_TEXT_QUIT "Quit"
-#define START_TEXT_SIZE 48
 
 class Start : public GameNode {
   const std::string textNewGame = START_TEXT_NEW_GAME;
@@ -17,7 +13,7 @@ class Start : public GameNode {
   bool textNewGameIsPressed = false;  
   
   const std::string textQuit = START_TEXT_QUIT;
-  Rectangle textQuitGameRec;
+  Rectangle textQuitRec;
   bool textQuitIsPressed = false;    
 
 public:

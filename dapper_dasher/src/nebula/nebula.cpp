@@ -1,4 +1,5 @@
 #include "nebula/nebula.hpp"
+#include "config/config.hpp"
 
 void Nebula::start() {
   // tile related properties
@@ -6,9 +7,9 @@ void Nebula::start() {
   tile.height = NEBULA_TILE_HEIGHT;
   tile.x = 7;
   tile.y = 0;
-  position = Vector2{windowWidth + tile.width / 2, windowHeight - tile.height};
+  position = Vector2{config::WINDOW_WIDTH + tile.width / 2, config::WINDOW_HEIGHT - tile.height};
 
-  ScheduleService::repeat(
+  scheduleService::repeat(
       [this] {
         tileAnimation.sprite++;
         tileAnimation.sprite = std::fmod(
@@ -28,16 +29,15 @@ void Nebula::update() {
 
   // // extremes
   if (position.x < -tile.width) {
-    position.x = windowWidth + tile.width;
+    position.x = config::WINDOW_WIDTH + tile.width;
   }
 }
 
 void Nebula::render() {
-  GameState gameState = GameService::getGameState();
-  if (!gameState.started) {
+  if (!gameService::isStarted()) {
     return;
   }
-  TileService::draw(TileService::textures[TEXTURE_NEBULA], tile, position);
+  tileService::draw(tileService::textures[TEXTURE_NEBULA], tile, position);
 }
 
 void Nebula::stop(){};

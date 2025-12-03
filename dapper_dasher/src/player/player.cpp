@@ -1,4 +1,5 @@
 #include "player/player.hpp"
+#include "config/config.hpp"
 
 void Player::start() {
   // tile related properties
@@ -7,9 +8,9 @@ void Player::start() {
   tile.x = 0;
   tile.y = 0;
   position =
-      Vector2{windowWidth / 2 - tile.width / 2, windowHeight - tile.height};
+    Vector2{config::WINDOW_WIDTH / 2 - tile.width / 2, config::WINDOW_HEIGHT - tile.height};
 
-  ScheduleService::repeat(
+  scheduleService::repeat(
       [this] {
         if (!isJumping()) {
           tileAnimation.sprite++;
@@ -36,19 +37,18 @@ void Player::update() {
   if (position.y < 0) {
     position.y = 0;
   }
-  if (position.y > (windowHeight - tile.height)) {
-    position.y = windowHeight - tile.height;
+  if (position.y > (config::WINDOW_HEIGHT - tile.height)) {
+    position.y = config::WINDOW_HEIGHT - tile.height;
   }
 }
 
 void Player::render() {
-  GameState gameState = GameService::getGameState();
-  if (!gameState.started) {
+  if (!gameService::isStarted()) {
     return;
   }
-  TileService::draw(TileService::textures[TEXTURE_SCARFY], tile, position);
+  tileService::draw(tileService::textures[TEXTURE_SCARFY], tile, position);
 }
 
 void Player::stop(){};
 
-bool Player::isJumping() { return position.y < (windowHeight - tile.height); }
+bool Player::isJumping() { return position.y < (config::WINDOW_HEIGHT - tile.height); }

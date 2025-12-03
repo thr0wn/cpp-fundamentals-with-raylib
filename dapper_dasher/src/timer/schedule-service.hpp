@@ -4,18 +4,15 @@
 #include <functional>
 #include <list>
 
-class ScheduleService {
-  static std::list<Schedule*> schedules;
-
-public:
+namespace scheduleService {
   // initialize
-  static void start(); 
+  void start(); 
   // do fun once after interval in seconds
-  static Schedule *once(VoidFunction fun, double interval);
+  Schedule *once(VoidFunction fun, double interval);
   // repeat fun every interval in seconds.
-  static Schedule *repeat(VoidFunction fun, double interval);
+  Schedule *repeat(VoidFunction fun, double interval);
   // do once or repeat fun
-  static void update();
+  void update();
   // free resources
-  static void stop();  
+  void stop();  
 };

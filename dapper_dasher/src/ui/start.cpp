@@ -1,22 +1,33 @@
 #include "ui/start.hpp"
 
-void Start::start() {
-  textNewGameRec.x = (0.25f / 10.f) * windowWidth;
-  textNewGameRec.y = ((6.5f / 10.f) * windowHeight);
-  textNewGameRec.width = .5f * START_TEXT_SIZE * textNewGame.length();   
-  textNewGameRec.height = 1.2f * START_TEXT_SIZE;   
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
 
-  textQuitGameRec.x = (0.25f / 10.f) * windowWidth;
-  textQuitGameRec.y = (8.0f / 10.f) * windowHeight;
-  textNewGameRec.width = .5f * START_TEXT_SIZE * textQuit.length();   
-  textNewGameRec.height = 1.2f * START_TEXT_SIZE;     
+void Start::start() {
+  textNewGameRec.x = (0.25f / 10.f) * config::WINDOW_WIDTH;
+  textNewGameRec.y = ((6.5f / 10.f) * config::WINDOW_HEIGHT);
+  textNewGameRec.width = config::TEXT_UNIT_WITDH * textNewGame.length();   
+  textNewGameRec.height = config::TEXT_UNIT_HEIGHT;   
+
+  textQuitRec.x = (0.25f / 10.f) * config::WINDOW_WIDTH;
+  textQuitRec.y = (8.0f / 10.f) * config::WINDOW_HEIGHT;
+  textQuitRec.width = config::TEXT_UNIT_WITDH * textQuit.length();
+  textQuitRec.height = config::TEXT_UNIT_HEIGHT;  
 }
 
 void Start::render() {
-  if (!GameService::isStartUI()) {
+  if (gameService::isStarted()) {
     return;
   }
-  //GuiButton(textNewGameRec, textNewGame.data());
-  //  DrawText(textNewGame.data(), textNewGameRec.x, textNewGameRec.y, START_TEXT_SIZE, WHITE);
-  // DrawText(textQuit.data(), textQuitGameRec.x, textQuitGameRec.y, START_TEXT_SIZE, WHITE);
+  GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE);  
+  GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);  
+  textNewGameIsPressed = GuiLabelButton(textNewGameRec, textNewGame.data());
+  textQuitIsPressed = GuiLabelButton(textQuitRec, textQuit.data());
+
+  if (!gameService::isStarted() && textNewGameIsPressed) {
+    gameService::startGame();
+  }
+  if (textQuitIsPressed) {
+    gameService::stopGame();
+  }
 }

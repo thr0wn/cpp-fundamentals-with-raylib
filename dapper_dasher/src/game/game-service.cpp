@@ -1,13 +1,15 @@
 #include "game/game-service.hpp"
+#include "raylib.h"
 
-GameState GameService::gameState;
-std::list<GameNode *> GameService::gameNodes;
+namespace gameService {
+namespace {
+static GameState gameState;
+static std::list<GameNode *> gameNodes;
+} // namespace
 
-void GameService::addGameNode(GameNode *gameNode) {
-  gameNodes.push_back(gameNode);
-}
+void addGameNode(GameNode *gameNode) { gameNodes.push_back(gameNode); }
 
-void GameService::removeGameNode(GameNode *gameNode) {
+void removeGameNode(GameNode *gameNode) {
   std::list<GameNode *>::iterator iterator;
   bool found = false;
   for (GameNode *gNode : gameNodes) {
@@ -24,45 +26,48 @@ void GameService::removeGameNode(GameNode *gameNode) {
   }
 }
 
-void GameService::start() {
+void start() {
   // static
-  TileService::start();
-  ScheduleService::start();
+  tileService::start();
+  scheduleService::start();
   // game-nodes: start
   for (GameNode *gameNode : gameNodes) {
     gameNode->start();
   }
+
+  // Disable default close with
+  SetExitKey(KEY_NULL);
 }
 
-void GameService::update() {
+void update() {
   // game-nodes: update
   if (gameState.started && !gameState.paused) {
     for (GameNode *gameNode : gameNodes) {
       gameNode->update();
     }
     // static
-    ScheduleService::update();
+    scheduleService::update();
   }
 }
 
-void GameService::render() {
+void render() {
   // game-nodes: render
   for (GameNode *gameNode : gameNodes) {
     gameNode->render();
   }
 }
 
-void GameService::renderOut() {
+void renderOut() {
   // game-nodes: render outside draw
   for (GameNode *gameNode : gameNodes) {
     gameNode->renderOut();
   }
 }
 
-void GameService::stop() {
+void stop() {
   // static calls
-  TileService::stop();
-  ScheduleService::stop();
+  tileService::stop();
+  scheduleService::stop();
   // game-nodes: stop
   for (GameNode *gameNode : gameNodes) {
     gameNode->stop();
@@ -72,15 +77,12 @@ void GameService::stop() {
   CloseWindow();
 }
 
-void GameService::startGame() { gameState.started = true; }
-void GameService::pauseGame() { gameState.paused = true; }
-void GameService::closeGame() { gameState.close = true; }
+void startGame() { gameState.started = true; }
+bool isStarted() { return gameState.started; }
+void pauseGame() { gameState.paused = true; }
+bool isPaused() { return gameState.paused; }
+void stopGame() { gameState.close = true; }
+bool shouldClose() { return gameState.close || WindowShouldClose(); }
 
-bool GameService::isStartUI() { return !gameState.started; }
-bool GameService::isPauseUI() { return gameState.started && !gameState.paused; }
-
-bool GameService::shouldClose() {
-  return gameState.close || WindowShouldClose();
-}
-
-GameState GameService::getGameState() { return gameState; }
+GameState getGameState() { return gameState; }
+} // namespace gameService

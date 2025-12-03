@@ -1,7 +1,7 @@
 #include "game/game.hpp"
 
 void Game::start() {
-  InitWindow(windowWidth, windowHeight, "Dapper Dasher");
+  InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT, "Dapper Dasher");
   SetTargetFPS(60);
   
   // add game-nodes
@@ -9,28 +9,28 @@ void Game::start() {
   Player *player = new Player();
   Nebula *nebula = new Nebula();
   Start *start = new Start();
-  GameService::addGameNode(background);
-  GameService::addGameNode(player);
-  GameService::addGameNode(nebula);
-  GameService::addGameNode(start);
+  gameService::addGameNode(background);
+  gameService::addGameNode(player);
+  gameService::addGameNode(nebula);
+  gameService::addGameNode(start);
 
-  GameService::start();  
+  gameService::start();  
 }
 
-void Game::update() { GameService::update(); }
+void Game::update() { gameService::update(); }
 
 void Game::render() {
   BeginDrawing();
   ClearBackground(WHITE);
-  GameService::render();
-  GameService::renderOut();
+  gameService::render();
+  gameService::renderOut();
   EndDrawing();
 }
 
 void Game::stop() {
-  GameService::stop();
+  gameService::stop();
 }
 
 bool Game::shouldClose () {
-  return GameService::shouldClose();
+  return gameService::shouldClose();
 }  
