@@ -1,5 +1,4 @@
 #include "background.hpp"
-#include "raylib.h"
 
 void Background::start() {
   setBackground(TEXTURE_FAR_BUILDING, &texture, &position);

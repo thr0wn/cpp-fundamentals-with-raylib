@@ -1,6 +1,5 @@
 #include <cstdio>
 #include <iostream>
-#include "raylib.h"
 #include "game.hpp"
 
 int main() {
@@ -13,5 +12,5 @@ int main() {
   }
   game.stop();
 
-  return 0;  
+  return 0;
 }

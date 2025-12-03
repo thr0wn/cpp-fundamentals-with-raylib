@@ -2,11 +2,11 @@
 #include "config.hpp"
 #include "game-node.hpp"
 #include "game-service.hpp"
-#include "raylib.h"
 #include <string>
+#include "raylib.h"
 
-#define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+// #define RAYGUI_IMPLEMENTATION
+// #include "raygui.h"
 
 #define START_TEXT_NEW_GAME "New Game"
 #define START_TEXT_QUIT "Quit"

@@ -2,7 +2,7 @@ add_subdirectory(config)
 
 # library setup
 # ----------------------------------------------------------------------------------------
-set(SOURCE_FILES
+set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cpp"
@@ -15,7 +15,7 @@ set(SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.cpp"
 )
-set(HEADER_FILES
+set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.hpp"
@@ -31,11 +31,13 @@ set(HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.hpp"
 )
 add_library(${LIBRARY_NAME} STATIC
-    ${SOURCE_FILES}
-    ${HEADER_FILES})
+  ${LIBRARY_SOURCE_FILES}
+  ${LIBRARY_HEADER_FILES}
+)
 target_link_libraries(${LIBRARY_NAME} PUBLIC
-    raylib
-    raygui)
+  raylib
+  raygui
+)
 
 # enable #include without relative path
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
@@ -47,29 +49,28 @@ target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/p
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/timer")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/tile")
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ui")
-
-# include config.hpp
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}/config")
 
 # executable setup
 # ----------------------------------------------------------------------------------------
-set(SOURCE_FILES
+set(EXECUTABLE_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
 )
 add_executable(${EXECUTABLE_NAME}
-  ${SOURCE_FILES}
+  ${EXECUTABLE_SOURCE_FILES}
 )
-target_link_libraries(${EXECUTABLE_NAME}
-  ${LIBRARY_NAME})
-
+target_link_libraries(${EXECUTABLE_NAME} PUBLIC
+  ${LIBRARY_NAME}
+  raylib
+  raygui
+)
 
 # output dir
 set_target_properties(${EXECUTABLE_NAME} PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
-
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME}
+)
 # some debug property
 set_property(TARGET ${EXECUTABLE_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:${EXECUTABLE_NAME}>)
-
 # copy resources
 add_custom_command(
   TARGET ${EXECUTABLE_NAME} POST_BUILD

@@ -13,8 +13,11 @@ set(EXECUTABLE_NAME exe)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Dependencies
-set(RAYLIB_VERSION 5.5)
+set(RAYLIB_VERSION 5.0)
 set(RAYGUI_VERSION 4.0)
+
+# raygui has a lot of warnings of -Wenum-compare
+add_compile_options(-Wno-enum-compare)
 
 # fetch and declare content
 include(FetchContent)

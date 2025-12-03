@@ -1,9 +1,11 @@
 #include "game.hpp"
+#include "raylib.h"
 
 void Game::start() {
   InitWindow(windowWidth, windowHeight, "Dapper Dasher");
   SetTargetFPS(60);
-  // game-nodes
+  
+  // add game-nodes
   Background *background = new Background();  
   Player *player = new Player();
   Nebula *nebula = new Nebula();
@@ -28,9 +30,8 @@ void Game::render() {
 
 void Game::stop() {
   GameService::stop();
-  CloseWindow();
 }
 
 bool Game::shouldClose () {
-  return GameService::getGameState().close;  
+  return GameService::shouldClose();
 }  

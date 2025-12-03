@@ -1,4 +1,5 @@
 #include "game-service.hpp"
+#include "raylib.h"
 
 GameState GameService::gameState;
 std::list<GameNode *> GameService::gameNodes;
@@ -78,5 +79,9 @@ void GameService::closeGame() { gameState.close = true; }
 
 bool GameService::isStartUI() { return !gameState.started; }
 bool GameService::isPauseUI() { return gameState.started && !gameState.paused; }
+
+bool GameService::shouldClose() {
+  return gameState.close || WindowShouldClose();
+}
 
 GameState GameService::getGameState() { return gameState; }

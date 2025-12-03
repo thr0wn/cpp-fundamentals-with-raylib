@@ -24,7 +24,11 @@ public:
   static void startGame();
   static void pauseGame();
   static void closeGame();
+
   static bool isStartUI();  
-  static bool isPauseUI();  
+  static bool isPauseUI();
+
+  static bool shouldClose();
+
   static GameState getGameState();  
 };

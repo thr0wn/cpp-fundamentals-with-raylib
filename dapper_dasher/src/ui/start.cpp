@@ -16,7 +16,7 @@ void Start::render() {
   if (!GameService::isStartUI()) {
     return;
   }
-  GuiButton(textNewGameRec, textNewGame.data());
-//  DrawText(textNewGame.data(), textNewGameRec.x, textNewGameRec.y, START_TEXT_SIZE, WHITE);
+  //GuiButton(textNewGameRec, textNewGame.data());
+  //  DrawText(textNewGame.data(), textNewGameRec.x, textNewGameRec.y, START_TEXT_SIZE, WHITE);
   // DrawText(textQuit.data(), textQuitGameRec.x, textQuitGameRec.y, START_TEXT_SIZE, WHITE);
 }
