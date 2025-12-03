@@ -1,4 +1,5 @@
 #include "background/background.hpp"
+#include "game/game-service.hpp"
 
 void Background::start() {
   setBackground(TEXTURE_FAR_BUILDING, &texture, &position);
@@ -15,7 +16,7 @@ void Background::update() {
 void Background::render() {
   renderTexture(texture, position, velocity);
   renderTexture(textureMid, positionMid, velocityMid);
-  renderTexture(textureNear, positionNear, velocityNear);  
+  renderTexture(textureNear, positionNear, velocityNear);
 }
 
 void Background::stop() {}
@@ -28,7 +29,7 @@ void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
 }
 
 void Background::updateTexture(Texture2D texture, Vector2 *position,
-                                float velocity) {
+                               float velocity) {
   if (position->x <= -3.0f * texture.width) {
     position->x = 0;
   }
@@ -36,10 +37,10 @@ void Background::updateTexture(Texture2D texture, Vector2 *position,
 }
 
 void Background::renderTexture(Texture2D texture, Vector2 position,
-                                float velocity) {
-  Color color = gameService::isStarted() ? WHITE : GRAY;
+                               float velocity) {
+  Color color = gameService::isStarted() && !gameService::isPaused() ? WHITE : GRAY;
   Vector2 secondPosition = position;
   secondPosition.x += 3.0f * texture.width;
   DrawTextureEx(texture, position, 0, 3.0f, color);
-  DrawTextureEx(texture, secondPosition, 0, 3.0f, color);  
+  DrawTextureEx(texture, secondPosition, 0, 3.0f, color);
 }

@@ -12,7 +12,9 @@ namespace gameService {
   // Remove a game node  
   void removeGameNode(GameNode *gameNode);
 
-  // Initialization. Only Game should call it..
+  // Initialization. Only Game should call it.
+  void restart();
+  // Reinitialization of game nodes
   void start();
   // Update logic.
   void update();
@@ -33,9 +35,15 @@ namespace gameService {
   bool isPaused();
   // Stop the game changing the game state
   void stopGame();
-  // Check if the game should close  
+  // Check if the game should close
   bool shouldClose();
+  // Resume/Unpause the game changing the game state
+  void resumeGame();
+  // Restart the game from the pause menu chaing the game state
+  void restartGame();  
 
-  // Return the current game state  
-  GameState getGameState();  
+  // Return the current game state
+  GameState getGameState();
+
+  void log(std::string data);
 };

@@ -37,7 +37,8 @@ void Nebula::render() {
   if (!gameService::isStarted()) {
     return;
   }
-  tileService::draw(tileService::textures[TEXTURE_NEBULA], tile, position);
+  Color color = gameService::isPaused() ? GRAY : WHITE;
+  tileService::draw(tileService::textures[TEXTURE_NEBULA], tile, position, color);
 }
 
 void Nebula::stop(){};

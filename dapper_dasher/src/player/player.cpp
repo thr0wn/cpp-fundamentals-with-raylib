@@ -1,5 +1,6 @@
 #include "player/player.hpp"
 #include "config/config.hpp"
+#include "game/game-service.hpp"
 
 void Player::start() {
   // tile related properties
@@ -46,7 +47,8 @@ void Player::render() {
   if (!gameService::isStarted()) {
     return;
   }
-  tileService::draw(tileService::textures[TEXTURE_SCARFY], tile, position);
+  Color color = gameService::isPaused() ? GRAY : WHITE;  
+  tileService::draw(tileService::textures[TEXTURE_SCARFY], tile, position, color);
 }
 
 void Player::stop(){};

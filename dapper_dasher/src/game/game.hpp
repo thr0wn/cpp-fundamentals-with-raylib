@@ -5,6 +5,7 @@
 #include "player/player.hpp"
 #include "raylib.h"
 #include "ui/start.hpp"
+#include "ui/pause.hpp"
 
 
 class Game {

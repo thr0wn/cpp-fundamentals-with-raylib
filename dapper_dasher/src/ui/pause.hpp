@@ -5,19 +5,21 @@
 #include <string>
 #include "raygui.h"
 
-#define START_TEXT_RESUME "Resume"
-#define START_TEXT_RESTART "Quit"
-
 class Pause : public GameNode {
-  const std::string textNewGame = START_TEXT_NEW_GAME;
-  Rectangle textNewGameRec;
-  bool textNewGameIsPressed = false;  
-  
-  const std::string textQuit = START_TEXT_QUIT;
+  const std::string textResume = config::PAUSE_TEXT_RESUME;
+  Rectangle textResumeRec;
+  bool textResumeIsPressed = false;
+
+  const std::string textRestart = config::PAUSE_TEXT_RESTART;
+  Rectangle textRestartRec;
+  bool textRestartIsPressed = false;    
+
+  const std::string textQuit = config::PAUSE_TEXT_QUIT;
   Rectangle textQuitRec;
-  bool textQuitIsPressed = false;    
+  bool textQuitIsPressed = false;
 
 public:
   void start() override;
+  void update() override;
   void render() override;
 };

@@ -1,5 +1,6 @@
 #include "game/game-service.hpp"
 #include "raylib.h"
+#include <cstdio>
 
 namespace gameService {
 namespace {
@@ -27,6 +28,9 @@ void removeGameNode(GameNode *gameNode) {
 }
 
 void start() {
+  InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT, "Dapper Dasher");
+  SetTargetFPS(60);
+
   // static
   tileService::start();
   scheduleService::start();
@@ -37,6 +41,16 @@ void start() {
 
   // Disable default close with
   SetExitKey(KEY_NULL);
+}
+
+void restart() {
+  // static
+  scheduleService::stop(); 
+  // game-nodes: start
+  for (GameNode *gameNode : gameNodes) {
+    gameNode->stop();
+    gameNode->start();
+  }
 }
 
 void update() {
@@ -51,10 +65,14 @@ void update() {
 }
 
 void render() {
+  BeginDrawing();
   // game-nodes: render
   for (GameNode *gameNode : gameNodes) {
     gameNode->render();
   }
+  ClearBackground(WHITE);
+  EndDrawing();
+  gameService::renderOut();  
 }
 
 void renderOut() {
@@ -83,6 +101,17 @@ void pauseGame() { gameState.paused = true; }
 bool isPaused() { return gameState.paused; }
 void stopGame() { gameState.close = true; }
 bool shouldClose() { return gameState.close || WindowShouldClose(); }
+void resumeGame() { gameState.paused = false; }
+void restartGame() {
+  gameState.paused = false;
+  gameState.started = false;
+  restart();
+}
 
 GameState getGameState() { return gameState; }
+
+void log(std::string message) {
+  printf("GAMELOG: %s\n", message.data());
+  fflush(stdout);
+}
 } // namespace gameService
