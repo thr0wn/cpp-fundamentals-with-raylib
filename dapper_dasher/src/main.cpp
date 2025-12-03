@@ -1,6 +1,4 @@
-#include <cstdio>
-#include <iostream>
-#include "game.hpp"
+#include "game/game.hpp"
 
 int main() {
   Game game;

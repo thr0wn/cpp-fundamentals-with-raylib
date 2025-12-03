@@ -1,9 +1,8 @@
 #pragma once
-#include "config.hpp"
-#include "game-node.hpp"
-#include "game-service.hpp"
+#include "config/config.hpp"
+#include "game/game-node.hpp"
+#include "game/game-service.hpp"
 #include <string>
-#include "raylib.h"
 
 // #define RAYGUI_IMPLEMENTATION
 // #include "raygui.h"

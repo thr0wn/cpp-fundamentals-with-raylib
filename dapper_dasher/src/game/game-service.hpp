@@ -1,10 +1,9 @@
 #pragma once
-#include "config.hpp"
-#include "game-node.hpp"
-#include "game-state.hpp"
-#include "tile-service.hpp"
-#include "schedule-service.hpp"
-#include "game-node.hpp"
+#include "config/config.hpp"
+#include "game/game-node.hpp"
+#include "game/game-state.hpp"
+#include "tile/tile-service.hpp"
+#include "timer/schedule-service.hpp"
 #include "list"
 
 class GameService {

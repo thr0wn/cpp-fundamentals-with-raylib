@@ -1,5 +1,4 @@
-#include "game.hpp"
-#include "raylib.h"
+#include "game/game.hpp"
 
 void Game::start() {
   InitWindow(windowWidth, windowHeight, "Dapper Dasher");

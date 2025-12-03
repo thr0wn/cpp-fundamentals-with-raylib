@@ -1,5 +1,4 @@
-#include "player.hpp"
-#include "game-service.hpp"
+#include "player/player.hpp"
 
 void Player::start() {
   // tile related properties

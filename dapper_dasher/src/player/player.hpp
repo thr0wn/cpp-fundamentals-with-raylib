@@ -1,12 +1,12 @@
 #pragma once
-#include "config.hpp"
-#include "game-node.hpp"
+#include "config/config.hpp"
+#include "game/game-node.hpp"
 #include "raylib.h"
-#include "game-service.hpp"
-#include "schedule-service.hpp"
-#include "tile-service.hpp"
-#include "tile.hpp"
-#include "timer.hpp"
+#include "game/game-service.hpp"
+#include "timer/schedule-service.hpp"
+#include "tile/tile-service.hpp"
+#include "tile/tile.hpp"
+#include "timer/timer.hpp"
 #include <cmath>
 #include <cstdio>
 

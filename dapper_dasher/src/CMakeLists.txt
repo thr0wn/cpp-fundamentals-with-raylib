@@ -17,10 +17,10 @@ set(LIBRARY_SOURCE_FILES
 )
 set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.hpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/game-node/game-node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.hpp"
@@ -35,21 +35,13 @@ add_library(${LIBRARY_NAME} STATIC
   ${LIBRARY_HEADER_FILES}
 )
 target_link_libraries(${LIBRARY_NAME} PUBLIC
-  raylib
   raygui
+  raylib
 )
 
 # enable #include without relative path
 target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/background")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/game")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/game-node")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/nebula")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/player")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/timer")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/tile")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/ui")
-target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}/config")
+target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}")
 
 # executable setup
 # ----------------------------------------------------------------------------------------
@@ -61,8 +53,6 @@ add_executable(${EXECUTABLE_NAME}
 )
 target_link_libraries(${EXECUTABLE_NAME} PUBLIC
   ${LIBRARY_NAME}
-  raylib
-  raygui
 )
 
 # output dir

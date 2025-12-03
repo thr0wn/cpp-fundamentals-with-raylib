@@ -1,5 +1,4 @@
-#include "game-service.hpp"
-#include "raylib.h"
+#include "game/game-service.hpp"
 
 GameState GameService::gameState;
 std::list<GameNode *> GameService::gameNodes;

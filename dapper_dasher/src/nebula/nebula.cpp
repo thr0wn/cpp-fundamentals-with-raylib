@@ -1,4 +1,4 @@
-#include "nebula.hpp"
+#include "nebula/nebula.hpp"
 
 void Nebula::start() {
   // tile related properties

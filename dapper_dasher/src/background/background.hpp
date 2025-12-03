@@ -1,9 +1,9 @@
 #pragma once
-#include "game-node.hpp"
+#include "game/game-node.hpp"
 #include "raylib.h"
-#include "tile.hpp"
-#include "tile-service.hpp"
-#include "game-service.hpp"
+#include "tile/tile.hpp"
+#include "tile/tile-service.hpp"
+#include "game/game-service.hpp"
 
 #define BACKGROUND_FAR_VELOCITY -30.0f;
 #define BACKGROUND_MID_VELOCITY -60.0f;

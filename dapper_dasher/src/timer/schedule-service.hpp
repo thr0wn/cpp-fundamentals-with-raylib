@@ -1,6 +1,6 @@
 #pragma once
-#include "schedule.hpp"
-#include "timer.hpp"
+#include "timer/schedule.hpp"
+#include "timer/timer.hpp"
 #include <functional>
 #include <list>
 

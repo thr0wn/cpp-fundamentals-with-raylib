@@ -1,14 +1,11 @@
 #pragma once
-#include "config.hpp"
-#include "game-node.hpp"
-#include "nebula.hpp"
-#include "player.hpp"
-#include "background.hpp"
-#include "game-service.hpp"
-#include "tile-service.hpp"
-#include "schedule-service.hpp"
-#include "start.hpp"
-#include "pause.hpp"
+#include "background/background.hpp"
+#include "config/config.hpp"
+#include "nebula/nebula.hpp"
+#include "player/player.hpp"
+#include "raylib.h"
+#include "ui/start.hpp"
+
 
 class Game {
 public:
