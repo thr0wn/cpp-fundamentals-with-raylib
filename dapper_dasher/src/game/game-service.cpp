@@ -107,6 +107,7 @@ void restartGame() {
   gameState.started = false;
   restart();
 }
+bool isRunning() { return gameState.started && !gameState.paused; }
 
 GameState getGameState() { return gameState; }
 

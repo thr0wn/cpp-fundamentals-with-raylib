@@ -7,9 +7,11 @@ void Game::start() {
   Nebula *nebula = new Nebula();
   Start *start = new Start();
   Pause *pause = new Pause();
+  Score *score = new Score();
   gameService::addGameNode(background);
   gameService::addGameNode(player);
   gameService::addGameNode(nebula);
+  gameService::addGameNode(score);
   gameService::addGameNode(pause);
   gameService::addGameNode(start);
 

@@ -37,4 +37,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raygui)
 add_subdirectory(${raygui_SOURCE_DIR}/projects/CMake)
 
+FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY https://github.com/fmtlib/fmt
+    GIT_TAG 9.1.0
+    GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(fmt)
+
 add_subdirectory(src)

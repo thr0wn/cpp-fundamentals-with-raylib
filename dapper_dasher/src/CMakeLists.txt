@@ -9,6 +9,7 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.cpp"
@@ -24,6 +25,7 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.hpp"
@@ -37,6 +39,7 @@ add_library(${LIBRARY_NAME} STATIC
 target_link_libraries(${LIBRARY_NAME} PUBLIC
   raygui
   raylib
+  fmt::fmt
 )
 
 # enable #include without relative path

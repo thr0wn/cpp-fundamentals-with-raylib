@@ -40,8 +40,9 @@ namespace gameService {
   // Resume/Unpause the game changing the game state
   void resumeGame();
   // Restart the game from the pause menu chaing the game state
-  void restartGame();  
-
+  void restartGame();
+  // Is Game started and not paused
+  bool isRunning(); 
   // Return the current game state
   GameState getGameState();
 

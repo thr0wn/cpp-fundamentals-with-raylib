@@ -6,7 +6,7 @@
 #include "raylib.h"
 #include "ui/start.hpp"
 #include "ui/pause.hpp"
-
+#include "ui/score.hpp"
 
 class Game {
 public:
