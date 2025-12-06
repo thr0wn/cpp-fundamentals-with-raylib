@@ -4,6 +4,7 @@
 #include "game/game-state.hpp"
 #include "tile/tile-service.hpp"
 #include "timer/schedule-service.hpp"
+#include "database/database-service.hpp"
 #include "list"
 
 namespace gameService {
@@ -45,6 +46,4 @@ namespace gameService {
   bool isRunning(); 
   // Return the current game state
   GameState getGameState();
-
-  void log(std::string data);
 };

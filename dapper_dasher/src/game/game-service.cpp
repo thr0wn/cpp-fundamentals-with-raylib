@@ -1,6 +1,4 @@
 #include "game/game-service.hpp"
-#include "raylib.h"
-#include <cstdio>
 
 namespace gameService {
 namespace {
@@ -31,9 +29,10 @@ void start() {
   InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT, "Dapper Dasher");
   SetTargetFPS(60);
 
-  // static
+  // services
   tileService::start();
   scheduleService::start();
+  databaseService::start();    
   // game-nodes: start
   for (GameNode *gameNode : gameNodes) {
     gameNode->start();
@@ -59,7 +58,7 @@ void update() {
     for (GameNode *gameNode : gameNodes) {
       gameNode->update();
     }
-    // static
+    // services
     scheduleService::update();
   }
 }
@@ -83,15 +82,16 @@ void renderOut() {
 }
 
 void stop() {
-  // static calls
-  tileService::stop();
-  scheduleService::stop();
   // game-nodes: stop
   for (GameNode *gameNode : gameNodes) {
     gameNode->stop();
     delete gameNode;
   }
   gameNodes.clear();
+  // services
+  tileService::stop();
+  scheduleService::stop();
+  databaseService::stop();    
   CloseWindow();
 }
 
@@ -110,9 +110,4 @@ void restartGame() {
 bool isRunning() { return gameState.started && !gameState.paused; }
 
 GameState getGameState() { return gameState; }
-
-void log(std::string message) {
-  printf("GAMELOG: %s\n", message.data());
-  fflush(stdout);
-}
 } // namespace gameService

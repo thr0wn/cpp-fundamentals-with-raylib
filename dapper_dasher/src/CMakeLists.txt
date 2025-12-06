@@ -6,6 +6,8 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/database/database-service.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.cpp"
@@ -21,6 +23,8 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/database/database-service.hpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.hpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.hpp"
@@ -40,6 +44,7 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
   raygui
   raylib
   fmt::fmt
+  leveldb
 )
 
 # enable #include without relative path
@@ -49,7 +54,7 @@ target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}")
 # executable setup
 # ----------------------------------------------------------------------------------------
 set(EXECUTABLE_SOURCE_FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
+  "${CMAKE_SOURCE_DIR}/src/main.cpp"
 )
 add_executable(${EXECUTABLE_NAME}
   ${EXECUTABLE_SOURCE_FILES}

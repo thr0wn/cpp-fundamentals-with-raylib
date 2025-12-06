@@ -7,7 +7,7 @@
 class Start : public GameNode {
   const std::string textNewGame = config::START_TEXT_NEW_GAME;
   Rectangle textNewGameRec;
-  bool textNewGameIsPressed = false;  
+  bool textNewGameIsPressed = false;
   
   const std::string textQuit = config::START_TEXT_QUIT;
   Rectangle textQuitRec;

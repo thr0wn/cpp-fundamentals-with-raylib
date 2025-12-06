@@ -1,6 +1,7 @@
 #include "ui/score.hpp"
 
 void Score::start() {
+  // ui  
   textScoreRec.x = 0.025f * config::WINDOW_WIDTH;
   textScoreRec.y = 0.025f * config::WINDOW_HEIGHT;
   textScoreRec.width =
@@ -21,7 +22,12 @@ void Score::start() {
   textPressSpaceRec.height = config::TEXT_UNIT_HEIGHT * config::TEXT_SMALL_SIZE;
   textPressSpaceRec.x -= textPressSpaceRec.width;
 
-  scheduleService::repeat([this] { score++; }, scoreInterval);
+  // score  
+  scheduleService::repeat([this] { score++; }, scoreInterval);  
+  score = 0;  
+  std::string highscoreAsString = "0";
+  databaseService::get(highScoreKey, &highscoreAsString);
+  highScore = std::stoi(highscoreAsString);
 }
 
 void Score::update() {
@@ -49,3 +55,7 @@ void Score::render() {
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SMALL_SIZE);
   GuiLabelButton(textPressSpaceRec, textPressSpace.data());
 }
+
+void Score::stop() {
+  databaseService::set(highScoreKey, std::to_string(highScore));
+}  

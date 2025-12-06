@@ -24,6 +24,9 @@ namespace config {
   constexpr const float TEXT_UNIT_WITDH = 0.525f;
   constexpr const float TEXT_UNIT_HEIGHT = 1.25f;
 
+  // database
+  const std::string DATABASE_LOCATION = "./database";  
+  
   // Start UI constants
   const std::string START_TEXT_NEW_GAME = "New Game";
   const std::string START_TEXT_QUIT = "Quit";
@@ -37,5 +40,6 @@ namespace config {
   const std::string SCORE_TEXT_SCORE = "Score";
   const std::string SCORE_TEXT_HIGH_SCORE = "High score";
   const std::string SCORE_TEXT_PRESS_SPACE = "Press space to jump";
-  const int SCORE_INTERVAL = 1;  
+  const int SCORE_INTERVAL = 1;
+  const std::string SCORE_DATABASE_HIGHSCORE_KEY = "highScore";
 }
