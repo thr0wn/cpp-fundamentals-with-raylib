@@ -1,4 +1,5 @@
 #pragma once
+#include "log/log-service.hpp"
 #include "timer/schedule.hpp"
 #include "timer/timer.hpp"
 #include <functional>

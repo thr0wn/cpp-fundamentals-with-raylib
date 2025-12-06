@@ -13,16 +13,16 @@ void start() {
   leveldb::Status status =
       leveldb::DB::Open(options, databaseLocation, &keyValueDB);
   if (status.ok()) {
-    logService::log("(database) Started");
+    logService::log("(database-service) Started");
     started = true;
   } else {
     logService::log(
-        fmt::format("(database) Not started due to:\n{}", status.ToString()));
+        fmt::format("(database-service) Not started due to:\n{}", status.ToString()));
   }
 }
 void stop() {
   delete keyValueDB;
-  logService::log("(database) Stopped");
+  logService::log("(database-service) Stopped");
 }  
 
 void set(std::string key, std::string value) {

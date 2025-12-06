@@ -2,9 +2,7 @@
 
 namespace logService {
 void log(std::string message) {
-  puts("-----------------------------------");
-  printf("GAMELOG: %s", message.data());
-  puts("\n-----------------------------------");    
+  printf("GAMELOG: %s\n", message.data());
   fflush(stdout);
 }
 } // namespace logService

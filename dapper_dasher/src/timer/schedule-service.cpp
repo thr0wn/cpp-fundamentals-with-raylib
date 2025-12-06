@@ -4,7 +4,7 @@ namespace scheduleService {
 namespace {
 std::list<Schedule *> schedules;
 }
-void start() {}
+void start() { logService::log("(schedule-service) Started"); }
 
 Schedule *once(VoidFunction fun, double interval) {
   Schedule *schedule = new Schedule();
@@ -44,5 +44,6 @@ void stop() {
     delete schedule;
   }
   schedules.clear();
+  logService::log("(schedule-service) Stopped");
 }
 } // namespace scheduleService

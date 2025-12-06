@@ -1,4 +1,5 @@
 #pragma once
+#include "log/log-service.hpp"
 #include "tile/tile.hpp"
 
 namespace tileService {

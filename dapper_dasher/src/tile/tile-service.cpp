@@ -13,9 +13,10 @@ void start() {
   for (int i = 0; i < NUMBER_OF_TEXTURES; i++) {
     textures[i] = LoadTexture(textureUrls[i]);
   }
+  logService::log("(tile-service) Started");
 }
 
-  void draw(Texture texture, Tile tile, Vector2 position, Color color) {
+void draw(Texture texture, Tile tile, Vector2 position, Color color) {
   Rectangle source = {(tile.x * tile.width), (tile.y * tile.height), tile.width,
                       tile.height};
   Rectangle destiny = {position.x, position.y, tile.width, tile.height};
@@ -27,5 +28,6 @@ void stop() {
   for (int i = 0; i < NUMBER_OF_TEXTURES; i++) {
     UnloadTexture(textures[i]);
   }
+  logService::log("(tile-service) Stopped");
 }
 } // namespace tileService
