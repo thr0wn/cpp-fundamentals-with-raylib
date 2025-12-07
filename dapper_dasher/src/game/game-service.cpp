@@ -128,23 +128,34 @@ void startGame() {
   logService::log("(game-service) Game Started");
 }
 bool isStarted() { return gameState.started; }
+
 void pauseGame() {
   gameState.paused = true;
   logService::log("(game-service) Game Paused");
 }
 bool isPaused() { return gameState.paused; }
+
+void gameOver() {
+  gameState.gameOver = true;
+  logService::log("(game-service) Game Over");
+}
+bool isGameOver() { return gameState.gameOver; }
+
 void stopGame() {
   gameState.close = true;
   logService::log("(game-service) Game Stopped");
 }
 bool shouldClose() { return gameState.close || WindowShouldClose(); }
+
 void resumeGame() {
   gameState.paused = false;
   logService::log("(game-service) Game Resumed");
 }
+
 void restartGame() {
+    gameState.started = false;  
   gameState.paused = false;
-  gameState.started = false;
+  gameState.gameOver = false;
   restart();
   logService::log("(game-service) Game Restarted");
 }

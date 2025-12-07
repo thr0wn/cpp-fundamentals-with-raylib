@@ -3,13 +3,13 @@
 #include "game/game-node.hpp"
 #include "game/game-service.hpp"
 #include "ui/text.hpp"
-#include <string>
+#include "raygui.h"
 
-class Start : public GameNode {
-  Text textNewGame{config::START_TEXT_NEW_GAME};
-  bool textNewGameIsPressed = false;
-  
-  Text textQuit{config::START_TEXT_QUIT};
+class GameOver : public GameNode {
+  Text textRestart{config::GAMEOVER_TEXT_RESTART};
+  bool textRestartIsPressed = false;
+
+  Text textQuit{config::GAMEOVER_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
 public:

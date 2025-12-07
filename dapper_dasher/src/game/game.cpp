@@ -8,12 +8,14 @@ void Game::start() {
   Start *start = new Start();
   Pause *pause = new Pause();
   Score *score = new Score();
+  GameOver *gameOver = new GameOver();
   gameService::addGameNode(background);
   gameService::addGameNode(player);
   gameService::addGameNode(nebula);
-  gameService::addGameNode(score);
-  gameService::addGameNode(pause);
   gameService::addGameNode(start);
+  gameService::addGameNode(pause);
+  gameService::addGameNode(score);  
+  gameService::addGameNode(gameOver);
 
   gameService::start();  
 }

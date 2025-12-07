@@ -34,12 +34,16 @@ namespace gameService {
   void pauseGame();
   // Check if game is paused
   bool isPaused();
+  // Set game over changing the game state
+  void gameOver();
+  // Check if game is over
+  bool isGameOver(); 
   // Stop the game changing the game state
   void stopGame();
   // Check if the game should close
   bool shouldClose();
   // Resume/Unpause the game changing the game state
-  void resumeGame();
+  void resumeGame(); 
   // Restart the game from the pause menu chaing the game state
   void restartGame();
   // Is Game started and not paused

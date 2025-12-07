@@ -1,15 +1,10 @@
-#include "ui/pause.hpp"
+#include "ui/game-over.hpp"
 
-void Pause::start() {
-  textResume.setSize(config::TEXT_SIZE_LARGE);
-  textResume.setPosition(
-      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
-  textResume.alignCenter();
-  
+void GameOver::start() {
   textRestart.setSize(config::TEXT_SIZE_LARGE);
   textRestart.setPosition(
       {0.5f * config::WINDOW_WIDTH,
-       textResume.getPosition().y + textResume.getHeight()});
+       0.35 * config::WINDOW_HEIGHT});
   textRestart.alignCenter();
   
   textQuit.setSize(config::TEXT_SIZE_LARGE);
@@ -18,26 +13,15 @@ void Pause::start() {
   textQuit.alignCenter();  
 }
 
-void Pause::update() {
-  if (gameService::isRunning() &&
-      (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    gameService::pauseGame();
-  }
-}
-
-void Pause::render() {
-  if (!gameService::isPaused()) {
+void GameOver::render() { 
+  if (!gameService::isGameOver()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
-  textResumeIsPressed = GuiLabelButton(textResume.getRectangle(), textResume.getChars());
   textRestartIsPressed = GuiLabelButton(textRestart.getRectangle(), textRestart.getChars());
   textQuitIsPressed = GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
-  if (textResumeIsPressed) {
-    gameService::resumeGame();
-  }
   if (textRestartIsPressed) {
     gameService::restartGame();
   }

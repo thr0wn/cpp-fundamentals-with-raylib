@@ -17,12 +17,12 @@ namespace config {
   constexpr const float WINDOW_HEIGHT = 576.0f;
 
   // Text constants
-  constexpr const int TEXT_LARGE_SIZE = 48;
-  constexpr const int TEXT_MEDIUM_SIZE = 24;
-  constexpr const int TEXT_SMALL_SIZE = 12;
+  constexpr const int TEXT_SIZE_LARGE = 48;
+  constexpr const int TEXT_SIZE_MEDIUM = 24;
+  constexpr const int TEXT_SIZE_SMALL = 12;
   constexpr const int TEXT_COLOR = 0xffffffff;
-  constexpr const float TEXT_UNIT_WITDH = 0.525f;
-  constexpr const float TEXT_UNIT_HEIGHT = 1.25f;
+  constexpr const float TEXT_LINE_WIDTH_UNIT = 0.55f;
+  constexpr const float TEXT_LINE_HEIGHT_UNIT = 1.25f;
 
   // database
   const std::string DATABASE_LOCATION = "./database";  
@@ -42,4 +42,8 @@ namespace config {
   const std::string SCORE_TEXT_PRESS_SPACE = "Press space to jump";
   const int SCORE_INTERVAL = 1;
   const std::string SCORE_DATABASE_HIGHSCORE_KEY = "highScore";
+
+  // GameOver UI constants
+  const std::string GAMEOVER_TEXT_RESTART = "Restart";
+  const std::string GAMEOVER_TEXT_QUIT = "Quit";  
 }

@@ -4,6 +4,7 @@
 #include "game/game-service.hpp"
 #include "database/database-service.hpp"
 #include <string>
+#include "ui/text.hpp"
 #include <fmt/format.h>
 #include "raygui.h"
 
@@ -13,16 +14,13 @@ class Score : public GameNode {
   const std::string highScoreKey = config::SCORE_DATABASE_HIGHSCORE_KEY;  
   const int scoreInterval = config::SCORE_INTERVAL;
 
-  const std::string textScore = config::SCORE_TEXT_SCORE;
-  Rectangle textScoreRec;
+  Text textScore{config::SCORE_TEXT_SCORE};
   bool textScoreIsPressed = false;
 
-  const std::string textHighScore = config::SCORE_TEXT_HIGH_SCORE;
-  Rectangle textHighScoreRec;
+  Text textHighScore{config::SCORE_TEXT_HIGH_SCORE};
   bool textHighScoreIsPressed = false;
 
-  const std::string textPressSpace = config::SCORE_TEXT_PRESS_SPACE;
-  Rectangle textPressSpaceRec;
+  Text textPressSpace{config::SCORE_TEXT_PRESS_SPACE};
   bool textPressSpaceIsPressed = false;
 
 public:

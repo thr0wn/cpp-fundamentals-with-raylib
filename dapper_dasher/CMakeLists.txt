@@ -18,10 +18,14 @@ set(RAYGUI_VERSION 4.0)
 set(FMT_VERSION 9.1.0)
 set(LEVELDB_VERSION 1.23)
 
-# raygui has a lot of warnings of -Wenum-compare
-add_compile_options(-Wno-enum-compare)
-# leveldb uses a version gtest that throws this error
-add_compile_options(-Wno-error=maybe-uninitialized)
+# compile options
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU") 
+  # raygui has a lot of warnings of -Wenum-compare
+  add_compile_options(-Wno-enum-compare)
+  # leveldb uses a version gtest that throws this error
+  add_compile_options(-Wno-error=maybe-uninitialized)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+endif()
 
 # fetch and declare content
 include(FetchContent)

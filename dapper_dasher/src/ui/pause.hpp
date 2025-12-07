@@ -2,20 +2,18 @@
 #include "config/config.hpp"
 #include "game/game-node.hpp"
 #include "game/game-service.hpp"
+#include "ui/text.hpp"
 #include <string>
 #include "raygui.h"
 
 class Pause : public GameNode {
-  const std::string textResume = config::PAUSE_TEXT_RESUME;
-  Rectangle textResumeRec;
+  Text textResume{config::PAUSE_TEXT_RESUME};
   bool textResumeIsPressed = false;
 
-  const std::string textRestart = config::PAUSE_TEXT_RESTART;
-  Rectangle textRestartRec;
-  bool textRestartIsPressed = false;    
+  Text textRestart{config::PAUSE_TEXT_RESTART};
+  bool textRestartIsPressed = false;
 
-  const std::string textQuit = config::PAUSE_TEXT_QUIT;
-  Rectangle textQuitRec;
+  Text textQuit{config::PAUSE_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
 public:
