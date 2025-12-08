@@ -1,0 +1,15 @@
+#include "timer/timer.h"
+#include "raylib.h"
+
+namespace game {
+Timer::Timer(double endTime) {
+  startTime = 0;
+  this->endTime = endTime;
+}
+
+void Timer::start() { startTime = GetTime(); }
+
+bool Timer::isActive() { return startTime != 0 && elapsed() <= endTime; }
+
+double Timer::elapsed() { return GetTime() - startTime; }
+} // namespace game

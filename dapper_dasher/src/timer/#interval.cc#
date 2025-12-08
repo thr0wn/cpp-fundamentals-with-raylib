@@ -1,0 +1,5 @@
+#include "interval.h"
+
+void interval(std::function<void(void)> fun, double intervalInSeconds) {
+  Timer intervalTimer  
+}

@@ -1,5 +1,0 @@
-#include "interval.hpp"
-
-void interval(std::function<void(void)> fun, double intervalInSeconds) {
-  Timer intervalTimer  
-}
