@@ -13,8 +13,12 @@ namespace game {
   }
 
   void GameService::_update() {
-    if (gameState.started && !gameState.paused) {
-      GameNode::_update();
+    try {
+      if (gameState.started && !gameState.paused) {
+        GameNode::_update();
+      }
+    } catch(...) {
+      logService->log("(game-service) Crashed at update");
     }
   }
 
@@ -29,7 +33,14 @@ namespace game {
     }
   }
 
-  void GameService::stop() { CloseWindow(); }
+  void GameService::_stop() {
+    try {
+      GameNode::_stop();
+      CloseWindow();
+    } catch(...) {
+      logService->log("(game-service) Crashed at stop");
+    }
+  }
 
   void GameService::startGame() {
     gameState.started = true;

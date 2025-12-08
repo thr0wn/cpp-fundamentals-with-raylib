@@ -8,10 +8,8 @@
 // #include "nebula/nebula.hpp"
 // #include "player/player.hpp"
 // #include "raylib.h"
-// #include "ui/game-over.hpp"
-// #include "ui/pause.hpp"
-// #include "ui/score.hpp"
-// #include "ui/start.hpp"
+#include "ui/ui.hpp"
+
 
 namespace game {
 int start();

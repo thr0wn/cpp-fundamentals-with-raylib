@@ -14,9 +14,9 @@ public:
   GameNode(std::string name);
 
   // Add a new game node
-  void addGameNode(GameNode *gameNode);
+  void push(GameNode *gameNode);
   // Remove a game node
-  void removeGameNode(GameNode *gameNode);
+  void erase(GameNode *gameNode);
 
   // set game-node name
   void setName(std::string name);

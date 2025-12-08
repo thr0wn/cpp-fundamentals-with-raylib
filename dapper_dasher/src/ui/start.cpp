@@ -5,7 +5,7 @@
 
 namespace game {
 Start::Start() : GameNode("start"){};
-  
+
 void Start::start() {
   textNewGame.setSize(config::TEXT_SIZE_LARGE);
   textNewGame.setPosition(

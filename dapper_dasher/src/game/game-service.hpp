@@ -16,9 +16,9 @@ public:
   
   void _update() override;
   void _render() override;
+  void _stop() override;
   
   void start() override;
-  void stop() override;
 
   // Start game changing the game state
   void startGame();
