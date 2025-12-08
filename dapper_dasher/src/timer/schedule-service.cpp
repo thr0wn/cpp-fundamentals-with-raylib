@@ -1,10 +1,9 @@
 #include "timer/schedule-service.hpp"
 
 namespace game {
+ScheduleService::ScheduleService() : GameNode("schedule-service") {};
 
-void ScheduleService::start() {
-  setName("schedule-service");  
-}
+void ScheduleService::start () {};
 
 Schedule *ScheduleService::once(VoidFunction fun, double interval) {
   Schedule *schedule = new Schedule();
@@ -46,5 +45,5 @@ void ScheduleService::stop() {
   schedules.clear();
 }
 
-ScheduleService scheduleService;
+ScheduleService *scheduleService;
 } // namespace game

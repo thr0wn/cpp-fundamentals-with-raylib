@@ -28,6 +28,8 @@ class Nebula : public GameNode2D {
                                  NEBULA_SPRITE_ROW_SIZE};
 
 public:
+  Nebula();
+  
   void start() override;
   void update() override;
   void render() override;

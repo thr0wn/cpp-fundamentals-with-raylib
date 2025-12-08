@@ -12,6 +12,8 @@ class GameService : public GameNode {
   GameState gameState;
 
 public:
+  GameService();
+  
   void _update() override;
   void _render() override;
   
@@ -43,5 +45,5 @@ public:
   // Return the current game state
   GameState getGameState();
 };
-extern GameService gameService;
+extern GameService *gameService;
 }; // namespace game

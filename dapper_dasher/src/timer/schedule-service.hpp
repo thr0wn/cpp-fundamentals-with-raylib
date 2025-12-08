@@ -12,6 +12,8 @@ private:
   std::list<Schedule *> schedules;
 
 public:
+  ScheduleService();
+
   // initialize
   void start() override;
   // do fun once after interval in seconds
@@ -24,5 +26,5 @@ public:
   void stop() override;
 };
 
-extern ScheduleService scheduleService;
+extern ScheduleService *scheduleService;
 } // namespace game

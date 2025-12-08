@@ -25,6 +25,8 @@ class Score : public GameNode {
   bool textPressSpaceIsPressed = false;
 
 public:
+  Score();
+  
   void start() override;
   void update() override;
   void render() override;

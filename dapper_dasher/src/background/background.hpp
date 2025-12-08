@@ -29,6 +29,8 @@ class Background : public GameNode2D {
   void renderTexture(Texture2D texture, Vector2 position, float velocity);
 
 public:
+  Background();
+
   void start() override;
   void update() override;
   void render() override;

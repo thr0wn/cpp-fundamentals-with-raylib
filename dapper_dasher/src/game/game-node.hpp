@@ -8,15 +8,17 @@ namespace game {
 class GameNode {
 private:
   std::string name = "game-node";
-  std::list<GameNode> children;
+  std::list<GameNode *> children;
 
 public:
-  // Add a new game node
-  void addGameNode(GameNode gameNode);
-  // Remove a game node
-  void removeGameNode(GameNode gameNode);
+  GameNode(std::string name);
 
-  // Set game-node name
+  // Add a new game node
+  void addGameNode(GameNode *gameNode);
+  // Remove a game node
+  void removeGameNode(GameNode *gameNode);
+
+  // set game-node name
   void setName(std::string name);
   // Get game-node name
   std::string getName();
@@ -50,6 +52,8 @@ public:
 
 class GameNode2D : public GameNode {
 public:
+  GameNode2D(std::string name);
+  
   Tile tile;
   Vector2 position;
 };

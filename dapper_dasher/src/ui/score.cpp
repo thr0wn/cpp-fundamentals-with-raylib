@@ -2,8 +2,9 @@
 #include "raygui.h"
 
 namespace game {
+Score::Score() : GameNode("score"){};
+  
 void Score::start() {
-  setName("score-ui");  
   // ui
   textScore.setSize(config::TEXT_SIZE_MEDIUM);
   textScore.setPosition(
@@ -20,15 +21,15 @@ void Score::start() {
   textPressSpace.alignRight();
 
   // score
-  scheduleService.repeat([this] { score++; }, scoreInterval);
+  scheduleService->repeat([this] { score++; }, scoreInterval);
   score = 0;
   std::string highscoreAsString = "0";
-  databaseService.get(highScoreKey, &highscoreAsString);
+  databaseService->get(highScoreKey, &highscoreAsString);
   highScore = std::stoi(highscoreAsString);
 }
 
 void Score::update() {
-  if (!gameService.isRunning()) {
+  if (!gameService->isRunning()) {
     return;
   }
   if (score > highScore) {
@@ -37,7 +38,7 @@ void Score::update() {
 }
 
 void Score::render() {
-  if (!gameService.isRunning()) {
+  if (!gameService->isRunning()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_MEDIUM);
@@ -55,6 +56,6 @@ void Score::render() {
 }
 
 void Score::stop() {
-  databaseService.set(highScoreKey, std::to_string(highScore));
+  databaseService->set(highScoreKey, std::to_string(highScore));
 }
 } // namespace game

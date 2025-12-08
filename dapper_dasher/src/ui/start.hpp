@@ -14,6 +14,8 @@ class Start : public GameNode {
   bool textQuitIsPressed = false;
 
 public:
+  Start();
+  
   void start() override;
   void render() override;
 };

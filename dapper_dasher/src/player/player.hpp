@@ -30,6 +30,8 @@ class Player : public GameNode2D {
   TileAnimation tileAnimation = {0, PLAYER_SPRITE_TOTAL};
 
 public:
+  Player();
+
   void start() override;
   void update() override;
   void render() override;

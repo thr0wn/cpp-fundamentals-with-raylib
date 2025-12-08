@@ -14,6 +14,8 @@ class GameOver : public GameNode {
   bool textQuitIsPressed = false;
 
 public:
+  GameOver();
+  
   void start() override;
   void render() override;
 };

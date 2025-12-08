@@ -5,9 +5,9 @@
 namespace game {
 class LogService : public game::GameNode {
 public:
-  void start() override;
-
+  LogService();
+  
   void log(std::string message);
 };
-extern LogService logService;
+extern LogService *logService;
 } // namespace game

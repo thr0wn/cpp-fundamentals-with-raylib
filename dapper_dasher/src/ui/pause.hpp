@@ -18,6 +18,8 @@ class Pause : public GameNode {
   bool textQuitIsPressed = false;
 
 public:
+  Pause();
+  
   void start() override;
   void update() override;
   void render() override;

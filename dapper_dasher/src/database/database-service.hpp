@@ -11,6 +11,8 @@ class DatabaseService : public GameNode {
   std::string databaseLocation = config::DATABASE_LOCATION;
   bool started = false;
 public:
+  DatabaseService();
+
   // start db connections
   void start();
   // stop db connections
@@ -23,5 +25,5 @@ public:
   // key-value database: unset
   void unset(std::string key);
 };
-extern DatabaseService databaseService;
+  extern DatabaseService *databaseService;
 } // namespace game

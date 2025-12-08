@@ -1,8 +1,9 @@
 #include "ui/game-over.hpp"
 
 namespace game {
+GameOver::GameOver() : GameNode("game-over") {};
+
 void GameOver::start() {
-  setName("game-over-ui");
   textRestart.setSize(config::TEXT_SIZE_LARGE);
   textRestart.setPosition(
       {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
@@ -15,7 +16,7 @@ void GameOver::start() {
 }
 
 void GameOver::render() {
-  if (!gameService.isGameOver()) {
+  if (!gameService->isGameOver()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
@@ -26,10 +27,10 @@ void GameOver::render() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textRestartIsPressed) {
-    gameService.restartGame();
+    gameService->restartGame();
   }
   if (textQuitIsPressed) {
-    gameService.stopGame();
+    gameService->stopGame();
   }
 }
 } // namespace game

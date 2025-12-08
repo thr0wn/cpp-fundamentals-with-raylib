@@ -1,9 +1,9 @@
 #include "database/database-service.hpp"
 
 namespace game {
+DatabaseService::DatabaseService() : GameNode("database-service") {}
+
 void DatabaseService::start() {
-  setName("database-service");
-  
   leveldb::Options options;
   options.create_if_missing = true;
   leveldb::Status status =
@@ -11,13 +11,12 @@ void DatabaseService::start() {
   if (status.ok()) {
     started = true;
   } else {
-    logService.log(fmt::format("(database-service) Not started due to:\n{}",                                status.ToString()));
+    logService->log(fmt::format("(database-service) Not started due to:\n{}",
+                                status.ToString()));
   }
 }
 
-void DatabaseService::stop() {
-  delete keyValueDB;
-}
+void DatabaseService::stop() { delete keyValueDB; }
 
 void DatabaseService::set(std::string key, std::string value) {
   if (started)
@@ -36,5 +35,5 @@ void DatabaseService::unset(std::string key) {
     leveldb::Status status = keyValueDB->Delete(leveldb::WriteOptions(), key);
 }
 
-DatabaseService databaseService;
+DatabaseService *databaseService;
 } // namespace game

@@ -1,78 +1,77 @@
 #include "game/game-service.hpp"
 
 namespace game {
-void GameService::start() {
-  setName("game-service");  
+  GameService::GameService(): GameNode("game-service") {}
   
-  InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT, config::GAME_NAME.data());
-  SetTargetFPS(60);
+  void GameService::start() {
+    InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT,
+               config::GAME_NAME.data());
+    SetTargetFPS(60);
 
-  // Disable default close with
-  SetExitKey(KEY_NULL);
-}
-
-void GameService::_update () {
-  if (gameState.started && !gameState.paused) {
-    GameNode::_update();
+    // Disable default close with
+    SetExitKey(KEY_NULL);
   }
-}
 
-void GameService::_render() {
-  try {
-    BeginDrawing();
-    GameNode::_render();
-    ClearBackground(WHITE);
-    EndDrawing();
-  } catch (...) {
-    logService.log("(game-service) Crashed at render");
+  void GameService::_update() {
+    if (gameState.started && !gameState.paused) {
+      GameNode::_update();
+    }
   }
-}
 
-void GameService::stop() {
-    CloseWindow();
-}
+  void GameService::_render() {
+    try {
+      BeginDrawing();
+      GameNode::_render();
+      ClearBackground(WHITE);
+      EndDrawing();
+    } catch (...) {
+      logService->log("(game-service) Crashed at render");
+    }
+  }
 
-void GameService::startGame() {
-  gameState.started = true;
-  logService.log("(game-service) Game Started");
-}
-bool GameService::isStarted() { return gameState.started; }
+  void GameService::stop() { CloseWindow(); }
 
-void GameService::pauseGame() {
-  gameState.paused = true;
-  logService.log("(game-service) Game Paused");
-}
-bool GameService::isPaused() { return gameState.paused; }
+  void GameService::startGame() {
+    gameState.started = true;
+    logService->log("(game-service) Game Started");
+  }
+  bool GameService::isStarted() { return gameState.started; }
 
-void GameService::gameOver() {
-  gameState.gameOver = true;
-  logService.log("(game-service) Game Over");
-}
-bool GameService::isGameOver() { return gameState.gameOver; }
+  void GameService::pauseGame() {
+    gameState.paused = true;
+    logService->log("(game-service) Game Paused");
+  }
+  bool GameService::isPaused() { return gameState.paused; }
 
-void GameService::stopGame() {
-  gameState.close = true;
-  logService.log("(game-service) Game Stopped");
-}
-bool GameService::shouldClose() {
-  return gameState.close || WindowShouldClose();
-}
+  void GameService::gameOver() {
+    gameState.gameOver = true;
+    logService->log("(game-service) Game Over");
+  }
+  bool GameService::isGameOver() { return gameState.gameOver; }
 
-void GameService::resumeGame() {
-  gameState.paused = false;
-  logService.log("(game-service) Game Resumed");
-}
+  void GameService::stopGame() {
+    gameState.close = true;
+    logService->log("(game-service) Game Stopped");
+  }
+  bool GameService::shouldClose() {
+    return gameState.close || WindowShouldClose();
+  }
 
-void GameService::restartGame() {
-  gameState.started = false;
-  gameState.paused = false;
-  gameState.gameOver = false;
-  restart();
-  logService.log("(game-service) Game Restarted");
-}
-bool GameService::isRunning() { return gameState.started && !gameState.paused; }
+  void GameService::resumeGame() {
+    gameState.paused = false;
+    logService->log("(game-service) Game Resumed");
+  }
 
-GameState GameService::getGameState() { return gameState; }
+  void GameService::restartGame() {
+    gameState.started = false;
+    gameState.paused = false;
+    gameState.gameOver = false;
+    restart();
+    logService->log("(game-service) Game Restarted");
+  }
+  bool GameService::isRunning() { return gameState.started && !gameState.paused; }
 
-GameService gameService;
+  GameState GameService::getGameState() { return gameState; }
+
+  GameService *gameService;
 } // namespace game
