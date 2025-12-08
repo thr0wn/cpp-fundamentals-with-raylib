@@ -1,35 +1,36 @@
 #include "game/game.hpp"
 
-void Game::start() {
-  // add game-nodes
-  Background *background = new Background();  
-  Player *player = new Player();
-  Nebula *nebula = new Nebula();
-  Start *start = new Start();
-  Pause *pause = new Pause();
-  Score *score = new Score();
-  GameOver *gameOver = new GameOver();
-  gameService::addGameNode(background);
-  gameService::addGameNode(player);
-  gameService::addGameNode(nebula);
-  gameService::addGameNode(start);
-  gameService::addGameNode(pause);
-  gameService::addGameNode(score);  
-  gameService::addGameNode(gameOver);
+namespace game {
+int start() {
+  Background background;
+  // Player *player = new Player();
+  // Nebula *nebula = new Nebula();
+  // Start *start = new Start();
+  // Pause *pause = new Pause();
+  // Score *score = new Score();
+  // GameOver *gameOver = new GameOver();
+  //gameService.addGameNode(logService);
+  //gameService.addGameNode(&scheduleService);
+  //gameService.addGameNode(tileService);
+  gameService.addGameNode(background);
+  // gameService.addGameNode(player);
+  // gameService.addGameNode(nebula);
+  // gameService.addGameNode(start);
+  // gameService.addGameNode(pause);
+  // gameService.addGameNode(score);
+  // gameService.addGameNode(gameOver);
 
-  gameService::start();  
+  gameService._start();
+  while (!gameService.shouldClose()) {
+    gameService._update();
+    gameService._render();
+    gameService._renderOut();
+  }
+  gameService._stop();
+
+  return 0;
 }
 
-void Game::update() { gameService::update(); }
+void stop() { gameService._stop(); }
 
-void Game::render() {
-  gameService::render();
-}
-
-void Game::stop() {
-  gameService::stop();
-}
-
-bool Game::shouldClose () {
-  return gameService::shouldClose();
-}  
+} // namespace game

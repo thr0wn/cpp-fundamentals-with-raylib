@@ -3,6 +3,7 @@ add_subdirectory(config)
 # library setup
 # ----------------------------------------------------------------------------------------
 set(LIBRARY_SOURCE_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cpp"
@@ -15,7 +16,6 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.cpp"

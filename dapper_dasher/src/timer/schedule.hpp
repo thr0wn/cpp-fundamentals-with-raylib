@@ -3,12 +3,14 @@
 #include <functional>
 #include <list>
 
+namespace game {
 typedef std::function<void(void)> VoidFunction;
 
 class Schedule {
-public:  
+public:
   Timer *timer = NULL;
   VoidFunction fun;
   bool isExecuted;
-  bool isRepetable; 
+  bool isRepetable;
 };
+} // namespace game

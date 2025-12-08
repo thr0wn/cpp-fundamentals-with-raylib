@@ -1,11 +1,11 @@
 #pragma once
 #include "config/config.hpp"
 #include "game/game-node.hpp"
-#include "raylib.h"
 #include "game/game-service.hpp"
-#include "timer/schedule-service.hpp"
+#include "raylib.h"
 #include "tile/tile-service.hpp"
 #include "tile/tile.hpp"
+#include "timer/schedule-service.hpp"
 #include "timer/timer.hpp"
 #include <cmath>
 #include <cstdio>
@@ -22,6 +22,7 @@
 // tile animation
 #define PLAYER_SPRITE_TOTAL 6
 
+namespace game {
 class Player : public GameNode2D {
   const float gravity = PLAYER_INITIAL_GRAVITY;
   float velocity = 0;
@@ -36,3 +37,4 @@ public:
 
   bool isJumping();
 };
+} // namespace game

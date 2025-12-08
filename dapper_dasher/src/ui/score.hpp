@@ -1,17 +1,18 @@
 #pragma once
 #include "config/config.hpp"
+#include "database/database-service.hpp"
 #include "game/game-node.hpp"
 #include "game/game-service.hpp"
-#include "database/database-service.hpp"
-#include <string>
+#include "raygui.h"
 #include "ui/text.hpp"
 #include <fmt/format.h>
-#include "raygui.h"
+#include <string>
 
+namespace game {
 class Score : public GameNode {
   int score;
   int highScore;
-  const std::string highScoreKey = config::SCORE_DATABASE_HIGHSCORE_KEY;  
+  const std::string highScoreKey = config::SCORE_DATABASE_HIGHSCORE_KEY;
   const int scoreInterval = config::SCORE_INTERVAL;
 
   Text textScore{config::SCORE_TEXT_SCORE};
@@ -27,5 +28,7 @@ public:
   void start() override;
   void update() override;
   void render() override;
-  void stop() override;;  
+  void stop() override;
+  ;
 };
+} // namespace game

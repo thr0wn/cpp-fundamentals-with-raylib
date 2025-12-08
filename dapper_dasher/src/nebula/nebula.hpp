@@ -1,11 +1,11 @@
 #pragma once
 #include "config/config.hpp"
 #include "game/game-node.hpp"
-#include "raylib.h"
 #include "game/game-service.hpp"
-#include "timer/schedule-service.hpp"
+#include "raylib.h"
 #include "tile/tile-service.hpp"
 #include "tile/tile.hpp"
+#include "timer/schedule-service.hpp"
 #include "timer/timer.hpp"
 #include <cmath>
 
@@ -21,9 +21,11 @@
 #define NEBULA_SPRITE_TOTAL 60
 #define NEBULA_SPRITE_ROW_SIZE 8
 
+namespace game {
 class Nebula : public GameNode2D {
   const float velocity = INITIAL_VELOCITY;
-  TileAnimation tileAnimation = { 0, NEBULA_SPRITE_TOTAL, NEBULA_SPRITE_ROW_SIZE};  
+  TileAnimation tileAnimation = {0, NEBULA_SPRITE_TOTAL,
+                                 NEBULA_SPRITE_ROW_SIZE};
 
 public:
   void start() override;
@@ -31,3 +33,4 @@ public:
   void render() override;
   void stop() override;
 };
+} // namespace game

@@ -1,17 +1,18 @@
 #include "player/player.hpp"
-#include "config/config.hpp"
-#include "game/game-service.hpp"
 
+namespace game {
 void Player::start() {
+  setName("player");
+
   // tile related properties
   tile.width = PLAYER_TILE_WIDTH;
   tile.height = PLAYER_TILE_HEIGHT;
   tile.x = 0;
   tile.y = 0;
-  position =
-    Vector2{config::WINDOW_WIDTH / 2 - tile.width / 2, config::WINDOW_HEIGHT - tile.height};
+  position = Vector2{config::WINDOW_WIDTH / 2 - tile.width / 2,
+                     config::WINDOW_HEIGHT - tile.height};
 
-  scheduleService::repeat(
+  scheduleService.repeat(
       [this] {
         if (!isJumping()) {
           tileAnimation.sprite++;
@@ -44,13 +45,17 @@ void Player::update() {
 }
 
 void Player::render() {
-  if (!gameService::isStarted()) {
+  if (!gameService.isStarted()) {
     return;
   }
-  Color color = gameService::isPaused() ? GRAY : WHITE;  
-  tileService::draw(tileService::textures[TEXTURE_SCARFY], tile, position, color);
+  Color color = gameService.isPaused() ? GRAY : WHITE;
+  tileService.draw(tileService.textures[TEXTURE_SCARFY], tile, position,
+                    color);
 }
 
 void Player::stop(){};
 
-bool Player::isJumping() { return position.y < (config::WINDOW_HEIGHT - tile.height); }
+bool Player::isJumping() {
+  return position.y < (config::WINDOW_HEIGHT - tile.height);
+}
+} // namespace game

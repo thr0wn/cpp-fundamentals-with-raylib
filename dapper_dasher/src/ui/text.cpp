@@ -1,5 +1,6 @@
 #include "ui/text.hpp"
 
+namespace game {
 Text::Text(std::string text) {
   this->text = text;
   updateRectangle();
@@ -46,4 +47,5 @@ void Text::alignLeft() {
 }
 void Text::alignRight() {
   rectangle.x = position.x - getWidth();
+}
 }

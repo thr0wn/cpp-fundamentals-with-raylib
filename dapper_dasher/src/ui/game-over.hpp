@@ -2,9 +2,10 @@
 #include "config/config.hpp"
 #include "game/game-node.hpp"
 #include "game/game-service.hpp"
-#include "ui/text.hpp"
 #include "raygui.h"
+#include "ui/text.hpp"
 
+namespace game {
 class GameOver : public GameNode {
   Text textRestart{config::GAMEOVER_TEXT_RESTART};
   bool textRestartIsPressed = false;
@@ -16,3 +17,4 @@ public:
   void start() override;
   void render() override;
 };
+} // namespace game

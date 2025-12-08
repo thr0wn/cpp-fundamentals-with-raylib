@@ -1,12 +1,12 @@
 #include "timer/schedule-service.hpp"
 
-namespace scheduleService {
-namespace {
-std::list<Schedule *> schedules;
-}
-void start() { logService::log("(schedule-service) Started"); }
+namespace game {
 
-Schedule *once(VoidFunction fun, double interval) {
+void ScheduleService::start() {
+  setName("schedule-service");  
+}
+
+Schedule *ScheduleService::once(VoidFunction fun, double interval) {
   Schedule *schedule = new Schedule();
   schedule->fun = fun;
   schedule->timer = new Timer{interval};
@@ -17,13 +17,13 @@ Schedule *once(VoidFunction fun, double interval) {
   return schedule;
 }
 
-Schedule *repeat(VoidFunction fun, double interval) {
+Schedule *ScheduleService::repeat(VoidFunction fun, double interval) {
   Schedule *schedule = once(fun, interval);
   schedule->isRepetable = true;
   return schedule;
 }
 
-void update() {
+void ScheduleService::update() {
   for (Schedule *schedule : schedules) {
     if (!schedule->timer->isActive()) {
       if (!schedule->isExecuted && !schedule->isRepetable) {
@@ -38,12 +38,13 @@ void update() {
   }
 }
 
-void stop() {
+void ScheduleService::stop() {
   for (Schedule *schedule : schedules) {
     delete schedule->timer;
     delete schedule;
   }
   schedules.clear();
-  logService::log("(schedule-service) Stopped");
 }
-} // namespace scheduleService
+
+ScheduleService scheduleService;
+} // namespace game

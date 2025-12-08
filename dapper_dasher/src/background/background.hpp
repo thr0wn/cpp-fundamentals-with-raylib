@@ -1,15 +1,16 @@
 #pragma once
 #include "game/game-node.hpp"
-#include "raylib.h"
-#include "tile/tile.hpp"
-#include "tile/tile-service.hpp"
 #include "game/game-service.hpp"
+#include "raylib.h"
+#include "tile/tile-service.hpp"
+#include "tile/tile.hpp"
 
 #define BACKGROUND_FAR_VELOCITY -30.0f;
 #define BACKGROUND_MID_VELOCITY -60.0f;
 #define BACKGROUND_NEAR_VELOCITY -90.0f;
 
-class Background : public GameNode {
+namespace game {
+class Background : public GameNode2D {
   Texture2D texture;
   const float velocity = BACKGROUND_FAR_VELOCITY;
 
@@ -23,13 +24,13 @@ class Background : public GameNode {
 
   void setBackground(GameTexture gameTexture, Texture2D *texture,
                      Vector2 *position);
-  
+
   void updateTexture(Texture2D texture, Vector2 *position, float velocity);
-  void renderTexture(Texture2D texture, Vector2 position, float velocity);  
+  void renderTexture(Texture2D texture, Vector2 position, float velocity);
 
 public:
   void start() override;
   void update() override;
   void render() override;
-  void stop() override;
 };
+} // namespace game

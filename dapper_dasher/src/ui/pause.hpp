@@ -2,10 +2,11 @@
 #include "config/config.hpp"
 #include "game/game-node.hpp"
 #include "game/game-service.hpp"
+#include "raygui.h"
 #include "ui/text.hpp"
 #include <string>
-#include "raygui.h"
 
+namespace game {
 class Pause : public GameNode {
   Text textResume{config::PAUSE_TEXT_RESUME};
   bool textResumeIsPressed = false;
@@ -21,3 +22,4 @@ public:
   void update() override;
   void render() override;
 };
+} // namespace game

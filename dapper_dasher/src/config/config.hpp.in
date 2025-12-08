@@ -12,6 +12,9 @@ namespace config {
   constexpr std::int32_t project_version_minor{@PROJECT_VERSION_MINOR@};
   constexpr std::int32_t project_version_patch{@PROJECT_VERSION_PATCH@};
 
+  // Game constants
+  const std::string GAME_NAME = "Dapper Dasher";  
+  
   // Window constants
   constexpr const float WINDOW_WIDTH = 768.0f;
   constexpr const float WINDOW_HEIGHT = 576.0f;

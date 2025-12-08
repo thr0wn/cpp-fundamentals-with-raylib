@@ -1,7 +1,8 @@
 #include "background/background.hpp"
-#include "game/game-service.hpp"
 
+namespace game {
 void Background::start() {
+  setName("background");  
   setBackground(TEXTURE_FAR_BUILDING, &texture, &position);
   setBackground(TEXTURE_BACK_BUILDING, &textureMid, &positionMid);
   setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
@@ -19,11 +20,9 @@ void Background::render() {
   renderTexture(textureNear, positionNear, velocityNear);
 }
 
-void Background::stop() {}
-
 void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
                                Vector2 *position) {
-  *texture = tileService::textures[gameTexture];
+  *texture = tileService.textures[gameTexture];
   position->x = 0;
   position->y = 0;
 }
@@ -38,9 +37,11 @@ void Background::updateTexture(Texture2D texture, Vector2 *position,
 
 void Background::renderTexture(Texture2D texture, Vector2 position,
                                float velocity) {
-  Color color = gameService::isStarted() && !gameService::isPaused() ? WHITE : GRAY;
+  Color color =
+      gameService.isStarted() && !gameService.isPaused() ? WHITE : GRAY;
   Vector2 secondPosition = position;
   secondPosition.x += 3.0f * texture.width;
   DrawTextureEx(texture, position, 0, 3.0f, color);
   DrawTextureEx(texture, secondPosition, 0, 3.0f, color);
 }
+} // namespace game

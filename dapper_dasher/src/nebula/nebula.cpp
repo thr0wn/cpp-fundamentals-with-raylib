@@ -1,15 +1,17 @@
 #include "nebula/nebula.hpp"
-#include "config/config.hpp"
 
+namespace game {
 void Nebula::start() {
+  setName("nebula");  
   // tile related properties
   tile.width = NEBULA_TILE_WIDTH;
   tile.height = NEBULA_TILE_HEIGHT;
   tile.x = 7;
   tile.y = 0;
-  position = Vector2{config::WINDOW_WIDTH + tile.width / 2, config::WINDOW_HEIGHT - tile.height};
+  position = Vector2{config::WINDOW_WIDTH + tile.width / 2,
+                     config::WINDOW_HEIGHT - tile.height};
 
-  scheduleService::repeat(
+  scheduleService.repeat(
       [this] {
         tileAnimation.sprite++;
         tileAnimation.sprite = std::fmod(
@@ -34,11 +36,13 @@ void Nebula::update() {
 }
 
 void Nebula::render() {
-  if (!gameService::isStarted()) {
+  if (!gameService.isStarted()) {
     return;
   }
-  Color color = gameService::isPaused() ? GRAY : WHITE;
-  tileService::draw(tileService::textures[TEXTURE_NEBULA], tile, position, color);
+  Color color = gameService.isPaused() ? GRAY : WHITE;
+  tileService.draw(tileService.textures[TEXTURE_NEBULA], tile, position,
+                    color);
 }
 
 void Nebula::stop(){};
+} // namespace game
