@@ -13,9 +13,8 @@ private:
 
 public:
   ScheduleService();
-
-  // initialize
-  void start() override;
+  // reinitialize  
+  void restart() override;
   // do fun once after interval in seconds
   Schedule *once(VoidFunction fun, double interval);
   // repeat fun every interval in seconds.

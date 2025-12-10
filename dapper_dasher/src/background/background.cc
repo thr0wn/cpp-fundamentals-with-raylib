@@ -9,6 +9,10 @@ void Background::start() {
   setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
 }
 
+void Background::restart() {
+  start();
+}
+
 void Background::update() {
   updateTexture(texture, &position, velocity);
   updateTexture(textureMid, &positionMid, velocityMid);

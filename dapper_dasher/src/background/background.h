@@ -32,6 +32,7 @@ public:
   Background();
 
   void start() override;
+  void restart() override;
   void update() override;
   void render() override;
 };

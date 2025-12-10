@@ -3,7 +3,7 @@
 namespace game {
 ScheduleService::ScheduleService() : GameNode("schedule-service") {};
 
-void ScheduleService::start () {};
+void ScheduleService::restart () { stop(); };
 
 Schedule *ScheduleService::once(VoidFunction fun, double interval) {
   Schedule *schedule = new Schedule();

@@ -28,6 +28,7 @@ public:
   Score();
   
   void start() override;
+  void restart() override;
   void update() override;
   void render() override;
   void stop() override;

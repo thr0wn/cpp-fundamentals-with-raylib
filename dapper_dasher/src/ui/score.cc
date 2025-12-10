@@ -28,6 +28,11 @@ void Score::start() {
   highScore = std::stoi(highscoreAsString);
 }
 
+void Score::restart() {
+  stop();
+  start();  
+}
+
 void Score::update() {
   if (!gameService->isRunning()) {
     return;

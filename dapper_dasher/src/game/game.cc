@@ -16,11 +16,11 @@ int start() {
   // Score *score = new Score();
   // GameOver *gameOver = new GameOver();
   gameService->push(logService);
-  gameService->push(databaseService);
   gameService->push(scheduleService);
   gameService->push(tileService);
   gameService->push(background);
-  gameService->push(ui);  
+  gameService->push(ui);
+  gameService->push(databaseService); // must be after others  
   // gameService->push(player);
   // gameService->push(nebula);
   // gameService->push(start);

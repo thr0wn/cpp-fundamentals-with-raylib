@@ -43,7 +43,7 @@ namespace config {
   const std::string SCORE_TEXT_SCORE = "Score";
   const std::string SCORE_TEXT_HIGH_SCORE = "High score";
   const std::string SCORE_TEXT_PRESS_SPACE = "Press space to jump";
-  const int SCORE_INTERVAL = 1;
+  constexpr const int SCORE_INTERVAL = 1;
   const std::string SCORE_DATABASE_HIGHSCORE_KEY = "highScore";
 
   // GameOver UI constants

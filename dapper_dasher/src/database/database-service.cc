@@ -16,7 +16,9 @@ void DatabaseService::start() {
   }
 }
 
-void DatabaseService::stop() { delete keyValueDB; }
+void DatabaseService::stop() {
+ delete keyValueDB;
+}
 
 void DatabaseService::set(std::string key, std::string value) {
   if (started)

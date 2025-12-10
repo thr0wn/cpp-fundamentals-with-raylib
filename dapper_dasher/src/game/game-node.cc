@@ -11,26 +11,22 @@ GameNode2D::GameNode2D(std::string name) : GameNode(name) {}
 void GameNode::push(GameNode *gameNode) { children.push_back(gameNode); }
 
 void GameNode::erase(GameNode *gameNode) {
-  std::list<GameNode *>::iterator iterator;
-  bool found = false;
+  std::list<GameNode *>::iterator iterator = children.begin();
   for (GameNode *gNode : children) {
     if (gNode->getName() == gameNode->getName()) {
       gNode->_stop();
-      found = true;
-      break;
+      children.erase(iterator);
+     break;
     }
     iterator++;
-  }
-  if (found) {
-    children.erase(iterator);
   }
 }
 
 void GameNode::_start() {
   try {
+    logService->log(fmt::format("({}) Starting", getName()));
     start();
     for (GameNode *gameNode : children) {
-      logService->log(fmt::format("({}) Starting", gameNode->getName()));
       gameNode->_start();
     }
     logService->log(fmt::format("({}) Started", getName()));
@@ -41,9 +37,9 @@ void GameNode::_start() {
 
 void GameNode::_restart() {
   try {
+    logService->log(fmt::format("({}) Restarting", getName()));
     restart();
     for (GameNode *gameNode : children) {
-      logService->log(fmt::format("({}) Restarting", gameNode->getName()));
       gameNode->_restart();
     }
     logService->log(fmt::format("({}) Restarted", getName()));
@@ -87,9 +83,9 @@ void GameNode::_renderOut() {
 
 void GameNode::_stop() {
   try {
+    logService->log(fmt::format("({}) Stopping", getName()));    
     stop();
     for (GameNode *gameNode : children) {
-      logService->log(fmt::format("({}) Stopping", gameNode->getName()));
       gameNode->_stop();
     }
     children.clear();

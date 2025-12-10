@@ -77,7 +77,7 @@ namespace game {
     gameState.started = false;
     gameState.paused = false;
     gameState.gameOver = false;
-    restart();
+    _restart();
     logService->log("(game-service) Game Restarted");
   }
   bool GameService::isRunning() { return gameState.started && !gameState.paused; }
