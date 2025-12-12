@@ -9,24 +9,16 @@ int start() {
   tileService = new TileService();
   UI *ui = new UI();
   Background *background = new Background();
-  // Player *player = new Player();
-  // Nebula *nebula = new Nebula();
-  // Start *start = new Start();
-  // Pause *pause = new Pause();
-  // Score *score = new Score();
-  // GameOver *gameOver = new GameOver();
+  Player *player = new Player();
+  Nebula *nebula = new Nebula();
   gameService->push(logService);
   gameService->push(scheduleService);
   gameService->push(tileService);
   gameService->push(background);
   gameService->push(ui);
   gameService->push(databaseService); // must be after others  
-  // gameService->push(player);
-  // gameService->push(nebula);
-  // gameService->push(start);
-  // gameService->push(pause);
-  // gameService->push(score);
-  // gameService->push(gameOver);
+  gameService->push(player);
+  gameService->push(nebula);
 
   gameService->_start();
   while (!gameService->shouldClose()) {
@@ -42,7 +34,9 @@ int start() {
   delete scheduleService;
   delete tileService;
   delete background;
-  delete ui;  
+  delete ui;
+  delete player;
+  delete nebula;
 
   return 0;
 }

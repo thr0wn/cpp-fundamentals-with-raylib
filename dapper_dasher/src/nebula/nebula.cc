@@ -27,6 +27,11 @@ void Nebula::start() {
       NEBULA_ANIMATION_TIME);
 };
 
+void Nebula::restart() {
+  start();  
+}
+
+
 void Nebula::update() {
   position.x += velocity * GetFrameTime();
 

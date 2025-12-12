@@ -1,9 +1,11 @@
 #include "timer/schedule-service.h"
 
 namespace game {
-ScheduleService::ScheduleService() : GameNode("schedule-service") {};
+ScheduleService::ScheduleService() : GameNode("schedule-service"){};
 
-void ScheduleService::restart () { stop(); };
+void ScheduleService::restart() {
+  stop();
+};
 
 Schedule *ScheduleService::once(VoidFunction fun, double interval) {
   Schedule *schedule = new Schedule();
