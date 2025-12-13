@@ -25,5 +25,5 @@ public:
   // key-value database: unset
   void unset(std::string key);
 };
-  extern DatabaseService *databaseService;
+  extern DatabaseService databaseService;
 } // namespace game

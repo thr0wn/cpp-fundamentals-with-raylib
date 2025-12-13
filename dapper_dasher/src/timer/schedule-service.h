@@ -25,5 +25,5 @@ public:
   void stop() override;
 };
 
-extern ScheduleService *scheduleService;
+extern ScheduleService scheduleService;
 } // namespace game

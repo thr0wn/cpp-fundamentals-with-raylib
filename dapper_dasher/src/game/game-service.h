@@ -45,5 +45,5 @@ public:
   // Return the current game state
   GameState getGameState();
 };
-extern GameService *gameService;
+extern GameService gameService;
 }; // namespace game

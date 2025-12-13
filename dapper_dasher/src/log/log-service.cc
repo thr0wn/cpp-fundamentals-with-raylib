@@ -8,5 +8,5 @@ namespace game {
     fflush(stdout);
   }
 
-  LogService *logService;
+  LogService logService;
 } // namespace game

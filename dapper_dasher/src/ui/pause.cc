@@ -22,14 +22,14 @@ void Pause::start() {
 }
 
 void Pause::update() {
-  if (gameService->isRunning() &&
+  if (gameService.isRunning() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    gameService->pauseGame();
+    gameService.pauseGame();
   }
 }
 
 void Pause::render() {
-  if (!gameService->isPaused()) {
+  if (!gameService.isPaused()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
@@ -42,13 +42,13 @@ void Pause::render() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textResumeIsPressed) {
-    gameService->resumeGame();
+    gameService.resumeGame();
   }
   if (textRestartIsPressed) {
-    gameService->restartGame();
+    gameService.restartGame();
   }
   if (textQuitIsPressed) {
-    gameService->stopGame();
+    gameService.stopGame();
   }
 }
 } // namespace game

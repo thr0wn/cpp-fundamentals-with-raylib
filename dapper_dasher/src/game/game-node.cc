@@ -24,27 +24,27 @@ void GameNode::erase(GameNode *gameNode) {
 
 void GameNode::_start() {
   try {
-    logService->log(fmt::format("({}) Starting", getName()));
+    logService.log(fmt::format("({}) Starting", getName()));
     start();
     for (GameNode *gameNode : children) {
       gameNode->_start();
     }
-    logService->log(fmt::format("({}) Started", getName()));
+    logService.log(fmt::format("({}) Started", getName()));
   } catch (...) {
-    logService->log(fmt::format("({}) Crashed at start", getName()));
+    logService.log(fmt::format("({}) Crashed at start", getName()));
   }
 }
 
 void GameNode::_restart() {
   try {
-    logService->log(fmt::format("({}) Restarting", getName()));
+    logService.log(fmt::format("({}) Restarting", getName()));
     restart();
     for (GameNode *gameNode : children) {
       gameNode->_restart();
     }
-    logService->log(fmt::format("({}) Restarted", getName()));
+    logService.log(fmt::format("({}) Restarted", getName()));
   } catch (...) {
-    logService->log(fmt::format("({}) Crashed at restart", getName()));
+    logService.log(fmt::format("({}) Crashed at restart", getName()));
   }
 }
 
@@ -55,7 +55,7 @@ void GameNode::_update() {
       gameNode->_update();
     }
   } catch (...) {
-    logService->log(fmt::format("({}) Crashed at update", getName()));
+    logService.log(fmt::format("({}) Crashed at update", getName()));
   }
 }
 
@@ -66,7 +66,7 @@ void GameNode::_render() {
       gameNode->_render();
     }
   } catch (...) {
-    logService->log(fmt::format("({}) Crashed at render", getName()));
+    logService.log(fmt::format("({}) Crashed at render", getName()));
   }
 }
 
@@ -77,21 +77,21 @@ void GameNode::_renderOut() {
       gameNode->_renderOut();
     }
   } catch (...) {
-    logService->log(fmt::format("({}) Crashed at renderOut", getName()));
+    logService.log(fmt::format("({}) Crashed at renderOut", getName()));
   }
 }
 
 void GameNode::_stop() {
   try {
-    logService->log(fmt::format("({}) Stopping", getName()));    
+    logService.log(fmt::format("({}) Stopping", getName()));    
     stop();
     for (GameNode *gameNode : children) {
       gameNode->_stop();
     }
     children.clear();
-    logService->log(fmt::format("({}) Stopped", getName()));
+    logService.log(fmt::format("({}) Stopped", getName()));
   } catch (...) {
-    logService->log(fmt::format("({}) Crashed at stop", getName()));
+    logService.log(fmt::format("({}) Crashed at stop", getName()));
   }
 }
 

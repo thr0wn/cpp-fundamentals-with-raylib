@@ -12,7 +12,7 @@ void Player::start() {
   position = Vector2{config::WINDOW_WIDTH / 2 - tile.width / 2,
                      config::WINDOW_HEIGHT - tile.height};
 
-  scheduleService->repeat(
+  scheduleService.repeat(
       [this] {
         if (!isJumping()) {
           tileAnimation.sprite++;
@@ -49,11 +49,11 @@ void Player::update() {
 }
 
 void Player::render() {
-  if (!gameService->isStarted()) {
+  if (!gameService.isStarted()) {
     return;
   }
-  Color color = gameService->isPaused() ? GRAY : WHITE;
-  tileService->draw(tileService->textures[TEXTURE_SCARFY], tile, position,
+  Color color = gameService.isPaused() ? GRAY : WHITE;
+  tileService.draw(tileService.textures[TEXTURE_SCARFY], tile, position,
                     color);
 }
 

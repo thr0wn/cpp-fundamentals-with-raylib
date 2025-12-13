@@ -47,5 +47,5 @@ void ScheduleService::stop() {
   schedules.clear();
 }
 
-ScheduleService *scheduleService;
+ScheduleService scheduleService;
 } // namespace game

@@ -19,5 +19,5 @@ public:
   void stop() override;
   void draw(Texture texture, Tile tile, Vector2 position, Color color);
 };
-extern TileService *tileService;
+extern TileService tileService;
 } // namespace game

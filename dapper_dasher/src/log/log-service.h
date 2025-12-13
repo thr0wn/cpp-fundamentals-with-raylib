@@ -9,5 +9,5 @@ public:
   
   void log(std::string message);
 };
-extern LogService *logService;
+extern LogService logService;
 } // namespace game

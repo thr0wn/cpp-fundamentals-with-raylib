@@ -11,10 +11,10 @@
 
 namespace game {
 class UI : public GameNode {
-  Start *startUI;
-  Pause *pauseUI;
-  Score *scoreUI;
-  GameOver *gameOverUI;
+  Start startUI;
+  Pause pauseUI;
+  Score scoreUI;
+  GameOver gameOverUI;
 
 public:
   UI();

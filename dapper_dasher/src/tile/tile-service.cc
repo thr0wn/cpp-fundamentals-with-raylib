@@ -24,5 +24,5 @@ void TileService::stop() {
   }
 }
 
-TileService *tileService;
+TileService tileService;
 } // namespace game

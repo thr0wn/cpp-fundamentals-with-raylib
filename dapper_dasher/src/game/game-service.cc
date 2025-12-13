@@ -18,7 +18,7 @@ namespace game {
         GameNode::_update();
       }
     } catch(...) {
-      logService->log("(game-service) Crashed at update");
+      logService.log("(game-service) Crashed at update");
     }
   }
 
@@ -29,7 +29,7 @@ namespace game {
       ClearBackground(WHITE);
       EndDrawing();
     } catch (...) {
-      logService->log("(game-service) Crashed at render");
+      logService.log("(game-service) Crashed at render");
     }
   }
 
@@ -38,31 +38,31 @@ namespace game {
       GameNode::_stop();
       CloseWindow();
     } catch(...) {
-      logService->log("(game-service) Crashed at stop");
+      logService.log("(game-service) Crashed at stop");
     }
   }
 
   void GameService::startGame() {
     gameState.started = true;
-    logService->log("(game-service) Game Started");
+    logService.log("(game-service) Game Started");
   }
   bool GameService::isStarted() { return gameState.started; }
 
   void GameService::pauseGame() {
     gameState.paused = true;
-    logService->log("(game-service) Game Paused");
+    logService.log("(game-service) Game Paused");
   }
   bool GameService::isPaused() { return gameState.paused; }
 
   void GameService::gameOver() {
     gameState.gameOver = true;
-    logService->log("(game-service) Game Over");
+    logService.log("(game-service) Game Over");
   }
   bool GameService::isGameOver() { return gameState.gameOver; }
 
   void GameService::stopGame() {
     gameState.close = true;
-    logService->log("(game-service) Game Stopped");
+    logService.log("(game-service) Game Stopped");
   }
   bool GameService::shouldClose() {
     return gameState.close || WindowShouldClose();
@@ -70,7 +70,7 @@ namespace game {
 
   void GameService::resumeGame() {
     gameState.paused = false;
-    logService->log("(game-service) Game Resumed");
+    logService.log("(game-service) Game Resumed");
   }
 
   void GameService::restartGame() {
@@ -78,11 +78,11 @@ namespace game {
     gameState.paused = false;
     gameState.gameOver = false;
     _restart();
-    logService->log("(game-service) Game Restarted");
+    logService.log("(game-service) Game Restarted");
   }
   bool GameService::isRunning() { return gameState.started && !gameState.paused; }
 
   GameState GameService::getGameState() { return gameState; }
 
-  GameService *gameService;
+  GameService gameService;
 } // namespace game

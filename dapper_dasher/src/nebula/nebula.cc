@@ -12,7 +12,7 @@ void Nebula::start() {
   position = Vector2{config::WINDOW_WIDTH + tile.width / 2,
                      config::WINDOW_HEIGHT - tile.height};
 
-  scheduleService->repeat(
+  scheduleService.repeat(
       [this] {
         tileAnimation.sprite++;
         tileAnimation.sprite = std::fmod(
@@ -42,11 +42,11 @@ void Nebula::update() {
 }
 
 void Nebula::render() {
-  if (!gameService->isStarted()) {
+  if (!gameService.isStarted()) {
     return;
   }
-  Color color = gameService->isPaused() ? GRAY : WHITE;
-  tileService->draw(tileService->textures[TEXTURE_NEBULA], tile, position,
+  Color color = gameService.isPaused() ? GRAY : WHITE;
+  tileService.draw(tileService.textures[TEXTURE_NEBULA], tile, position,
                     color);
 }
 
