@@ -17,6 +17,7 @@ set(RAYLIB_VERSION 5.0)
 set(RAYGUI_VERSION 4.0)
 set(FMT_VERSION 9.1.0)
 set(LEVELDB_VERSION 1.23)
+set(CATCH2_VERSION v3.5.3)
 
 # compile options
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU") 
@@ -28,24 +29,29 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   add_compile_options(/W4)
 endif()
 
+# testing
+option(ENABLE_TESTING "Enable a Unit Testing Build" ON)
+
 # fetch and declare content
+# fetch raylib and raygui
 include(FetchContent)
 FetchContent_Declare(
   raylib
-  DOWNLOAD_EXTRACT_TIMESTAMP OFF
-  URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
-  FIND_PACKAGE_ARGS
+  GIT_REPOSITORY https://github.com/raysan5/raylib
+  GIT_TAG ${RAYLIB_VERSION}
+  GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(raylib)
 FetchContent_Declare(
   raygui
-  DOWNLOAD_EXTRACT_TIMESTAMP OFF
-  URL https://github.com/raysan5/raygui/archive/refs/tags/${RAYGUI_VERSION}.tar.gz
-  FIND_PACKAGE_ARGS
+  GIT_REPOSITORY https://github.com/raysan5/raygui
+  GIT_TAG ${RAYGUI_VERSION}
+  GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(raygui)
 add_subdirectory(${raygui_SOURCE_DIR}/projects/CMake)
 
+# fetch fmt
 FetchContent_Declare(
     fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt
@@ -65,4 +71,15 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(leveldb)
 
+# fetch catch2
+if(ENABLE_TESTING)
+    FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2
+        GIT_TAG ${CATCH2_VERSION}
+        GIT_SHALLOW TRUE)
+    FetchContent_MakeAvailable(Catch2)
+endif()
+
 add_subdirectory(src)
+add_subdirectory(tests)

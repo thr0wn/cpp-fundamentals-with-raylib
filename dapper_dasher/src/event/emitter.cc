@@ -35,7 +35,7 @@ void Emitter::emit(Event event) {
       listener.function(event);
     }
   } catch (const std::out_of_range &ex) {
-    // do nothing
+    // do nothing    
   }
 };
 } // namespace game

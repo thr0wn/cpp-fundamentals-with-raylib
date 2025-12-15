@@ -1,5 +1,10 @@
 #pragma once
 #include "config/config.h"
+
+#include "event/event.h"
+#include "event/emitter.h"
+#include "event/listener.h"
+
 #include "background/background.h"
 #include "log/log-service.h"
 #include "tile/tile-service.h"

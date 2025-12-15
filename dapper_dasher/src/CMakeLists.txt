@@ -3,6 +3,7 @@ add_subdirectory(config)
 # library setup
 # ----------------------------------------------------------------------------------------
 set(LIBRARY_SOURCE_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/event/event.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/emitter.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.cc"
   
