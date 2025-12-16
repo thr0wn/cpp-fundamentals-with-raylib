@@ -2,40 +2,45 @@
 
 namespace game {
 
-void Emitter::on(std::string eventName, Listener listener) {
-  std::list<Listener> listenersByEventName;
+Emitter::~Emitter() {
+  for (auto it = listeners.begin(); it != listeners.end();) {
+    auto listenersItem = *it;
+    listenersItem.second->clear();
+    delete listenersItem.second;
+    it = listeners.erase(it);
+  }
+}
+
+void Emitter::on(std::string eventName, Listener *listener) {
+  std::list<Listener *> *listenersByEventName;
   try {
     listenersByEventName = listeners.at(eventName);
   } catch (const std::out_of_range &ex) {
-    listeners[eventName] = listenersByEventName;
+    listenersByEventName = new std::list<Listener *>;
+    listeners.insert({eventName, listenersByEventName});
   }
-  listenersByEventName.push_back(listener);
+  listenersByEventName->push_back(listener);
 };
 
-void Emitter::off(std::string eventName, Listener listener) {
-  try {
-    std::list<Listener> listenersByEventName = listeners.at(eventName);
-    std::list<Listener>::iterator iterator = listenersByEventName.begin();
-    for (auto _listener : listenersByEventName) {
-      if (_listener.name == listener.name) {
-        listenersByEventName.erase(iterator);
-        break;
-      }
-      iterator++;
+void Emitter::off(std::string eventName, Listener *listener) {
+  auto it = listeners.find(eventName);
+  if (it != listeners.end()) {
+    it->second->remove_if(
+        [listener](auto p) { return p->name == listener->name; });
+
+    if (it->second->empty()) {
+      listeners.erase(it);
     }
-  } catch (const std::out_of_range &ex) {
-    // do nothing
   }
 };
 
 void Emitter::emit(Event event) {
   try {
-    std::list<Listener> listenersByEventName = listeners.at(event.name);
-    for (auto listener : listenersByEventName) {
-      listener.function(event);
+    for (auto listener : *listeners.at(event.name)) {
+      listener->function(event);
     }
   } catch (const std::out_of_range &ex) {
-    // do nothing    
+    // do nothing
   }
 };
 } // namespace game

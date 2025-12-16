@@ -4,7 +4,7 @@
 #include <string>
 
 namespace game {
-typedef std::function<void(Event)> ListenerFunction;
+typedef std::function<void(const Event&)> ListenerFunction;
 class Listener {
 public:
   std::string name;
