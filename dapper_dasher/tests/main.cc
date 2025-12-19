@@ -6,27 +6,28 @@
 #include "game/game.h"
 
 TEST_CASE("Emitter should work properly", "[event][emitter]") {
-  game::Emitter emitter;
+  std::string emitterName0 = "game-emitter";
+  game::Emitter emitter{emitterName0};
   std::string eventName0 = "event-0";
   std::string eventName1 = "event-1";
   std::string listenerName0 = "listener-0";
   std::string listenerName1 = "listener-1";
   std::map<std::string, int> calls = {{listenerName0, 0}, {listenerName1, 0}};
-  auto listener0 = std::make_unique<game::Listener>(
+  game::Listener listener0(
       listenerName0,
       [&calls, &listenerName0](game::Event event) { calls[listenerName0]++; });
-      auto listener1 = std::make_unique<game::Listener>(
+  game::Listener listener1(
       listenerName1,
       [&calls, &listenerName1](game::Event event) { calls[listenerName1]++; });
 
   SECTION("when adding a listener") {
-    emitter.on(eventName0, listener0.get());
+    emitter.on(eventName0, listener0);
     REQUIRE(emitter.listeners.size() == 1);
   };
 
   SECTION("when emitting events") {
-    emitter.on(eventName0, listener0.get());
-    emitter.on(eventName1, listener1.get());
+    emitter.on(eventName0, listener0);
+    emitter.on(eventName1, listener1);
     game::Event event0{eventName0, {}};
     emitter.emit(event0);
     game::Event event1{eventName1, {}};
@@ -36,9 +37,9 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
   };
 
   SECTION("when removing a listener") {
-    emitter.on(eventName0, listener0.get());
+    emitter.on(eventName0, listener0);
     REQUIRE(emitter.listeners.size() == 1);
-    emitter.off(eventName0, listener0.get());
+    emitter.off(eventName0, listener0);
     REQUIRE(emitter.listeners.size() == 0);
   };
 }

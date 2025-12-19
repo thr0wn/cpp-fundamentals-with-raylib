@@ -1,11 +1,14 @@
 #pragma once
 #include "config/config.h"
 #include "database/database-service.h"
+#include "event/emitter.h"
+#include "event/listener.h"
 #include "game/game-node.h"
 #include "game/game-state.h"
-#include "list"
 #include "tile/tile-service.h"
 #include "timer/schedule-service.h"
+#include <list>
+#include <memory>
 
 namespace game {
 class GameService : public GameNode {
@@ -13,12 +16,18 @@ class GameService : public GameNode {
 
 public:
   GameService();
-  
+
+  // old api
   void _update() override;
   void _render() override;
   void _stop() override;
-  
   void start() override;
+
+  // new api
+  void onBeforeStart();
+  void onBeforeRender();
+  void onAfterRender();
+  void onAfterStop();  
 
   // Start game changing the game state
   void startGame();
@@ -45,5 +54,6 @@ public:
   // Return the current game state
   GameState getGameState();
 };
+extern Emitter gameEmitter;
 extern GameService gameService;
 }; // namespace game

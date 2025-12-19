@@ -11,12 +11,17 @@ cmake -DCXX=g++ -S . -B ./build && cmake --build build
 
 ### Debug
 ```shell
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/dapper_dasher/dapper_dasher
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/dapper_dasher/exe
+```
+
+### Build tests
+```shell
+cmake -S . -B build && cmake --build build --target unit-tests && ./build/tests/unit-tests
 ```
 
 ### Run
 ```shell
-./build/dapper_dasher/dapper_dasher
+./build/dapper_dasher/exe
 ```
 
 ### Watch with nodemon

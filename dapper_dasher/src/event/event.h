@@ -7,7 +7,7 @@ namespace game {
 class Event {
 public:
   std::string name;
-  std::list<std::any> arguments;
-  Event(std::string name, std::list<std::any> arguments);  
+  std::list<std::any> values;
+  Event(std::string name, std::list<std::any> values);  
 };
 } // namespace game
