@@ -13,7 +13,7 @@ set(LIBRARY_SOURCE_FILES
   
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cc"
   
-  "${CMAKE_CURRENT_SOURCE_DIR}/database/database-service.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/database/key-value-repository.cc"
   
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.cc"
   
@@ -42,7 +42,7 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"
   
-  "${CMAKE_CURRENT_SOURCE_DIR}/database/database-service.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/database/key-value-repository.h"
   
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.h"
   

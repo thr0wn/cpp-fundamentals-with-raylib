@@ -6,12 +6,12 @@
 #include "log/log-service.h"
 
 namespace game {
-class DatabaseService : public GameNode {
+class KeyValueRepository : public GameNode {
   leveldb::DB *keyValueDB;
   std::string databaseLocation = config::DATABASE_LOCATION;
   bool started = false;
 public:
-  DatabaseService();
+  KeyValueRepository();
 
   // start db connections
   void start();
@@ -25,5 +25,5 @@ public:
   // key-value database: unset
   void unset(std::string key);
 };
-  extern DatabaseService databaseService;
+  extern KeyValueRepository databaseService;
 } // namespace game

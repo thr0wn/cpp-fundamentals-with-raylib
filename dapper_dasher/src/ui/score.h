@@ -1,6 +1,6 @@
 #pragma once
 #include "config/config.h"
-#include "database/database-service.h"
+#include "database/key-value-repository.h"
 #include "game/game-node.h"
 #include "game/game-service.h"
 #include "raygui.h"

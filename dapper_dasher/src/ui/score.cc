@@ -1,5 +1,4 @@
 #include "ui/score.h"
-#include "raygui.h"
 
 namespace game {
 Score::Score() : GameNode("score"){};

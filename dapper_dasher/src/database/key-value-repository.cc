@@ -1,9 +1,9 @@
-#include "database/database-service.h"
+#include "database/key-value-repository.h"
 
 namespace game {
-DatabaseService::DatabaseService() : GameNode("database-service") {}
+KeyValueRepository::KeyValueRepository() : GameNode("database-service") {}
 
-void DatabaseService::start() {
+void KeyValueRepository::start() {
   leveldb::Options options;
   options.create_if_missing = true;
   leveldb::Status status =
@@ -16,27 +16,27 @@ void DatabaseService::start() {
   }
 }
 
-void DatabaseService::stop() {
+void KeyValueRepository::stop() {
   started = false;
   delete keyValueDB;
 }
 
-void DatabaseService::set(std::string key, std::string value) {
+void KeyValueRepository::set(std::string key, std::string value) {
   if (started)
     leveldb::Status status =
         keyValueDB->Put(leveldb::WriteOptions(), key, value);
 }
 
-void DatabaseService::get(std::string key, std::string *value) {
+void KeyValueRepository::get(std::string key, std::string *value) {
   if (started)
     leveldb::Status status =
         keyValueDB->Get(leveldb::ReadOptions(), key, value);
 }
 
-void DatabaseService::unset(std::string key) {
+void KeyValueRepository::unset(std::string key) {
   if (started)
     leveldb::Status status = keyValueDB->Delete(leveldb::WriteOptions(), key);
 }
 
-DatabaseService databaseService;
+KeyValueRepository databaseService;
 } // namespace game

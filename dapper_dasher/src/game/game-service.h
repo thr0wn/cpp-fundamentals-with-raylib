@@ -1,6 +1,5 @@
 #pragma once
 #include "config/config.h"
-#include "database/database-service.h"
 #include "event/emitter.h"
 #include "event/listener.h"
 #include "game/game-node.h"
