@@ -15,45 +15,13 @@ int start() {
   gameService.push(&nebula);
   gameService.push(&ui);
 
-  // game/start event  
-  Event beforeStartEvent{"game/start:before", {}};
-  Event startEvent{"game/start", {}};
-  Event afterStartEvent{"game/start:after", {}};
-
-  // game/update event    
-  Event beforeUpdateEvent{"game/update:before", {}};
-  Event updateEvent{"game/update", {}};
-  Event afterUpdateEvent{"game/update:after", {}};
-
-  // game/render event    
-  Event beforeRenderEvent{"game/render:before", {}};
-  Event renderEvent{"game/render", {}};
-  Event afterRenderEvent{"game/render:after", {}};
-
-  // game/stop event    
-  Event beforeStopEvent{"game/stop:before", {}};
-  Event stopEvent{"game/stop", {}};
-  Event afterStopEvent{"game/stop:after", {}};
-
-  // start 
-  gameEmitter.emit(beforeStartEvent);
-  gameEmitter.emit(startEvent);
-  gameEmitter.emit(afterStartEvent);
+  gameEmitter.start();
   while (!gameService.shouldClose()) {
-    // update    
-    gameEmitter.emit(beforeUpdateEvent, {{"log", false}});
-    gameEmitter.emit(updateEvent, {{"log", false}});
-    gameEmitter.emit(afterUpdateEvent, {{"log", false}});
-
-    // render    
-    gameEmitter.emit(beforeRenderEvent, {{"log", false}});
-    gameEmitter.emit(renderEvent, {{"log", false}});
-    gameEmitter.emit(afterRenderEvent, {{"log", false}});
+    gameEmitter.update();
+    gameEmitter.render();
   }
-  gameEmitter.emit(beforeStopEvent);
-  gameEmitter.emit(stopEvent);
-  gameEmitter.emit(afterStopEvent);
-
+  gameEmitter.stop();
+  
   return 0;
 }
 

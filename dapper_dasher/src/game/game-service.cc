@@ -116,6 +116,5 @@ bool GameService::isRunning() { return gameState.started && !gameState.paused; }
 
 GameState GameService::getGameState() { return gameState; }
 
-Emitter gameEmitter{"game-emitter"};
 GameService gameService;
 } // namespace game

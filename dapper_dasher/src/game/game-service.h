@@ -3,6 +3,7 @@
 #include "event/emitter.h"
 #include "event/listener.h"
 #include "game/game-node.h"
+#include "game/game-emitter.h"
 #include "game/game-state.h"
 #include "tile/tile-service.h"
 #include "timer/schedule-service.h"
@@ -53,6 +54,5 @@ public:
   // Return the current game state
   GameState getGameState();
 };
-extern Emitter gameEmitter;
 extern GameService gameService;
 }; // namespace game

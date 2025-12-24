@@ -9,6 +9,7 @@
 #include "log/log-service.h"
 #include "tile/tile-service.h"
 #include "timer/schedule-service.h"
+#include "game/game-emitter.h"
 #include "game/game-service.h"
 #include "nebula/nebula.h"
 #include "player/player.h"
