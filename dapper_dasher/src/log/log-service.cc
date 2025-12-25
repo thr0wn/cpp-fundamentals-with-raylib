@@ -4,13 +4,11 @@ namespace game {
 LogService::LogService() : GameNode("log-service") {}
 
 void LogService::log(std::string message) {
-  if(enabled)  
+  if (enabled)
     std::cout << fmt::format("GAMELOG: {}\n", message.data());
 }
 
-void LogService::setEnabled(bool enabled) {
-  this->enabled = enabled;
-}
+void LogService::setEnabled(bool enabled) { this->enabled = enabled; }
 
-LogService logService;
+std::unique_ptr<LogService> logService;
 } // namespace game

@@ -7,8 +7,10 @@ namespace game {
 typedef std::function<void(const Event&)> ListenerFunction;
 class Listener {
 public:
-  std::string name;
+  static uint idCounter;  
+  uint id;
+  std::string eventName;
   ListenerFunction function;
-  Listener(std::string name, ListenerFunction function);
+  Listener(std::string eventName, ListenerFunction function);
 };
 } // namespace game

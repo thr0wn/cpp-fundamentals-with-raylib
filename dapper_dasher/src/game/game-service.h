@@ -2,8 +2,8 @@
 #include "config/config.h"
 #include "event/emitter.h"
 #include "event/listener.h"
-#include "game/game-node.h"
 #include "game/game-emitter.h"
+#include "game/game-node.h"
 #include "game/game-state.h"
 #include "tile/tile-service.h"
 #include "timer/schedule-service.h"
@@ -11,19 +11,16 @@
 #include <memory>
 
 namespace game {
-class GameService : public GameNode {
+class GameService {
   GameState gameState;
 
 public:
   GameService();
-
-  // old api
-  void _update() override;
-  void _render() override;
-  void _stop() override;
-  void start() override;
-
-  // new api
+  
+  void start();
+  void update();
+  void render();
+  void stop();  
   void onBeforeStart();
   void onBeforeRender();
   void onAfterRender();
@@ -54,5 +51,5 @@ public:
   // Return the current game state
   GameState getGameState();
 };
-extern GameService gameService;
+  extern std::unique_ptr<GameService> gameService;
 }; // namespace game

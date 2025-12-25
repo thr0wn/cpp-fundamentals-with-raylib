@@ -4,6 +4,7 @@
 #include "game/game-node.h"
 #include "leveldb/db.h"
 #include "log/log-service.h"
+#include <memory>
 
 namespace game {
 class KeyValueRepository : public GameNode {
@@ -25,5 +26,5 @@ public:
   // key-value database: unset
   void unset(std::string key);
 };
-  extern KeyValueRepository databaseService;
+  extern std::unique_ptr<KeyValueRepository> keyValueRepository;
 } // namespace game

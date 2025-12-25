@@ -15,5 +15,5 @@ public:
   // Set enabled logs
   void setEnabled(bool enabled);
 };
-extern LogService logService;
+  extern std::unique_ptr<LogService> logService;
 } // namespace game

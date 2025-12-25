@@ -17,7 +17,7 @@ void Start::start() {
 }
 
 void Start::render() {
-  if (gameService.isStarted()) {
+  if (gameService->isStarted()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
@@ -27,11 +27,11 @@ void Start::render() {
   textQuitIsPressed =
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
-  if (!gameService.isStarted() && textNewGameIsPressed) {
-    gameService.startGame();
+  if (!gameService->isStarted() && textNewGameIsPressed) {
+    gameService->startGame();
   }
   if (textQuitIsPressed) {
-    gameService.stopGame();
+    gameService->stopGame();
   }
 }
 } // namespace game

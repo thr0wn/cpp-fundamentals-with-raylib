@@ -5,6 +5,7 @@
 #include "timer/timer.h"
 #include <functional>
 #include <list>
+#include <memory>
 
 namespace game {
 class ScheduleService : public GameNode {
@@ -25,5 +26,5 @@ public:
   void stop() override;
 };
 
-extern ScheduleService scheduleService;
+  extern std::unique_ptr<ScheduleService> scheduleService;
 } // namespace game

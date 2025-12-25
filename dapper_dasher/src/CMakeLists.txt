@@ -6,20 +6,20 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/event/event.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/emitter.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.cc"
-  
-  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-emitter.cc"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-emitter.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cc"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cc"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/database/key-value-repository.cc"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.cc"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cc"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/ui.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.cc"
@@ -38,8 +38,8 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/event/emitter.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.h"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-emitter.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"

@@ -1,5 +1,9 @@
 #include "event/listener.h"
 
 namespace game {
-  Listener::Listener(std::string name, ListenerFunction function): name(name), function(function) {}  
+uint Listener::idCounter = 0;
+Listener::Listener(std::string eventName, ListenerFunction function)
+    : eventName(eventName), function(function) {
+  id = idCounter++;
 }
+} // namespace game

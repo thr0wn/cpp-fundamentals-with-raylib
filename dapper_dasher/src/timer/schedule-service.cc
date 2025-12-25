@@ -46,6 +46,5 @@ void ScheduleService::stop() {
   }
   schedules.clear();
 }
-
-ScheduleService scheduleService;
+std::unique_ptr<ScheduleService> scheduleService;
 } // namespace game

@@ -5,7 +5,7 @@ namespace game {
 EmitOptions Emitter::DEFAULT_EMIT_OPTIONS = {{"log", true}};
 
 Emitter::Emitter(std::string name) : name(name) {
-  logService.log(fmt::format("({}) Constructor", name));
+  logService->log(fmt::format("({}) Constructor", name));  
 }
 
 Emitter::~Emitter() {
@@ -13,50 +13,52 @@ Emitter::~Emitter() {
     itMap->second.clear();
     itMap = listeners.erase(itMap);
   }
-  logService.log(fmt::format("({}) Destructor", name));
+  logService->log(fmt::format("({}) Destructor", name));
 }
 
-void Emitter::on(std::string eventName, Listener listener) {
-  listeners[eventName].push_back(listener);  
-  logService.log(fmt::format("({}) Added: \"{}\" on \"{}\"", name,
-                             listener.name, eventName));
+Listener Emitter::on(std::string eventName, ListenerFunction function) {
+  Listener listener{eventName, function};
+  listeners[eventName].push_back(listener);
+  logService->log(
+      fmt::format("({}) Added: listener on \"{}\"", name, eventName));
+  return listener;
 };
 
-void Emitter::off(std::string eventName, Listener listener) {
-  auto itMap = listeners.find(eventName);
+void Emitter::off(Listener listener) {
+  auto itMap = listeners.find(listener.eventName);
   if (itMap != listeners.end()) {
-    itMap->second.remove_if([listener](auto p) { return p.name == listener.name; });
+    itMap->second.remove_if([listener](auto p) {
+      return p.id == listener.id;
+    });
 
     if (itMap->second.empty()) {
       listeners.erase(itMap);
     }
   }
-  logService.log(fmt::format("({}) Removed: \"{}\" on \"{}\"", name,
-                             listener.name, eventName));
+  logService->log(fmt::format("({}) Removed: listener on \"{}\"", name,
+                             listener.eventName));
 };
 
 void Emitter::emit(Event event) { emit(event, DEFAULT_EMIT_OPTIONS); };
 
 void Emitter::emit(Event event, EmitOptions options) {
   try {
-    EmitOptions finalOptions = options;
-    finalOptions.merge(DEFAULT_EMIT_OPTIONS);
+    EmitOptions finalOptions = DEFAULT_EMIT_OPTIONS;
+    for (const auto &option : options) {
+      finalOptions[option.first] = option.second;
+    }
     bool shouldLog = std::any_cast<bool>(finalOptions["log"]);
-    logService.setEnabled(shouldLog);
-    logService.log(fmt::format("({}) Emitting: \"{}\"", name, event.name));
+    logService->setEnabled(shouldLog);
+    logService->log(fmt::format("({}) Emitting: \"{}\"", name, event.name));
     auto it = listeners.find(event.name);
     if (it != listeners.end()) {
       auto listenersList = it->second;
       for (auto listener : listenersList) {
-        logService.log(
-            fmt::format("({}) Starting: \"{}\"", name, listener.name));
         listener.function(event);
-        logService.log(
-            fmt::format("({}) Ending: \"{}\"", name, listener.name));
       }
     }
-    logService.log(fmt::format("({}) Emitted: \"{}\"", name, event.name));
-    logService.setEnabled(true);
+    logService->log(fmt::format("({}) Emitted: \"{}\"", name, event.name));
+    logService->setEnabled(true);
   } catch (const std::out_of_range &ex) {
     // do nothing
   }

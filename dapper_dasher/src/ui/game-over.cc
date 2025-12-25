@@ -16,7 +16,7 @@ void GameOver::start() {
 }
 
 void GameOver::render() {
-  if (!gameService.isGameOver()) {
+  if (!gameService->isGameOver()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
@@ -27,10 +27,10 @@ void GameOver::render() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textRestartIsPressed) {
-    gameService.restartGame();
+    gameService->restartGame();
   }
   if (textQuitIsPressed) {
-    gameService.stopGame();
+    gameService->stopGame();
   }
 }
 } // namespace game

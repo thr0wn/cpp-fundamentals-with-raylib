@@ -13,12 +13,10 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
   std::string listenerName0 = "listener-0";
   std::string listenerName1 = "listener-1";
   std::map<std::string, int> calls = {{listenerName0, 0}, {listenerName1, 0}};
-  game::Listener listener0(
-      listenerName0,
-      [&calls, &listenerName0](game::Event event) { calls[listenerName0]++; });
-  game::Listener listener1(
-      listenerName1,
-      [&calls, &listenerName1](game::Event event) { calls[listenerName1]++; });
+  game::ListenerFunction listener0 =
+      [&calls, &listenerName0](game::Event event) { calls[listenerName0]++; };
+  game::ListenerFunction listener1 =
+      [&calls, &listenerName1](game::Event event) { calls[listenerName1]++; };
 
   SECTION("when adding a listener") {
     emitter.on(eventName0, listener0);
@@ -37,9 +35,9 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
   };
 
   SECTION("when removing a listener") {
-    emitter.on(eventName0, listener0);
+    game::Listener listener = emitter.on(eventName0, listener0);
     REQUIRE(emitter.listeners.size() == 1);
-    emitter.off(eventName0, listener0);
+    emitter.off(listener);
     REQUIRE(emitter.listeners.size() == 0);
   };
 }

@@ -2,6 +2,7 @@
 #include "game/game-node.h"
 #include "log/log-service.h"
 #include "tile/tile.h"
+#include <memory>
 
 namespace game {
 class TileService : public GameNode {
@@ -19,5 +20,5 @@ public:
   void stop() override;
   void draw(Texture texture, Tile tile, Vector2 position, Color color);
 };
-extern TileService tileService;
+  extern std::unique_ptr<TileService> tileService;
 } // namespace game

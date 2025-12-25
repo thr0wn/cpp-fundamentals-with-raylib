@@ -11,8 +11,8 @@ void KeyValueRepository::start() {
   if (status.ok()) {
     started = true;
   } else {
-    logService.log(fmt::format("(database-service) Not started due to:\n{}",
-                               status.ToString()));
+    logService->log(fmt::format("(database-service) Not started due to:\n{}",
+                                status.ToString()));
   }
 }
 
@@ -38,5 +38,5 @@ void KeyValueRepository::unset(std::string key) {
     leveldb::Status status = keyValueDB->Delete(leveldb::WriteOptions(), key);
 }
 
-KeyValueRepository databaseService;
+std::unique_ptr<KeyValueRepository> keyValueRepository;
 } // namespace game

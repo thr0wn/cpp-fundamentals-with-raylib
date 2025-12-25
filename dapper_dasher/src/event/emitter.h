@@ -21,8 +21,8 @@ public:
   std::string name;
   Emitter(std::string name);
   ~Emitter();
-  void on(std::string eventName, Listener listener);
-  void off(std::string eventName, Listener listener);
+  Listener on(std::string eventName, ListenerFunction function);
+  void off(Listener listener);
   void emit(Event event);
   void emit(Event event, EmitOptions options);
 };

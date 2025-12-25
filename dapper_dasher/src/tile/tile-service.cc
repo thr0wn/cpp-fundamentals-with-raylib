@@ -23,6 +23,5 @@ void TileService::stop() {
     UnloadTexture(textures[i]);
   }
 }
-
-TileService tileService;
+std::unique_ptr<TileService> tileService;
 } // namespace game
