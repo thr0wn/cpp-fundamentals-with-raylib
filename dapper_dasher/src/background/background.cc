@@ -1,26 +1,30 @@
 #include "background/background.h"
 
 namespace game {
-Background::Background() : GameNode2D("background") {}
+Background::Background() {
+  gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/restart", [this](Event event) { onInit(); });
+  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+}
 
-void Background::start() {
-  setBackground(TEXTURE_FAR_BUILDING, &texture, &position);
+void Background::onInit() {
+  setBackground(TEXTURE_FAR_BUILDING, &textureFar, &positionFar);
   setBackground(TEXTURE_BACK_BUILDING, &textureMid, &positionMid);
   setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
+  logService->info("(background) Background initialized.");
 }
 
-void Background::restart() {
-  start();
-}
-
-void Background::update() {
-  updateTexture(texture, &position, velocity);
+void Background::onUpdate() {
+  if (!gameService->isRunning())
+    return;
+  updateTexture(textureFar, &positionFar, velocityFar);
   updateTexture(textureMid, &positionMid, velocityMid);
   updateTexture(textureNear, &positionNear, velocityNear);
 }
 
-void Background::render() {
-  renderTexture(texture, position, velocity);
+void Background::onRender() {
+  renderTexture(textureFar, positionFar, velocityFar);
   renderTexture(textureMid, positionMid, velocityMid);
   renderTexture(textureNear, positionNear, velocityNear);
 }
@@ -49,4 +53,6 @@ void Background::renderTexture(Texture2D texture, Vector2 position,
   DrawTextureEx(texture, position, 0, 3.0f, color);
   DrawTextureEx(texture, secondPosition, 0, 3.0f, color);
 }
+
+std::unique_ptr<Background> background;
 } // namespace game

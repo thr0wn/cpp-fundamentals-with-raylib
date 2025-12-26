@@ -3,14 +3,14 @@
 namespace game {
 void init() {
   logService = std::make_unique<LogService>();
-  scheduleService = std::make_unique<ScheduleService>();
-  tileService = std::make_unique<TileService>();
-  keyValueRepository = std::make_unique<KeyValueRepository>();
   gameEmitter = std::make_unique<Emitter>("game-emitter");
   gameService = std::make_unique<GameService>();
+  tileService = std::make_unique<TileService>();
+  scheduleService = std::make_unique<ScheduleService>();
+  keyValueRepository = std::make_unique<KeyValueRepository>();
 
   UI ui;
-  Background background;
+  background = std::make_unique<Background>();
   Player player;
   Nebula nebula;
 

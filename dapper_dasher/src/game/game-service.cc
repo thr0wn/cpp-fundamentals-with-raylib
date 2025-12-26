@@ -1,4 +1,5 @@
 #include "game/game-service.h"
+#include "tile/tile.h"
 
 namespace game {
 GameService::GameService() {
@@ -38,7 +39,7 @@ void GameService::onBeforeInit() {
 
 void GameService::onBeforeRender() {
   BeginDrawing();
-  ClearBackground(WHITE);
+  ClearBackground(RAYWHITE);
 }
 
 void GameService::onAfterRender() { EndDrawing(); }
