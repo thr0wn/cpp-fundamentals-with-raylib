@@ -28,10 +28,10 @@ void Start::render() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (!gameService->isStarted() && textNewGameIsPressed) {
-    gameService->startGame();
+    gameService->start();
   }
   if (textQuitIsPressed) {
-    gameService->stopGame();
+    gameService->stop();
   }
 }
 } // namespace game

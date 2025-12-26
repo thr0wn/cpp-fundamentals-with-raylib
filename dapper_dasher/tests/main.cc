@@ -5,7 +5,12 @@
 
 #include "game/game.h"
 
+void setupTests() {
+  game::logService = std::make_unique<game::LogService>();  
+}
+
 TEST_CASE("Emitter should work properly", "[event][emitter]") {
+  setupTests();  
   std::string emitterName0 = "game-emitter";
   game::Emitter emitter{emitterName0};
   std::string eventName0 = "event-0";

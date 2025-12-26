@@ -11,7 +11,7 @@ void KeyValueRepository::start() {
   if (status.ok()) {
     started = true;
   } else {
-    logService->log(fmt::format("(database-service) Not started due to:\n{}",
+    logService->info(fmt::format("(key-value-repository) Not started due to:\n{}",
                                 status.ToString()));
   }
 }

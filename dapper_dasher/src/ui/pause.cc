@@ -24,7 +24,7 @@ void Pause::start() {
 void Pause::update() {
   if (gameService->isRunning() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    gameService->pauseGame();
+    gameService->pause();
   }
 }
 
@@ -42,13 +42,13 @@ void Pause::render() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textResumeIsPressed) {
-    gameService->resumeGame();
+    gameService->resume();
   }
   if (textRestartIsPressed) {
-    gameService->restartGame();
+    gameService->restart();
   }
   if (textQuitIsPressed) {
-    gameService->stopGame();
+    gameService->stop();
   }
 }
 } // namespace game

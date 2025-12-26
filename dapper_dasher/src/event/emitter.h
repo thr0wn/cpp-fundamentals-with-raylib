@@ -25,5 +25,6 @@ public:
   void off(Listener listener);
   void emit(Event event);
   void emit(Event event, EmitOptions options);
+  void emit(std::string eventName);  
 };
 } // namespace game

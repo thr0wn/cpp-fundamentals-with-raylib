@@ -1,5 +1,8 @@
 #include "game/game.h"
 
 int main() {
-  return game::start();
+  game::init();
+  game::start();
+  game::deinit();
+  return 0;  
 }

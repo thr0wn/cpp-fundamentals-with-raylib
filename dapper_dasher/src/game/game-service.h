@@ -17,21 +17,21 @@ class GameService {
 public:
   GameService();
   
-  void start();
+  void init();
   void update();
   void render();
-  void stop();  
-  void onBeforeStart();
+  void deinit();  
+  void onBeforeInit();
   void onBeforeRender();
   void onAfterRender();
-  void onAfterStop();  
+  void onAfterDeinit();  
 
   // Start game changing the game state
-  void startGame();
+  void start();
   // Check if the game is started
   bool isStarted();
   // Pause a game changing the game state
-  void pauseGame();
+  void pause();
   // Check if game is paused
   bool isPaused();
   // Set game over changing the game state
@@ -39,13 +39,13 @@ public:
   // Check if game is over
   bool isGameOver();
   // Stop the game changing the game state
-  void stopGame();
+  void stop();
   // Check if the game should close
   bool shouldClose();
   // Resume/Unpause the game changing the game state
-  void resumeGame();
+  void resume();
   // Restart the game from the pause menu chaing the game state
-  void restartGame();
+  void restart();
   // Is Game started and not paused
   bool isRunning();
   // Return the current game state

@@ -27,10 +27,10 @@ void GameOver::render() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textRestartIsPressed) {
-    gameService->restartGame();
+    gameService->restart();
   }
   if (textQuitIsPressed) {
-    gameService->stopGame();
+    gameService->stop();
   }
 }
 } // namespace game

@@ -11,9 +11,11 @@ public:
   LogService();
 
   // Log messages directly to sdtout
-  void log(std::string message);
+  void info(std::string message);
   // Set enabled logs
   void setEnabled(bool enabled);
+  // Check if enabled
+  bool isEnabled();  
 };
   extern std::unique_ptr<LogService> logService;
 } // namespace game
