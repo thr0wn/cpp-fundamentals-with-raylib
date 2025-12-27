@@ -1,11 +1,13 @@
 #include "timer/schedule-service.h"
 
 namespace game {
-ScheduleService::ScheduleService() : GameNode("schedule-service"){};
-
-void ScheduleService::restart() {
-  stop();
+ScheduleService::ScheduleService() {
+  gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
+  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
+  gameEmitter->on("game/deinit", [this](Event event) { onDeinit(); });
 };
+
+void ScheduleService::onRestart() { onDeinit(); };
 
 Schedule *ScheduleService::once(VoidFunction fun, double interval) {
   Schedule *schedule = new Schedule();
@@ -24,7 +26,10 @@ Schedule *ScheduleService::repeat(VoidFunction fun, double interval) {
   return schedule;
 }
 
-void ScheduleService::update() {
+void ScheduleService::onUpdate() {
+  if (!gameService->isRunning()) {
+    return;
+  }
   for (Schedule *schedule : schedules) {
     if (!schedule->timer->isActive()) {
       if (!schedule->isExecuted && !schedule->isRepetable) {
@@ -39,7 +44,7 @@ void ScheduleService::update() {
   }
 }
 
-void ScheduleService::stop() {
+void ScheduleService::onDeinit() {
   for (Schedule *schedule : schedules) {
     delete schedule->timer;
     delete schedule;

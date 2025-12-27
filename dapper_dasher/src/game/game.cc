@@ -1,6 +1,12 @@
 #include "game/game.h"
 
 namespace game {
+namespace {
+std::unique_ptr<Background> background;
+std::unique_ptr<Player> player;
+std::unique_ptr<Nebula> nebula;
+std::unique_ptr<UI> ui;
+} // namespace
 void init() {
   logService = std::make_unique<LogService>();
   gameEmitter = std::make_unique<Emitter>("game-emitter");
@@ -9,10 +15,10 @@ void init() {
   scheduleService = std::make_unique<ScheduleService>();
   keyValueRepository = std::make_unique<KeyValueRepository>();
 
-  UI ui;
   background = std::make_unique<Background>();
-  Player player;
-  Nebula nebula;
+  player = std::make_unique<Player>();
+  nebula = std::make_unique<Nebula>();
+  ui = std::make_unique<UI>();
 
   gameService->init();
 }

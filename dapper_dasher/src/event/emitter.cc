@@ -48,8 +48,6 @@ void Emitter::emit(Event event, EmitOptions options) {
       emit(beforeEvent,
            {{"log", shouldLog}, {"before", false}, {"after", false}});
     }
-    if (shouldLog)
-      logService->info(fmt::format("({}) Emitting: \"{}\"", name, event.name));
     auto it = listeners.find(event.name);
     if (it != listeners.end()) {
       auto listenersList = it->second;

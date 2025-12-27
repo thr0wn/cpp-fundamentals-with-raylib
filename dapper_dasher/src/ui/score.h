@@ -1,7 +1,6 @@
 #pragma once
 #include "config/config.h"
 #include "database/key-value-repository.h"
-#include "game/game-node.h"
 #include "game/game-service.h"
 #include "raygui.h"
 #include "ui/text.h"
@@ -9,7 +8,7 @@
 #include <string>
 
 namespace game {
-class Score : public GameNode {
+class Score {
   int score;
   int highScore;
   const std::string highScoreKey = config::SCORE_DATABASE_HIGHSCORE_KEY;
@@ -27,11 +26,12 @@ class Score : public GameNode {
 public:
   Score();
   
-  void start() override;
-  void restart() override;
-  void update() override;
-  void render() override;
-  void stop() override;
-  ;
+  void onInit();
+  void onRestart();
+  void onUpdate();
+  void onRender();
+  void onDeinit();
+
+  void loadHighScoreScore();  
 };
 } // namespace game

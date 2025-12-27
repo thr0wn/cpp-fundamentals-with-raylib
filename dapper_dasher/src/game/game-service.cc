@@ -1,18 +1,17 @@
 #include "game/game-service.h"
-#include "tile/tile.h"
 
 namespace game {
 GameService::GameService() {
   gameEmitter->on("game/init:before", [this](Event event) { onBeforeInit(); });
   gameEmitter->on("game/render:before",
-                 [this](Event event) { onBeforeRender(); });
-  gameEmitter->on("game/render:after", [this](Event event) { onAfterRender(); });
-  gameEmitter->on("game/deinit:after", [this](Event event) { onAfterDeinit(); });
+                  [this](Event event) { onBeforeRender(); });
+  gameEmitter->on("game/render:after",
+                  [this](Event event) { onAfterRender(); });
+  gameEmitter->on("game/deinit:after",
+                  [this](Event event) { onAfterDeinit(); });
 }
 
-void GameService::init() {
-  gameEmitter->emit("game/init");
-}
+void GameService::init() { gameEmitter->emit("game/init"); }
 
 void GameService::update() {
   Event updateEvent{"game/update", {}};
@@ -24,9 +23,7 @@ void GameService::render() {
   gameEmitter->emit(renderEvent, {{"log", false}});
 }
 
-void GameService::deinit() {
-  gameEmitter->emit("game/deinit");
-}
+void GameService::deinit() { gameEmitter->emit("game/deinit"); }
 
 void GameService::onBeforeInit() {
   InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT,
@@ -47,7 +44,7 @@ void GameService::onAfterRender() { EndDrawing(); }
 void GameService::onAfterDeinit() { CloseWindow(); }
 
 void GameService::start() {
-  gameState.started = true;  
+  gameState.started = true;
   gameEmitter->emit("game/start");
 }
 bool GameService::isStarted() { return gameState.started; }
@@ -66,7 +63,7 @@ bool GameService::isGameOver() { return gameState.gameOver; }
 
 void GameService::stop() {
   gameState.close = true;
-  gameEmitter->emit("game/stop");  
+  gameEmitter->emit("game/stop");
 }
 bool GameService::shouldClose() {
   return gameState.close || WindowShouldClose();
@@ -74,7 +71,7 @@ bool GameService::shouldClose() {
 
 void GameService::resume() {
   gameState.paused = false;
-  gameEmitter->emit("game/resume");  
+  gameEmitter->emit("game/resume");
 }
 
 void GameService::restart() {

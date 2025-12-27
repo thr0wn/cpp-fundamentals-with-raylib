@@ -3,7 +3,6 @@
 #include "event/emitter.h"
 #include "event/listener.h"
 #include "game/game-emitter.h"
-#include "game/game-node.h"
 #include "game/game-state.h"
 #include "tile/tile-service.h"
 #include "timer/schedule-service.h"

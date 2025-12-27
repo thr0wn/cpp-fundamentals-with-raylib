@@ -10,17 +10,11 @@
 #include <string>
 
 namespace game {
-class UI : public GameNode {
+class UI {
   Start startUI;
   Pause pauseUI;
   Score scoreUI;
   GameOver gameOverUI;
-
-public:
-  UI();
-  
-  void start() override;
-  void stop() override;
 };
 } // namespace game
 

@@ -1,5 +1,6 @@
 #pragma once
-#include "game/game-node.h"
+#include "game/game-emitter.h"
+#include "game/game-service.h"
 #include "log/log-service.h"
 #include "timer/schedule.h"
 #include "timer/timer.h"
@@ -8,22 +9,22 @@
 #include <memory>
 
 namespace game {
-class ScheduleService : public GameNode {
+class ScheduleService {
 private:
   std::list<Schedule *> schedules;
 
 public:
   ScheduleService();
   // reinitialize  
-  void restart() override;
+  void onRestart();
   // do fun once after interval in seconds
   Schedule *once(VoidFunction fun, double interval);
   // repeat fun every interval in seconds.
   Schedule *repeat(VoidFunction fun, double interval);
   // do once or repeat fun
-  void update() override;
+  void onUpdate();
   // free resources
-  void stop() override;
+  void onDeinit();
 };
 
   extern std::unique_ptr<ScheduleService> scheduleService;

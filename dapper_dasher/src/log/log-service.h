@@ -1,10 +1,10 @@
 #pragma once
-#include "game/game-node.h"
 #include <iostream>
 #include <string>
+#include <fmt/format.h>
 
 namespace game {
-class LogService : public game::GameNode {
+class LogService {
 private:  
   bool enabled = true;  
 public:

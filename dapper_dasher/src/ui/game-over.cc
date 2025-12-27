@@ -1,9 +1,12 @@
 #include "ui/game-over.h"
 
 namespace game {
-GameOver::GameOver() : GameNode("game-over") {};
+GameOver::GameOver() {
+  gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });    
+};
 
-void GameOver::start() {
+void GameOver::onInit() {
   textRestart.setSize(config::TEXT_SIZE_LARGE);
   textRestart.setPosition(
       {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
@@ -13,9 +16,10 @@ void GameOver::start() {
   textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
                         textRestart.getPosition().y + textRestart.getHeight()});
   textQuit.alignCenter();
+  logService->info("(game-over-ui) Game Over UI initialized.");        
 }
 
-void GameOver::render() {
+void GameOver::onRender() {
   if (!gameService->isGameOver()) {
     return;
   }

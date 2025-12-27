@@ -1,12 +1,12 @@
 #pragma once
 #include "config/config.h"
-#include "game/game-node.h"
+#include "game/game-emitter.h"
 #include "game/game-service.h"
 #include "raygui.h"
 #include "ui/text.h"
 
 namespace game {
-class GameOver : public GameNode {
+class GameOver {
   Text textRestart{config::GAMEOVER_TEXT_RESTART};
   bool textRestartIsPressed = false;
 
@@ -16,7 +16,7 @@ class GameOver : public GameNode {
 public:
   GameOver();
   
-  void start() override;
-  void render() override;
+  void onInit();
+  void onRender();
 };
 } // namespace game

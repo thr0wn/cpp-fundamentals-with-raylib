@@ -1,16 +1,21 @@
 #include "nebula/nebula.h"
 
 namespace game {
-Nebula::Nebula() : GameNode2D("nebula") {}
+Nebula::Nebula() {
+  gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
+  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+}
 
-void Nebula::start() {
+void Nebula::onInit() {
   // tile related properties
-  tile.width = NEBULA_TILE_WIDTH;
-  tile.height = NEBULA_TILE_HEIGHT;
-  tile.x = 7;
-  tile.y = 0;
-  position = Vector2{config::WINDOW_WIDTH + tile.width / 2,
-                     config::WINDOW_HEIGHT - tile.height};
+  nebula.tile.width = NEBULA_TILE_WIDTH;
+  nebula.tile.height = NEBULA_TILE_HEIGHT;
+  nebula.tile.x = 7;
+  nebula.tile.y = 0;
+  nebula.position = Vector2{config::WINDOW_WIDTH + nebula.tile.width / 2,
+                            config::WINDOW_HEIGHT - nebula.tile.height};
 
   scheduleService->repeat(
       [this] {
@@ -19,36 +24,41 @@ void Nebula::start() {
             tileAnimation.sprite,
             tileAnimation
                 .spriteTotal); // 8x8 spritesheet, but with only 60 sprites
-        tile.y = std::floor(tileAnimation.sprite /
-                            tileAnimation.spriteRowSize); // 8x8 spritesheet
-        tile.x = std::fmod(tileAnimation.sprite,
-                           tileAnimation.spriteRowSize); // 8 sprites per row
+        nebula.tile.y =
+            std::floor(tileAnimation.sprite /
+                       tileAnimation.spriteRowSize); // 8x8 spritesheet
+        nebula.tile.x =
+            std::fmod(tileAnimation.sprite,
+                      tileAnimation.spriteRowSize); // 8 sprites per row
       },
       NEBULA_ANIMATION_TIME);
+  logService->info("(nebula) Nebula initialized.");
 };
 
-void Nebula::restart() {
-  start();  
+void Nebula::onRestart() {
+  onInit();
+  logService->info("(nebula) Nebula restarted.");
 }
 
+void Nebula::onUpdate() {
+  if (!gameService->isRunning()) {
+    return;
+  }
 
-void Nebula::update() {
-  position.x += velocity * GetFrameTime();
+  nebula.position.x += velocity * GetFrameTime();
 
   // // extremes
-  if (position.x < -tile.width) {
-    position.x = config::WINDOW_WIDTH + tile.width;
+  if (nebula.position.x < -nebula.tile.width) {
+    nebula.position.x = config::WINDOW_WIDTH + nebula.tile.width;
   }
 }
 
-void Nebula::render() {
+void Nebula::onRender() {
   if (!gameService->isStarted()) {
     return;
   }
   Color color = gameService->isPaused() ? GRAY : WHITE;
-  tileService->draw(tileService->textures[TEXTURE_NEBULA], tile, position,
-                    color);
+  tileService->draw(tileService->textures[TEXTURE_NEBULA], nebula.tile,
+                    nebula.position, color);
 }
-
-void Nebula::stop(){};
 } // namespace game

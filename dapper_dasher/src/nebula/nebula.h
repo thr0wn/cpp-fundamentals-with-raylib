@@ -22,18 +22,18 @@
 #define NEBULA_SPRITE_ROW_SIZE 8
 
 namespace game {
-class Nebula : public GameNode2D {
+class Nebula {
+  GameNode2D nebula{"nebula-node"};
   const float velocity = INITIAL_VELOCITY;
   TileAnimation tileAnimation = {0, NEBULA_SPRITE_TOTAL,
                                  NEBULA_SPRITE_ROW_SIZE};
 
 public:
   Nebula();
-  
-  void start() override;
-  void restart() override;
-  void update() override;
-  void render() override;
-  void stop() override;
+
+  void onInit();
+  void onRestart();
+  void onUpdate();
+  void onRender();
 };
 } // namespace game

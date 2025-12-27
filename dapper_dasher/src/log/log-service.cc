@@ -1,7 +1,7 @@
 #include "log/log-service.h"
 
 namespace game {
-LogService::LogService() : GameNode("log-service") {}
+LogService::LogService() {}
 
 void LogService::info(std::string message) {
   if (enabled)
@@ -10,5 +10,6 @@ void LogService::info(std::string message) {
 
 void LogService::setEnabled(bool enabled) { this->enabled = enabled; }
 bool LogService::isEnabled() { return enabled; }
+
 std::unique_ptr<LogService> logService;
 } // namespace game

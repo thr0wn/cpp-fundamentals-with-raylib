@@ -1,5 +1,4 @@
 #pragma once
-#include "game/game-node.h"
 #include "game/game-emitter.h"
 #include "game/game-service.h"
 #include "raylib.h"
@@ -37,5 +36,4 @@ public:
   void onUpdate();
   void onRender();
 };
-  extern std::unique_ptr<Background> background;
 } // namespace game

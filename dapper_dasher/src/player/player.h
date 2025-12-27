@@ -1,6 +1,7 @@
 #pragma once
 #include "config/config.h"
 #include "game/game-node.h"
+#include "game/game-emitter.h"
 #include "game/game-service.h"
 #include "raylib.h"
 #include "tile/tile-service.h"
@@ -23,7 +24,8 @@
 #define PLAYER_SPRITE_TOTAL 6
 
 namespace game {
-class Player : public GameNode2D {
+class Player {
+  GameNode2D player{"player-node"};  
   const float gravity = PLAYER_INITIAL_GRAVITY;
   float velocity = 0;
   const float jumpVelocity = PLAYER_JUMP_VELOCITY;
@@ -32,10 +34,10 @@ class Player : public GameNode2D {
 public:
   Player();
 
-  void start() override;
-  void restart() override;
-  void update() override;
-  void render() override;
+  void onInit();
+  void onRestart();
+  void onUpdate();
+  void onRender();
 
   bool isJumping();
 };

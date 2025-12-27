@@ -4,9 +4,12 @@
 #include "raygui.h"
 
 namespace game {
-Start::Start() : GameNode("start"){};
+Start::Start() {
+  gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+};
 
-void Start::start() {
+void Start::onInit() {
   textNewGame.setSize(config::TEXT_SIZE_LARGE);
   textNewGame.setPosition(
       {0.025f * config::WINDOW_WIDTH, 0.7f * config::WINDOW_HEIGHT});
@@ -14,9 +17,10 @@ void Start::start() {
   textQuit.setSize(config::TEXT_SIZE_LARGE);
   textQuit.setPosition({0.025f * config::WINDOW_WIDTH,
                         textNewGame.getPosition().y + textNewGame.getHeight()});
+  logService->info("(start-ui) Start UI initialized.");  
 }
 
-void Start::render() {
+void Start::onRender() {
   if (gameService->isStarted()) {
     return;
   }

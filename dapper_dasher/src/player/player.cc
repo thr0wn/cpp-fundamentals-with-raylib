@@ -1,16 +1,21 @@
 #include "player/player.h"
 
 namespace game {
-Player::Player() : GameNode2D("player"){};
+Player::Player() {
+  gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
+  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+};
 
-void Player::start() {
+void Player::onInit() {
   // tile related properties
-  tile.width = PLAYER_TILE_WIDTH;
-  tile.height = PLAYER_TILE_HEIGHT;
-  tile.x = 0;
-  tile.y = 0;
-  position = Vector2{config::WINDOW_WIDTH / 2 - tile.width / 2,
-                     config::WINDOW_HEIGHT - tile.height};
+  player.tile.width = PLAYER_TILE_WIDTH;
+  player.tile.height = PLAYER_TILE_HEIGHT;
+  player.tile.x = 0;
+  player.tile.y = 0;
+  player.position = Vector2{config::WINDOW_WIDTH / 2 - player.tile.width / 2,
+                            config::WINDOW_HEIGHT - player.tile.height};
 
   scheduleService->repeat(
       [this] {
@@ -20,44 +25,50 @@ void Player::start() {
               tileAnimation.sprite,
               tileAnimation
                   .spriteTotal); // 6x1 spritesheet, but with only 60 sprites
-          tile.x = tileAnimation.sprite;
+          player.tile.x = tileAnimation.sprite;
         }
       },
       PLAYER_ANIMATION_TIME);
+  logService->info("(player) Player initialized.");
 };
 
-void Player::restart() {
-  start();  
+void Player::onRestart() {
+  onInit();
+  logService->info("(player) Player restarted.");
 }
 
-void Player::update() {
+void Player::onUpdate() {
+  if (!gameService->isRunning()) {
+    return;
+  }
+
   if (IsKeyDown(KEY_SPACE) && !isJumping()) {
     velocity = jumpVelocity;
   } else {
     velocity += gravity * GetFrameTime();
   }
 
-  position.y += velocity * GetFrameTime();
+  player.position.y += velocity * GetFrameTime();
 
   // y borders
-  if (position.y < 0) {
-    position.y = 0;
+  if (player.position.y < 0) {
+    player.position.y = 0;
   }
-  if (position.y > (config::WINDOW_HEIGHT - tile.height)) {
-    position.y = config::WINDOW_HEIGHT - tile.height;
+  if (player.position.y > (config::WINDOW_HEIGHT - player.tile.height)) {
+    player.position.y = config::WINDOW_HEIGHT - player.tile.height;
   }
 }
 
-void Player::render() {
+void Player::onRender() {
   if (!gameService->isStarted()) {
     return;
   }
   Color color = gameService->isPaused() ? GRAY : WHITE;
-  tileService->draw(tileService->textures[TEXTURE_SCARFY], tile, position,
-                    color);
+  tileService->draw(tileService->textures[TEXTURE_SCARFY], player.tile,
+                    player.position, color);
 }
 
 bool Player::isJumping() {
-  return position.y < (config::WINDOW_HEIGHT - tile.height);
+  return player.position.y < (config::WINDOW_HEIGHT - player.tile.height);
 }
 } // namespace game

@@ -1,9 +1,13 @@
 #include "ui/pause.h"
 
 namespace game {
-Pause::Pause() : GameNode("pause"){};
+Pause::Pause() {
+  gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });  
+};
 
-void Pause::start() {
+void Pause::onInit() {
   textResume.setSize(config::TEXT_SIZE_LARGE);
   textResume.setPosition(
       {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
@@ -19,16 +23,17 @@ void Pause::start() {
   textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
                         textRestart.getPosition().y + textRestart.getHeight()});
   textQuit.alignCenter();
+  logService->info("(pause-ui) Pause UI initialized.");      
 }
 
-void Pause::update() {
+void Pause::onUpdate() {
   if (gameService->isRunning() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
     gameService->pause();
   }
 }
 
-void Pause::render() {
+void Pause::onRender() {
   if (!gameService->isPaused()) {
     return;
   }

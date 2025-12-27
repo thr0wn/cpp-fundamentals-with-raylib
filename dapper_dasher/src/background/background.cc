@@ -53,6 +53,4 @@ void Background::renderTexture(Texture2D texture, Vector2 position,
   DrawTextureEx(texture, position, 0, 3.0f, color);
   DrawTextureEx(texture, secondPosition, 0, 3.0f, color);
 }
-
-std::unique_ptr<Background> background;
 } // namespace game

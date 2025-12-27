@@ -1,12 +1,13 @@
 #pragma once
 #include "config/config.h"
-#include "game/game-node.h"
+#include "game/game-emitter.h"
 #include "game/game-service.h"
+#include "log/log-service.h"
 #include "ui/text.h"
 #include <string>
 
 namespace game {
-class Start : public GameNode {
+class Start {
   Text textNewGame{config::START_TEXT_NEW_GAME};
   bool textNewGameIsPressed = false;
 
@@ -15,8 +16,8 @@ class Start : public GameNode {
 
 public:
   Start();
-  
-  void start() override;
-  void render() override;
+
+  void onInit();
+  void onRender();
 };
 } // namespace game
