@@ -3,7 +3,7 @@
 ![gamelplay](https://github.com/user-attachments/assets/7e43affc-78b2-411a-9f99-e98e0138c67e)
 
 ## Dapper Dasher
-Game developed at course "Udemy: Cpp fundamentals". Use "A" and "D" to move the circle.
+Game developed at course "Udemy: Cpp fundamentals". Use "SPACE" to jump.
 
 ### Build
 ```shell
