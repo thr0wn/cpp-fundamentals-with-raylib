@@ -27,9 +27,6 @@ Schedule *ScheduleService::repeat(VoidFunction fun, double interval) {
 }
 
 void ScheduleService::onUpdate() {
-  if (!gameService->isRunning()) {
-    return;
-  }
   for (Schedule *schedule : schedules) {
     if (!schedule->timer->isActive()) {
       if (!schedule->isExecuted && !schedule->isRepetable) {

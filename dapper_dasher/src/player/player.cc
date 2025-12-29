@@ -19,10 +19,12 @@ void Player::onInit() {
 
   scheduleService->repeat(
       [this] {
+        if (!gameService->isRunning()) {
+          return;
+        }
         if (!isJumping()) {
-          tileAnimation.sprite++;
           tileAnimation.sprite = std::fmod(
-              tileAnimation.sprite,
+              ++tileAnimation.sprite,
               tileAnimation
                   .spriteTotal); // 6x1 spritesheet, but with only 60 sprites
           player.tile.x = tileAnimation.sprite;

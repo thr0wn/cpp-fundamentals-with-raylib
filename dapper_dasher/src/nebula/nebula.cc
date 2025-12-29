@@ -19,9 +19,11 @@ void Nebula::onInit() {
 
   scheduleService->repeat(
       [this] {
-        tileAnimation.sprite++;
+        if (!gameService->isRunning()) {
+          return;
+        }
         tileAnimation.sprite = std::fmod(
-            tileAnimation.sprite,
+            ++tileAnimation.sprite,
             tileAnimation
                 .spriteTotal); // 8x8 spritesheet, but with only 60 sprites
         nebula.tile.y =

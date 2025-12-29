@@ -32,7 +32,7 @@ public:
 class GameNode2D : public GameNode {
 public:
   GameNode2D(std::string name);
-  
+
   Tile tile;
   Vector2 position;
 };

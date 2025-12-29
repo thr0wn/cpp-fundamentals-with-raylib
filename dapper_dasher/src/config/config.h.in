@@ -43,10 +43,12 @@ namespace config {
   const std::string SCORE_TEXT_SCORE = "Score";
   const std::string SCORE_TEXT_HIGH_SCORE = "High score";
   const std::string SCORE_TEXT_PRESS_SPACE = "Press space to jump";
-  constexpr const int SCORE_INTERVAL = 1;
-  const std::string SCORE_DATABASE_HIGHSCORE_KEY = "highScore";
 
   // GameOver UI constants
   const std::string GAMEOVER_TEXT_RESTART = "Restart";
-  const std::string GAMEOVER_TEXT_QUIT = "Quit";  
+  const std::string GAMEOVER_TEXT_QUIT = "Quit";
+
+  // Player service
+  constexpr const int PLAYER_SERVICE_SCORE_INTERVAL = 1;
+  const std::string PLAYER_SERVICE_DATABASE_HIGHSCORE_KEY = "highScore";
 }

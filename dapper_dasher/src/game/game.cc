@@ -14,6 +14,7 @@ void init() {
   tileService = std::make_unique<TileService>();
   scheduleService = std::make_unique<ScheduleService>();
   keyValueRepository = std::make_unique<KeyValueRepository>();
+  playerService = std::make_unique<PlayerService>();
 
   background = std::make_unique<Background>();
   player = std::make_unique<Player>();

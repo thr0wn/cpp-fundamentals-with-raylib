@@ -1,5 +1,6 @@
 #pragma once
 #include "config/config.h"
+#include "player/player-service.h"
 #include "database/key-value-repository.h"
 #include "game/game-service.h"
 #include "raygui.h"
@@ -9,11 +10,6 @@
 
 namespace game {
 class Score {
-  int score;
-  int highScore;
-  const std::string highScoreKey = config::SCORE_DATABASE_HIGHSCORE_KEY;
-  const int scoreInterval = config::SCORE_INTERVAL;
-
   Text textScore{config::SCORE_TEXT_SCORE};
   bool textScoreIsPressed = false;
 
@@ -26,12 +22,8 @@ class Score {
 public:
   Score();
   
-  void onInit();
-  void onRestart();
-  void onUpdate();
+  void onStart();
   void onRender();
-  void onDeinit();
 
-  void loadHighScoreScore();  
 };
 } // namespace game
