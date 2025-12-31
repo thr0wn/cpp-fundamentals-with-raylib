@@ -7,6 +7,7 @@
 Remove services to get a more event oriented api.
 ** 1.1. key-value-repository -> database
 Remove the repository
+
 New Events:
 #+begin_src cpp
   gameEmitter->emit({"database/set", any})
@@ -16,6 +17,7 @@ New Events:
 
 ** 1.2. log-service -> log.h
 Remove the service
+
 New events:
 #+begin_src cpp
   gameEmitter->emit({"log/info", string})
@@ -26,6 +28,7 @@ Remove service and create a new texture-loader
 
 ** 1.4. game-service.cc -> game.cc -> game-state.cc
 Remove the service
+
 New events:
 #+begin_src cpp
   gameEmitter->emit({"game/state", &GameState})
