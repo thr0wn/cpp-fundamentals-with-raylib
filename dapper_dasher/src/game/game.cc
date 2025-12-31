@@ -2,14 +2,17 @@
 
 namespace game {
 namespace {
+std::unique_ptr<Log> log;
 std::unique_ptr<Background> background;
 std::unique_ptr<Player> player;
 std::unique_ptr<Nebula> nebula;
 std::unique_ptr<UI> ui;
 } // namespace
 void init() {
-  logService = std::make_unique<LogService>();
   gameEmitter = std::make_unique<Emitter>("game-emitter");
+
+  log = std::make_unique<Log>();
+
   gameService = std::make_unique<GameService>();
   tileService = std::make_unique<TileService>();
   scheduleService = std::make_unique<ScheduleService>();

@@ -11,14 +11,14 @@ void TileService::onInit() {
   for (int i = 0; i < NUMBER_OF_TEXTURES; i++) {
     textures[i] = LoadTexture(textureUrls[i]);
   }
-  logService->info("(tile-service) Loaded textures.");    
+  gameEmitter->emit({"log/info",std::string( "(tile-service) Loaded textures.")});    
 }
 
 void TileService::onDeinit() {
   for (int i = 0; i < NUMBER_OF_TEXTURES; i++) {
     UnloadTexture(textures[i]);
   }
-  logService->info("(tile-service) Unloaded textures.");      
+  gameEmitter->emit({"log/info",std::string( "(tile-service) Unloaded textures.")});      
 }
 
 void TileService::draw(Texture texture, Tile tile, Vector2 position,

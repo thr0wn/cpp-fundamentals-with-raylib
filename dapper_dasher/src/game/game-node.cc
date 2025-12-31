@@ -1,6 +1,5 @@
 #include "game/game-node.h"
 
-#include "log/log-service.h"
 
 namespace game {
 uint GameNode::idCounter = 0;

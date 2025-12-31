@@ -12,7 +12,7 @@ void Background::onInit() {
   setBackground(TEXTURE_FAR_BUILDING, &textureFar, &positionFar);
   setBackground(TEXTURE_BACK_BUILDING, &textureMid, &positionMid);
   setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
-  logService->info("(background) Background initialized.");
+  gameEmitter->emit({"log/info",std::string( "(background) Background initialized.")});
 }
 
 void Background::onUpdate() {

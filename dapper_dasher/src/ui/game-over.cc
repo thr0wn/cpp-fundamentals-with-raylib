@@ -16,7 +16,7 @@ void GameOver::onInit() {
   textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
                         textRestart.getPosition().y + textRestart.getHeight()});
   textQuit.alignCenter();
-  logService->info("(game-over-ui) Game Over UI initialized.");        
+  gameEmitter->emit({"log/info",std::string( "(game-over-ui) Game Over UI initialized.")});        
 }
 
 void GameOver::onRender() {

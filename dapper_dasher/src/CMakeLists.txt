@@ -16,14 +16,13 @@ set(LIBRARY_SOURCE_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/database/key-value-repository.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/log/log.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player-score.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/ui/ui.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.cc"
@@ -48,7 +47,7 @@ set(LIBRARY_HEADER_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/database/key-value-repository.h"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/log/log.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.h"
   

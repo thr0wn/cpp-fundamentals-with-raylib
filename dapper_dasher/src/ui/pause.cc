@@ -23,7 +23,7 @@ void Pause::onInit() {
   textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
                         textRestart.getPosition().y + textRestart.getHeight()});
   textQuit.alignCenter();
-  logService->info("(pause-ui) Pause UI initialized.");      
+  gameEmitter->emit({"log/info",std::string( "(pause-ui) Pause UI initialized.")});      
 }
 
 void Pause::onUpdate() {

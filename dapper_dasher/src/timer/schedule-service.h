@@ -1,7 +1,6 @@
 #pragma once
 #include "game/game-emitter.h"
 #include "game/game-service.h"
-#include "log/log-service.h"
 #include "timer/schedule.h"
 #include "timer/timer.h"
 #include <functional>

@@ -31,9 +31,7 @@ void Emitter::off(Listener listener) {
   }
 };
 
-void Emitter::emit(Event event) {
-  emit(event, DEFAULT_EMIT_OPTIONS);
-};
+void Emitter::emit(Event event) { emit(event, DEFAULT_EMIT_OPTIONS); };
 
 void Emitter::emit(Event event, EmitOptions options) {
   try {
@@ -57,8 +55,10 @@ void Emitter::emit(Event event, EmitOptions options) {
         listener.function(event);
       }
     }
-    if (shouldLog)
-      logService->info(fmt::format("({}) Emitted: \"{}\"", name, event.name));
+    if (shouldLog) {      
+      emit({"log/info", fmt::format("({}) Emitted: \"{}\"", name, event.name)},
+           {{"log", false}});
+    }      
     if (shouldEmitAfter) {
       auto afterEventName = event.name + ":after";
       decltype(event) afterEvent{afterEventName, event.value};
@@ -68,16 +68,6 @@ void Emitter::emit(Event event, EmitOptions options) {
   } catch (const std::out_of_range &ex) {
     // do nothing
   }
-};
-
-void Emitter::emit(std::string eventName,  EmitOptions options) {
-  Event event{eventName, {}};
-  emit(event, options);
-};
-
-void Emitter::emit(std::string eventName) {
-  Event event{eventName, {}};
-  emit(event);
 };
 
 } // namespace game

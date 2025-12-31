@@ -31,12 +31,12 @@ void Player::onInit() {
         }
       },
       config::PLAYER_ANIMATION_TIME);
-  logService->info("(player) Player initialized.");
+  gameEmitter->emit({"log/info",std::string( "(player) Player initialized.")});
 };
 
 void Player::onRestart() {
   onInit();
-  logService->info("(player) Player restarted.");
+  gameEmitter->emit({"log/info",std::string( "(player) Player restarted.")});
 }
 
 void Player::onUpdate() {

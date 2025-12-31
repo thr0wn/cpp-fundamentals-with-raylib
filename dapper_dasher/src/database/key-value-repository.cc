@@ -13,17 +13,16 @@ void KeyValueRepository::onBeforeInit() {
       leveldb::DB::Open(options, databaseLocation, &keyValueDB);
   if (status.ok()) {
     started = true;
-    logService->info("(key-value-repository) KeyValueRepository initialized.");
+    gameEmitter->emit({"log/info",std::string( "(key-value-repository) KeyValueRepository initialized.")});
   } else {
-    logService->info(fmt::format(
-        "(key-value-repository) Not started due to:\n{}", status.ToString()));
+    gameEmitter->emit({"log/info",std::string( fmt::format("(key-value-repository) Not started due to:\n{}", status.ToString()))});
   }
 }
 
 void KeyValueRepository::onAfterDeinit() {
   started = false;
   delete keyValueDB;
-  logService->info("(key-value-repository) KeyValueRepository deinitialized.");
+  gameEmitter->emit({"log/info",std::string( "(key-value-repository) KeyValueRepository deinitialized.")});
 }
 
 void KeyValueRepository::set(std::string key, std::string value) {

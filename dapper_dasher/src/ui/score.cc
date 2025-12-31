@@ -28,7 +28,7 @@ void Score::onStart() {
   textPressSpace.setPosition(
       {0.975f * config::WINDOW_WIDTH, 0.025f * config::WINDOW_HEIGHT});
   textPressSpace.alignRight();
-  logService->info("(score-ui) Score UI started.");
+  gameEmitter->emit({"log/info",std::string( "(score-ui) Score UI started.")});
 }
 
 void Score::onRender() {

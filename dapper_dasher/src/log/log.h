@@ -1,14 +1,15 @@
 #pragma once
+#include "game/game-emitter.h"
 #include <iostream>
 #include <string>
 #include <fmt/format.h>
 
 namespace game {
-class LogService {
+class Log {
 private:  
   bool enabled = true;  
 public:
-  LogService();
+  Log();
 
   // Log messages directly to sdtout
   void info(std::string message);
@@ -17,5 +18,4 @@ public:
   // Check if enabled
   bool isEnabled();  
 };
-  extern std::unique_ptr<LogService> logService;
 } // namespace game

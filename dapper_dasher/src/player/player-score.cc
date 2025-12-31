@@ -17,26 +17,24 @@ void PlayerScore::onStart() {
         setScore(score + 1);
         if (score > highScore) {
           setHighScore(score);
-          logService->info("(player-score) Player service new highscore.");
+          gameEmitter->emit({"log/info",std::string( "(player-score) Player service new highscore.")});
         }
       },
       scoreInterval);
   loadHighScoreScore();
-  logService->info("(player-score) Player Service started.");
+  gameEmitter->emit({"log/info",std::string( "(player-score) Player Service started.")});
 }
 
 void PlayerScore::onStop() {
-  logService->info(
-      fmt::format("(player-score) Persisted a highscore of {}.", highScore));
-  logService->info("(player-score) Player Service stopped.");
+  gameEmitter->emit({"log/info",std::string( fmt::format("(player-score) Persisted a highscore of {}.", highScore))});
+  gameEmitter->emit({"log/info",std::string( "(player-score) Player Service stopped.")});
 }
 
 void PlayerScore::loadHighScoreScore() {
   std::string highscoreAsString = "0";
   keyValueRepository->get(highScoreKey, &highscoreAsString);
   setHighScore(std::stoi(highscoreAsString));
-  logService->info(
-      fmt::format("(player-score) Restored a highscore of {}.", highScore));
+  gameEmitter->emit({"log/info",std::string( fmt::format("(player-score) Restored a highscore of {}.", highScore))});
 }
 
 void PlayerScore::setScore(int score) {

@@ -2,7 +2,6 @@
 #include "config/config.h"
 #include "game/game-emitter.h"
 #include "game/game-service.h"
-#include "log/log-service.h"
 #include "ui/text.h"
 #include <string>
 

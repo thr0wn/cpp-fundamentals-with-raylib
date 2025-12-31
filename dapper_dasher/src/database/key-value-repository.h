@@ -3,7 +3,6 @@
 #include "fmt/format.h"
 #include "game/game-emitter.h"
 #include "leveldb/db.h"
-#include "log/log-service.h"
 #include <memory>
 
 namespace game {

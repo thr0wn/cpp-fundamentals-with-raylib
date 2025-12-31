@@ -1,7 +1,6 @@
 #pragma once
 #include "event/event.h"
 #include "event/listener.h"
-#include "log/log-service.h"
 #include <algorithm>
 #include <fmt/format.h>
 #include <functional>
@@ -26,7 +25,5 @@ public:
   void off(Listener listener);
   void emit(Event event);
   void emit(Event event, EmitOptions options);
-  void emit(std::string eventName);
-  void emit(std::string eventName, EmitOptions options);
 };
 } // namespace game

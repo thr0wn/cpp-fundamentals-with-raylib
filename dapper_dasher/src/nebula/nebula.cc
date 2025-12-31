@@ -34,12 +34,12 @@ void Nebula::onInit() {
                       tileAnimation.spriteRowSize); // 8 sprites per row
       },
       config::NEBULA_ANIMATION_TIME);
-  logService->info("(nebula) Nebula initialized.");
+  gameEmitter->emit({"log/info",std::string( "(nebula) Nebula initialized.")});
 };
 
 void Nebula::onRestart() {
   onInit();
-  logService->info("(nebula) Nebula restarted.");
+  gameEmitter->emit({"log/info",std::string( "(nebula) Nebula restarted.")});
 }
 
 void Nebula::onUpdate() {

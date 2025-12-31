@@ -17,7 +17,7 @@ void Start::onInit() {
   textQuit.setSize(config::TEXT_SIZE_LARGE);
   textQuit.setPosition({0.025f * config::WINDOW_WIDTH,
                         textNewGame.getPosition().y + textNewGame.getHeight()});
-  logService->info("(start-ui) Start UI initialized.");  
+  gameEmitter->emit({"log/info",std::string( "(start-ui) Start UI initialized.")});  
 }
 
 void Start::onRender() {
