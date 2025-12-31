@@ -3,7 +3,7 @@
 namespace game {
 
 EmitOptions Emitter::DEFAULT_EMIT_OPTIONS = {
-    {"log", true}, {"before", true}, {"after", true}};
+    {"log", true}, {"before", false}, {"after", false}};
 
 Emitter::Emitter(std::string name) : name(name) {}
 
@@ -31,7 +31,9 @@ void Emitter::off(Listener listener) {
   }
 };
 
-void Emitter::emit(Event event) { emit(event, DEFAULT_EMIT_OPTIONS); };
+void Emitter::emit(Event event) {
+  emit(event, DEFAULT_EMIT_OPTIONS);
+};
 
 void Emitter::emit(Event event, EmitOptions options) {
   try {
@@ -44,14 +46,14 @@ void Emitter::emit(Event event, EmitOptions options) {
     bool shouldEmitAfter = std::any_cast<bool>(finalOptions["after"]);
     if (shouldEmitBefore) {
       auto beforeEventName = event.name + ":before";
-      Event beforeEvent{beforeEventName, event.values};
+      decltype(event) beforeEvent{beforeEventName, event.value};
       emit(beforeEvent,
            {{"log", shouldLog}, {"before", false}, {"after", false}});
     }
     auto it = listeners.find(event.name);
     if (it != listeners.end()) {
-      auto listenersList = it->second;
-      for (auto listener : listenersList) {
+      auto &listenersList = it->second;
+      for (auto &listener : listenersList) {
         listener.function(event);
       }
     }
@@ -59,7 +61,7 @@ void Emitter::emit(Event event, EmitOptions options) {
       logService->info(fmt::format("({}) Emitted: \"{}\"", name, event.name));
     if (shouldEmitAfter) {
       auto afterEventName = event.name + ":after";
-      Event afterEvent{afterEventName, event.values};
+      decltype(event) afterEvent{afterEventName, event.value};
       emit(afterEvent,
            {{"log", shouldLog}, {"before", false}, {"after", false}});
     }
@@ -68,8 +70,14 @@ void Emitter::emit(Event event, EmitOptions options) {
   }
 };
 
+void Emitter::emit(std::string eventName,  EmitOptions options) {
+  Event event{eventName, {}};
+  emit(event, options);
+};
+
 void Emitter::emit(std::string eventName) {
   Event event{eventName, {}};
   emit(event);
 };
+
 } // namespace game

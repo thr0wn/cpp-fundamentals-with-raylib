@@ -1,13 +1,13 @@
 #pragma once
 #include <any>
-#include <string>
 #include <list>
+#include <string>
 
 namespace game {
 class Event {
 public:
   std::string name;
-  std::list<std::any> values;
-  Event(std::string name, std::list<std::any> values);  
+  std::any value;
+  Event(std::string name, std::any value);
 };
 } // namespace game

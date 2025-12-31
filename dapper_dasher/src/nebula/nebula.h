@@ -9,24 +9,12 @@
 #include "timer/timer.h"
 #include <cmath>
 
-// movement
-#define NEBULA_ANIMATION_TIME .125f
-#define INITIAL_VELOCITY -300.0f
-
-// tile
-#define NEBULA_TILE_WIDTH 100.0f
-#define NEBULA_TILE_HEIGHT 100.0f
-
-// tile animation
-#define NEBULA_SPRITE_TOTAL 60
-#define NEBULA_SPRITE_ROW_SIZE 8
-
 namespace game {
 class Nebula {
   GameNode2D nebula{"nebula-node"};
-  const float velocity = INITIAL_VELOCITY;
-  TileAnimation tileAnimation = {0, NEBULA_SPRITE_TOTAL,
-                                 NEBULA_SPRITE_ROW_SIZE};
+  const float velocity = config::INITIAL_VELOCITY;
+  TileAnimation tileAnimation = {0, config::NEBULA_SPRITE_TOTAL,
+                                 config::NEBULA_SPRITE_ROW_SIZE};
 
 public:
   Nebula();

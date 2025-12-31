@@ -1,0 +1,39 @@
+** Old api
+Pub/Sub and services
+#+begin_src c++
+  gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/start", [this](Event event) { onStart(); });
+  gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
+  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/stop", [this](Event event) { onStop(); });
+  gameEmitter->on("game/deinit", [this](Event event) { onDeinit(); });
+  gameEmitter->on("game/pause", [this](Event event) { onPause(); });
+  gameEmitter->on("game/resume", [this](Event event) { onResume(); });
+#+end_src
+
+#+begin_src c++
+  gameService->isPaused();
+#+end_src
+
+** New api
+Function for each lifecycle
+#+begin_src c++
+  useStart([] {
+    "..."
+      });
+#+end_src
+
+#+begin_src c++
+  useState([](State state, function setState) {
+    "..."
+      });
+#+end_src
+
+#+begin_src c++
+  useRender([]{
+    useState([](State state, function setState) {
+      "..."
+        });
+   })
+#+end_src

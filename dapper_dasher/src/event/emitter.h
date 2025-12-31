@@ -21,10 +21,12 @@ public:
   std::string name;
   Emitter(std::string name);
   ~Emitter();
+
   Listener on(std::string eventName, ListenerFunction function);
   void off(Listener listener);
   void emit(Event event);
   void emit(Event event, EmitOptions options);
-  void emit(std::string eventName);  
+  void emit(std::string eventName);
+  void emit(std::string eventName, EmitOptions options);
 };
 } // namespace game

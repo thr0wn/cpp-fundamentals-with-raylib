@@ -1,7 +1,5 @@
 #pragma once
 #include "config/config.h"
-#include "player/player-service.h"
-#include "database/key-value-repository.h"
 #include "game/game-service.h"
 #include "raygui.h"
 #include "ui/text.h"
@@ -10,6 +8,9 @@
 
 namespace game {
 class Score {
+  int score;
+  int highScore;
+
   Text textScore{config::SCORE_TEXT_SCORE};
   bool textScoreIsPressed = false;
 

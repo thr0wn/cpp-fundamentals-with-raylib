@@ -7,29 +7,19 @@
 #include "tile/tile-service.h"
 #include "tile/tile.h"
 #include "timer/schedule-service.h"
+#include "player/player-score.h"
 #include "timer/timer.h"
 #include <cmath>
 #include <cstdio>
 
-// movement
-#define PLAYER_ANIMATION_TIME .125f
-#define PLAYER_INITIAL_GRAVITY 1000.0f
-#define PLAYER_JUMP_VELOCITY -500.0f
-
-// tile
-#define PLAYER_TILE_WIDTH 128
-#define PLAYER_TILE_HEIGHT 128
-
-// tile animation
-#define PLAYER_SPRITE_TOTAL 6
-
 namespace game {
 class Player {
-  GameNode2D player{"player-node"};  
-  const float gravity = PLAYER_INITIAL_GRAVITY;
+  GameNode2D player{"player-node"};
+  const float gravity = config::PLAYER_INITIAL_GRAVITY;
   float velocity = 0;
-  const float jumpVelocity = PLAYER_JUMP_VELOCITY;
-  TileAnimation tileAnimation = {0, PLAYER_SPRITE_TOTAL};
+  const float jumpVelocity = config::PLAYER_JUMP_VELOCITY;
+  TileAnimation tileAnimation = {0, config::PLAYER_SPRITE_TOTAL};
+  PlayerScore playerScore;
 
 public:
   Player();

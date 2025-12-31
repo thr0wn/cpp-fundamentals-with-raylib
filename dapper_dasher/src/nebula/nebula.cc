@@ -10,8 +10,8 @@ Nebula::Nebula() {
 
 void Nebula::onInit() {
   // tile related properties
-  nebula.tile.width = NEBULA_TILE_WIDTH;
-  nebula.tile.height = NEBULA_TILE_HEIGHT;
+  nebula.tile.width = config::NEBULA_TILE_WIDTH;
+  nebula.tile.height = config::NEBULA_TILE_HEIGHT;
   nebula.tile.x = 7;
   nebula.tile.y = 0;
   nebula.position = Vector2{config::WINDOW_WIDTH + nebula.tile.width / 2,
@@ -33,7 +33,7 @@ void Nebula::onInit() {
             std::fmod(tileAnimation.sprite,
                       tileAnimation.spriteRowSize); // 8 sprites per row
       },
-      NEBULA_ANIMATION_TIME);
+      config::NEBULA_ANIMATION_TIME);
   logService->info("(nebula) Nebula initialized.");
 };
 

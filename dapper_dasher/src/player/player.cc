@@ -10,8 +10,8 @@ Player::Player() {
 
 void Player::onInit() {
   // tile related properties
-  player.tile.width = PLAYER_TILE_WIDTH;
-  player.tile.height = PLAYER_TILE_HEIGHT;
+  player.tile.width = config::PLAYER_TILE_WIDTH;
+  player.tile.height = config::PLAYER_TILE_HEIGHT;
   player.tile.x = 0;
   player.tile.y = 0;
   player.position = Vector2{config::WINDOW_WIDTH / 2 - player.tile.width / 2,
@@ -30,7 +30,7 @@ void Player::onInit() {
           player.tile.x = tileAnimation.sprite;
         }
       },
-      PLAYER_ANIMATION_TIME);
+      config::PLAYER_ANIMATION_TIME);
   logService->info("(player) Player initialized.");
 };
 

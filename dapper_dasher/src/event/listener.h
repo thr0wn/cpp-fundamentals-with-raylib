@@ -5,10 +5,10 @@
 #include <string>
 
 namespace game {
-typedef std::function<void(const Event&)> ListenerFunction;
+using ListenerFunction = std::function<void(const Event &)>;
 class Listener {
 public:
-  static std::uint32_t idCounter;  
+  static std::uint32_t idCounter;
   std::uint32_t id;
   std::string eventName;
   ListenerFunction function;

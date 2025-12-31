@@ -21,7 +21,7 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
-  "${CMAKE_CURRENT_SOURCE_DIR}/player/player-service.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/player/player-score.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/ui.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.cc"
@@ -45,17 +45,17 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/database/key-value-repository.h"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log-service.h"
-  
+
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.h"
   
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/player/player-service.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/player/player-score.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/ui.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.h"

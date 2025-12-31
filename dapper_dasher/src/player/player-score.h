@@ -6,24 +6,24 @@
 #include <cstdint>
 
 namespace game {
-class PlayerService {
+class PlayerScore {
 private:
-  std::uint32_t score;
-  std::uint32_t highScore;
+  int score;
+  int highScore;
   const std::string highScoreKey = config::PLAYER_SERVICE_DATABASE_HIGHSCORE_KEY;
   const int scoreInterval = config::PLAYER_SERVICE_SCORE_INTERVAL;
-  
+
 public:
-  PlayerService();
+  PlayerScore();
 
   void onStart();
   void onStop();
 
   void loadHighScoreScore();
 
-  std::uint32_t getScore();  
-  std::uint32_t getHighScore();  
+  void setScore(int score);  
+  int getScore();  
+  void setHighScore(int highScore);  
+  int getHighScore();  
 };
-
-extern std::unique_ptr<PlayerService> playerService;
 }
