@@ -8,8 +8,8 @@
 
 namespace game {
 class Score {
-  int score;
-  int highScore;
+  int *score;
+  int *highScore;
 
   Text textScore{config::SCORE_TEXT_SCORE};
   bool textScoreIsPressed = false;

@@ -7,6 +7,9 @@ PlayerScore::PlayerScore() {
 }
 
 void PlayerScore::onStart() {
+  // Pass reference to the state  
+  gameEmitter->emit({"player/score", &score});
+  gameEmitter->emit({"player/highScore", &highScore});
   // score
   setScore(0);
   scheduleService->repeat(
@@ -17,38 +20,44 @@ void PlayerScore::onStart() {
         setScore(score + 1);
         if (score > highScore) {
           setHighScore(score);
-          gameEmitter->emit({"log/info",std::string( "(player-score) Player service new highscore.")});
+          gameEmitter->emit(
+              {"log/info", std::string("(player-score) New highscore.")});
         }
       },
       scoreInterval);
   loadHighScoreScore();
-  gameEmitter->emit({"log/info",std::string( "(player-score) Player Service started.")});
+  gameEmitter->emit({"log/info", std::string("(player-score) Started.")});
 }
 
 void PlayerScore::onStop() {
-  gameEmitter->emit({"log/info",std::string( fmt::format("(player-score) Persisted a highscore of {}.", highScore))});
-  gameEmitter->emit({"log/info",std::string( "(player-score) Player Service stopped.")});
+  gameEmitter->emit(
+      {"log/info",
+       std::string(fmt::format("(player-score) Persisted a highscore of {}.",
+                               highScore))});
+  gameEmitter->emit({"log/info", std::string("(player-score) Stopped.")});
 }
 
 void PlayerScore::loadHighScoreScore() {
-  std::string highscoreAsString = "0";
-  keyValueRepository->get(highScoreKey, &highscoreAsString);
-  setHighScore(std::stoi(highscoreAsString));
-  gameEmitter->emit({"log/info",std::string( fmt::format("(player-score) Restored a highscore of {}.", highScore))});
+  std::string highScoreAsString = "0";
+  gameEmitter->emit({"database/get", (std::pair<std::string, std::string *>){
+                                         highScoreKey, &highScoreAsString}});
+  setHighScore(std::stoi(highScoreAsString));
+  gameEmitter->emit(
+      {"log/info",
+       std::string(fmt::format("(player-score) Restored a highscore of {}.",
+                               highScore))});
 }
 
 void PlayerScore::setScore(int score) {
   this->score = score;
-  Event scoreChangeEvent{"player/score", score};
-  gameEmitter->emit(scoreChangeEvent);
 }
 int PlayerScore::getScore() { return score; }
 
 void PlayerScore::setHighScore(int highScore) {
   this->highScore = highScore;
-  keyValueRepository->set(highScoreKey, std::to_string(highScore));
-  Event highScoreChangeEvent{"player/highScore", highScore};
-  gameEmitter->emit(highScoreChangeEvent);
+  gameEmitter->emit(
+      {"database/set", (std::pair<std::string, std::string>){
+                           highScoreKey, std::to_string(highScore)}});
 }
 int PlayerScore::getHighScore() { return highScore; }
 

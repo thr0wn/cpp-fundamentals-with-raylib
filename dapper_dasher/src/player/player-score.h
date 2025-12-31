@@ -1,9 +1,9 @@
 #pragma once
 
-#include "database/key-value-repository.h"
 #include "timer/schedule-service.h"
 #include <string>
 #include <cstdint>
+#include <map>
 
 namespace game {
 class PlayerScore {

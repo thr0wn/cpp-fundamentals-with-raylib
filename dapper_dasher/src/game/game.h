@@ -9,7 +9,7 @@
 #include "game/game-service.h"
 #include "tile/tile-service.h"
 #include "timer/schedule-service.h"
-#include "database/key-value-repository.h"
+#include "database/database.h"
 #include "nebula/nebula.h"
 #include "player/player.h"
 #include "background/background.h"

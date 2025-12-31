@@ -4,14 +4,16 @@
 #include "game/game-emitter.h"
 #include "leveldb/db.h"
 #include <memory>
+#include <any>
+#include <map>
 
 namespace game {
-class KeyValueRepository {
+class Database {
   leveldb::DB *keyValueDB;
   std::string databaseLocation = config::DATABASE_LOCATION;
   bool started = false;
 public:
-  KeyValueRepository();
+  Database();
 
   // init db connections
   void onBeforeInit();
@@ -25,5 +27,4 @@ public:
   // key-value database: unset
   void unset(std::string key);
 };
-  extern std::unique_ptr<KeyValueRepository> keyValueRepository;
 } // namespace game
