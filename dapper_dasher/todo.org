@@ -1,11 +1,11 @@
-#+title todo
+#+title: todo
 #+author: natan
 #+STARTUP: indent
 #+TODO: TODO DOING WAITING | DONE
-      
+
 * Todo
 ** DOING Remove services
-Remove services to a more event oriented api.
+Remove services to get a more event oriented api.
 *** key-value-repository -> database
 Remove the repository
 New Events:
