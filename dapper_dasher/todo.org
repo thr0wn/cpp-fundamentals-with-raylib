@@ -3,10 +3,9 @@
 #+STARTUP: indent
 #+TODO: TODO DOING WAITING | DONE
 
-* Todo
-** DOING Remove services
+* DOING Remove services
 Remove services to get a more event oriented api.
-*** key-value-repository -> database
+** key-value-repository -> database
 Remove the repository
 New Events:
 #+begin_src cpp
@@ -15,24 +14,24 @@ New Events:
   gameEmitter->emit({"database/unset", any})
 #+end_src
 
-*** log-service -> log.h
+** log-service -> log.h
 Remove the service
 New events:
 #+begin_src cpp
   gameEmitter->emit({"log/info", string})
 #+end_src
 
-*** tile-service -> tile.cc (with static draw method) -> texture-loader.cc
+** tile-service -> tile.cc (with static draw method) -> texture-loader.cc
 Remove service and create a new texture-loader
 
-*** game-service.cc -> game.cc -> game-state.cc
+** game-service.cc -> game.cc -> game-state.cc
 Remove the service
 New events:
 #+begin_src cpp
   gameEmitter->emit({"game/state", &GameState})
 #+end_src
-** WAITING New API
-*** Old API
+* WAITING New API
+** Old API
 Mainly composed using Observer Pattern and Service Pattern.
 #+begin_src c++
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
@@ -50,7 +49,7 @@ Mainly composed using Observer Pattern and Service Pattern.
   gameService->isPaused();
 #+end_src
 
-*** New API more functional
+** New API more functional
 Create a more functional api. One function per lifecycle/event,
 #+begin_src c++
   useStart([] {
