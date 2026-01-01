@@ -14,7 +14,7 @@ Score::Score() {
   // Get highScore reference  
   gameEmitter->on("player/highScore", [this](Event event) {
     highScore = std::any_cast<int *>(event.value);
-  });  
+  });
 };
 
 void Score::onStart() {

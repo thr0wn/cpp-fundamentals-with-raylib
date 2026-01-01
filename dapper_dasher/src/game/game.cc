@@ -4,6 +4,8 @@ namespace game {
 namespace {
 std::unique_ptr<Log> log;
 std::unique_ptr<Database> database;
+std::unique_ptr<TextureLoader> textureLoader;
+
 std::unique_ptr<Background> background;
 std::unique_ptr<Player> player;
 std::unique_ptr<Nebula> nebula;
@@ -14,9 +16,9 @@ void init() {
 
   log = std::make_unique<Log>();
   database = std::make_unique<Database>();
+  textureLoader = std::make_unique<TextureLoader>();  
 
   gameService = std::make_unique<GameService>();
-  tileService = std::make_unique<TileService>();
   scheduleService = std::make_unique<ScheduleService>();
   
   background = std::make_unique<Background>();

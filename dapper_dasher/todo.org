@@ -5,7 +5,7 @@
 
 * DOING 1. Remove services
 Remove services to get a more event oriented api.
-** 1.1. key-value-repository -> database
+** DONE 1.1. key-value-repository -> database
 Remove the repository
 
 New Events:
@@ -15,7 +15,7 @@ New Events:
   gameEmitter->emit({"database/unset", any})
 #+end_src
 
-** 1.2. log-service -> log.h
+** DONE 1.2. log-service -> log.h
 Remove the service
 
 New events:
@@ -23,7 +23,7 @@ New events:
   gameEmitter->emit({"log/info", string})
 #+end_src
 
-** 1.3. tile-service -> tile.cc (with static draw method) -> texture-loader.cc
+** DOING 1.3. tile-service -> tile.cc (with static draw method) -> texture-loader.cc
 Remove service and create a new texture-loader
 
 ** 1.4. game-service.cc -> game.cc -> game-state.cc

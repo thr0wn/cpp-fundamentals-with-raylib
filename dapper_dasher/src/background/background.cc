@@ -12,7 +12,8 @@ void Background::onInit() {
   setBackground(TEXTURE_FAR_BUILDING, &textureFar, &positionFar);
   setBackground(TEXTURE_BACK_BUILDING, &textureMid, &positionMid);
   setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
-  gameEmitter->emit({"log/info",std::string( "(background) Background initialized.")});
+  gameEmitter->emit(
+      {"log/info", std::string("(background) Background initialized.")});
 }
 
 void Background::onUpdate() {
@@ -31,7 +32,8 @@ void Background::onRender() {
 
 void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
                                Vector2 *position) {
-  *texture = tileService->textures[gameTexture];
+  gameEmitter->emit({"tile/texture/get",
+                     (std::pair<GameTexture, Texture2D *>){gameTexture, texture}});
   position->x = 0;
   position->y = 0;
 }

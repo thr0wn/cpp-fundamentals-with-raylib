@@ -7,7 +7,7 @@
 #include "game/game-emitter.h"
 #include "log/log.h"
 #include "game/game-service.h"
-#include "tile/tile-service.h"
+#include "tile/texture-loader.h"
 #include "timer/schedule-service.h"
 #include "database/database.h"
 #include "nebula/nebula.h"

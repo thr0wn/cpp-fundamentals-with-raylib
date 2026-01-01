@@ -32,7 +32,8 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.cc"
 )
 set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/event/event.h"
@@ -67,7 +68,7 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.h"
  
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile-service.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.h"
 )
 add_library(${LIBRARY_NAME} STATIC
   ${LIBRARY_SOURCE_FILES}

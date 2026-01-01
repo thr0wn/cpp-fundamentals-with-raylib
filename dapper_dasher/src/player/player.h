@@ -4,13 +4,13 @@
 #include "game/game-emitter.h"
 #include "game/game-service.h"
 #include "raylib.h"
-#include "tile/tile-service.h"
 #include "tile/tile.h"
 #include "timer/schedule-service.h"
 #include "player/player-score.h"
 #include "timer/timer.h"
 #include <cmath>
 #include <cstdio>
+#include <map>
 
 namespace game {
 class Player {
@@ -25,6 +25,7 @@ public:
   Player();
 
   void onInit();
+  void onAfterInit();
   void onRestart();
   void onUpdate();
   void onRender();

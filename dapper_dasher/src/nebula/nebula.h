@@ -3,11 +3,11 @@
 #include "game/game-node.h"
 #include "game/game-service.h"
 #include "raylib.h"
-#include "tile/tile-service.h"
 #include "tile/tile.h"
 #include "timer/schedule-service.h"
 #include "timer/timer.h"
 #include <cmath>
+#include <map>
 
 namespace game {
 class Nebula {
@@ -20,6 +20,7 @@ public:
   Nebula();
 
   void onInit();
+  void onAfterInit();
   void onRestart();
   void onUpdate();
   void onRender();

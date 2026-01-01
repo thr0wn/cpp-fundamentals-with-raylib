@@ -2,7 +2,6 @@
 #include "game/game-emitter.h"
 #include "game/game-service.h"
 #include "raylib.h"
-#include "tile/tile-service.h"
 #include "tile/tile.h"
 
 #define BACKGROUND_FAR_VELOCITY -30.0f;

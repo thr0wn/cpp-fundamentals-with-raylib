@@ -1,11 +1,11 @@
 #pragma once
+#include "game/game-emitter.h"
 #include "raylib.h"
-
-#define TILE_WIDTH 8
-#define TILE_HEIGHT 8
+#include <map>
 
 #define NUMBER_OF_TEXTURES 5
 
+namespace game {
 typedef enum GameTexture {
   TEXTURE_SCARFY = 0,
   TEXTURE_FAR_BUILDING,
@@ -14,12 +14,18 @@ typedef enum GameTexture {
   TEXTURE_NEBULA
 } GameTexture;
 
-class Tile : Rectangle {
+class Tile: public Rectangle {
 public:
   float x;
   float y;
-  float width = TILE_WIDTH;
-  float height = TILE_HEIGHT;
+  float width;
+  float height;
+  Texture2D texture;
+
+  void loadTexture(GameTexture gameTexture);
+
+  void draw(Vector2 position, Color color);
+  static void draw(Tile tile, Vector2 position, Color color);
 };
 
 class TileAnimation {
@@ -28,3 +34,4 @@ public:
   int spriteTotal;
   int spriteRowSize;
 };
+} // namespace game

@@ -3,6 +3,7 @@
 namespace game {
 Player::Player() {
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
+  gameEmitter->on("game/init:after", [this](Event event) { onAfterInit(); });
   gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
@@ -31,12 +32,16 @@ void Player::onInit() {
         }
       },
       config::PLAYER_ANIMATION_TIME);
-  gameEmitter->emit({"log/info",std::string( "(player) Player initialized.")});
+  gameEmitter->emit({"log/info", std::string("(player) Player initialized.")});
 };
+
+void Player::onAfterInit() {
+  player.tile.loadTexture(TEXTURE_SCARFY);
+}
 
 void Player::onRestart() {
   onInit();
-  gameEmitter->emit({"log/info",std::string( "(player) Player restarted.")});
+  gameEmitter->emit({"log/info", std::string("(player) Player restarted.")});
 }
 
 void Player::onUpdate() {
@@ -66,8 +71,7 @@ void Player::onRender() {
     return;
   }
   Color color = gameService->isPaused() ? GRAY : WHITE;
-  tileService->draw(tileService->textures[TEXTURE_SCARFY], player.tile,
-                    player.position, color);
+  player.tile.draw(player.position, color);
 }
 
 bool Player::isJumping() {
