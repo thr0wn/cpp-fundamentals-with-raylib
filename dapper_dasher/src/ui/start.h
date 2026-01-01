@@ -13,6 +13,8 @@ class Start {
   Text textQuit{config::START_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
+  GameState *gameState;
+
 public:
   Start();
 

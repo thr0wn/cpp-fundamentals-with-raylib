@@ -4,7 +4,10 @@ namespace game {
 Pause::Pause() {
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });  
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 };
 
 void Pause::onInit() {
@@ -23,18 +26,19 @@ void Pause::onInit() {
   textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
                         textRestart.getPosition().y + textRestart.getHeight()});
   textQuit.alignCenter();
-  gameEmitter->emit({"log/info",std::string( "(pause-ui) Pause UI initialized.")});      
+  gameEmitter->emit(
+      {"log/info", std::string("(pause-ui) Pause UI initialized.")});
 }
 
 void Pause::onUpdate() {
-  if (gameService->isRunning() &&
+  if (gameState->isRunning() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    gameService->pause();
+    gameEmitter->emit({"game/pause", {}});
   }
 }
 
 void Pause::onRender() {
-  if (!gameService->isPaused()) {
+  if (!gameState->isPaused()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
@@ -47,13 +51,13 @@ void Pause::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textResumeIsPressed) {
-    gameService->resume();
+    gameEmitter->emit({"game/resume", {}});
   }
   if (textRestartIsPressed) {
-    gameService->restart();
+    gameEmitter->emit({"game/restart", {}});
   }
   if (textQuitIsPressed) {
-    gameService->stop();
+    gameEmitter->emit({"game/stop", {}});
   }
 }
 } // namespace game

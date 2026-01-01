@@ -6,6 +6,9 @@ Background::Background() {
   gameEmitter->on("game/restart", [this](Event event) { onInit(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 }
 
 void Background::onInit() {
@@ -17,7 +20,7 @@ void Background::onInit() {
 }
 
 void Background::onUpdate() {
-  if (!gameService->isRunning())
+  if (!gameState->isRunning())
     return;
   updateTexture(textureFar, &positionFar, velocityFar);
   updateTexture(textureMid, &positionMid, velocityMid);
@@ -32,8 +35,8 @@ void Background::onRender() {
 
 void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
                                Vector2 *position) {
-  gameEmitter->emit({"tile/texture/get",
-                     (std::pair<GameTexture, Texture2D *>){gameTexture, texture}});
+  gameEmitter->emit({"tile/texture/get", (std::pair<GameTexture, Texture2D *>){
+                                             gameTexture, texture}});
   position->x = 0;
   position->y = 0;
 }
@@ -48,8 +51,7 @@ void Background::updateTexture(Texture2D texture, Vector2 *position,
 
 void Background::renderTexture(Texture2D texture, Vector2 position,
                                float velocity) {
-  Color color =
-      gameService->isStarted() && !gameService->isPaused() ? WHITE : GRAY;
+  Color color = gameState->isStarted() && !gameState->isPaused() ? WHITE : GRAY;
   Vector2 secondPosition = position;
   secondPosition.x += 3.0f * texture.width;
   DrawTextureEx(texture, position, 0, 3.0f, color);

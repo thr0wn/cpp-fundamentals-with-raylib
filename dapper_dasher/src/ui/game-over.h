@@ -1,7 +1,7 @@
 #pragma once
 #include "config/config.h"
 #include "game/game-emitter.h"
-#include "game/game-service.h"
+#include "game/game-state.h"
 #include "raygui.h"
 #include "ui/text.h"
 
@@ -13,9 +13,11 @@ class GameOver {
   Text textQuit{config::GAMEOVER_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
+  GameState *gameState;
+
 public:
   GameOver();
-  
+
   void onInit();
   void onRender();
 };

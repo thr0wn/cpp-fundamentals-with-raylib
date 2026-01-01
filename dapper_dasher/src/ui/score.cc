@@ -6,12 +6,15 @@ using config::TEXT_SIZE_SMALL;
 Score::Score() {
   gameEmitter->on("game/start", [this](Event event) { onStart(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 
   // Get score reference
   gameEmitter->on("player/score", [this](Event event) {
     score = std::any_cast<int *>(event.value);
   });
-  // Get highScore reference  
+  // Get highScore reference
   gameEmitter->on("player/highScore", [this](Event event) {
     highScore = std::any_cast<int *>(event.value);
   });
@@ -36,7 +39,7 @@ void Score::onStart() {
 }
 
 void Score::onRender() {
-  if (!gameService->isRunning()) {
+  if (!gameState->isRunning()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_MEDIUM);
@@ -49,8 +52,8 @@ void Score::onRender() {
   }
 
   if (highScore != nullptr) {
-    std::string formattedHighScore = fmt::format(
-        "{}: {}", textHighScore.getString(), *highScore);
+    std::string formattedHighScore =
+        fmt::format("{}: {}", textHighScore.getString(), *highScore);
     GuiLabelButton(textHighScore.getRectangle(), formattedHighScore.data());
   }
 

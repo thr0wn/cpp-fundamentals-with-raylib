@@ -7,6 +7,9 @@ namespace game {
 Start::Start() {
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 };
 
 void Start::onInit() {
@@ -17,11 +20,12 @@ void Start::onInit() {
   textQuit.setSize(config::TEXT_SIZE_LARGE);
   textQuit.setPosition({0.025f * config::WINDOW_WIDTH,
                         textNewGame.getPosition().y + textNewGame.getHeight()});
-  gameEmitter->emit({"log/info",std::string( "(start-ui) Start UI initialized.")});  
+  gameEmitter->emit(
+      {"log/info", std::string("(start-ui) Start UI initialized.")});
 }
 
 void Start::onRender() {
-  if (gameService->isStarted()) {
+  if (gameState->isStarted()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
@@ -31,11 +35,11 @@ void Start::onRender() {
   textQuitIsPressed =
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
-  if (!gameService->isStarted() && textNewGameIsPressed) {
-    gameService->start();
+  if (!gameState->isStarted() && textNewGameIsPressed) {
+    gameEmitter->emit({"game/start", {}});
   }
   if (textQuitIsPressed) {
-    gameService->stop();
+    gameEmitter->emit({"game/stop", {}});
   }
 }
 } // namespace game

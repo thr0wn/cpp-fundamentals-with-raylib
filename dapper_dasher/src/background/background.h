@@ -1,6 +1,6 @@
 #pragma once
 #include "game/game-emitter.h"
-#include "game/game-service.h"
+#include "game/game-state.h"
 #include "raylib.h"
 #include "tile/tile.h"
 
@@ -21,6 +21,8 @@ class Background {
   Texture2D textureNear;
   const float velocityNear = BACKGROUND_NEAR_VELOCITY;
   Vector2 positionNear;
+
+  GameState *gameState;
 
   void setBackground(GameTexture gameTexture, Texture2D *texture,
                      Vector2 *position);

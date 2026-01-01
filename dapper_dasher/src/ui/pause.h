@@ -17,6 +17,8 @@ class Pause {
   Text textQuit{config::PAUSE_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
+  GameState *gameState;
+  
 public:
   Pause();
 

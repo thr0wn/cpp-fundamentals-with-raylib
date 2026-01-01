@@ -20,11 +20,12 @@ class Score {
   Text textPressSpace{config::SCORE_TEXT_PRESS_SPACE};
   bool textPressSpaceIsPressed = false;
 
+  GameState *gameState;
+
 public:
   Score();
-  
+
   void onStart();
   void onRender();
-
 };
 } // namespace game

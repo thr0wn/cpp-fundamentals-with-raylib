@@ -4,6 +4,9 @@ namespace game {
 PlayerScore::PlayerScore() {
   gameEmitter->on("game/start", [this](Event event) { onStart(); });
   gameEmitter->on("game/stop", [this](Event event) { onStop(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 }
 
 void PlayerScore::onStart() {
@@ -14,7 +17,7 @@ void PlayerScore::onStart() {
   setScore(0);
   scheduleService->repeat(
       [this] {
-        if (!gameService->isRunning()) {
+        if (!gameState->isRunning()) {
           return;
         }
         setScore(score + 1);

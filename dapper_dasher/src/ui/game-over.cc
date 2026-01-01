@@ -3,7 +3,10 @@
 namespace game {
 GameOver::GameOver() {
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });    
+  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 };
 
 void GameOver::onInit() {
@@ -16,11 +19,12 @@ void GameOver::onInit() {
   textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
                         textRestart.getPosition().y + textRestart.getHeight()});
   textQuit.alignCenter();
-  gameEmitter->emit({"log/info",std::string( "(game-over-ui) Game Over UI initialized.")});        
+  gameEmitter->emit(
+      {"log/info", std::string("(game-over-ui) Game Over UI initialized.")});
 }
 
 void GameOver::onRender() {
-  if (!gameService->isGameOver()) {
+  if (!gameState->isGameOver()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
@@ -31,10 +35,10 @@ void GameOver::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textRestartIsPressed) {
-    gameService->restart();
+    gameEmitter->emit({"game/restart", {}});
   }
   if (textQuitIsPressed) {
-    gameService->stop();
+    gameEmitter->emit({"game/stop", {}});
   }
 }
 } // namespace game

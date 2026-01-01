@@ -7,6 +7,9 @@ Player::Player() {
   gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 };
 
 void Player::onInit() {
@@ -20,7 +23,7 @@ void Player::onInit() {
 
   scheduleService->repeat(
       [this] {
-        if (!gameService->isRunning()) {
+        if (!gameState->isRunning()) {
           return;
         }
         if (!isJumping()) {
@@ -35,9 +38,7 @@ void Player::onInit() {
   gameEmitter->emit({"log/info", std::string("(player) Player initialized.")});
 };
 
-void Player::onAfterInit() {
-  player.tile.loadTexture(TEXTURE_SCARFY);
-}
+void Player::onAfterInit() { player.tile.loadTexture(TEXTURE_SCARFY); }
 
 void Player::onRestart() {
   onInit();
@@ -45,7 +46,7 @@ void Player::onRestart() {
 }
 
 void Player::onUpdate() {
-  if (!gameService->isRunning()) {
+  if (!gameState->isRunning()) {
     return;
   }
 
@@ -67,10 +68,10 @@ void Player::onUpdate() {
 }
 
 void Player::onRender() {
-  if (!gameService->isStarted()) {
+  if (!gameState->isStarted()) {
     return;
   }
-  Color color = gameService->isPaused() ? GRAY : WHITE;
+  Color color = gameState->isPaused() ? GRAY : WHITE;
   player.tile.draw(player.position, color);
 }
 

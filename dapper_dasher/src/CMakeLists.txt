@@ -9,7 +9,7 @@ set(LIBRARY_SOURCE_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-emitter.cc"
-  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cc"
@@ -43,7 +43,6 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-emitter.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-service.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.h"

@@ -1,5 +1,4 @@
 #include "nebula/nebula.h"
-#include "tile/tile.h"
 
 namespace game {
 Nebula::Nebula() {
@@ -8,6 +7,9 @@ Nebula::Nebula() {
   gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  gameEmitter->on("game/state", [this](Event event) {
+    gameState = std::any_cast<GameState *>(event.value);
+  });
 }
 
 void Nebula::onInit() {
@@ -21,7 +23,7 @@ void Nebula::onInit() {
 
   scheduleService->repeat(
       [this] {
-        if (!gameService->isRunning()) {
+        if (!gameState->isRunning()) {
           return;
         }
         tileAnimation.sprite = std::fmod(
@@ -39,9 +41,7 @@ void Nebula::onInit() {
   gameEmitter->emit({"log/info", std::string("(nebula) Nebula initialized.")});
 };
 
-void Nebula::onAfterInit() {
-  nebula.tile.loadTexture(TEXTURE_NEBULA);
-}
+void Nebula::onAfterInit() { nebula.tile.loadTexture(TEXTURE_NEBULA); }
 
 void Nebula::onRestart() {
   onInit();
@@ -49,7 +49,7 @@ void Nebula::onRestart() {
 }
 
 void Nebula::onUpdate() {
-  if (!gameService->isRunning()) {
+  if (!gameState->isRunning()) {
     return;
   }
 
@@ -62,10 +62,10 @@ void Nebula::onUpdate() {
 }
 
 void Nebula::onRender() {
-  if (!gameService->isStarted()) {
+  if (!gameState->isStarted()) {
     return;
   }
-  Color color = gameService->isPaused() ? GRAY : WHITE;
+  Color color = gameState->isPaused() ? GRAY : WHITE;
   Tile::draw(nebula.tile, nebula.position, color);
 }
 } // namespace game
