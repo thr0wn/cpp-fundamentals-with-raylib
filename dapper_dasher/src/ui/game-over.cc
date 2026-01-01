@@ -35,10 +35,10 @@ void GameOver::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textRestartIsPressed) {
-    gameEmitter->emit({"game/restart", {}});
+    gameEmitter->emit({"game/restart", {}}, {{"before", true}, {"after", true}});
   }
   if (textQuitIsPressed) {
-    gameEmitter->emit({"game/stop", {}});
+    gameEmitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
   }
 }
 } // namespace game
