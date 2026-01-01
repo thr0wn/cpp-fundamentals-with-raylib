@@ -33,7 +33,7 @@ void Pause::onInit() {
 void Pause::onUpdate() {
   if (gameState->isRunning() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    gameEmitter->emit({"game/pause", {}});
+    gameEmitter->emit({"game/pause", {}}, {{"before", true}, {"after", true}});
   }
 }
 

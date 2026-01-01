@@ -1,6 +1,6 @@
 #pragma once
 #include "config/config.h"
-#include "game/game-service.h"
+#include "game/game-state.h"
 #include "raygui.h"
 #include "ui/text.h"
 #include <fmt/format.h>

@@ -1,7 +1,7 @@
 #pragma once
 #include "config/config.h"
 #include "game/game-emitter.h"
-#include "game/game-service.h"
+#include "game/game-state.h"
 #include "ui/text.h"
 #include <string>
 

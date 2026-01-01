@@ -1,7 +1,6 @@
 #pragma once
 #include "config/config.h"
 #include "game/game-node.h"
-#include "game/game-service.h"
 #include "ui/start.h"
 #include "ui/pause.h"
 #include "ui/text.h"
