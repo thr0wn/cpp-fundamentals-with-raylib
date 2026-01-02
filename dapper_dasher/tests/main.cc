@@ -41,3 +41,15 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
     REQUIRE(emitter.listeners.size() == 0);
   };
 }
+
+TEST_CASE("Async-pointer should work properly", "[asyn-pointer]") {
+  int a = 0;
+  float b = 1;
+  game::AsyncPointer::push(&a);
+  game::AsyncPointer::push(&b);
+  int *c = game::AsyncPointer::get<int>();
+  float *d = game::AsyncPointer::get<float>();
+
+  REQUIRE(&a == c);
+  REQUIRE(&b == d);
+}

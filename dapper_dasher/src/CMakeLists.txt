@@ -3,6 +3,8 @@ add_subdirectory(config)
 # library setup
 # ----------------------------------------------------------------------------------------
 set(LIBRARY_SOURCE_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/async-pointer.cc"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/event/event.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/emitter.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.cc"
@@ -36,6 +38,8 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.cc"
 )
 set(LIBRARY_HEADER_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/async/async-pointer.h"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/event/event.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/emitter.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.h"
