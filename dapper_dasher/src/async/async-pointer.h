@@ -1,23 +1,23 @@
 #pragma once
 
+#include <algorithm>
 #include <any>
 #include <list>
-#include <algorithm>
 #include <memory>
 
 namespace game {
 namespace AsyncPointer {
-
-extern std::list<std::any> pointers;
-
-void push(const std::any &pointer);
+namespace {
+inline std::list<std::any> pointers;
+}
+template <typename T> void push(T *pointer) { pointers.push_back(pointer); }
 template <typename T> T *get() {
-  auto pointerIt = std::find_if(pointers.begin(), pointers.end(),
-                                [](const std::any &ptr) {
-                                return ptr.type() == typeid(T*);
-                                });
+  auto pointerIt =
+      std::find_if(pointers.begin(), pointers.end(), [](const std::any &ptr) {
+        return ptr.type() == typeid(T *);
+      });
   if (pointerIt != pointers.end()) {
-    return std::any_cast<T*>(*pointerIt);
+    return std::any_cast<T *>(*pointerIt);
   }
   return nullptr;
 }
