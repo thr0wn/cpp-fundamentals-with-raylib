@@ -2,9 +2,9 @@
 
 namespace game {
 Pause::Pause() {
-  gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  emitter->on("game/init", [this](Event event) { onInit(); });
+  emitter->on("game/update", [this](Event event) { onUpdate(); });
+  emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void Pause::onInit() {
@@ -29,7 +29,7 @@ void Pause::onInit() {
 void Pause::onUpdate() {
   if (gameState->isRunning() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    gameEmitter->emit({"game/pause", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/pause", {}}, {{"before", true}, {"after", true}});
   }
 }
 
@@ -47,13 +47,13 @@ void Pause::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textResumeIsPressed) {
-    gameEmitter->emit({"game/resume", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/resume", {}}, {{"before", true}, {"after", true}});
   }
   if (textRestartIsPressed) {
-    gameEmitter->emit({"game/restart", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/restart", {}}, {{"before", true}, {"after", true}});
   }
   if (textQuitIsPressed) {
-    gameEmitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
   }
 }
 } // namespace game

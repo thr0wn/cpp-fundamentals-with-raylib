@@ -2,8 +2,8 @@
 
 namespace game {
 GameOver::GameOver() {
-  gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  emitter->on("game/init", [this](Event event) { onInit(); });
+  emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void GameOver::onInit() {
@@ -31,10 +31,10 @@ void GameOver::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textRestartIsPressed) {
-    gameEmitter->emit({"game/restart", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/restart", {}}, {{"before", true}, {"after", true}});
   }
   if (textQuitIsPressed) {
-    gameEmitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
   }
 }
 } // namespace game

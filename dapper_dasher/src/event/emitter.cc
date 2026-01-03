@@ -5,8 +5,6 @@ namespace game {
 EmitOptions Emitter::DEFAULT_EMIT_OPTIONS = {
     {"log", true}, {"before", false}, {"after", false}};
 
-Emitter::Emitter(std::string name) : name(name) {}
-
 Emitter::~Emitter() {
   for (auto itMap = listeners.begin(); itMap != listeners.end();) {
     itMap->second.clear();
@@ -56,7 +54,7 @@ void Emitter::emit(Event event, EmitOptions options) {
       }
     }
     if (shouldLog) {      
-      std::cout << fmt::format("GAMEINFO: ({}) Emitted: \"{}\"\n", name, event.name);
+      std::cout << fmt::format("GAMEINFO: (emitter) Emitted: \"{}\"\n", event.name);
     }      
     if (shouldEmitAfter) {
       auto afterEventName = event.name + ":after";

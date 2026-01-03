@@ -2,10 +2,10 @@
 
 namespace game {
 Nebula::Nebula() {
-  gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
-  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  emitter->on("game/init", [this](Event event) { onInit(); });
+  emitter->on("game/restart", [this](Event event) { onRestart(); });
+  emitter->on("game/update", [this](Event event) { onUpdate(); });
+  emitter->on("game/render", [this](Event event) { onRender(); });
 }
 
 void Nebula::onInit() {

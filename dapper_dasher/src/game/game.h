@@ -5,7 +5,6 @@
 #include "event/emitter.h"
 #include "event/event.h"
 #include "event/listener.h"
-#include "game/game-emitter.h"
 #include "game/game-state.h"
 #include "log/log.h"
 #include "tile/texture-loader.h"

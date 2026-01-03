@@ -2,8 +2,8 @@
 
 namespace game {
 TextureLoader::TextureLoader() {
-  gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/deinit", [this](Event event) { onDeinit(); });
+  emitter->on("game/init", [this](Event event) { onInit(); });
+  emitter->on("game/deinit", [this](Event event) { onDeinit(); });
 };
 
 void TextureLoader::onInit() {

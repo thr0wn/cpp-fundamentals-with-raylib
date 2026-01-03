@@ -18,8 +18,6 @@ public:
   static EmitOptions DEFAULT_EMIT_OPTIONS;
 
   std::map<std::string, std::list<Listener>> listeners;
-  std::string name;  
-  Emitter(std::string name);
   ~Emitter();
 
   Listener on(std::string eventName, ListenerFunction function);

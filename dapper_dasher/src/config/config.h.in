@@ -48,6 +48,11 @@ namespace config {
   const std::string GAMEOVER_TEXT_RESTART = "Restart";
   const std::string GAMEOVER_TEXT_QUIT = "Quit";
 
+  // Bakcground
+  const float BACKGROUND_FAR_VELOCITY = -30.0f;
+  const float BACKGROUND_MID_VELOCITY = -60.0f;
+  const float BACKGROUND_NEAR_VELOCITY = -90.0f;
+
   // Player
   // movement
   const float PLAYER_ANIMATION_TIME = .125f;

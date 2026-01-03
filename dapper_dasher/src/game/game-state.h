@@ -1,5 +1,6 @@
 #pragma once
-#include "game/game-emitter.h"
+#include "async/async-pointer.h"
+#include "event/emitter.h"
 
 namespace game {
 class GameState {
@@ -10,6 +11,7 @@ private:
   bool gameOver = false;
   bool stopped = false;
   bool deinitialized = false;
+  Emitter *emitter = AsyncPointer::get<Emitter>();
 
 public:
   GameState();

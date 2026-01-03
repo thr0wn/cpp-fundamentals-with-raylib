@@ -1,8 +1,8 @@
 #pragma once
 #include "config/config.h"
 #include "async/async-pointer.h"
+#include "event/emitter.h"
 #include "game/game-node.h"
-#include "game/game-emitter.h"
 #include "game/game-state.h"
 #include "log/log.h"
 #include "raylib.h"
@@ -21,7 +21,8 @@ class Player {
   const float jumpVelocity = config::PLAYER_JUMP_VELOCITY;
   TileAnimation tileAnimation = {0, config::PLAYER_SPRITE_TOTAL};
   Timer animationTimer{config::PLAYER_ANIMATION_TIME};
-  
+
+  Emitter *emitter = AsyncPointer::get<Emitter>();  
   GameState *gameState = AsyncPointer::get<GameState>();
   TextureLoader *textureLoader = AsyncPointer::get<TextureLoader>();
   Log *log = AsyncPointer::get<Log>();  

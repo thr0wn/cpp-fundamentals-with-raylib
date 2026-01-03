@@ -8,7 +8,6 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.cc"
-  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-emitter.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cc"
 
@@ -41,7 +40,6 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/event/emitter.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.h"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-emitter.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"

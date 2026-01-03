@@ -1,5 +1,6 @@
 #pragma once
 #include "async/async-pointer.h"
+#include "event/emitter.h"
 #include "log/log.h"
 #include "config/config.h"
 #include "game/game-state.h"
@@ -20,9 +21,10 @@ class Score {
   Text textPressSpace{config::SCORE_TEXT_PRESS_SPACE};
   bool textPressSpaceIsPressed = false;
 
+  Emitter *emitter = AsyncPointer::get<Emitter>();
   GameState *gameState = AsyncPointer::get<GameState>();
   PlayerScore *playerScore = AsyncPointer::get<PlayerScore>();
-  Log *log = AsyncPointer::get<Log>();  
+  Log *log = AsyncPointer::get<Log>();
 
 public:
   Score();

@@ -1,6 +1,7 @@
 #pragma once
 #include "config/config.h"
 #include "async/async-pointer.h"
+#include "event/emitter.h"
 #include "game/game-node.h"
 #include "game/game-state.h"
 #include "log/log.h"
@@ -19,6 +20,7 @@ class Nebula {
                                  config::NEBULA_SPRITE_ROW_SIZE};
   Timer animationTimer{config::NEBULA_ANIMATION_TIME};
 
+  Emitter *emitter = AsyncPointer::get<Emitter>();
   GameState *gameState = AsyncPointer::get<GameState>();
   TextureLoader *textureLoader = AsyncPointer::get<TextureLoader>();
   Log *log = AsyncPointer::get<Log>();

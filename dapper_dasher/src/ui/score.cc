@@ -4,8 +4,8 @@ namespace game {
 using config::TEXT_SIZE_SMALL;
 
 Score::Score() {
-  gameEmitter->on("game/start", [this](Event event) { onStart(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  emitter->on("game/start", [this](Event event) { onStart(); });
+  emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void Score::onStart() {

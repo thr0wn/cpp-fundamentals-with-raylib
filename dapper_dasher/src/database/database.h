@@ -1,8 +1,8 @@
 #pragma once
 #include "config/config.h"
+#include "event/emitter.h"
 #include "fmt/format.h"
 #include "async/async-pointer.h"
-#include "game/game-emitter.h"
 #include "leveldb/db.h"
 #include "log/log.h"
 #include <memory>
@@ -15,6 +15,8 @@ class Database {
   std::string databaseLocation = config::DATABASE_LOCATION;
   bool started = false;
   Log *log = AsyncPointer::get<Log>();
+  Emitter *emitter = AsyncPointer::get<Emitter>();
+
 public:
   Database();
   

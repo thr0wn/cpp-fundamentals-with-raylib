@@ -1,6 +1,6 @@
 #pragma once
 #include "config/config.h"
-#include "game/game-emitter.h"
+#include "event/emitter.h"
 #include "game/game-state.h"
 #include "async/async-pointer.h"
 #include "log/log.h"
@@ -15,6 +15,7 @@ class GameOver {
   Text textQuit{config::GAMEOVER_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
+  Emitter *emitter = AsyncPointer::get<Emitter>();  
   GameState *gameState = AsyncPointer::get<GameState>();
   Log *log = AsyncPointer::get<Log>();  
 

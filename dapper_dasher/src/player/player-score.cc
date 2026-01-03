@@ -2,9 +2,9 @@
 
 namespace game {
 PlayerScore::PlayerScore() {
-  gameEmitter->on("game/start", [this](Event event) { onStart(); });
-  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
-  gameEmitter->on("game/stop", [this](Event event) { onStop(); });
+  emitter->on("game/start", [this](Event event) { onStart(); });
+  emitter->on("game/update", [this](Event event) { onUpdate(); });
+  emitter->on("game/stop", [this](Event event) { onStop(); });
 }
 
 void PlayerScore::onStart() {

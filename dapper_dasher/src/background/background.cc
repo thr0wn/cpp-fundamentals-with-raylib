@@ -2,10 +2,10 @@
 
 namespace game {
 Background::Background() {
-  gameEmitter->on("game/init:after", [this](Event event) { onAfterInit(); });
-  gameEmitter->on("game/restart", [this](Event event) { onAfterInit(); });
-  gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  emitter->on("game/init:after", [this](Event event) { onAfterInit(); });
+  emitter->on("game/restart", [this](Event event) { onAfterInit(); });
+  emitter->on("game/update", [this](Event event) { onUpdate(); });
+  emitter->on("game/render", [this](Event event) { onRender(); });
 }
 
 void Background::onAfterInit() {

@@ -2,8 +2,8 @@
 
 namespace game {
 Database::Database() {
-  gameEmitter->on("game/init", [this](Event event) { onBeforeInit(); });
-  gameEmitter->on("game/deinit", [this](Event event) { onAfterDeinit(); });
+  emitter->on("game/init", [this](Event event) { onBeforeInit(); });
+  emitter->on("game/deinit", [this](Event event) { onAfterDeinit(); });
 }
 
 void Database::onBeforeInit() {

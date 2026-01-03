@@ -2,6 +2,7 @@
 
 namespace game {
 namespace {
+std::shared_ptr<Emitter> emitter;
 std::shared_ptr<Log> log;
 std::shared_ptr<GameState> gameState;
 std::shared_ptr<Database> database;
@@ -14,8 +15,8 @@ std::shared_ptr<Nebula> nebula;
 std::shared_ptr<UI> ui;
 
 void createInstances() {
-  gameEmitter = std::make_shared<Emitter>("game-emitter");
-  AsyncPointer::push(gameEmitter.get());
+  emitter = std::make_shared<Emitter>();
+  AsyncPointer::push(emitter.get());
 
   log = std::make_shared<Log>();
   AsyncPointer::push(log.get());
@@ -55,13 +56,13 @@ void initRaylib() {
 }
 
 void update() {
-  gameEmitter->emit({"game/update", {}},
+  emitter->emit({"game/update", {}},
                     {{"log", false}, {"before", true}, {"after", true}});
 }
 void render() {
   BeginDrawing();
   ClearBackground(RAYWHITE);
-  gameEmitter->emit({"game/render", {}},
+  emitter->emit({"game/render", {}},
                     {{"log", false}, {"before", true}, {"after", true}});
   EndDrawing();
 }
@@ -71,7 +72,7 @@ void deinitRaylib() { CloseWindow(); }
 void init() {
   createInstances();
   initRaylib();
-  gameEmitter->emit({"game/init", {}}, {{"before", true}, {"after", true}});
+  emitter->emit({"game/init", {}}, {{"before", true}, {"after", true}});
 }
 void start() {  
   while (!(gameState->isStopped() || WindowShouldClose())) {
@@ -79,16 +80,16 @@ void start() {
     render();
   }
   if (WindowShouldClose()) {
-    stop();    
+    stop();
   }
 }
 
 void stop() {
-  gameEmitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
+  emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
 }
 
 void deinit() {
-  gameEmitter->emit({"game/deinit", {}}, {{"before", true}, {"after", true}});
+  emitter->emit({"game/deinit", {}}, {{"before", true}, {"after", true}});
   deinitRaylib();
 }
 } // namespace game

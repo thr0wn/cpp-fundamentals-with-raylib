@@ -6,8 +6,7 @@
 #include "game/game.h"
 
 TEST_CASE("Emitter should work properly", "[event][emitter]") {
-  std::string emitterName0 = "game-emitter";
-  game::Emitter emitter{emitterName0};
+  game::Emitter emitter;
   std::string eventName0 = "event-0";
   std::string eventName1 = "event-1";
   std::string listenerName0 = "listener-0";

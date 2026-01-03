@@ -1,16 +1,16 @@
 #pragma once
-#include "game/game-emitter.h"
+#include "async/async-pointer.h"
+#include "event/emitter.h"
 #include <iostream>
 #include <string>
 #include <fmt/format.h>
 
 namespace game {
 class Log {
-private:  
-  bool enabled = true;  
+private:
+  bool enabled = true;
+  Emitter *emitter = AsyncPointer::get<Emitter>();  
 public:
-  Log();
-
   // Log messages directly to sdtout
   void info(std::string message);
   // Set enabled logs

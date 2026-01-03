@@ -5,8 +5,8 @@
 
 namespace game {
 Start::Start() {
-  gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/render", [this](Event event) { onRender(); });
+  emitter->on("game/init", [this](Event event) { onInit(); });
+  emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void Start::onInit() {
@@ -32,10 +32,10 @@ void Start::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (!gameState->isStarted() && textNewGameIsPressed) {
-    gameEmitter->emit({"game/start", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/start", {}}, {{"before", true}, {"after", true}});
   }
   if (textQuitIsPressed) {
-    gameEmitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
+    emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
   }
 }
 } // namespace game

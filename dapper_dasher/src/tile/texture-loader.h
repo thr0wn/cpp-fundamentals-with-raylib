@@ -1,5 +1,5 @@
 #pragma once
-#include "game/game-emitter.h"
+#include "event/emitter.h"
 #include "game/game-node.h"
 #include "async/async-pointer.h"
 #include "log/log.h"
@@ -14,6 +14,7 @@ public:
 
   bool loaded;
 
+  Emitter *emitter = AsyncPointer::get<Emitter>();  
   Log *log = AsyncPointer::get<Log>();
   
   const char *textureUrls[NUMBER_OF_TEXTURES] = {

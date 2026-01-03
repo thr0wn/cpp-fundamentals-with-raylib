@@ -3,7 +3,7 @@
 #include "config/config.h"
 #include "async/async-pointer.h"
 #include "database/database.h"
-#include "game/game-emitter.h"
+#include "event/emitter.h"
 #include "game/game-state.h"
 #include "log/log.h"
 #include "timer/timer.h"
@@ -19,6 +19,8 @@ private:
   const std::string highScoreKey =
       config::PLAYER_SERVICE_DATABASE_HIGHSCORE_KEY;
   Timer scoreTimer{config::PLAYER_SERVICE_SCORE_INTERVAL};
+
+  Emitter *emitter = AsyncPointer::get<Emitter>();  
   GameState *gameState = AsyncPointer::get<GameState>();
   Log *log = AsyncPointer::get<Log>();
   Database *database = AsyncPointer::get<Database>();
