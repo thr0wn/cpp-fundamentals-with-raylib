@@ -2,30 +2,47 @@
 
 namespace game {
 namespace {
-std::unique_ptr<Log> log;
-std::unique_ptr<GameState> gameState;
-std::unique_ptr<Database> database;
-std::unique_ptr<TextureLoader> textureLoader;
+std::shared_ptr<Log> log;
+std::shared_ptr<GameState> gameState;
+std::shared_ptr<Database> database;
+std::shared_ptr<TextureLoader> textureLoader;
 
-std::unique_ptr<Background> background;
-std::unique_ptr<Player> player;
-std::unique_ptr<Nebula> nebula;
-std::unique_ptr<UI> ui;
+std::shared_ptr<Background> background;
+std::shared_ptr<Player> player;
+std::shared_ptr<PlayerScore> playerScore;
+std::shared_ptr<Nebula> nebula;
+std::shared_ptr<UI> ui;
 
 void createInstances() {
-  gameEmitter = std::make_unique<Emitter>("game-emitter");
+  gameEmitter = std::make_shared<Emitter>("game-emitter");
+  AsyncPointer::push(gameEmitter.get());
 
-  log = std::make_unique<Log>();
-  gameState = std::make_unique<GameState>();
-  database = std::make_unique<Database>();
-  textureLoader = std::make_unique<TextureLoader>();
+  log = std::make_shared<Log>();
+  AsyncPointer::push(log.get());
 
-  scheduleService = std::make_unique<ScheduleService>();
+  gameState = std::make_shared<GameState>();
+  AsyncPointer::push(gameState.get());
 
-  background = std::make_unique<Background>();
-  player = std::make_unique<Player>();
-  nebula = std::make_unique<Nebula>();
-  ui = std::make_unique<UI>();
+  database = std::make_shared<Database>();
+  AsyncPointer::push(database.get());
+
+  textureLoader = std::make_shared<TextureLoader>();
+  AsyncPointer::push(textureLoader.get());
+
+  background = std::make_shared<Background>();
+  AsyncPointer::push(background.get());
+
+  player = std::make_shared<Player>();
+  AsyncPointer::push(player.get());
+
+  playerScore = std::make_shared<PlayerScore>();
+  AsyncPointer::push(playerScore.get());  
+
+  nebula = std::make_shared<Nebula>();
+  AsyncPointer::push(nebula.get());
+
+  ui = std::make_shared<UI>();
+  AsyncPointer::push(ui.get());
 }
 
 void initRaylib() {
@@ -56,10 +73,13 @@ void init() {
   initRaylib();
   gameEmitter->emit({"game/init", {}}, {{"before", true}, {"after", true}});
 }
-void start() {
+void start() {  
   while (!(gameState->isStopped() || WindowShouldClose())) {
     update();
     render();
+  }
+  if (WindowShouldClose()) {
+    stop();    
   }
 }
 

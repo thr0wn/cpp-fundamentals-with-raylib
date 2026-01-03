@@ -2,6 +2,8 @@
 #include "config/config.h"
 #include "game/game-emitter.h"
 #include "game/game-state.h"
+#include "async/async-pointer.h"
+#include "log/log.h"
 #include "raygui.h"
 #include "ui/text.h"
 #include <string>
@@ -17,7 +19,8 @@ class Pause {
   Text textQuit{config::PAUSE_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
-  GameState *gameState;
+  GameState *gameState = AsyncPointer::get<GameState>();
+  Log *log = AsyncPointer::get<Log>();  
   
 public:
   Pause();

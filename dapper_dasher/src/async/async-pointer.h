@@ -7,19 +7,21 @@
 
 namespace game {
 namespace AsyncPointer {
-namespace {
-inline std::list<std::any> pointers;
-}
-template <typename T> void push(T *pointer) { pointers.push_back(pointer); }
+
+inline std::list<std::any> _pointers;
+
+template <typename T> void push(T *pointer) { _pointers.push_back(pointer); }
 template <typename T> T *get() {
   auto pointerIt =
-      std::find_if(pointers.begin(), pointers.end(), [](const std::any &ptr) {
+      std::find_if(_pointers.begin(), _pointers.end(), [](const std::any &ptr) {
         return ptr.type() == typeid(T *);
       });
-  if (pointerIt != pointers.end()) {
+  if (pointerIt != _pointers.end()) {
+
     return std::any_cast<T *>(*pointerIt);
   }
   return nullptr;
 }
+inline void clear() { _pointers.clear(); }
 } // namespace AsyncPointer
 } // namespace game

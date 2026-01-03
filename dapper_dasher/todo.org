@@ -3,7 +3,7 @@
 #+STARTUP: indent
 #+TODO: TODO DOING WAITING | DONE
 
-* DOING 1. Remove services
+* DONE 1. Remove services
 Remove services to get a more event oriented api.
 ** DONE 1.1. key-value-repository -> database
 Remove the repository
@@ -23,17 +23,18 @@ New events:
   gameEmitter->emit({"log/info", string})
 #+end_src
 
-** DOING 1.3. tile-service -> tile.cc (with static draw method) -> texture-loader.cc
+** DONE 1.3. tile-service -> tile.cc (with static draw method) -> texture-loader.cc
 Remove service and create a new texture-loader
 
-** 1.4. game-service.cc -> game.cc -> game-state.cc
+** DONE 1.4. game-service.cc -> game.cc -> game-state.cc
+** DONE 1.4. game-service.cc -> game.cc -> game-state.cc
 Remove the service
 
 New events:
 #+begin_src cpp
   gameEmitter->emit({"game/state", &GameState})
 #+end_src
-* WAITING 2. New API
+* WAITING 2. New Functional API
 ** 2.1. Old API
 Mainly composed using Observer Pattern and Service Pattern.
 #+begin_src c++
@@ -47,7 +48,7 @@ Mainly composed using Observer Pattern and Service Pattern.
   gameEmitter->on("game/pause", [this](Event event) { onPause(); });
   gameEmitter->on("game/resume", [this](Event event) { onResume(); });
 #+end_src
-
+Service call:
 #+begin_src c++
   gameService->isPaused();
 #+end_src
@@ -72,4 +73,22 @@ Create a more functional api. One function per lifecycle/event,
       "..."
         });
    })
+#+end_src
+* WAITING 3. Async pointer
+** Descrition
+Create a mechanism to keep pointers to instances using the event system or a dependency injection solution.
+
+** Solution
+Given classB depends on classA and that container instantiate at least classA.
+At the container:
+#+begin_src cpp
+  ...
+  AsyncPointer::register(objectOfClassA);
+  ...
+#+end_src
+On classB:
+#+begin_src cpp
+  ...
+  ClassA *objectOfClassA = AsyncPointer::get<ClassA>();
+  ...
 #+end_src

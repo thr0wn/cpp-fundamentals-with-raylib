@@ -29,7 +29,6 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.cc"
@@ -64,9 +63,6 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.h"
-
-  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/timer/schedule-service.h"
  
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.h"

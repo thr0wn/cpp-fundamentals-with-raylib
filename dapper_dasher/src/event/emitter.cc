@@ -56,8 +56,7 @@ void Emitter::emit(Event event, EmitOptions options) {
       }
     }
     if (shouldLog) {      
-      emit({"log/info", fmt::format("({}) Emitted: \"{}\"", name, event.name)},
-           {{"log", false}});
+      std::cout << fmt::format("GAMEINFO: ({}) Emitted: \"{}\"\n", name, event.name);
     }      
     if (shouldEmitAfter) {
       auto afterEventName = event.name + ":after";

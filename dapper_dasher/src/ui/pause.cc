@@ -5,9 +5,6 @@ Pause::Pause() {
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
-  gameEmitter->on("game/state", [this](Event event) {
-    gameState = std::any_cast<GameState *>(event.value);
-  });
 };
 
 void Pause::onInit() {
@@ -26,8 +23,7 @@ void Pause::onInit() {
   textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
                         textRestart.getPosition().y + textRestart.getHeight()});
   textQuit.alignCenter();
-  gameEmitter->emit(
-      {"log/info", std::string("(pause-ui) Pause UI initialized.")});
+  log->info("(pause-ui) Pause UI initialized.");
 }
 
 void Pause::onUpdate() {

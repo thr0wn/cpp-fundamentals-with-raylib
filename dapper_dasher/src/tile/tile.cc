@@ -1,9 +1,8 @@
 #include "tile/tile.h"
 
 namespace game {
-void Tile::loadTexture(GameTexture gameTexture) {
-  gameEmitter->emit({"tile/texture/get", (std::pair<GameTexture, Texture2D *>){
-                                             gameTexture, &texture}});
+void Tile::setTexture(Texture texture) {
+  this->texture = texture;
 }
 void Tile::draw(Vector2 position, Color color) {
   Tile::draw(*this, position, color);

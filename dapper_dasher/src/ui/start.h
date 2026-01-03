@@ -1,4 +1,6 @@
 #pragma once
+#include "async/async-pointer.h"
+#include "log/log.h"
 #include "config/config.h"
 #include "game/game-emitter.h"
 #include "game/game-state.h"
@@ -13,8 +15,8 @@ class Start {
   Text textQuit{config::START_TEXT_QUIT};
   bool textQuitIsPressed = false;
 
-  GameState *gameState;
-
+  GameState *gameState = AsyncPointer::get<GameState>();
+  Log *log = AsyncPointer::get<Log>();
 public:
   Start();
 

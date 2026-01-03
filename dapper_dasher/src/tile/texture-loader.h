@@ -1,6 +1,8 @@
 #pragma once
 #include "game/game-emitter.h"
 #include "game/game-node.h"
+#include "async/async-pointer.h"
+#include "log/log.h"
 #include "tile/tile.h"
 #include <map>
 #include <any>
@@ -12,6 +14,8 @@ public:
 
   bool loaded;
 
+  Log *log = AsyncPointer::get<Log>();
+  
   const char *textureUrls[NUMBER_OF_TEXTURES] = {
       "resources/textures/scarfy.png", "resources/textures/far-buildings.png",
       "resources/textures/back-buildings.png",

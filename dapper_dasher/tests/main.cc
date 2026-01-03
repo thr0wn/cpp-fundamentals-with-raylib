@@ -43,13 +43,31 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
 }
 
 TEST_CASE("Async-pointer should work properly", "[asyn-pointer]") {
-  int a = 0;
-  float b = 1;
-  game::AsyncPointer::push(&a);
-  game::AsyncPointer::push(&b);
-  int *c = game::AsyncPointer::get<int>();
-  float *d = game::AsyncPointer::get<float>();
+  SECTION("with inline definition") {
+    std::shared_ptr<int> a0(new int{1});
+    std::shared_ptr<float> a1(new float{2.0});
+    game::AsyncPointer::push(a0.get());
+    game::AsyncPointer::push(a1.get());
+    auto b0 = game::AsyncPointer::get<int>();
+    auto b1 = game::AsyncPointer::get<float>();
 
-  REQUIRE(&a == c);
-  REQUIRE(&b == d);
+    REQUIRE(*a0 == *b0);
+    REQUIRE(*a1 == *b1);
+  }
+  SECTION("whith scoped definition") {
+    game::AsyncPointer::clear();
+    std::shared_ptr<int> a0;
+    std::shared_ptr<float> a1;
+    {
+      a0 = std::make_shared<int>(1);
+      a1 = std::make_shared<float>(2.0);
+      game::AsyncPointer::push(a0.get());
+      game::AsyncPointer::push(a1.get());
+    }
+    auto b0 = game::AsyncPointer::get<int>();
+    auto b1 = game::AsyncPointer::get<float>();
+
+    REQUIRE(*a0 == *b0);
+    REQUIRE(*a1 == *b1);
+  }
 }

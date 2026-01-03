@@ -2,21 +2,17 @@
 
 namespace game {
 Background::Background() {
-  gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/restart", [this](Event event) { onInit(); });
+  gameEmitter->on("game/init:after", [this](Event event) { onAfterInit(); });
+  gameEmitter->on("game/restart", [this](Event event) { onAfterInit(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
-  gameEmitter->on("game/state", [this](Event event) {
-    gameState = std::any_cast<GameState *>(event.value);
-  });
 }
 
-void Background::onInit() {
+void Background::onAfterInit() {
   setBackground(TEXTURE_FAR_BUILDING, &textureFar, &positionFar);
   setBackground(TEXTURE_BACK_BUILDING, &textureMid, &positionMid);
   setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
-  gameEmitter->emit(
-      {"log/info", std::string("(background) Background initialized.")});
+  log->info("(background) Background initialized.");
 }
 
 void Background::onUpdate() {
@@ -35,8 +31,7 @@ void Background::onRender() {
 
 void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
                                Vector2 *position) {
-  gameEmitter->emit({"tile/texture/get", (std::pair<GameTexture, Texture2D *>){
-                                             gameTexture, texture}});
+  *texture = textureLoader->textures[gameTexture];
   position->x = 0;
   position->y = 0;
 }

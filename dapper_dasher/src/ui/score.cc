@@ -6,18 +6,6 @@ using config::TEXT_SIZE_SMALL;
 Score::Score() {
   gameEmitter->on("game/start", [this](Event event) { onStart(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
-  gameEmitter->on("game/state", [this](Event event) {
-    gameState = std::any_cast<GameState *>(event.value);
-  });
-
-  // Get score reference
-  gameEmitter->on("player/score", [this](Event event) {
-    score = std::any_cast<int *>(event.value);
-  });
-  // Get highScore reference
-  gameEmitter->on("player/highScore", [this](Event event) {
-    highScore = std::any_cast<int *>(event.value);
-  });
 };
 
 void Score::onStart() {
@@ -35,7 +23,7 @@ void Score::onStart() {
   textPressSpace.setPosition(
       {0.975f * config::WINDOW_WIDTH, 0.025f * config::WINDOW_HEIGHT});
   textPressSpace.alignRight();
-  gameEmitter->emit({"log/info", std::string("(score-ui) Score UI started.")});
+  log->info("(score-ui) Score UI started.");
 }
 
 void Score::onRender() {
@@ -45,17 +33,13 @@ void Score::onRender() {
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_MEDIUM);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
 
-  if (score != nullptr) {
-    std::string formattedScore =
-        fmt::format("{}: {}", textScore.getChars(), *score);
-    GuiLabelButton(textScore.getRectangle(), formattedScore.data());
-  }
+  std::string formattedScore =
+    fmt::format("{}: {}", textScore.getChars(), playerScore->getScore());
+  GuiLabelButton(textScore.getRectangle(), formattedScore.data());
 
-  if (highScore != nullptr) {
-    std::string formattedHighScore =
-        fmt::format("{}: {}", textHighScore.getString(), *highScore);
-    GuiLabelButton(textHighScore.getRectangle(), formattedHighScore.data());
-  }
+  std::string formattedHighScore =
+      fmt::format("{}: {}", textHighScore.getString(), playerScore->getHighScore());
+  GuiLabelButton(textHighScore.getRectangle(), formattedHighScore.data());
 
   GuiSetStyle(DEFAULT, TEXT_SIZE, TEXT_SIZE_SMALL);
   GuiLabelButton(textPressSpace.getRectangle(), textPressSpace.getChars());

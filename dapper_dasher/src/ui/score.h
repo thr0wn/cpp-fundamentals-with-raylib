@@ -1,6 +1,9 @@
 #pragma once
+#include "async/async-pointer.h"
+#include "log/log.h"
 #include "config/config.h"
 #include "game/game-state.h"
+#include "player/player-score.h"
 #include "raygui.h"
 #include "ui/text.h"
 #include <fmt/format.h>
@@ -8,9 +11,6 @@
 
 namespace game {
 class Score {
-  int *score;
-  int *highScore;
-
   Text textScore{config::SCORE_TEXT_SCORE};
   bool textScoreIsPressed = false;
 
@@ -20,7 +20,9 @@ class Score {
   Text textPressSpace{config::SCORE_TEXT_PRESS_SPACE};
   bool textPressSpaceIsPressed = false;
 
-  GameState *gameState;
+  GameState *gameState = AsyncPointer::get<GameState>();
+  PlayerScore *playerScore = AsyncPointer::get<PlayerScore>();
+  Log *log = AsyncPointer::get<Log>();  
 
 public:
   Score();

@@ -7,9 +7,6 @@ namespace game {
 Start::Start() {
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
-  gameEmitter->on("game/state", [this](Event event) {
-    gameState = std::any_cast<GameState *>(event.value);
-  });
 };
 
 void Start::onInit() {
@@ -20,8 +17,7 @@ void Start::onInit() {
   textQuit.setSize(config::TEXT_SIZE_LARGE);
   textQuit.setPosition({0.025f * config::WINDOW_WIDTH,
                         textNewGame.getPosition().y + textNewGame.getHeight()});
-  gameEmitter->emit(
-      {"log/info", std::string("(start-ui) Start UI initialized.")});
+  log->info("(start-ui) Start UI initialized.");
 }
 
 void Start::onRender() {

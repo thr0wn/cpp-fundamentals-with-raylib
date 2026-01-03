@@ -3,13 +3,9 @@
 namespace game {
 Player::Player() {
   gameEmitter->on("game/init", [this](Event event) { onInit(); });
-  gameEmitter->on("game/init:after", [this](Event event) { onAfterInit(); });
   gameEmitter->on("game/restart", [this](Event event) { onRestart(); });
   gameEmitter->on("game/update", [this](Event event) { onUpdate(); });
   gameEmitter->on("game/render", [this](Event event) { onRender(); });
-  gameEmitter->on("game/state", [this](Event event) {
-    gameState = std::any_cast<GameState *>(event.value);
-  });
 };
 
 void Player::onInit() {
@@ -18,31 +14,15 @@ void Player::onInit() {
   player.tile.height = config::PLAYER_TILE_HEIGHT;
   player.tile.x = 0;
   player.tile.y = 0;
+  player.tile.setTexture(textureLoader->textures[TEXTURE_SCARFY]);
   player.position = Vector2{config::WINDOW_WIDTH / 2 - player.tile.width / 2,
                             config::WINDOW_HEIGHT - player.tile.height};
-
-  scheduleService->repeat(
-      [this] {
-        if (!gameState->isRunning()) {
-          return;
-        }
-        if (!isJumping()) {
-          tileAnimation.sprite = std::fmod(
-              ++tileAnimation.sprite,
-              tileAnimation
-                  .spriteTotal); // 6x1 spritesheet, but with only 60 sprites
-          player.tile.x = tileAnimation.sprite;
-        }
-      },
-      config::PLAYER_ANIMATION_TIME);
-  gameEmitter->emit({"log/info", std::string("(player) Player initialized.")});
+  log->info("(player) Player initialized.");
 };
-
-void Player::onAfterInit() { player.tile.loadTexture(TEXTURE_SCARFY); }
 
 void Player::onRestart() {
   onInit();
-  gameEmitter->emit({"log/info", std::string("(player) Player restarted.")});
+  log->info("(player) Player restarted.");
 }
 
 void Player::onUpdate() {
@@ -64,6 +44,17 @@ void Player::onUpdate() {
   }
   if (player.position.y > (config::WINDOW_HEIGHT - player.tile.height)) {
     player.position.y = config::WINDOW_HEIGHT - player.tile.height;
+  }
+
+  if(!animationTimer.isActive()) {
+    if (!isJumping()) {
+      tileAnimation.sprite = std::fmod(
+          ++tileAnimation.sprite,
+          tileAnimation
+              .spriteTotal); // 6x1 spritesheet, but with only 60 sprites
+      player.tile.x = tileAnimation.sprite;
+    }
+    animationTimer.start();
   }
 }
 

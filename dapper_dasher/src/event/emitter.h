@@ -1,6 +1,7 @@
 #pragma once
 #include "event/event.h"
 #include "event/listener.h"
+#include "iostream"
 #include <algorithm>
 #include <fmt/format.h>
 #include <functional>
@@ -12,12 +13,12 @@
 
 namespace game {
 typedef std::map<std::string, std::any> EmitOptions;
-class Emitter {
+class Emitter {  
 public:
   static EmitOptions DEFAULT_EMIT_OPTIONS;
 
   std::map<std::string, std::list<Listener>> listeners;
-  std::string name;
+  std::string name;  
   Emitter(std::string name);
   ~Emitter();
 

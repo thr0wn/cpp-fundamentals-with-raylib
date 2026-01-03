@@ -1,8 +1,11 @@
 #pragma once
+#include "async/async-pointer.h"
+#include "log/log.h"
 #include "game/game-emitter.h"
 #include "game/game-state.h"
 #include "raylib.h"
 #include "tile/tile.h"
+#include "tile/texture-loader.h"
 
 #define BACKGROUND_FAR_VELOCITY -30.0f;
 #define BACKGROUND_MID_VELOCITY -60.0f;
@@ -22,7 +25,9 @@ class Background {
   const float velocityNear = BACKGROUND_NEAR_VELOCITY;
   Vector2 positionNear;
 
-  GameState *gameState;
+  GameState *gameState = AsyncPointer::get<GameState>();
+  TextureLoader *textureLoader = AsyncPointer::get<TextureLoader>();
+  Log *log = AsyncPointer::get<Log>();
 
   void setBackground(GameTexture gameTexture, Texture2D *texture,
                      Vector2 *position);
@@ -33,7 +38,7 @@ class Background {
 public:
   Background();
 
-  void onInit();
+  void onAfterInit();
   void onUpdate();
   void onRender();
 };
