@@ -9,6 +9,8 @@
 
 namespace game {
 class GameOver {
+  Text textGameOver{config::GAMEOVER_TEXT};
+  
   Text textRestart{config::GAMEOVER_TEXT_RESTART};
   bool textRestartIsPressed = false;
 

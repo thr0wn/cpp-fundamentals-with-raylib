@@ -40,56 +40,40 @@ void createInstances() {
   AsyncPointer::push(player.get());
 
   playerScore = std::make_shared<PlayerScore>();
-  AsyncPointer::push(playerScore.get());  
+  AsyncPointer::push(playerScore.get());
 
   ui = std::make_shared<UI>();
   AsyncPointer::push(ui.get());
 }
 
-void initRaylib() {
+} // namespace
+void init() {
+  createInstances();
   InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT,
              config::GAME_NAME.data());
   SetTargetFPS(60);
 
   // Disable default close with
   SetExitKey(KEY_NULL);
+  gameState->init();
 }
-
-void update() {
-  emitter->emit({"game/update", {}},
-                    {{"log", false}, {"before", true}, {"after", true}});
-}
-void render() {
-  BeginDrawing();
-  ClearBackground(RAYWHITE);
-  emitter->emit({"game/render", {}},
-                    {{"log", false}, {"before", true}, {"after", true}});
-  EndDrawing();
-}
-
-void deinitRaylib() { CloseWindow(); }
-} // namespace
-void init() {
-  createInstances();
-  initRaylib();
-  emitter->emit({"game/init", {}}, {{"before", true}, {"after", true}});
-}
-void start() {  
+void start() {
   while (!(gameState->isStopped() || WindowShouldClose())) {
-    update();
-    render();
+    gameState->update();
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    gameState->render();
+    EndDrawing();
   }
   if (WindowShouldClose()) {
     stop();
   }
 }
 
-void stop() {
-  emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
-}
+void stop() { gameState->stop(); }
 
 void deinit() {
-  emitter->emit({"game/deinit", {}}, {{"before", true}, {"after", true}});
-  deinitRaylib();
+  gameState->deinit();  
+  CloseWindow();
 }
 } // namespace game

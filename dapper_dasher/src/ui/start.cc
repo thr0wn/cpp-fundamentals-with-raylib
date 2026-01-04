@@ -32,10 +32,10 @@ void Start::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (!gameState->isStarted() && textNewGameIsPressed) {
-    emitter->emit({"game/start", {}}, {{"before", true}, {"after", true}});
+    gameState->start();
   }
   if (textQuitIsPressed) {
-    emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
+    gameState->stop();
   }
 }
 } // namespace game

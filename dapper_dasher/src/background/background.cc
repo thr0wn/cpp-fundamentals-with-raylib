@@ -46,7 +46,7 @@ void Background::updateTexture(Texture2D texture, Vector2 *position,
 
 void Background::renderTexture(Texture2D texture, Vector2 position,
                                float velocity) {
-  Color color = gameState->isStarted() && !gameState->isPaused() ? WHITE : GRAY;
+  Color color = gameState->isRunning() ? WHITE : GRAY;
   Vector2 secondPosition = position;
   secondPosition.x += 3.0f * texture.width;
   DrawTextureEx(texture, position, 0, 3.0f, color);

@@ -53,7 +53,7 @@ void Nebula::onRender() {
   if (!gameState->isStarted()) {
     return;
   }
-  nebula.color = gameState->isPaused() ? GRAY : WHITE;
+  nebula.color = gameState->isRunning() ? WHITE : GRAY;
   nebula.draw();
 }
 

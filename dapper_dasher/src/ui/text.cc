@@ -7,7 +7,7 @@ Text::Text(std::string text) {
 }
 
 std::string Text::getString() { return text; }
-char *Text::getChars() { return text.data(); }
+const char *Text::getChars() { return text.c_str(); }
 
 float Text::getWidth() { return text.length() * getLineWidth(); }
 float Text::getHeight() { return getLineHeight(); }

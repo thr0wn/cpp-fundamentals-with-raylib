@@ -29,7 +29,7 @@ void Pause::onInit() {
 void Pause::onUpdate() {
   if (gameState->isRunning() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    emitter->emit({"game/pause", {}}, {{"before", true}, {"after", true}});
+    gameState->pause();
   }
 }
 
@@ -47,13 +47,13 @@ void Pause::onRender() {
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textResumeIsPressed) {
-    emitter->emit({"game/resume", {}}, {{"before", true}, {"after", true}});
+    gameState->resume();
   }
   if (textRestartIsPressed) {
-    emitter->emit({"game/restart", {}}, {{"before", true}, {"after", true}});
+    gameState->restart();
   }
   if (textQuitIsPressed) {
-    emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
+    gameState->stop();
   }
 }
 } // namespace game

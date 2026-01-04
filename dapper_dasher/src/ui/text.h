@@ -16,7 +16,7 @@ public:
   Text(std::string text);
 
   std::string getString();
-  char *getChars();
+  const char *getChars();
 
   float getWidth();
   float getHeight();

@@ -7,9 +7,15 @@ GameOver::GameOver() {
 };
 
 void GameOver::onInit() {
+  textGameOver.setSize(config::TEXT_SIZE_LARGE);
+  textGameOver.setPosition(
+      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
+  textGameOver.alignCenter();
+
   textRestart.setSize(config::TEXT_SIZE_LARGE);
   textRestart.setPosition(
-      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
+      {0.5f * config::WINDOW_WIDTH,
+       textGameOver.getPosition().y + textGameOver.getHeight()});
   textRestart.alignCenter();
 
   textQuit.setSize(config::TEXT_SIZE_LARGE);
@@ -25,16 +31,20 @@ void GameOver::onRender() {
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
+
+  GuiLabel(textGameOver.getRectangle(), textGameOver.getChars());
+
   textRestartIsPressed =
       GuiLabelButton(textRestart.getRectangle(), textRestart.getChars());
+
   textQuitIsPressed =
       GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
 
   if (textRestartIsPressed) {
-    emitter->emit({"game/restart", {}}, {{"before", true}, {"after", true}});
+    gameState->restart();
   }
   if (textQuitIsPressed) {
-    emitter->emit({"game/stop", {}}, {{"before", true}, {"after", true}});
+    gameState->stop();
   }
 }
 } // namespace game

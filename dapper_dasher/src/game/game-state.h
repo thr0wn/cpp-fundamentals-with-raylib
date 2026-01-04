@@ -14,16 +14,16 @@ private:
   Emitter *emitter = AsyncPointer::get<Emitter>();
 
 public:
-  GameState();
-
-  void onInit();
-  void onStart();
-  void onRestart();
-  void onPause();  
-  void onResume();
-  void onGameOver();
-  void onStop();
-  void onDeinit(); 
+  void init();
+  void update();
+  void render();
+  void start();
+  void restart();
+  void pause();  
+  void resume();
+  void setGameOver();
+  void stop();
+  void deinit();  
 
   bool isInitialized();  
   bool isStarted();  

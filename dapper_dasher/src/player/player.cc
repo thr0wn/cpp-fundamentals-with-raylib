@@ -35,7 +35,7 @@ void Player::onUpdate() {
   } else {
     velocity += gravity * GetFrameTime();
   }
-
+  
   player.position.y += velocity * GetFrameTime();
 
   // y borders
@@ -58,7 +58,7 @@ void Player::onUpdate() {
   }
 
   if (CheckCollisionRecs(player.getCollisionRec(), nebula->getNebula().getCollisionRec())) {
-    log->info("(player) Collision");    
+    gameState->setGameOver();
   }
 }
 
@@ -66,7 +66,7 @@ void Player::onRender() {
   if (!gameState->isStarted()) {
     return;
   }
-  player.color = gameState->isPaused() ? GRAY : WHITE;
+  player.color = gameState->isRunning() ? WHITE : GRAY;
   player.draw();
 }
 
