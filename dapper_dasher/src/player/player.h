@@ -4,6 +4,7 @@
 #include "event/emitter.h"
 #include "game/game-node.h"
 #include "game/game-state.h"
+#include "nebula/nebula.h"
 #include "log/log.h"
 #include "raylib.h"
 #include "tile/tile.h"
@@ -22,10 +23,11 @@ class Player {
   TileAnimation tileAnimation = {0, config::PLAYER_SPRITE_TOTAL};
   Timer animationTimer{config::PLAYER_ANIMATION_TIME};
 
+  Nebula *nebula = AsyncPointer::get<Nebula>();
   Emitter *emitter = AsyncPointer::get<Emitter>();  
   GameState *gameState = AsyncPointer::get<GameState>();
   TextureLoader *textureLoader = AsyncPointer::get<TextureLoader>();
-  Log *log = AsyncPointer::get<Log>();  
+  Log *log = AsyncPointer::get<Log>();
 
 public:
   Player();

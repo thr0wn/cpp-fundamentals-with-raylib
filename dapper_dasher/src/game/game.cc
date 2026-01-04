@@ -33,14 +33,14 @@ void createInstances() {
   background = std::make_shared<Background>();
   AsyncPointer::push(background.get());
 
+  nebula = std::make_shared<Nebula>();
+  AsyncPointer::push(nebula.get());
+
   player = std::make_shared<Player>();
   AsyncPointer::push(player.get());
 
   playerScore = std::make_shared<PlayerScore>();
   AsyncPointer::push(playerScore.get());  
-
-  nebula = std::make_shared<Nebula>();
-  AsyncPointer::push(nebula.get());
 
   ui = std::make_shared<UI>();
   AsyncPointer::push(ui.get());

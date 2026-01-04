@@ -56,14 +56,18 @@ void Player::onUpdate() {
     }
     animationTimer.start();
   }
+
+  if (CheckCollisionRecs(player.getCollisionRec(), nebula->getNebula().getCollisionRec())) {
+    log->info("(player) Collision");    
+  }
 }
 
 void Player::onRender() {
   if (!gameState->isStarted()) {
     return;
   }
-  Color color = gameState->isPaused() ? GRAY : WHITE;
-  player.tile.draw(player.position, color);
+  player.color = gameState->isPaused() ? GRAY : WHITE;
+  player.draw();
 }
 
 bool Player::isJumping() {

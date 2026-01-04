@@ -21,10 +21,7 @@ public:
   float height;
   Texture2D texture;
 
-  void setTexture(Texture texture);
-
-  void draw(Vector2 position, Color color);
-  static void draw(Tile tile, Vector2 position, Color color);
+  void setTexture(const Texture &texture);
 };
 
 class TileAnimation {

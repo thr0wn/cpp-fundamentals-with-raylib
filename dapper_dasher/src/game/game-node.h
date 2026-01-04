@@ -34,6 +34,12 @@ public:
   GameNode2D(std::string name);
 
   Tile tile;
-  Vector2 position;
+  Rectangle collisionRec{0};
+  Vector2 position{0};
+  Vector2 scale{1, 1};
+  Color color;
+
+  void draw();
+  const Rectangle &getCollisionRec();
 };
 } // namespace game

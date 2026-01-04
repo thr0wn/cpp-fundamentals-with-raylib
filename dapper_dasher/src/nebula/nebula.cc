@@ -53,7 +53,9 @@ void Nebula::onRender() {
   if (!gameState->isStarted()) {
     return;
   }
-  Color color = gameState->isPaused() ? GRAY : WHITE;
-  Tile::draw(nebula.tile, nebula.position, color);
+  nebula.color = gameState->isPaused() ? GRAY : WHITE;
+  nebula.draw();
 }
+
+GameNode2D &Nebula::getNebula() { return nebula; }
 } // namespace game

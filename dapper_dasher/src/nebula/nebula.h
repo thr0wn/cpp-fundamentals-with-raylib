@@ -14,7 +14,7 @@
 
 namespace game {
 class Nebula {
-  GameNode2D nebula{"nebula-node"};
+  GameNode2D nebula{"nebula-node"};  
   const float velocity = config::INITIAL_VELOCITY;
   TileAnimation tileAnimation = {0, config::NEBULA_SPRITE_TOTAL,
                                  config::NEBULA_SPRITE_ROW_SIZE};
@@ -32,5 +32,7 @@ public:
   void onRestart();
   void onUpdate();
   void onRender();
+
+  GameNode2D& getNebula();  
 };
 } // namespace game
