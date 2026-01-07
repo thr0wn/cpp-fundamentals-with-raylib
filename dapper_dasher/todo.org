@@ -1,7 +1,7 @@
 #+title: todo
 #+author: natan
 #+STARTUP: indent
-#+TODO: TODO DOING WAITING | DONE
+#+TODO: TODO DOING WAITING CANCELED | DONE
 
 * DONE 1. Remove services
 Remove services to get a more event oriented api.
@@ -74,7 +74,7 @@ Create a more functional api. One function per lifecycle/event,
         });
    })
 #+end_src
-* WAITING 3. Async pointer
+* DONE 3. Async pointer
 ** Descrition
 Create a mechanism to keep pointers to instances using the event system or a dependency injection solution.
 
@@ -92,3 +92,114 @@ On classB:
   ClassA *objectOfClassA = AsyncPointer::get<ClassA>();
   ...
 #+end_src
+* 4. Collision basic API
+** DOING 4.1. Create an abstract class to represent geometries (Rectangle, Circle...)
+Class Geometry should be defined as below.
+#+begin_src cpp
+  struct Vector2 {
+    float x;                // Vector x component
+    float y;                // Vector y component
+  };
+
+  typedef struct Vector3 {
+    float x;                // Vector x component
+    float y;                // Vector y component
+    float z;                // Vector z component
+  };
+
+  struct Point {
+    struct Vector2;
+  };
+
+  struct Line {
+    Vector2 point1;
+    Vector2 point2;
+  };
+
+  struct Triangle {
+    Vector2 point1;
+    Vector2 point2;
+    Vector2 point3;
+  };
+
+  struct Rectangle {
+    float x;
+    float y;
+    float width;
+    float height;
+  };
+
+  struct Circle {
+    Vector2 center;
+    float radius;
+  };
+
+  struct BoundingBox {
+    Vector3 min;            // Minimum vertex box-corner
+    Vector3 max;            // Maximum vertex box-corner
+  };
+
+  struct Sphere {
+    Vector3 center;
+    float radius;
+  };
+
+  struct Poly {
+    Vector3 *points;
+    int pointCount;
+  };
+
+  class Geometry {
+    std::variant<Rectangle
+                 Circle,
+                 Point,
+                 Triangle,
+                 Poly,
+                 Line,
+                 BoundingBox,
+                 Sphere> raw;
+
+    bool checkCollision(const Geometry &other) const {
+      if(std::holds_alternative<Rectangle>(raw) && std::holds_alternative<Rectangle>(other.raw)) {
+        Rectangle rec0 = std::any_cast<Rectangle>(raw);
+        Rectangle rec1 = std::any_cast<Rectangle>(other.raw);
+        return CheckCollisionRecs(rec0, rec1);
+      } else if(std::holds_alternative<Circle>(raw) && std::holds_alternative<Rectangle>(other.raw)) {
+        Circle circ0 = std::any_cast<Circle>(raw);
+        Rectangle rec1 = std::any_cast<Rectangle>(other.raw);
+        return CheckCollisionRecs(circ0.center, circ0.radius, rec1);
+      }
+      //...
+      //other ifs
+      //...
+    }
+
+    void translate(const Vector2 &translation, Geometry &out) const {
+      if(std::holds_alternative<Rectangle>(raw)) {
+        if(!std::holds_alternative<Rectangle>(out.raw)) {
+          out.raw = std::get<Rectangle>(raw);
+        }
+        Rectangle &rec = std::get<Rectangle>(out.raw);
+        rec.x += translaion.x;
+        rec.y += translaion.y;
+      }
+      //...
+      //other ifs
+      //...
+    }
+  }
+
+    class GameNode2D {
+      Geometry geometry;
+      Geometry transformedGeometry;
+
+      bool checkCollision(const GameNode2D &other) const {
+        gemometry.translate(position, transformedGeometry);
+        other.geometry.translate(other.position, other.transformedGeometry);
+        return transformedGeometry.checkCollision(other.transformedGeometry);
+      }
+    }
+#+end_src
+** CANCELED 4.2. Create ways to define and scale the collision geometry
+** 4.3. Debug collision borders
+Create a variable to show/hide the collision shape
