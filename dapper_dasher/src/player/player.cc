@@ -9,8 +9,9 @@ Player::Player() {
 };
 
 void Player::onInit() {
-  Rectangle collisionRectangle = {0, 0, config::PLAYER_TILE_WIDTH,
-                                  config::PLAYER_TILE_HEIGHT};
+  Rectangle collisionRectangle = {0, 0, 0.5f * config::PLAYER_TILE_WIDTH,
+                                  0.5f * config::PLAYER_TILE_HEIGHT};
+  player.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
   player.collisionGeometry().raw() = collisionRectangle;
 
   player.tile().width = config::PLAYER_TILE_WIDTH;
@@ -19,8 +20,9 @@ void Player::onInit() {
   player.tile().y = 0;
   player.tile().setTexture(textureLoader->textures[TEXTURE_SCARFY]);
 
-  player.position() = Vector2{config::WINDOW_WIDTH / 2 - player.tile().width / 2,
-                     config::WINDOW_HEIGHT - player.tile().height};
+  player.position() =
+      Vector2{config::WINDOW_WIDTH / 2 - player.tile().width / 2,
+              config::WINDOW_HEIGHT - player.tile().height};
   log->info("(player) Player initialized.");
 };
 
@@ -61,11 +63,11 @@ void Player::onUpdate() {
     animationTimer.start();
   }
 
-  player.update();  
-  // if (CheckCollisionRecs(player.getCollisionRec(),
-  //                        nebula->getNebula().getCollisionRec())) {
-  //   gameState->setGameOver();
-  // }
+  player.update();
+  
+  if (player.checkCollision(nebula->getNebula())) {
+    gameState->setGameOver();
+  }
 }
 
 void Player::onRender() {
@@ -74,7 +76,6 @@ void Player::onRender() {
   }
   player.color() = gameState->isRunning() ? WHITE : GRAY;
   player.render();
-  player.updatedCollisionGeometry().render();  
 }
 
 bool Player::isJumping() {

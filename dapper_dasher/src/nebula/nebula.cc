@@ -9,8 +9,9 @@ Nebula::Nebula() {
 }
 
 void Nebula::onInit() {
-  Rectangle collisionRectangle = {0, 0, config::NEBULA_TILE_WIDTH,
-                                  config::NEBULA_TILE_HEIGHT};
+  Rectangle collisionRectangle = {0, 0, 0.5f * config::NEBULA_TILE_WIDTH,
+                                  0.5f * config::NEBULA_TILE_HEIGHT};
+  nebula.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;  
   nebula.collisionGeometry().raw() = collisionRectangle;
 
   nebula.tile().width = config::NEBULA_TILE_WIDTH;
@@ -60,7 +61,6 @@ void Nebula::onRender() {
   }
   nebula.color() = gameState->isRunning() ? WHITE : GRAY;
   nebula.render();
-  nebula.updatedCollisionGeometry().render();;  
 }
 
 GameNode2D &Nebula::getNebula() { return nebula; }

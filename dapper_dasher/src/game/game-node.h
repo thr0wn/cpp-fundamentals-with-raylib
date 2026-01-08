@@ -35,6 +35,8 @@ private:
   Vector2 _scale{1, 1};
   Color _color;
 
+  // collision
+  Vector2 _center;
   Geometry _collisionGeometry;
   Geometry _updatedCollisionGeometry;
 
@@ -58,6 +60,8 @@ public:
 
   Geometry &updatedCollisionGeometry();
   const Geometry &updatedCollisionGeometry() const;
+
+  bool checkCollision(const GameNode2D &other);
 
   void update();
 

@@ -4,6 +4,9 @@ namespace game {
 RawGeometry &Geometry::raw() { return _raw; }
 const RawGeometry &Geometry::raw() const { return _raw; }
 
+GeometryPivot &Geometry::pivot() { return _pivot; }
+const GeometryPivot &Geometry::pivot() const { return _pivot; }
+
 bool Geometry::checkCollision(const Geometry &other) const {
   if (std::holds_alternative<Rectangle>(_raw) &&
       std::holds_alternative<Rectangle>(other._raw)) {
@@ -31,7 +34,8 @@ bool Geometry::checkCollision(const Geometry &other) const {
   return false;
 }
 
-void Geometry::translate(const Vector2 &translation, Geometry &out) const {
+void Geometry::translate(const Vector2 &center, const Vector2 &translation,
+                         Geometry &out) const {
   if (std::holds_alternative<Rectangle>(_raw)) {
     if (!std::holds_alternative<Rectangle>(out._raw)) {
       out._raw = std::get<Rectangle>(_raw);
@@ -42,6 +46,10 @@ void Geometry::translate(const Vector2 &translation, Geometry &out) const {
     recOut.y = rec.y + translation.y;
     recOut.width = rec.width;
     recOut.height = rec.height;
+    if (_pivot == GEOMETRY_PIVOT_CENTER) {
+      recOut.x += center.x - recOut.width / 2;
+      recOut.y += center.y - recOut.height / 2;
+    }
   } else if (std::holds_alternative<Circle>(_raw)) {
     if (!std::holds_alternative<Circle>(out._raw)) {
       out._raw = std::get<Circle>(_raw);
@@ -51,6 +59,10 @@ void Geometry::translate(const Vector2 &translation, Geometry &out) const {
     circleOut.center.x = circle.center.x + translation.x;
     circleOut.center.y = circle.center.y + translation.y;
     circleOut.radius = circle.radius;
+    if (_pivot == GEOMETRY_PIVOT_CENTER) {
+      circleOut.center.x += center.x - circleOut.radius / 2;
+      circleOut.center.y += center.y - circleOut.radius / 2;
+    }
   } else {
     std::cout << "GAMEINFO: (geometry) translate not implemented!!!\n";
   }

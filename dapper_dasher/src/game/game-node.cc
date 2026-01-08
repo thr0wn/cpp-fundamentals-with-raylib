@@ -42,8 +42,14 @@ const Geometry &GameNode2D::updatedCollisionGeometry() const {
   return _updatedCollisionGeometry;
 }
 
+bool GameNode2D::checkCollision(const GameNode2D &other) {
+  return _updatedCollisionGeometry.checkCollision(other._updatedCollisionGeometry);
+}
+
 void GameNode2D::update() {
-  _collisionGeometry.translate(_position, _updatedCollisionGeometry);
+  _center.x = _scale.x * _tile.width/2;
+  _center.y = _scale.y * _tile.height/2;
+  _collisionGeometry.translate(_center, _position, _updatedCollisionGeometry);
 }
 
 void GameNode2D::render() const {

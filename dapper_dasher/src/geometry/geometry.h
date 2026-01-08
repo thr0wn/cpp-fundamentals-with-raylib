@@ -38,16 +38,24 @@ namespace game {
 typedef std::variant<Rectangle, Circle, Triangle, Poly, Line, BoundingBox,
                      Sphere>
     RawGeometry;
+typedef enum GeometryPivot {
+  GEOMETRY_PIVOT_TOP_LEFT = 0,
+  GEOMETRY_PIVOT_CENTER
+} GeometryPivot;
 class Geometry {
 private:
   RawGeometry _raw;
-
+  GeometryPivot _pivot;
+  
 public:
   RawGeometry &raw();
   const RawGeometry &raw() const;
 
+  GeometryPivot &pivot();
+  const GeometryPivot &pivot() const;  
+
   bool checkCollision(const Geometry &other) const;
-  void translate(const Vector2 &translation, Geometry &out) const;
+  void translate(const Vector2 &center, const Vector2 &translation, Geometry &out) const;
   void render() const;
 };
 } // namespace game
