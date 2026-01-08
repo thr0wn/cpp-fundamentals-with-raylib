@@ -9,14 +9,18 @@ Player::Player() {
 };
 
 void Player::onInit() {
-  // tile related properties
-  player.tile.width = config::PLAYER_TILE_WIDTH;
-  player.tile.height = config::PLAYER_TILE_HEIGHT;
-  player.tile.x = 0;
-  player.tile.y = 0;
-  player.tile.setTexture(textureLoader->textures[TEXTURE_SCARFY]);
-  player.position = Vector2{config::WINDOW_WIDTH / 2 - player.tile.width / 2,
-                            config::WINDOW_HEIGHT - player.tile.height};
+  Rectangle collisionRectangle = {0, 0, config::PLAYER_TILE_WIDTH,
+                                  config::PLAYER_TILE_HEIGHT};
+  player.collisionGeometry().raw() = collisionRectangle;
+
+  player.tile().width = config::PLAYER_TILE_WIDTH;
+  player.tile().height = config::PLAYER_TILE_HEIGHT;
+  player.tile().x = 0;
+  player.tile().y = 0;
+  player.tile().setTexture(textureLoader->textures[TEXTURE_SCARFY]);
+
+  player.position() = Vector2{config::WINDOW_WIDTH / 2 - player.tile().width / 2,
+                     config::WINDOW_HEIGHT - player.tile().height};
   log->info("(player) Player initialized.");
 };
 
@@ -35,42 +39,45 @@ void Player::onUpdate() {
   } else {
     velocity += gravity * GetFrameTime();
   }
-  
-  player.position.y += velocity * GetFrameTime();
+
+  player.position().y += velocity * GetFrameTime();
 
   // y borders
-  if (player.position.y < 0) {
-    player.position.y = 0;
+  if (player.position().y < 0) {
+    player.position().y = 0;
   }
-  if (player.position.y > (config::WINDOW_HEIGHT - player.tile.height)) {
-    player.position.y = config::WINDOW_HEIGHT - player.tile.height;
+  if (player.position().y > (config::WINDOW_HEIGHT - player.tile().height)) {
+    player.position().y = config::WINDOW_HEIGHT - player.tile().height;
   }
 
-  if(!animationTimer.isActive()) {
+  if (!animationTimer.isActive()) {
     if (!isJumping()) {
       tileAnimation.sprite = std::fmod(
           ++tileAnimation.sprite,
           tileAnimation
               .spriteTotal); // 6x1 spritesheet, but with only 60 sprites
-      player.tile.x = tileAnimation.sprite;
+      player.tile().x = tileAnimation.sprite;
     }
     animationTimer.start();
   }
 
-  if (CheckCollisionRecs(player.getCollisionRec(), nebula->getNebula().getCollisionRec())) {
-    gameState->setGameOver();
-  }
+  player.update();  
+  // if (CheckCollisionRecs(player.getCollisionRec(),
+  //                        nebula->getNebula().getCollisionRec())) {
+  //   gameState->setGameOver();
+  // }
 }
 
 void Player::onRender() {
   if (!gameState->isStarted()) {
     return;
   }
-  player.color = gameState->isRunning() ? WHITE : GRAY;
-  player.draw();
+  player.color() = gameState->isRunning() ? WHITE : GRAY;
+  player.render();
+  player.updatedCollisionGeometry().render();  
 }
 
 bool Player::isJumping() {
-  return player.position.y < (config::WINDOW_HEIGHT - player.tile.height);
+  return player.position().y < (config::WINDOW_HEIGHT - player.tile().height);
 }
 } // namespace game

@@ -11,6 +11,8 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cc"
 
+  "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.cc"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.cc"
@@ -44,11 +46,13 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"
 
+  "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.h"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/background/background.h"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log.h"
-
-  "${CMAKE_CURRENT_SOURCE_DIR}/background/background.h"
   
   "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.h"
 

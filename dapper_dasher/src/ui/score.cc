@@ -1,7 +1,6 @@
 #include "ui/score.h"
 
 namespace game {
-using config::TEXT_SIZE_SMALL;
 
 Score::Score() {
   emitter->on("game/start", [this](Event event) { onStart(); });
@@ -41,7 +40,7 @@ void Score::onRender() {
       fmt::format("{}: {}", textHighScore.getString(), playerScore->getHighScore());
   GuiLabelButton(textHighScore.getRectangle(), formattedHighScore.data());
 
-  GuiSetStyle(DEFAULT, TEXT_SIZE, TEXT_SIZE_SMALL);
+  GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_SMALL);
   GuiLabelButton(textPressSpace.getRectangle(), textPressSpace.getChars());
 }
 } // namespace game

@@ -1,41 +1,58 @@
 #include "game/game-node.h"
 
-
 namespace game {
-uint GameNode::idCounter = 0;
+GameNode::GameNode(const std::string &name) : _name(name) {
+  _id = _idCounter++;
+}
 
-GameNode::GameNode(std::string name) : name(name) { id = idCounter++; }
+std::string &GameNode::name() { return _name; }
+const std::string &GameNode::name() const { return _name; }
 
-void GameNode::push(GameNode gameNode) { children.push_back(gameNode); }
+const uint GameNode::id() const { return _id; }
 
+void GameNode::push(GameNode gameNode) { _children.push_back(gameNode); }
 void GameNode::erase(GameNode gameNode) {
-  children.remove_if(
-      [gameNode](auto child) { return child.getId() == gameNode.getId(); });
+  _children.remove_if(
+      [gameNode](auto child) { return child.id() == gameNode.id(); });
 }
 
-void GameNode::setName(std::string name) { this->name = name; }
+GameNode2D::GameNode2D(const std::string &name) : GameNode(name) {}
 
-std::string GameNode::getName() const { return name; }
+Tile &GameNode2D::tile() { return _tile; }
+const Tile &GameNode2D::tile() const { return _tile; }
 
-uint GameNode::getId() const { return id; }
+Vector2 &GameNode2D::position() { return _position; }
+const Vector2 &GameNode2D::position() const { return _position; }
 
+Vector2 &GameNode2D::scale() { return _scale; }
+const Vector2 &GameNode2D::scale() const { return _scale; }
 
-GameNode2D::GameNode2D(std::string name) : GameNode(name) {}
+Color &GameNode2D::color() { return _color; }
+const Color &GameNode2D::color() const { return _color; }
 
-const Rectangle &GameNode2D::getCollisionRec() {
-  collisionRec.x = position.x;  
-  collisionRec.x = position.x;  
-  collisionRec.width = tile.width * scale.x;
-  collisionRec.height = tile.height * scale.y;
-  return collisionRec;
+Geometry &GameNode2D::collisionGeometry() { return _collisionGeometry; }
+const Geometry &GameNode2D::collisionGeometry() const {
+  return _collisionGeometry;
 }
 
-void GameNode2D::draw() {
-  Rectangle source = {(tile.x * tile.width), (tile.y * tile.height), tile.width,
-                      tile.height};
-  Rectangle destiny = {position.x, position.y, tile.width * scale.x, tile.height * scale.y};
+Geometry &GameNode2D::updatedCollisionGeometry() {
+  return _updatedCollisionGeometry;
+}
+const Geometry &GameNode2D::updatedCollisionGeometry() const {
+  return _updatedCollisionGeometry;
+}
+
+void GameNode2D::update() {
+  _collisionGeometry.translate(_position, _updatedCollisionGeometry);
+}
+
+void GameNode2D::render() const {
+  Rectangle source = {(_tile.x * _tile.width), (_tile.y * _tile.height),
+                      _tile.width, _tile.height};
+  Rectangle destiny = {_position.x, _position.y, _tile.width * _scale.x,
+                       _tile.height * _scale.y};
   Vector2 origin = {0, 0};
-  DrawTexturePro(tile.texture, source, destiny, origin, 0.0f, color);
+  DrawTexturePro(_tile.texture, source, destiny, origin, 0.0f, _color);
 }
 
 } // namespace game

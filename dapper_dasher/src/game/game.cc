@@ -2,47 +2,47 @@
 
 namespace game {
 namespace {
-std::shared_ptr<Emitter> emitter;
-std::shared_ptr<Log> log;
-std::shared_ptr<GameState> gameState;
-std::shared_ptr<Database> database;
-std::shared_ptr<TextureLoader> textureLoader;
+std::unique_ptr<Emitter> emitter;
+std::unique_ptr<Log> log;
+std::unique_ptr<GameState> gameState;
+std::unique_ptr<Database> database;
+std::unique_ptr<TextureLoader> textureLoader;
 
-std::shared_ptr<Background> background;
-std::shared_ptr<Player> player;
-std::shared_ptr<PlayerScore> playerScore;
-std::shared_ptr<Nebula> nebula;
-std::shared_ptr<UI> ui;
+std::unique_ptr<Background> background;
+std::unique_ptr<Player> player;
+std::unique_ptr<PlayerScore> playerScore;
+std::unique_ptr<Nebula> nebula;
+std::unique_ptr<UI> ui;
 
 void createInstances() {
-  emitter = std::make_shared<Emitter>();
+  emitter = std::make_unique<Emitter>();
   AsyncPointer::push(emitter.get());
 
-  log = std::make_shared<Log>();
+  log = std::make_unique<Log>();
   AsyncPointer::push(log.get());
 
-  gameState = std::make_shared<GameState>();
+  gameState = std::make_unique<GameState>();
   AsyncPointer::push(gameState.get());
 
-  database = std::make_shared<Database>();
+  database = std::make_unique<Database>();
   AsyncPointer::push(database.get());
 
-  textureLoader = std::make_shared<TextureLoader>();
+  textureLoader = std::make_unique<TextureLoader>();
   AsyncPointer::push(textureLoader.get());
 
-  background = std::make_shared<Background>();
+  background = std::make_unique<Background>();
   AsyncPointer::push(background.get());
 
-  nebula = std::make_shared<Nebula>();
+  nebula = std::make_unique<Nebula>();
   AsyncPointer::push(nebula.get());
 
-  player = std::make_shared<Player>();
+  player = std::make_unique<Player>();
   AsyncPointer::push(player.get());
 
-  playerScore = std::make_shared<PlayerScore>();
+  playerScore = std::make_unique<PlayerScore>();
   AsyncPointer::push(playerScore.get());
 
-  ui = std::make_shared<UI>();
+  ui = std::make_unique<UI>();
   AsyncPointer::push(ui.get());
 }
 

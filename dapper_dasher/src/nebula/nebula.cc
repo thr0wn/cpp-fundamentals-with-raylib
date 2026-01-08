@@ -9,14 +9,17 @@ Nebula::Nebula() {
 }
 
 void Nebula::onInit() {
-  // tile related properties
-  nebula.tile.width = config::NEBULA_TILE_WIDTH;
-  nebula.tile.height = config::NEBULA_TILE_HEIGHT;
-  nebula.tile.x = 0;
-  nebula.tile.y = 0;
-  nebula.tile.setTexture(textureLoader->textures[TEXTURE_NEBULA]);
-  nebula.position = Vector2{config::WINDOW_WIDTH + nebula.tile.width / 2,
-                            config::WINDOW_HEIGHT - nebula.tile.height};
+  Rectangle collisionRectangle = {0, 0, config::NEBULA_TILE_WIDTH,
+                                  config::NEBULA_TILE_HEIGHT};
+  nebula.collisionGeometry().raw() = collisionRectangle;
+
+  nebula.tile().width = config::NEBULA_TILE_WIDTH;
+  nebula.tile().height = config::NEBULA_TILE_HEIGHT;
+  nebula.tile().x = 0;
+  nebula.tile().y = 0;
+  nebula.tile().setTexture(textureLoader->textures[TEXTURE_NEBULA]);
+  nebula.position() = Vector2{config::WINDOW_WIDTH + nebula.tile().width / 2,
+                            config::WINDOW_HEIGHT - nebula.tile().height};
   log->info("(nebula) Nebula initialized.");
 };
 
@@ -30,31 +33,34 @@ void Nebula::onUpdate() {
     return;
   }
 
-  nebula.position.x += velocity * GetFrameTime();
+  nebula.position().x += velocity * GetFrameTime();
 
   // // extremes
-  if (nebula.position.x < -nebula.tile.width) {
-    nebula.position.x = config::WINDOW_WIDTH + nebula.tile.width;
+  if (nebula.position().x < -nebula.tile().width) {
+    nebula.position().x = config::WINDOW_WIDTH + nebula.tile().width;
   }
 
   if (!animationTimer.isActive()) {
     tileAnimation.sprite = std::fmod(
         ++tileAnimation.sprite,
         tileAnimation.spriteTotal); // 8x8 spritesheet, but with only 60 sprites
-    nebula.tile.y = std::floor(tileAnimation.sprite /
+    nebula.tile().y = std::floor(tileAnimation.sprite /
                                tileAnimation.spriteRowSize); // 8x8 spritesheet
-    nebula.tile.x = std::fmod(tileAnimation.sprite,
+    nebula.tile().x = std::fmod(tileAnimation.sprite,
                               tileAnimation.spriteRowSize); // 8 sprites per row
     animationTimer.start();
   }
+
+  nebula.update();  
 }
 
 void Nebula::onRender() {
   if (!gameState->isStarted()) {
     return;
   }
-  nebula.color = gameState->isRunning() ? WHITE : GRAY;
-  nebula.draw();
+  nebula.color() = gameState->isRunning() ? WHITE : GRAY;
+  nebula.render();
+  nebula.updatedCollisionGeometry().render();;  
 }
 
 GameNode2D &Nebula::getNebula() { return nebula; }
