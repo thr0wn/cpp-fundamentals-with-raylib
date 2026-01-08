@@ -1,5 +1,7 @@
 #pragma once
 
+#include "raylib.h"
+
 namespace game {
 // Simple timer.
 class Timer {
@@ -7,12 +9,15 @@ class Timer {
   double endTime;
 
 public:
-  Timer(double endTIme);
-  // Start the timer
-  void start();
-  // Return true if elapsed time is less than endTime
-  bool isActive();
-  // Elapsed time since start
-  double elapsed();
+  Timer(double endTime) {
+    startTime = 0;
+    this->endTime = endTime;
+  }
+
+  void start() { startTime = GetTime(); }
+
+  bool isActive() { return startTime != 0 && elapsed() <= endTime; }
+
+  double elapsed() { return GetTime() - startTime; }
 };
 } // namespace game

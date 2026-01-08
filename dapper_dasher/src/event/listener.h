@@ -7,11 +7,16 @@
 namespace game {
 using ListenerFunction = std::function<void(const Event &)>;
 class Listener {
+private:
+  inline static std::uint32_t idCounter = 0;
+
 public:
-  static std::uint32_t idCounter;
   std::uint32_t id;
   std::string eventName;
   ListenerFunction function;
-  Listener(std::string eventName, ListenerFunction function);
+  Listener(std::string eventName, ListenerFunction function)
+      : eventName(eventName), function(function) {
+    id = idCounter++;
+  }
 };
 } // namespace game

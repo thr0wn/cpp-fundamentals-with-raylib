@@ -10,30 +10,46 @@ class Text {
   float size;
   Rectangle rectangle;
   Vector2 position;
-  void updateRectangle();
 
 public:
-  Text(std::string text);
+  Text(std::string text) {
+    this->text = text;
+    updateRectangle();
+  }
 
-  std::string getString();
-  const char *getChars();
+  std::string getString() { return text; }
+  const char *getChars() { return text.c_str(); }
 
-  float getWidth();
-  float getHeight();
+  float getWidth() { return text.length() * getLineWidth(); }
+  float getHeight() { return getLineHeight(); }
 
-  Rectangle getRectangle();
+  void updateRectangle() {
+    rectangle.x = position.x;
+    rectangle.y = position.y;
+    rectangle.width = getWidth();
+    rectangle.height = getHeight();
+  }
+  Rectangle getRectangle() { return rectangle; }
 
-  void setPosition(Vector2 position);
-  Vector2 getPosition();
+  void setPosition(Vector2 position) {
+    this->position = position;
+    updateRectangle();
+  }
 
-  void setSize(float size);
-  float getSize();
+  Vector2 getPosition() { return position; }
 
-  float getLineHeight();
-  float getLineWidth();
+  void setSize(float size) {
+    this->size = size;
+    updateRectangle();
+  }
 
-  void alignCenter();
-  void alignLeft();
-  void alignRight();
+  float getSize() { return size; }
+
+  float getLineHeight() { return lineHeightUnit * size; }
+  float getLineWidth() { return lineWidthUnit * size; }
+
+  void alignCenter() { rectangle.x = position.x - getWidth() / 2; }
+  void alignLeft() { rectangle.x = position.x; }
+  void alignRight() { rectangle.x = position.x - getWidth(); }
 };
 } // namespace game
