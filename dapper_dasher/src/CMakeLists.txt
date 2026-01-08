@@ -3,7 +3,35 @@ add_subdirectory(config)
 # library setup
 # ----------------------------------------------------------------------------------------
 set(LIBRARY_SOURCE_FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/event/event.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/event/emitter.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/event/listener.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/database/database.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/log/log.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/player/player-score.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.cc"
 )
 set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/async/async-pointer.h"
@@ -15,8 +43,6 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"
-
-  "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.h"
 

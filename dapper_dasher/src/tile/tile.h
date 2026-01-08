@@ -13,7 +13,7 @@ typedef enum GameTexture {
   TEXTURE_NEBULA
 } GameTexture;
 
-class Tile : public Rectangle {
+class Tile: public Rectangle {
 public:
   float x;
   float y;
@@ -21,7 +21,7 @@ public:
   float height;
   Texture2D texture;
 
-  void setTexture(const Texture &texture) { this->texture = texture; }
+  void setTexture(const Texture &texture);
 };
 
 class TileAnimation {

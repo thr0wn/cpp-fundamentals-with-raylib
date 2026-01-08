@@ -1,6 +1,6 @@
 #pragma once
-
 #include "config/config.h"
+
 #include "async/async-pointer.h"
 #include "event/emitter.h"
 #include "event/event.h"

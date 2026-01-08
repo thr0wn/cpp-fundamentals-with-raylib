@@ -1,51 +1,48 @@
 #include "game/game.h"
 
-#define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
-
 namespace game {
 namespace {
-std::unique_ptr<Emitter> emitter;
-std::unique_ptr<Log> log;
-std::unique_ptr<GameState> gameState;
-std::unique_ptr<Database> database;
-std::unique_ptr<TextureLoader> textureLoader;
+std::shared_ptr<Emitter> emitter;
+std::shared_ptr<Log> log;
+std::shared_ptr<GameState> gameState;
+std::shared_ptr<Database> database;
+std::shared_ptr<TextureLoader> textureLoader;
 
-std::unique_ptr<Background> background;
-std::unique_ptr<Player> player;
-std::unique_ptr<PlayerScore> playerScore;
-std::unique_ptr<Nebula> nebula;
-std::unique_ptr<UI> ui;
+std::shared_ptr<Background> background;
+std::shared_ptr<Player> player;
+std::shared_ptr<PlayerScore> playerScore;
+std::shared_ptr<Nebula> nebula;
+std::shared_ptr<UI> ui;
 
 void createInstances() {
-  emitter = std::make_unique<Emitter>();
+  emitter = std::make_shared<Emitter>();
   AsyncPointer::push(emitter.get());
 
-  log = std::make_unique<Log>();
+  log = std::make_shared<Log>();
   AsyncPointer::push(log.get());
 
-  gameState = std::make_unique<GameState>();
+  gameState = std::make_shared<GameState>();
   AsyncPointer::push(gameState.get());
 
-  database = std::make_unique<Database>();
+  database = std::make_shared<Database>();
   AsyncPointer::push(database.get());
 
-  textureLoader = std::make_unique<TextureLoader>();
+  textureLoader = std::make_shared<TextureLoader>();
   AsyncPointer::push(textureLoader.get());
 
-  background = std::make_unique<Background>();
+  background = std::make_shared<Background>();
   AsyncPointer::push(background.get());
 
-  nebula = std::make_unique<Nebula>();
+  nebula = std::make_shared<Nebula>();
   AsyncPointer::push(nebula.get());
 
-  player = std::make_unique<Player>();
+  player = std::make_shared<Player>();
   AsyncPointer::push(player.get());
 
-  playerScore = std::make_unique<PlayerScore>();
+  playerScore = std::make_shared<PlayerScore>();
   AsyncPointer::push(playerScore.get());
 
-  ui = std::make_unique<UI>();
+  ui = std::make_shared<UI>();
   AsyncPointer::push(ui.get());
 }
 
