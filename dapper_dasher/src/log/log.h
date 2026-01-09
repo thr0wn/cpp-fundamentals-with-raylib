@@ -8,14 +8,12 @@
 namespace game {
 class Log {
 private:
-  bool enabled = true;
-  Emitter *emitter = AsyncPointer::get<Emitter>();  
+  bool _enabled = true;
+  Emitter *_emitter = AsyncPointer::get<Emitter>();  
 public:
-  // Log messages directly to sdtout
-  void info(std::string message);
-  // Set enabled logs
-  void setEnabled(bool enabled);
-  // Check if enabled
-  bool isEnabled();  
+  void info(const std::string &message);
+
+  bool &enabled();
+  const bool &enabled() const;  
 };
 } // namespace game

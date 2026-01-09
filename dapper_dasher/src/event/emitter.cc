@@ -2,36 +2,38 @@
 
 namespace game {
 
-EmitOptions Emitter::DEFAULT_EMIT_OPTIONS = {
-    {"log", true}, {"before", false}, {"after", false}};
-
 Emitter::~Emitter() {
-  for (auto itMap = listeners.begin(); itMap != listeners.end();) {
+  for (auto itMap = _listeners.begin(); itMap != _listeners.end();) {
     itMap->second.clear();
-    itMap = listeners.erase(itMap);
+    itMap = _listeners.erase(itMap);
   }
 }
 
-Listener Emitter::on(std::string eventName, ListenerFunction function) {
+Listeners &Emitter::listeners() { return _listeners; };
+const Listeners &Emitter::listeners() const { return _listeners; };
+
+Listener Emitter::on(const std::string &eventName,
+                     const ListenerFunction &function) {
   Listener listener{eventName, function};
-  listeners[eventName].push_back(listener);
+  _listeners[eventName].push_back(listener);
   return listener;
 };
 
-void Emitter::off(Listener listener) {
-  auto itMap = listeners.find(listener.eventName);
-  if (itMap != listeners.end()) {
-    itMap->second.remove_if([listener](auto p) { return p.id == listener.id; });
+void Emitter::off(const Listener &listener) {
+  auto itMap = _listeners.find(listener.eventName());
+  if (itMap != _listeners.end()) {
+    itMap->second.remove_if(
+        [listener](auto p) { return p.id() == listener.id(); });
 
     if (itMap->second.empty()) {
-      listeners.erase(itMap);
+      _listeners.erase(itMap);
     }
   }
 };
 
-void Emitter::emit(Event event) { emit(event, DEFAULT_EMIT_OPTIONS); };
+void Emitter::emit(const Event &event) { emit(event, DEFAULT_EMIT_OPTIONS); };
 
-void Emitter::emit(Event event, EmitOptions options) {
+void Emitter::emit(const Event &event, const EmitOptions &options) {
   try {
     EmitOptions finalOptions = DEFAULT_EMIT_OPTIONS;
     for (const auto &option : options) {
@@ -41,24 +43,25 @@ void Emitter::emit(Event event, EmitOptions options) {
     bool shouldEmitBefore = std::any_cast<bool>(finalOptions["before"]);
     bool shouldEmitAfter = std::any_cast<bool>(finalOptions["after"]);
     if (shouldEmitBefore) {
-      auto beforeEventName = event.name + ":before";
-      decltype(event) beforeEvent{beforeEventName, event.value};
+      auto beforeEventName = event.name() + ":before";
+      decltype(event) beforeEvent{beforeEventName, event.value()};
       emit(beforeEvent,
            {{"log", shouldLog}, {"before", false}, {"after", false}});
     }
-    auto it = listeners.find(event.name);
-    if (it != listeners.end()) {
+    auto it = _listeners.find(event.name());
+    if (it != _listeners.end()) {
       auto &listenersList = it->second;
       for (auto &listener : listenersList) {
-        listener.function(event);
+        listener.function()(event);
       }
     }
-    if (shouldLog) {      
-      std::cout << fmt::format("GAMEINFO: (emitter) Emitted: \"{}\"\n", event.name);
-    }      
+    if (shouldLog) {
+      std::cout << fmt::format("GAMEINFO: (emitter) Emitted: \"{}\"\n",
+                               event.name());
+    }
     if (shouldEmitAfter) {
-      auto afterEventName = event.name + ":after";
-      decltype(event) afterEvent{afterEventName, event.value};
+      auto afterEventName = event.name() + ":after";
+      decltype(event) afterEvent{afterEventName, event.value()};
       emit(afterEvent,
            {{"log", shouldLog}, {"before", false}, {"after", false}});
     }

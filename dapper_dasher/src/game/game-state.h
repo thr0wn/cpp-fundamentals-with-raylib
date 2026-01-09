@@ -5,13 +5,13 @@
 namespace game {
 class GameState {
 private:  
-  bool initialized = false;  
-  bool started = false;  
-  bool paused = false;
-  bool gameOver = false;
-  bool stopped = false;
-  bool deinitialized = false;
-  Emitter *emitter = AsyncPointer::get<Emitter>();
+  bool _initialized = false;  
+  bool _started = false;  
+  bool _paused = false;
+  bool _gameOver = false;
+  bool _stopped = false;
+  bool _deinitialized = false;
+  Emitter *_emitter = AsyncPointer::get<Emitter>();
 
 public:
   void init();
@@ -25,12 +25,12 @@ public:
   void stop();
   void deinit();  
 
-  bool isInitialized();  
-  bool isStarted();  
-  bool isRunning();  
-  bool isPaused();  
-  bool isGameOver();
-  bool isStopped();
-  bool isDeinitialized();  
+  bool initialized();  
+  bool started();  
+  bool running();  
+  bool paused();  
+  bool gameOver();
+  bool stopped();
+  bool deinitialized();  
 };
 }

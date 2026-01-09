@@ -9,17 +9,18 @@
 
 namespace game {
 class GameOver {
-  Text textGameOver{config::GAMEOVER_TEXT};
+private:  
+  Text _textGameOver{config::GAMEOVER_TEXT, config::TEXT_SIZE_LARGE};
   
-  Text textRestart{config::GAMEOVER_TEXT_RESTART};
-  bool textRestartIsPressed = false;
+  Text _textRestart{config::GAMEOVER_TEXT_RESTART, config::TEXT_SIZE_LARGE};
+  bool _textRestartIsPressed = false;
 
-  Text textQuit{config::GAMEOVER_TEXT_QUIT};
-  bool textQuitIsPressed = false;
+  Text _textQuit{config::GAMEOVER_TEXT_QUIT, config::TEXT_SIZE_LARGE};
+  bool _textQuitIsPressed = false;
 
-  Emitter *emitter = AsyncPointer::get<Emitter>();  
-  GameState *gameState = AsyncPointer::get<GameState>();
-  Log *log = AsyncPointer::get<Log>();  
+  Emitter *_emitter = AsyncPointer::get<Emitter>();  
+  GameState *_gameState = AsyncPointer::get<GameState>();
+  Log *_log = AsyncPointer::get<Log>();  
 
 public:
   GameOver();

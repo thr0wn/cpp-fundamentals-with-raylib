@@ -12,16 +12,17 @@
 
 namespace game {
 class Score {
-  Text textScore{config::SCORE_TEXT_SCORE};
+private:  
+  Text _textScore{config::SCORE_TEXT_SCORE, config::TEXT_SIZE_MEDIUM};
 
-  Text textHighScore{config::SCORE_TEXT_HIGH_SCORE};
+  Text _textHighScore{config::SCORE_TEXT_HIGH_SCORE, config::TEXT_SIZE_MEDIUM};
 
-  Text textPressSpace{config::SCORE_TEXT_PRESS_SPACE};
+  Text _textPressSpace{config::SCORE_TEXT_PRESS_SPACE, config::TEXT_SIZE_SMALL};
 
-  Emitter *emitter = AsyncPointer::get<Emitter>();
-  GameState *gameState = AsyncPointer::get<GameState>();
-  PlayerScore *playerScore = AsyncPointer::get<PlayerScore>();
-  Log *log = AsyncPointer::get<Log>();
+  Emitter *_emitter = AsyncPointer::get<Emitter>();
+  GameState *_gameState = AsyncPointer::get<GameState>();
+  PlayerScore *_playerScore = AsyncPointer::get<PlayerScore>();
+  Log *_log = AsyncPointer::get<Log>();
 
 public:
   Score();

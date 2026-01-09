@@ -19,7 +19,7 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
 
   SECTION("when adding a listener") {
     emitter.on(eventName0, listener0);
-    REQUIRE(emitter.listeners.size() == 1);
+    REQUIRE(emitter.listeners().size() == 1);
   };
 
   SECTION("when emitting events") {
@@ -35,9 +35,9 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
 
   SECTION("when removing a listener") {
     game::Listener listener = emitter.on(eventName0, listener0);
-    REQUIRE(emitter.listeners.size() == 1);
+    REQUIRE(emitter.listeners().size() == 1);
     emitter.off(listener);
-    REQUIRE(emitter.listeners.size() == 0);
+    REQUIRE(emitter.listeners().size() == 0);
   };
 }
 

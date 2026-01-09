@@ -58,7 +58,7 @@ void GameNode2D::render() const {
   Rectangle destiny = {_position.x, _position.y, _tile.width * _scale.x,
                        _tile.height * _scale.y};
   Vector2 origin = {0, 0};
-  DrawTexturePro(_tile.texture, source, destiny, origin, 0.0f, _color);
+  DrawTexturePro(_tile.texture(), source, destiny, origin, 0.0f, _color);
 }
 
 } // namespace game

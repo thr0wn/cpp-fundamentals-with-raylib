@@ -10,22 +10,23 @@
 
 namespace game {
 class Background {
-  Texture2D textureFar;
-  const float velocityFar = config::BACKGROUND_FAR_VELOCITY;
-  Vector2 positionFar;
+private:  
+  Texture2D _textureFar;
+  const float _velocityFar = config::BACKGROUND_FAR_VELOCITY;
+  Vector2 _positionFar;
   
-  Texture2D textureMid;
-  const float velocityMid = config::BACKGROUND_MID_VELOCITY;
-  Vector2 positionMid;
+  Texture2D _textureMid;
+  const float _velocityMid = config::BACKGROUND_MID_VELOCITY;
+  Vector2 _positionMid;
 
-  Texture2D textureNear;
-  const float velocityNear = config::BACKGROUND_NEAR_VELOCITY;
-  Vector2 positionNear;
+  Texture2D _textureNear;
+  const float _velocityNear = config::BACKGROUND_NEAR_VELOCITY;
+  Vector2 _positionNear;
 
-  Emitter *emitter = AsyncPointer::get<Emitter>();
-  GameState *gameState = AsyncPointer::get<GameState>();
-  TextureLoader *textureLoader = AsyncPointer::get<TextureLoader>();
-  Log *log = AsyncPointer::get<Log>();
+  Emitter *_emitter = AsyncPointer::get<Emitter>();
+  GameState *_gameState = AsyncPointer::get<GameState>();
+  TextureLoader *_textureLoader = AsyncPointer::get<TextureLoader>();
+  Log *_log = AsyncPointer::get<Log>();
 
   void setBackground(GameTexture gameTexture, Texture2D *texture,
                      Vector2 *position);

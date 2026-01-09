@@ -13,16 +13,23 @@
 
 namespace game {
 typedef std::map<std::string, std::any> EmitOptions;
-class Emitter {  
-public:
-  static EmitOptions DEFAULT_EMIT_OPTIONS;
+typedef std::map<std::string, std::list<Listener>> Listeners;
+class Emitter {
+private:
+  Listeners _listeners;
 
-  std::map<std::string, std::list<Listener>> listeners;
+public:
+  inline const static EmitOptions DEFAULT_EMIT_OPTIONS = {
+      {"log", true}, {"before", false}, {"after", false}};
+
   ~Emitter();
 
-  Listener on(std::string eventName, ListenerFunction function);
-  void off(Listener listener);
-  void emit(Event event);
-  void emit(Event event, EmitOptions options);
+  Listeners &listeners();
+  const Listeners &listeners() const;
+
+  Listener on(const std::string &eventName, const ListenerFunction &function);
+  void off(const Listener &listener);
+  void emit(const Event &event);
+  void emit(const Event &event, const EmitOptions &options);
 };
 } // namespace game

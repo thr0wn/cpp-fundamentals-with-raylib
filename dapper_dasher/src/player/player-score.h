@@ -14,17 +14,19 @@
 namespace game {
 class PlayerScore {
 private:
-  int score;
-  int highScore;
-  const std::string highScoreKey =
+  int _score;
+  int _highScore;
+  const std::string _highScoreKey =
       config::PLAYER_SERVICE_DATABASE_HIGHSCORE_KEY;
-  Timer scoreTimer{config::PLAYER_SERVICE_SCORE_INTERVAL};
+  Timer _scoreTimer{config::PLAYER_SERVICE_SCORE_INTERVAL};
 
-  Emitter *emitter = AsyncPointer::get<Emitter>();  
-  GameState *gameState = AsyncPointer::get<GameState>();
-  Log *log = AsyncPointer::get<Log>();
-  Database *database = AsyncPointer::get<Database>();
+  Emitter *_emitter = AsyncPointer::get<Emitter>();  
+  GameState *_gameState = AsyncPointer::get<GameState>();
+  Log *_log = AsyncPointer::get<Log>();
+  Database *_database = AsyncPointer::get<Database>();
 
+  void loadHighScoreScore();
+  void setHighScore(const int &highScore);  
 public:
   PlayerScore();
 
@@ -32,11 +34,7 @@ public:
   void onUpdate();
   void onStop();
 
-  void loadHighScoreScore();
-
-  void setScore(int score);
-  int getScore();
-  void setHighScore(int highScore);
-  int getHighScore();
+  const int &score();
+  const int &highScore();
 };
 } // namespace game

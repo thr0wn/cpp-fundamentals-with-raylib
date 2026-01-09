@@ -14,16 +14,17 @@
 
 namespace game {
 class Nebula {
-  GameNode2D nebula{"nebula-node"};  
-  const float velocity = config::INITIAL_VELOCITY;
-  TileAnimation tileAnimation = {0, config::NEBULA_SPRITE_TOTAL,
+private:  
+  GameNode2D _nebula{"nebula-node"};  
+  const float _velocity = config::INITIAL_VELOCITY;
+  TileAnimation _tileAnimation{config::NEBULA_SPRITE_TOTAL,
                                  config::NEBULA_SPRITE_ROW_SIZE};
-  Timer animationTimer{config::NEBULA_ANIMATION_TIME};
+  Timer _animationTimer{config::NEBULA_ANIMATION_TIME};
 
-  Emitter *emitter = AsyncPointer::get<Emitter>();
-  GameState *gameState = AsyncPointer::get<GameState>();
-  TextureLoader *textureLoader = AsyncPointer::get<TextureLoader>();
-  Log *log = AsyncPointer::get<Log>();
+  Emitter *_emitter = AsyncPointer::get<Emitter>();
+  GameState *_gameState = AsyncPointer::get<GameState>();
+  TextureLoader *_textureLoader = AsyncPointer::get<TextureLoader>();
+  Log *_log = AsyncPointer::get<Log>();
   
 public:
   Nebula();
@@ -33,6 +34,6 @@ public:
   void onUpdate();
   void onRender();
 
-  GameNode2D& getNebula();  
+  const GameNode2D& nebula() const;  
 };
 } // namespace game

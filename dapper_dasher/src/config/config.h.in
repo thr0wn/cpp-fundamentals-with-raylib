@@ -24,11 +24,14 @@ namespace config {
   constexpr const int TEXT_SIZE_MEDIUM = 24;
   constexpr const int TEXT_SIZE_SMALL = 12;
   constexpr const int TEXT_COLOR = 0xffffffff;
-  constexpr const float TEXT_LINE_WIDTH_UNIT = 0.55f;
+  constexpr const float TEXT_CHAR_WIDTH_UNIT = 0.55f; // ratio char width/font size
   constexpr const float TEXT_LINE_HEIGHT_UNIT = 1.25f;
 
   // database
-  const std::string DATABASE_LOCATION = "./database";  
+  const std::string DATABASE_LOCATION = "./database";
+
+  //
+  const int NUMBER_OF_TEXTURES = 5;  
   
   // Start UI constants
   const std::string START_TEXT_NEW_GAME = "New Game";
@@ -49,7 +52,7 @@ namespace config {
   const std::string GAMEOVER_TEXT_RESTART = "Restart";
   const std::string GAMEOVER_TEXT_QUIT = "Quit";
 
-  // Bakcground
+  // Background
   const float BACKGROUND_FAR_VELOCITY = -30.0f;
   const float BACKGROUND_MID_VELOCITY = -60.0f;
   const float BACKGROUND_NEAR_VELOCITY = -90.0f;

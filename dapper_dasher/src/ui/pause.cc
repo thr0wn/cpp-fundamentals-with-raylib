@@ -2,58 +2,55 @@
 
 namespace game {
 Pause::Pause() {
-  emitter->on("game/init", [this](Event event) { onInit(); });
-  emitter->on("game/update", [this](Event event) { onUpdate(); });
-  emitter->on("game/render", [this](Event event) { onRender(); });
+  _emitter->on("game/init", [this](Event event) { onInit(); });
+  _emitter->on("game/update", [this](Event event) { onUpdate(); });
+  _emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void Pause::onInit() {
-  textResume.setSize(config::TEXT_SIZE_LARGE);
-  textResume.setPosition(
-      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
-  textResume.alignCenter();
+  _textResume.position() = 
+      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT};
+  _textResume.align() = GAME_TEXT_ALIGN_CENTER;
 
-  textRestart.setSize(config::TEXT_SIZE_LARGE);
-  textRestart.setPosition(
+  _textRestart.position() = 
       {0.5f * config::WINDOW_WIDTH,
-       textResume.getPosition().y + textResume.getHeight()});
-  textRestart.alignCenter();
+       _textResume.position().y + _textResume.height()};
+  _textRestart.align() = GAME_TEXT_ALIGN_CENTER;
 
-  textQuit.setSize(config::TEXT_SIZE_LARGE);
-  textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
-                        textRestart.getPosition().y + textRestart.getHeight()});
-  textQuit.alignCenter();
-  log->info("(pause-ui) Pause UI initialized.");
+  _textQuit.position() = {0.5 * config::WINDOW_WIDTH,
+                          _textRestart.position().y + _textRestart.height()};
+  _textQuit.align() = GAME_TEXT_ALIGN_CENTER;
+  _log->info("(pause-ui) Pause UI initialized.");
 }
 
 void Pause::onUpdate() {
-  if (gameState->isRunning() &&
+  if (_gameState->running() &&
       (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER))) {
-    gameState->pause();
+    _gameState->pause();
   }
 }
 
 void Pause::onRender() {
-  if (!gameState->isPaused()) {
+  if (!_gameState->paused()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
-  textResumeIsPressed =
-      GuiLabelButton(textResume.getRectangle(), textResume.getChars());
-  textRestartIsPressed =
-      GuiLabelButton(textRestart.getRectangle(), textRestart.getChars());
-  textQuitIsPressed =
-      GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
+  _textResumeIsPressed =
+      GuiLabelButton(_textResume.rectangle(), _textResume.c_str());
+  _textRestartIsPressed =
+      GuiLabelButton(_textRestart.rectangle(), _textRestart.c_str());
+  _textQuitIsPressed =
+      GuiLabelButton(_textQuit.rectangle(), _textQuit.c_str());
 
-  if (textResumeIsPressed) {
-    gameState->resume();
+  if (_textResumeIsPressed) {
+    _gameState->resume();
   }
-  if (textRestartIsPressed) {
-    gameState->restart();
+  if (_textRestartIsPressed) {
+    _gameState->restart();
   }
-  if (textQuitIsPressed) {
-    gameState->stop();
+  if (_textQuitIsPressed) {
+    _gameState->stop();
   }
 }
 } // namespace game

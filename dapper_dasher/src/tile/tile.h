@@ -1,8 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include <map>
-
-#define NUMBER_OF_TEXTURES 5
+#include <climits>
+#include <cmath>
 
 namespace game {
 typedef enum GameTexture {
@@ -13,21 +13,34 @@ typedef enum GameTexture {
   TEXTURE_NEBULA
 } GameTexture;
 
-class Tile: public Rectangle {
+class Tile : public Rectangle {
+private:  
+  Texture2D _texture;
 public:
-  float x;
-  float y;
-  float width;
-  float height;
-  Texture2D texture;
-
-  void setTexture(const Texture &texture);
+  Texture2D &texture();
+  const Texture2D &texture() const;
 };
 
 class TileAnimation {
+private:
+  int _counter = 0;  
+  Vector2 _sprite;
+  int _spriteTotal{INT_MAX};
+  int _spriteRowSize{INT_MAX};
+
 public:
-  int sprite;
-  int spriteTotal;
-  int spriteRowSize;
+  TileAnimation(const int &spriteTotal);  
+  TileAnimation(const int &spriteTotal, const int &spriteRowSize);
+
+  void next();
+
+  Vector2 &sprite();
+  const Vector2 &sprite() const;
+
+  int &spriteTotal();
+  const int &spriteTotal() const;
+
+  int &spriteRowSize();  
+  const int &spriteRowSize() const;  
 };
 } // namespace game

@@ -2,66 +2,62 @@
 
 namespace game {
 Nebula::Nebula() {
-  emitter->on("game/init", [this](Event event) { onInit(); });
-  emitter->on("game/restart", [this](Event event) { onRestart(); });
-  emitter->on("game/update", [this](Event event) { onUpdate(); });
-  emitter->on("game/render", [this](Event event) { onRender(); });
+  _emitter->on("game/init", [this](Event event) { onInit(); });
+  _emitter->on("game/restart", [this](Event event) { onRestart(); });
+  _emitter->on("game/update", [this](Event event) { onUpdate(); });
+  _emitter->on("game/render", [this](Event event) { onRender(); });
 }
 
 void Nebula::onInit() {
   Rectangle collisionRectangle = {0, 0, 0.5f * config::NEBULA_TILE_WIDTH,
                                   0.5f * config::NEBULA_TILE_HEIGHT};
-  nebula.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;  
-  nebula.collisionGeometry().raw() = collisionRectangle;
+  _nebula.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
+  _nebula.collisionGeometry().raw() = collisionRectangle;
 
-  nebula.tile().width = config::NEBULA_TILE_WIDTH;
-  nebula.tile().height = config::NEBULA_TILE_HEIGHT;
-  nebula.tile().x = 0;
-  nebula.tile().y = 0;
-  nebula.tile().setTexture(textureLoader->textures[TEXTURE_NEBULA]);
-  nebula.position() = Vector2{config::WINDOW_WIDTH + nebula.tile().width / 2,
-                            config::WINDOW_HEIGHT - nebula.tile().height};
-  log->info("(nebula) Nebula initialized.");
+  _nebula.tile().width = config::NEBULA_TILE_WIDTH;
+  _nebula.tile().height = config::NEBULA_TILE_HEIGHT;
+  _nebula.tile().x = 0;
+  _nebula.tile().y = 0;
+  _nebula.tile().texture() = _textureLoader->textures()[TEXTURE_NEBULA];
+  _nebula.position() = Vector2{config::WINDOW_WIDTH + _nebula.tile().width / 2,
+                               config::WINDOW_HEIGHT - _nebula.tile().height};
+  _log->info("(nebula) Nebula initialized.");
 };
 
 void Nebula::onRestart() {
   onInit();
-  log->info("(nebula) Nebula restarted.");
+  _log->info("(nebula) Nebula restarted.");
 }
 
 void Nebula::onUpdate() {
-  if (!gameState->isRunning()) {
+  if (!_gameState->running()) {
     return;
   }
 
-  nebula.position().x += velocity * GetFrameTime();
+  _nebula.position().x += _velocity * GetFrameTime();
 
   // // extremes
-  if (nebula.position().x < -nebula.tile().width) {
-    nebula.position().x = config::WINDOW_WIDTH + nebula.tile().width;
+  if (_nebula.position().x < -_nebula.tile().width) {
+    _nebula.position().x = config::WINDOW_WIDTH + _nebula.tile().width;
   }
 
-  if (!animationTimer.isActive()) {
-    tileAnimation.sprite = std::fmod(
-        ++tileAnimation.sprite,
-        tileAnimation.spriteTotal); // 8x8 spritesheet, but with only 60 sprites
-    nebula.tile().y = std::floor(tileAnimation.sprite /
-                               tileAnimation.spriteRowSize); // 8x8 spritesheet
-    nebula.tile().x = std::fmod(tileAnimation.sprite,
-                              tileAnimation.spriteRowSize); // 8 sprites per row
-    animationTimer.start();
+  if (!_animationTimer.active()) {
+    _nebula.tile().x = _tileAnimation.sprite().x;
+    _nebula.tile().y = _tileAnimation.sprite().y;
+    _tileAnimation.next();
+    _animationTimer.start();
   }
 
-  nebula.update();  
+  _nebula.update();
 }
 
 void Nebula::onRender() {
-  if (!gameState->isStarted()) {
+  if (!_gameState->started()) {
     return;
   }
-  nebula.color() = gameState->isRunning() ? WHITE : GRAY;
-  nebula.render();
+  _nebula.color() = _gameState->running() ? WHITE : GRAY;
+  _nebula.render();
 }
 
-GameNode2D &Nebula::getNebula() { return nebula; }
+const GameNode2D &Nebula::nebula() const { return _nebula; }
 } // namespace game

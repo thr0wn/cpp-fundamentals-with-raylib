@@ -3,15 +3,16 @@
 namespace game {
 // Simple timer.
 class Timer {
-  double startTime;
-  double endTime;
+private:  
+  double _startTime;
+  double _endTime;
 
 public:
   Timer(double endTIme);
   // Start the timer
   void start();
   // Return true if elapsed time is less than endTime
-  bool isActive();
+  bool active();
   // Elapsed time since start
   double elapsed();
 };

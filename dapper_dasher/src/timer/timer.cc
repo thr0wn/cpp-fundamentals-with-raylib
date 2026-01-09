@@ -3,13 +3,13 @@
 
 namespace game {
 Timer::Timer(double endTime) {
-  startTime = 0;
-  this->endTime = endTime;
+  _startTime = 0;
+  this->_endTime = endTime;
 }
 
-void Timer::start() { startTime = GetTime(); }
+void Timer::start() { _startTime = GetTime(); }
 
-bool Timer::isActive() { return startTime != 0 && elapsed() <= endTime; }
+bool Timer::active() { return _startTime != 0 && elapsed() <= _endTime; }
 
-double Timer::elapsed() { return GetTime() - startTime; }
+double Timer::elapsed() { return GetTime() - _startTime; }
 } // namespace game

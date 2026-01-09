@@ -2,48 +2,48 @@
 
 namespace game {
 namespace {
-std::unique_ptr<Emitter> emitter;
-std::unique_ptr<Log> log;
-std::unique_ptr<GameState> gameState;
-std::unique_ptr<Database> database;
-std::unique_ptr<TextureLoader> textureLoader;
+std::unique_ptr<Emitter> _emitter;
+std::unique_ptr<Log> _log;
+std::unique_ptr<GameState> _gameState;
+std::unique_ptr<Database> _database;
+std::unique_ptr<TextureLoader> _textureLoader;
 
-std::unique_ptr<Background> background;
-std::unique_ptr<Player> player;
-std::unique_ptr<PlayerScore> playerScore;
-std::unique_ptr<Nebula> nebula;
-std::unique_ptr<UI> ui;
+std::unique_ptr<Background> _background;
+std::unique_ptr<Player> _player;
+std::unique_ptr<PlayerScore> _playerScore;
+std::unique_ptr<Nebula> _nebula;
+std::unique_ptr<UI> _ui;
 
 void createInstances() {
-  emitter = std::make_unique<Emitter>();
-  AsyncPointer::push(emitter.get());
+  _emitter = std::make_unique<Emitter>();
+  AsyncPointer::push(_emitter.get());
 
-  log = std::make_unique<Log>();
-  AsyncPointer::push(log.get());
+  _log = std::make_unique<Log>();
+  AsyncPointer::push(_log.get());
 
-  gameState = std::make_unique<GameState>();
-  AsyncPointer::push(gameState.get());
+  _gameState = std::make_unique<GameState>();
+  AsyncPointer::push(_gameState.get());
 
-  database = std::make_unique<Database>();
-  AsyncPointer::push(database.get());
+  _database = std::make_unique<Database>();
+  AsyncPointer::push(_database.get());
 
-  textureLoader = std::make_unique<TextureLoader>();
-  AsyncPointer::push(textureLoader.get());
+  _textureLoader = std::make_unique<TextureLoader>();
+  AsyncPointer::push(_textureLoader.get());
 
-  background = std::make_unique<Background>();
-  AsyncPointer::push(background.get());
+  _background = std::make_unique<Background>();
+  AsyncPointer::push(_background.get());
 
-  nebula = std::make_unique<Nebula>();
-  AsyncPointer::push(nebula.get());
+  _nebula = std::make_unique<Nebula>();
+  AsyncPointer::push(_nebula.get());
 
-  player = std::make_unique<Player>();
-  AsyncPointer::push(player.get());
+  _player = std::make_unique<Player>();
+  AsyncPointer::push(_player.get());
 
-  playerScore = std::make_unique<PlayerScore>();
-  AsyncPointer::push(playerScore.get());
+  _playerScore = std::make_unique<PlayerScore>();
+  AsyncPointer::push(_playerScore.get());
 
-  ui = std::make_unique<UI>();
-  AsyncPointer::push(ui.get());
+  _ui = std::make_unique<UI>();
+  AsyncPointer::push(_ui.get());
 }
 
 } // namespace
@@ -55,14 +55,14 @@ void init() {
 
   // Disable default close with
   SetExitKey(KEY_NULL);
-  gameState->init();
+  _gameState->init();
 }
 void start() {
-  while (!(gameState->isStopped() || WindowShouldClose())) {
-    gameState->update();
+  while (!(_gameState->stopped() || WindowShouldClose())) {
+    _gameState->update();
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    gameState->render();
+    _gameState->render();
     EndDrawing();
   }
   if (WindowShouldClose()) {
@@ -70,10 +70,10 @@ void start() {
   }
 }
 
-void stop() { gameState->stop(); }
+void stop() { _gameState->stop(); }
 
 void deinit() {
-  gameState->deinit();  
+  _gameState->deinit();  
   CloseWindow();
 }
 } // namespace game

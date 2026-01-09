@@ -11,11 +11,11 @@
 
 namespace game {
 class Database {
-  leveldb::DB *keyValueDB;
-  std::string databaseLocation = config::DATABASE_LOCATION;
-  bool started = false;
-  Log *log = AsyncPointer::get<Log>();
-  Emitter *emitter = AsyncPointer::get<Emitter>();
+  leveldb::DB *_keyValueDB;
+  std::string _databaseLocation = config::DATABASE_LOCATION;
+  bool _started = false;
+  Log *_log = AsyncPointer::get<Log>();
+  Emitter *_emitter = AsyncPointer::get<Emitter>();
 
 public:
   Database();

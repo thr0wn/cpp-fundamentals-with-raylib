@@ -2,36 +2,36 @@
 
 namespace game {
 Background::Background() {
-  emitter->on("game/init:after", [this](Event event) { onAfterInit(); });
-  emitter->on("game/restart", [this](Event event) { onAfterInit(); });
-  emitter->on("game/update", [this](Event event) { onUpdate(); });
-  emitter->on("game/render", [this](Event event) { onRender(); });
+  _emitter->on("game/init:after", [this](Event event) { onAfterInit(); });
+  _emitter->on("game/restart", [this](Event event) { onAfterInit(); });
+  _emitter->on("game/update", [this](Event event) { onUpdate(); });
+  _emitter->on("game/render", [this](Event event) { onRender(); });
 }
 
 void Background::onAfterInit() {
-  setBackground(TEXTURE_FAR_BUILDING, &textureFar, &positionFar);
-  setBackground(TEXTURE_BACK_BUILDING, &textureMid, &positionMid);
-  setBackground(TEXTURE_NEAR_BUILDING, &textureNear, &positionNear);
-  log->info("(background) Background initialized.");
+  setBackground(TEXTURE_FAR_BUILDING, &_textureFar, &_positionFar);
+  setBackground(TEXTURE_BACK_BUILDING, &_textureMid, &_positionMid);
+  setBackground(TEXTURE_NEAR_BUILDING, &_textureNear, &_positionNear);
+  _log->info("(background) Background initialized.");
 }
 
 void Background::onUpdate() {
-  if (!gameState->isRunning())
+  if (!_gameState->running())
     return;
-  updateTexture(textureFar, &positionFar, velocityFar);
-  updateTexture(textureMid, &positionMid, velocityMid);
-  updateTexture(textureNear, &positionNear, velocityNear);
+  updateTexture(_textureFar, &_positionFar, _velocityFar);
+  updateTexture(_textureMid, &_positionMid, _velocityMid);
+  updateTexture(_textureNear, &_positionNear, _velocityNear);
 }
 
 void Background::onRender() {
-  renderTexture(textureFar, positionFar, velocityFar);
-  renderTexture(textureMid, positionMid, velocityMid);
-  renderTexture(textureNear, positionNear, velocityNear);
+  renderTexture(_textureFar, _positionFar, _velocityFar);
+  renderTexture(_textureMid, _positionMid, _velocityMid);
+  renderTexture(_textureNear, _positionNear, _velocityNear);
 }
 
 void Background::setBackground(GameTexture gameTexture, Texture2D *texture,
                                Vector2 *position) {
-  *texture = textureLoader->textures[gameTexture];
+  *texture = _textureLoader->textures()[gameTexture];
   position->x = 0;
   position->y = 0;
 }
@@ -46,7 +46,7 @@ void Background::updateTexture(Texture2D texture, Vector2 *position,
 
 void Background::renderTexture(Texture2D texture, Vector2 position,
                                float velocity) {
-  Color color = gameState->isRunning() ? WHITE : GRAY;
+  Color color = _gameState->running() ? WHITE : GRAY;
   Vector2 secondPosition = position;
   secondPosition.x += 3.0f * texture.width;
   DrawTextureEx(texture, position, 0, 3.0f, color);

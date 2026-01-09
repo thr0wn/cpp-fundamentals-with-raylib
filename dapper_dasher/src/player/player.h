@@ -16,18 +16,19 @@
 
 namespace game {
 class Player {
-  GameNode2D player{"player-node"};
-  const float gravity = config::PLAYER_INITIAL_GRAVITY;
-  float velocity = 0;
-  const float jumpVelocity = config::PLAYER_JUMP_VELOCITY;
-  TileAnimation tileAnimation = {0, config::PLAYER_SPRITE_TOTAL};
-  Timer animationTimer{config::PLAYER_ANIMATION_TIME};
+private:  
+  GameNode2D _player{"player-node"};
+  const float _gravity = config::PLAYER_INITIAL_GRAVITY;
+  float _velocity = 0;
+  const float _jumpVelocity = config::PLAYER_JUMP_VELOCITY;
+  TileAnimation _tileAnimation{config::PLAYER_SPRITE_TOTAL};
+  Timer _animationTimer{config::PLAYER_ANIMATION_TIME};
 
-  Nebula *nebula = AsyncPointer::get<Nebula>();
-  Emitter *emitter = AsyncPointer::get<Emitter>();  
-  GameState *gameState = AsyncPointer::get<GameState>();
-  TextureLoader *textureLoader = AsyncPointer::get<TextureLoader>();
-  Log *log = AsyncPointer::get<Log>();
+  Nebula *_nebula = AsyncPointer::get<Nebula>();
+  Emitter *_emitter = AsyncPointer::get<Emitter>();  
+  GameState *_gameState = AsyncPointer::get<GameState>();
+  TextureLoader *_textureLoader = AsyncPointer::get<TextureLoader>();
+  Log *_log = AsyncPointer::get<Log>();
 
 public:
   Player();
@@ -37,6 +38,6 @@ public:
   void onUpdate();
   void onRender();
 
-  bool isJumping();
+  bool jumping();
 };
 } // namespace game

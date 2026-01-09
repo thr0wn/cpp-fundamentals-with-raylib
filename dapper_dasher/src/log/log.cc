@@ -1,13 +1,11 @@
 #include "log/log.h"
 
 namespace game {
-void Log::info(std::string message) {
-  if (enabled)
-    std::cout << fmt::format("GAMEINFO: {}\n", message.data());
+void Log::info(const std::string &message) {
+  if (_enabled)
+    std::cout << fmt::format("GAMEINFO: {}\n", message);
 }
 
-void Log::setEnabled(bool enabled) { this->enabled = enabled; }
-bool Log::isEnabled() { return enabled; }
-
-std::unique_ptr<Log> logService;
+bool &Log::enabled() { return _enabled; }
+const bool &Log::enabled() const { return _enabled; }
 } // namespace game

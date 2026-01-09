@@ -5,37 +5,34 @@
 
 namespace game {
 Start::Start() {
-  emitter->on("game/init", [this](Event event) { onInit(); });
-  emitter->on("game/render", [this](Event event) { onRender(); });
+  _emitter->on("game/init", [this](Event event) { onInit(); });
+  _emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void Start::onInit() {
-  textNewGame.setSize(config::TEXT_SIZE_LARGE);
-  textNewGame.setPosition(
-      {0.025f * config::WINDOW_WIDTH, 0.7f * config::WINDOW_HEIGHT});
+  _textNewGame.position() = {0.025f * config::WINDOW_WIDTH,
+                             0.7f * config::WINDOW_HEIGHT};
 
-  textQuit.setSize(config::TEXT_SIZE_LARGE);
-  textQuit.setPosition({0.025f * config::WINDOW_WIDTH,
-                        textNewGame.getPosition().y + textNewGame.getHeight()});
-  log->info("(start-ui) Start UI initialized.");
+  _textQuit.position() = {0.025f * config::WINDOW_WIDTH,
+                          _textNewGame.position().y + _textNewGame.height()};
+  _log->info("(start-ui) Start UI initialized.");
 }
 
 void Start::onRender() {
-  if (gameState->isStarted()) {
+  if (_gameState->started()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
-  textNewGameIsPressed =
-      GuiLabelButton(textNewGame.getRectangle(), textNewGame.getChars());
-  textQuitIsPressed =
-      GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
+  _textNewGameIsPressed =
+      GuiLabelButton(_textNewGame.rectangle(), _textNewGame.c_str());
+  _textQuitIsPressed = GuiLabelButton(_textQuit.rectangle(), _textQuit.c_str());
 
-  if (!gameState->isStarted() && textNewGameIsPressed) {
-    gameState->start();
+  if (!_gameState->started() && _textNewGameIsPressed) {
+    _gameState->start();
   }
-  if (textQuitIsPressed) {
-    gameState->stop();
+  if (_textQuitIsPressed) {
+    _gameState->stop();
   }
 }
 } // namespace game

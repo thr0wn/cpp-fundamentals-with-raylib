@@ -3,34 +3,48 @@
 #include "raylib.h"
 
 namespace game {
+typedef enum GameTextAlign {
+  GAME_TEXT_ALIGN_LEFT = 0,
+  GAME_TEXT_ALIGN_RIGHT,
+  GAME_TEXT_ALIGN_CENTER
+} GameTextAlign;
+
 class Text {
-  constexpr static const float lineHeightUnit = config::TEXT_LINE_HEIGHT_UNIT;
-  constexpr static const float lineWidthUnit = config::TEXT_LINE_WIDTH_UNIT;
-  std::string text;
-  float size;
-  Rectangle rectangle;
-  Vector2 position;
-  void updateRectangle();
+private:
+  constexpr static const float _lineHeightUnit = config::TEXT_LINE_HEIGHT_UNIT;
+  constexpr static const float _charWidthUnit = config::TEXT_CHAR_WIDTH_UNIT;
+  std::string _text;
+  int _size;
+  Rectangle _rectangle;
+  Vector2 _position;
+  GameTextAlign _align;
+
+  const float lineHeight() const;
+  const float charWidth() const;
 
 public:
-  Text(std::string text);
+  Text(const std::string &text);
+  Text(const std::string &text, const int &size);
 
-  std::string getString();
-  const char *getChars();
+  std::string &string();
+  const std::string &string() const;
 
-  float getWidth();
-  float getHeight();
+  const char *c_str() const;
 
-  Rectangle getRectangle();
+  const float width() const;
+  const float height() const;
 
-  void setPosition(Vector2 position);
-  Vector2 getPosition();
+  const Rectangle rectangle();
 
-  void setSize(float size);
-  float getSize();
+  Vector2 &position();
+  const Vector2 &position() const;
 
-  float getLineHeight();
-  float getLineWidth();
+  GameTextAlign &align();
+  const GameTextAlign &align() const;
+
+  
+  int &size();
+  const int &size() const;
 
   void alignCenter();
   void alignLeft();

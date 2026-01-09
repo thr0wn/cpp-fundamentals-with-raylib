@@ -10,18 +10,19 @@
 
 namespace game {
 class Pause {
-  Text textResume{config::PAUSE_TEXT_RESUME};
-  bool textResumeIsPressed = false;
+private:  
+  Text _textResume{config::PAUSE_TEXT_RESUME, config::TEXT_SIZE_LARGE};
+  bool _textResumeIsPressed = false;
 
-  Text textRestart{config::PAUSE_TEXT_RESTART};
-  bool textRestartIsPressed = false;
+  Text _textRestart{config::PAUSE_TEXT_RESTART, config::TEXT_SIZE_LARGE};
+  bool _textRestartIsPressed = false;
 
-  Text textQuit{config::PAUSE_TEXT_QUIT};
-  bool textQuitIsPressed = false;
+  Text _textQuit{config::PAUSE_TEXT_QUIT, config::TEXT_SIZE_LARGE};
+  bool _textQuitIsPressed = false;
 
-  Emitter *emitter = AsyncPointer::get<Emitter>();  
-  GameState *gameState = AsyncPointer::get<GameState>();
-  Log *log = AsyncPointer::get<Log>();  
+  Emitter *_emitter = AsyncPointer::get<Emitter>();  
+  GameState *_gameState = AsyncPointer::get<GameState>();
+  Log *_log = AsyncPointer::get<Log>();
   
 public:
   Pause();

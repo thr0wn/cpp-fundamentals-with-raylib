@@ -5,9 +5,17 @@
 
 namespace game {
 class Event {
+private:
+  std::string _name;
+  std::any _value;
+
 public:
-  std::string name;
-  std::any value;
-  Event(std::string name, std::any value);
+  Event(const std::string &name, const std::any &value);
+
+  std::string &name();
+  const std::string &name() const;
+
+  std::any &value();
+  const std::any &value() const;
 };
 } // namespace game

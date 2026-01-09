@@ -2,83 +2,80 @@
 
 namespace game {
 Player::Player() {
-  emitter->on("game/init", [this](Event event) { onInit(); });
-  emitter->on("game/restart", [this](Event event) { onRestart(); });
-  emitter->on("game/update", [this](Event event) { onUpdate(); });
-  emitter->on("game/render", [this](Event event) { onRender(); });
+  _emitter->on("game/init", [this](Event event) { onInit(); });
+  _emitter->on("game/restart", [this](Event event) { onRestart(); });
+  _emitter->on("game/update", [this](Event event) { onUpdate(); });
+  _emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void Player::onInit() {
   Rectangle collisionRectangle = {0, 0, 0.5f * config::PLAYER_TILE_WIDTH,
                                   0.5f * config::PLAYER_TILE_HEIGHT};
-  player.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
-  player.collisionGeometry().raw() = collisionRectangle;
+  _player.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
+  _player.collisionGeometry().raw() = collisionRectangle;
 
-  player.tile().width = config::PLAYER_TILE_WIDTH;
-  player.tile().height = config::PLAYER_TILE_HEIGHT;
-  player.tile().x = 0;
-  player.tile().y = 0;
-  player.tile().setTexture(textureLoader->textures[TEXTURE_SCARFY]);
+  _player.tile().width = config::PLAYER_TILE_WIDTH;
+  _player.tile().height = config::PLAYER_TILE_HEIGHT;
+  _player.tile().x = 0;
+  _player.tile().y = 0;
+  _player.tile().texture() = _textureLoader->textures()[TEXTURE_SCARFY];
 
-  player.position() =
-      Vector2{config::WINDOW_WIDTH / 2 - player.tile().width / 2,
-              config::WINDOW_HEIGHT - player.tile().height};
-  log->info("(player) Player initialized.");
+  _player.position() =
+      Vector2{config::WINDOW_WIDTH / 2 - _player.tile().width / 2,
+              config::WINDOW_HEIGHT - _player.tile().height};
+  _log->info("(player) Player initialized.");
 };
 
 void Player::onRestart() {
   onInit();
-  log->info("(player) Player restarted.");
+  _log->info("(player) Player restarted.");
 }
 
 void Player::onUpdate() {
-  if (!gameState->isRunning()) {
+  if (!_gameState->running()) {
     return;
   }
 
-  if (IsKeyDown(KEY_SPACE) && !isJumping()) {
-    velocity = jumpVelocity;
+  if (IsKeyDown(KEY_SPACE) && !jumping()) {
+    _velocity = _jumpVelocity;
   } else {
-    velocity += gravity * GetFrameTime();
+    _velocity += _gravity * GetFrameTime();
   }
 
-  player.position().y += velocity * GetFrameTime();
+  _player.position().y += _velocity * GetFrameTime();
 
   // y borders
-  if (player.position().y < 0) {
-    player.position().y = 0;
+  if (_player.position().y < 0) {
+    _player.position().y = 0;
   }
-  if (player.position().y > (config::WINDOW_HEIGHT - player.tile().height)) {
-    player.position().y = config::WINDOW_HEIGHT - player.tile().height;
+  if (_player.position().y > (config::WINDOW_HEIGHT - _player.tile().height)) {
+    _player.position().y = config::WINDOW_HEIGHT - _player.tile().height;
   }
 
-  if (!animationTimer.isActive()) {
-    if (!isJumping()) {
-      tileAnimation.sprite = std::fmod(
-          ++tileAnimation.sprite,
-          tileAnimation
-              .spriteTotal); // 6x1 spritesheet, but with only 60 sprites
-      player.tile().x = tileAnimation.sprite;
+  if (!_animationTimer.active()) {
+    if (!jumping()) {
+      _player.tile().x = _tileAnimation.sprite().x;
+      _tileAnimation.next();
     }
-    animationTimer.start();
+    _animationTimer.start();
   }
 
-  player.update();
-  
-  if (player.checkCollision(nebula->getNebula())) {
-    gameState->setGameOver();
+  _player.update();
+
+  if (_player.checkCollision(_nebula->nebula())) {
+    _gameState->setGameOver();
   }
 }
 
 void Player::onRender() {
-  if (!gameState->isStarted()) {
+  if (!_gameState->started()) {
     return;
   }
-  player.color() = gameState->isRunning() ? WHITE : GRAY;
-  player.render();
+  _player.color() = _gameState->running() ? WHITE : GRAY;
+  _player.render();
 }
 
-bool Player::isJumping() {
-  return player.position().y < (config::WINDOW_HEIGHT - player.tile().height);
+bool Player::jumping() {
+  return _player.position().y < (config::WINDOW_HEIGHT - _player.tile().height);
 }
 } // namespace game

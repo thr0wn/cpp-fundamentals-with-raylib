@@ -1,51 +1,44 @@
 #include "ui/text.h"
 
 namespace game {
-Text::Text(std::string text) {
-  this->text = text;
-  updateRectangle();
+Text::Text(const std::string &text) : _text(text) {}
+Text::Text(const std::string &text, const int &size)
+    : _text(text), _size(size) {}
+
+std::string &Text::string() { return _text; };
+const std::string &Text::string() const { return _text; };
+
+const char *Text::c_str() const { return _text.c_str(); }
+
+const float Text::width() const { return _text.length() * charWidth(); }
+const float Text::height() const { return lineHeight(); }
+
+const Rectangle Text::rectangle() {
+  if (_align == GAME_TEXT_ALIGN_LEFT) {
+    _rectangle.x = _position.x;
+  }
+  if (_align == GAME_TEXT_ALIGN_RIGHT) {
+    _rectangle.x = _position.x - width();
+  }
+  if (_align == GAME_TEXT_ALIGN_CENTER) {
+    _rectangle.x = _position.x - width() / 2;
+  }
+
+  _rectangle.y = _position.y;
+  _rectangle.width = width();
+  _rectangle.height = height();
+  return _rectangle;
 }
 
-std::string Text::getString() { return text; }
-const char *Text::getChars() { return text.c_str(); }
+Vector2 &Text::position() { return _position; };
+const Vector2 &Text::position() const { return _position; };
 
-float Text::getWidth() { return text.length() * getLineWidth(); }
-float Text::getHeight() { return getLineHeight(); }
+GameTextAlign &Text::align() { return _align; };
+const GameTextAlign &Text::align() const { return _align; };
 
-void Text::updateRectangle() {
-  rectangle.x = position.x;
-  rectangle.y = position.y;
-  rectangle.width = getWidth();
-  rectangle.height = getHeight();
-}
-Rectangle Text::getRectangle() { return rectangle; }
+int &Text::size() { return _size; };
+const int &Text::size() const { return _size; };
 
-void Text::setPosition(Vector2 position) {
-  this->position = position;
-  updateRectangle();
-}
-
-Vector2 Text::getPosition() {
-  return position;
-}
-
-void Text::setSize(float size) {
-  this->size = size;
-  updateRectangle();
-}
-
-float Text::getSize() { return size; }
-
-float Text::getLineHeight() { return lineHeightUnit * size; }
-float Text::getLineWidth() { return lineWidthUnit * size; }
-
-void Text::alignCenter() {
-  rectangle.x = position.x - getWidth()/2;
-}
-void Text::alignLeft() {
-  rectangle.x = position.x;
-}
-void Text::alignRight() {
-  rectangle.x = position.x - getWidth();
-}
-}
+const float Text::lineHeight() const { return _lineHeightUnit * _size; }
+const float Text::charWidth() const { return _charWidthUnit * _size; }
+} // namespace game

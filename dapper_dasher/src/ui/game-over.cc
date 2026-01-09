@@ -2,49 +2,46 @@
 
 namespace game {
 GameOver::GameOver() {
-  emitter->on("game/init", [this](Event event) { onInit(); });
-  emitter->on("game/render", [this](Event event) { onRender(); });
+  _emitter->on("game/init", [this](Event event) { onInit(); });
+  _emitter->on("game/render", [this](Event event) { onRender(); });
 };
 
 void GameOver::onInit() {
-  textGameOver.setSize(config::TEXT_SIZE_LARGE);
-  textGameOver.setPosition(
-      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
-  textGameOver.alignCenter();
-
-  textRestart.setSize(config::TEXT_SIZE_LARGE);
-  textRestart.setPosition(
+  _textGameOver.position() = 
+      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT};
+  _textGameOver.align() = GAME_TEXT_ALIGN_CENTER;
+  
+  _textRestart.position() = 
       {0.5f * config::WINDOW_WIDTH,
-       textGameOver.getPosition().y + textGameOver.getHeight()});
-  textRestart.alignCenter();
-
-  textQuit.setSize(config::TEXT_SIZE_LARGE);
-  textQuit.setPosition({0.5 * config::WINDOW_WIDTH,
-                        textRestart.getPosition().y + textRestart.getHeight()});
-  textQuit.alignCenter();
-  log->info("(game-over-ui) Game Over UI initialized.");
+       _textGameOver.position().y + _textGameOver.height()};
+  _textRestart.align() = GAME_TEXT_ALIGN_CENTER;
+  
+  _textQuit.position() = {0.5 * config::WINDOW_WIDTH,
+                        _textRestart.position().y + _textRestart.height()};
+  _textQuit.align() = GAME_TEXT_ALIGN_CENTER;
+  _log->info("(game-over-ui) Game Over UI initialized.");
 }
 
 void GameOver::onRender() {
-  if (!gameState->isGameOver()) {
+  if (!_gameState->gameOver()) {
     return;
   }
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
 
-  GuiLabel(textGameOver.getRectangle(), textGameOver.getChars());
+  GuiLabel(_textGameOver.rectangle(), _textGameOver.c_str());
 
-  textRestartIsPressed =
-      GuiLabelButton(textRestart.getRectangle(), textRestart.getChars());
+  _textRestartIsPressed =
+      GuiLabelButton(_textRestart.rectangle(), _textRestart.c_str());
 
-  textQuitIsPressed =
-      GuiLabelButton(textQuit.getRectangle(), textQuit.getChars());
+  _textQuitIsPressed =
+      GuiLabelButton(_textQuit.rectangle(), _textQuit.c_str());
 
-  if (textRestartIsPressed) {
-    gameState->restart();
+  if (_textRestartIsPressed) {
+    _gameState->restart();
   }
-  if (textQuitIsPressed) {
-    gameState->stop();
+  if (_textQuitIsPressed) {
+    _gameState->stop();
   }
 }
 } // namespace game
