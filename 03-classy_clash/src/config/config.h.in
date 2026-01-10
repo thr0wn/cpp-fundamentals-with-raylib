@@ -1,0 +1,84 @@
+#pragma once
+
+#include <cstdint>
+#include <string_view>
+#include <string>
+
+namespace config {
+  constexpr std::string_view project_name = "@PROJECT_NAME@";
+  constexpr std::string_view project_version = "@PROJECT_VERSION@";
+
+  constexpr std::int32_t project_version_major{@PROJECT_VERSION_MAJOR@};
+  constexpr std::int32_t project_version_minor{@PROJECT_VERSION_MINOR@};
+  constexpr std::int32_t project_version_patch{@PROJECT_VERSION_PATCH@};
+
+  // Game constants
+  const std::string GAME_NAME = "Dapper Dasher";  
+  
+  // Window constants
+  constexpr const float WINDOW_WIDTH = 768.0f;
+  constexpr const float WINDOW_HEIGHT = 576.0f;
+
+  // Text constants
+  constexpr const int TEXT_SIZE_LARGE = 48;
+  constexpr const int TEXT_SIZE_MEDIUM = 24;
+  constexpr const int TEXT_SIZE_SMALL = 12;
+  constexpr const int TEXT_COLOR = 0xffffffff;
+  constexpr const float TEXT_CHAR_WIDTH_UNIT = 0.55f; // ratio char width/font size
+  constexpr const float TEXT_LINE_HEIGHT_UNIT = 1.25f;
+
+  // database
+  const std::string DATABASE_LOCATION = "./database";
+
+  //
+  const int NUMBER_OF_TEXTURES = 5;  
+  
+  // Start UI constants
+  const std::string START_TEXT_NEW_GAME = "New Game";
+  const std::string START_TEXT_QUIT = "Quit";
+
+  // Pause UI constants
+  const std::string PAUSE_TEXT_RESUME = "Resume";
+  const std::string PAUSE_TEXT_RESTART = "Restart";
+  const std::string PAUSE_TEXT_QUIT = "Quit";
+
+  // Score UI constants
+  const std::string SCORE_TEXT_SCORE = "Score";
+  const std::string SCORE_TEXT_HIGH_SCORE = "High score";
+  const std::string SCORE_TEXT_PRESS_SPACE = "Press space to jump";
+
+  // GameOver UI constants
+  const std::string GAMEOVER_TEXT = "Game Over";
+  const std::string GAMEOVER_TEXT_RESTART = "Restart";
+  const std::string GAMEOVER_TEXT_QUIT = "Quit";
+
+  // Background
+  const float BACKGROUND_FAR_VELOCITY = -30.0f;
+  const float BACKGROUND_MID_VELOCITY = -60.0f;
+  const float BACKGROUND_NEAR_VELOCITY = -90.0f;
+
+  // Player
+  // movement
+  const float PLAYER_ANIMATION_TIME = .125f;
+  const float PLAYER_INITIAL_GRAVITY = 1000.0f;
+  const float PLAYER_JUMP_VELOCITY = -500.0f;
+  // tile
+  const float PLAYER_TILE_WIDTH = 128;
+  const float PLAYER_TILE_HEIGHT = 128;
+  // tile animation
+  const int PLAYER_SPRITE_TOTAL = 6;
+  // Service
+  constexpr const int PLAYER_SERVICE_SCORE_INTERVAL = 1;
+  const std::string PLAYER_SERVICE_DATABASE_HIGHSCORE_KEY = "highScore";
+
+  // Nebula
+  // movement
+  const float NEBULA_ANIMATION_TIME = .125f;
+  const float INITIAL_VELOCITY = -300.0f;
+  // tile
+  const float NEBULA_TILE_WIDTH = 100.0f;
+  const float  NEBULA_TILE_HEIGHT = 100.0f;
+  // tile animation
+  const int NEBULA_SPRITE_TOTAL = 60;
+  const int NEBULA_SPRITE_ROW_SIZE = 8;
+}

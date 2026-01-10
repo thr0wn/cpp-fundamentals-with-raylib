@@ -8,9 +8,14 @@ Original cpp fundamentals git: https://gitlab.com/GameDevTV/CPPCourse
 ### Axe game
 Simple game using circle and rectangle.
 
-[axe_game](axe_game)
+[axe_game](01-axe_game)
 
 ### Dapper Dasher
 Platform game using textures.
 
-[dapper_dasher](dapper_dasher)
+[dapper_dasher](02-dapper_dasher)
+
+### Classy Clash
+Top down game using textures and tilesets.
+
+[classy_clash](03-classy_clash)
