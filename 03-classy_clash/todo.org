@@ -1,0 +1,4 @@
+#+title: todo
+#+author: natan
+#+STARTUP: indent
+#+TODO: TODO DOING WAITING CANCELED | DONE
