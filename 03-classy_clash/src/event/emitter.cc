@@ -9,7 +9,6 @@ Emitter::~Emitter() {
   }
 }
 
-Listeners &Emitter::listeners() { return _listeners; };
 const Listeners &Emitter::listeners() const { return _listeners; };
 
 Listener Emitter::on(const std::string &eventName,

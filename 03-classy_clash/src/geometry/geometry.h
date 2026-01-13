@@ -4,6 +4,7 @@
 #include <iostream>
 #include <variant>
 
+namespace game {
 typedef struct Point {
   struct Vector2;
 } Point;
@@ -34,7 +35,6 @@ typedef struct Poly {
   int pointCount;
 } Poly;
 
-namespace game {
 typedef std::variant<Rectangle, Circle, Triangle, Poly, Line, BoundingBox,
                      Sphere>
     RawGeometry;
@@ -46,16 +46,17 @@ class Geometry {
 private:
   RawGeometry _raw;
   GeometryPivot _pivot;
-  
+
 public:
   RawGeometry &raw();
   const RawGeometry &raw() const;
 
   GeometryPivot &pivot();
-  const GeometryPivot &pivot() const;  
+  const GeometryPivot &pivot() const;
 
   bool checkCollision(const Geometry &other) const;
-  void translate(const Vector2 &center, const Vector2 &translation, Geometry &out) const;
+  void translate(const Vector2 &center, const Vector2 &translation,
+                 Geometry &out) const;
   void render() const;
 };
 } // namespace game

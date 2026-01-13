@@ -30,10 +30,7 @@ public:
 
 class GameNode2D : public GameNode {
 private:
-  Tile _tile;
   Vector2 _position{0};
-  Vector2 _scale{1, 1};
-  Color _color;
 
   // collision
   Vector2 _center;
@@ -43,17 +40,11 @@ private:
 public:
   GameNode2D(const std::string &name);
 
-  Tile &tile();
-  const Tile &tile() const;
-
   Vector2 &position();
   const Vector2 &position() const;
 
-  Vector2 &scale();
-  const Vector2 &scale() const;
-
-  Color &color();
-  const Color &color() const;
+  Vector2 &center();
+  const Vector2 &center() const;
 
   Geometry &collisionGeometry();
   const Geometry &collisionGeometry() const;
@@ -64,7 +55,5 @@ public:
   bool checkCollision(const GameNode2D &other);
 
   void update();
-
-  void render() const;
 };
 } // namespace game

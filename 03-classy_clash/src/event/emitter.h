@@ -24,7 +24,6 @@ public:
 
   ~Emitter();
 
-  Listeners &listeners();
   const Listeners &listeners() const;
 
   Listener on(const std::string &eventName, const ListenerFunction &function);

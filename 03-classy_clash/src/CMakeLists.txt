@@ -13,27 +13,23 @@ set(LIBRARY_SOURCE_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/background/background.cc"
-
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.cc"
-
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
-  "${CMAKE_CURRENT_SOURCE_DIR}/player/player-score.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.cc"
-  "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.cc"
-
+  
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/vector/vector.cc"
 )
 set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/async/async-pointer.h"
@@ -48,26 +44,24 @@ set(LIBRARY_HEADER_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.h"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/background/background.h"
-
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log.h"
-  
-  "${CMAKE_CURRENT_SOURCE_DIR}/nebula/nebula.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/player/player-score.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/ui.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/ui/score.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.h"
- 
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.h"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/vector/vector.h"
 )
 add_library(${LIBRARY_NAME} STATIC
   ${LIBRARY_SOURCE_FILES}

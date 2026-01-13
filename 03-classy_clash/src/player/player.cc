@@ -9,20 +9,23 @@ Player::Player() {
 };
 
 void Player::onInit() {
-  Rectangle collisionRectangle = {0, 0, 0.5f * config::PLAYER_TILE_WIDTH,
+  Rectangle collisionRectangle{0, 0, 0.5f * config::PLAYER_TILE_WIDTH,
                                   0.5f * config::PLAYER_TILE_HEIGHT};
   _player.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
   _player.collisionGeometry().raw() = collisionRectangle;
 
-  _player.tile().width = config::PLAYER_TILE_WIDTH;
-  _player.tile().height = config::PLAYER_TILE_HEIGHT;
-  _player.tile().x = 0;
-  _player.tile().y = 0;
-  _player.tile().texture() = _textureLoader->textures()[TEXTURE_SCARFY];
+  _tile.texture() = _textureLoader->textures()[TEXTURE_SCARFY];
+
+  _player.center().x = _tile.destiny().width/2;
+  _player.center().y = _tile.destiny().height/2;
 
   _player.position() =
-      Vector2{config::WINDOW_WIDTH / 2 - _player.tile().width / 2,
-              config::WINDOW_HEIGHT - _player.tile().height};
+      Vector2{config::WINDOW_WIDTH / 2 - _tile.destiny().width / 2,
+              config::WINDOW_HEIGHT - _tile.destiny().height};
+
+  
+  _animationTimer.start();
+
   _log->info("(player) Player initialized.");
 };
 
@@ -48,13 +51,13 @@ void Player::onUpdate() {
   if (_player.position().y < 0) {
     _player.position().y = 0;
   }
-  if (_player.position().y > (config::WINDOW_HEIGHT - _player.tile().height)) {
-    _player.position().y = config::WINDOW_HEIGHT - _player.tile().height;
+  if (_player.position().y > (config::WINDOW_HEIGHT - _tile.destiny().height)) {
+    _player.position().y = config::WINDOW_HEIGHT - _tile.destiny().height;
   }
 
   if (!_animationTimer.active()) {
     if (!jumping()) {
-      _player.tile().x = _tileAnimation.sprite().x;
+      _tile.source().x = _tileAnimation.tile().x * _tile.source().width;
       _tileAnimation.next();
     }
     _animationTimer.start();
@@ -62,20 +65,20 @@ void Player::onUpdate() {
 
   _player.update();
 
-  if (_player.checkCollision(_nebula->nebula())) {
-    _gameState->setGameOver();
-  }
+  _tile.destiny().x = _player.position().x;  
+  _tile.destiny().y = _player.position().y;
 }
 
 void Player::onRender() {
   if (!_gameState->started()) {
     return;
   }
-  _player.color() = _gameState->running() ? WHITE : GRAY;
-  _player.render();
+  _tile.color() = _gameState->running() ? WHITE : GRAY;
+  _tile.render();
 }
 
 bool Player::jumping() {
-  return _player.position().y < (config::WINDOW_HEIGHT - _player.tile().height);
+  return _player.position().y <
+         (config::WINDOW_HEIGHT - _tile.destiny().height);
 }
 } // namespace game

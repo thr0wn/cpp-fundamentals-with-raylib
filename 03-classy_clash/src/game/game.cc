@@ -8,10 +8,7 @@ std::unique_ptr<GameState> _gameState;
 std::unique_ptr<Database> _database;
 std::unique_ptr<TextureLoader> _textureLoader;
 
-std::unique_ptr<Background> _background;
 std::unique_ptr<Player> _player;
-std::unique_ptr<PlayerScore> _playerScore;
-std::unique_ptr<Nebula> _nebula;
 std::unique_ptr<UI> _ui;
 
 void createInstances() {
@@ -29,18 +26,6 @@ void createInstances() {
 
   _textureLoader = std::make_unique<TextureLoader>();
   AsyncPointer::push(_textureLoader.get());
-
-  _background = std::make_unique<Background>();
-  AsyncPointer::push(_background.get());
-
-  _nebula = std::make_unique<Nebula>();
-  AsyncPointer::push(_nebula.get());
-
-  _player = std::make_unique<Player>();
-  AsyncPointer::push(_player.get());
-
-  _playerScore = std::make_unique<PlayerScore>();
-  AsyncPointer::push(_playerScore.get());
 
   _ui = std::make_unique<UI>();
   AsyncPointer::push(_ui.get());
@@ -61,7 +46,7 @@ void start() {
   while (!(_gameState->stopped() || WindowShouldClose())) {
     _gameState->update();
     BeginDrawing();
-    ClearBackground(RAYWHITE);
+    ClearBackground(BLACK);
     _gameState->render();
     EndDrawing();
   }

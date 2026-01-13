@@ -8,10 +8,7 @@
 #include "log/log.h"
 #include "tile/texture-loader.h"
 #include "database/database.h"
-#include "nebula/nebula.h"
 #include "player/player.h"
-#include "player/player-score.h"
-#include "background/background.h"
 #include "raylib.h"
 #include "ui/ui.h"
 #include <memory>

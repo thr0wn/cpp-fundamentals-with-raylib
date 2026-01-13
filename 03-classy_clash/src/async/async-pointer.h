@@ -4,6 +4,7 @@
 #include <any>
 #include <list>
 #include <memory>
+#include <iostream>
 
 namespace game {
 namespace AsyncPointer {
@@ -17,8 +18,9 @@ template <typename T> T *get() {
         return ptr.type() == typeid(T *);
       });
   if (pointerIt != _pointers.end()) {
-
     return std::any_cast<T *>(*pointerIt);
+  } else {
+    std::cout << "GAMEINFO: (async-pointer) Pointer not found!";    
   }
   return nullptr;
 }
