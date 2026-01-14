@@ -1,4 +1,4 @@
-#include "tile/texture-loader.h"
+#include "texture/texture-loader.h"
 
 namespace game {
 TextureLoader::TextureLoader() {

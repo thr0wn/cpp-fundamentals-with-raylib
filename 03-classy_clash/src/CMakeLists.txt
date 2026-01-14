@@ -11,6 +11,7 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-state.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.cc"
 
+  "${CMAKE_CURRENT_SOURCE_DIR}/geometry/vector.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.cc"
@@ -19,17 +20,17 @@ set(LIBRARY_SOURCE_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
 
+  "${CMAKE_CURRENT_SOURCE_DIR}/texture/texture-loader.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile.cc"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.cc"
-  
-  "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.cc"
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.cc"
-
-  "${CMAKE_CURRENT_SOURCE_DIR}/vector/vector.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/world/world.cc"
 )
 set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/async/async-pointer.h"
@@ -42,6 +43,7 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game-node.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/game/game.h"
 
+  "${CMAKE_CURRENT_SOURCE_DIR}/geometry/vector.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/database/database.h"
@@ -50,18 +52,18 @@ set(LIBRARY_HEADER_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.h"
 
+  "${CMAKE_CURRENT_SOURCE_DIR}/texture/texture-loader.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile.h"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/ui.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/text.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/start.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/pause.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/ui/game-over.h"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
-
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/tile.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/tile/texture-loader.h"
-
-  "${CMAKE_CURRENT_SOURCE_DIR}/vector/vector.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/world/world.h"
 )
 add_library(${LIBRARY_NAME} STATIC
   ${LIBRARY_SOURCE_FILES}

@@ -4,18 +4,19 @@
 #include "event/emitter.h"
 #include "game/game-node.h"
 #include "log/log.h"
-#include "tile/tile.h"
+#include "texture/tile.h"
 #include <any>
 #include <map>
 
 namespace game {
+typedef enum GameTexture {
+  GAME_TEXTURE_WORLD = 0,
+} GameTexture;
+
 class TextureLoader {
 private:
   const char *_textureUrls[config::NUMBER_OF_TEXTURES] = {
-      "resources/textures/scarfy.png", "resources/textures/far-buildings.png",
-      "resources/textures/back-buildings.png",
-      "resources/textures/foreground.png",
-      "resources/textures/12_nebula_spritesheet.png"};
+      "resources/textures/tilemap.png"};
   Texture2D _textures[config::NUMBER_OF_TEXTURES];
 
   Emitter *_emitter = AsyncPointer::get<Emitter>();

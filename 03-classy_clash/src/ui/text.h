@@ -42,7 +42,6 @@ public:
   GameTextAlign &align();
   const GameTextAlign &align() const;
 
-  
   int &size();
   const int &size() const;
 

@@ -16,8 +16,8 @@ namespace config {
   const std::string GAME_NAME = "Dapper Dasher";  
   
   // Window constants
-  constexpr const float WINDOW_WIDTH = 768.0f;
-  constexpr const float WINDOW_HEIGHT = 576.0f;
+  constexpr const int WINDOW_WIDTH = 384;
+  constexpr const int WINDOW_HEIGHT = 384;
 
   // Text constants
   constexpr const int TEXT_SIZE_LARGE = 48;

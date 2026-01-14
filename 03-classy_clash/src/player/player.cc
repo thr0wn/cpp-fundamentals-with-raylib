@@ -14,8 +14,6 @@ void Player::onInit() {
   _player.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
   _player.collisionGeometry().raw() = collisionRectangle;
 
-  _tile.texture() = _textureLoader->textures()[TEXTURE_SCARFY];
-
   _player.center().x = _tile.destiny().width/2;
   _player.center().y = _tile.destiny().height/2;
 
@@ -23,15 +21,14 @@ void Player::onInit() {
       Vector2{config::WINDOW_WIDTH / 2 - _tile.destiny().width / 2,
               config::WINDOW_HEIGHT - _tile.destiny().height};
 
-  
   _animationTimer.start();
 
-  _log->info("(player) Player initialized.");
+  _log->info("(player) Initialized.");
 };
 
 void Player::onRestart() {
   onInit();
-  _log->info("(player) Player restarted.");
+  _log->info("(player) Restarted.");
 }
 
 void Player::onUpdate() {

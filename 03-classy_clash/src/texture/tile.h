@@ -5,14 +5,6 @@
 #include <map>
 
 namespace game {
-typedef enum GameTexture {
-  TEXTURE_SCARFY = 0,
-  TEXTURE_FAR_BUILDING,
-  TEXTURE_BACK_BUILDING,
-  TEXTURE_NEAR_BUILDING,
-  TEXTURE_NEBULA
-} GameTexture;
-
 class Tile {
 private:
   Rectangle _source;

@@ -6,9 +6,10 @@
 #include "game/game-state.h"
 #include "log/log.h"
 #include "raylib.h"
-#include "tile/tile.h"
-#include "tile/texture-loader.h"
+#include "texture/tile.h"
+#include "texture/texture-loader.h"
 #include "timer/timer.h"
+#include "geometry/vector.h"
 #include <cmath>
 #include <cstdio>
 #include <map>

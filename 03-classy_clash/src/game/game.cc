@@ -8,6 +8,7 @@ std::unique_ptr<GameState> _gameState;
 std::unique_ptr<Database> _database;
 std::unique_ptr<TextureLoader> _textureLoader;
 
+std::unique_ptr<World> _world;
 std::unique_ptr<Player> _player;
 std::unique_ptr<UI> _ui;
 
@@ -26,6 +27,9 @@ void createInstances() {
 
   _textureLoader = std::make_unique<TextureLoader>();
   AsyncPointer::push(_textureLoader.get());
+
+  _world = std::make_unique<World>();
+  AsyncPointer::push(_world.get());
 
   _ui = std::make_unique<UI>();
   AsyncPointer::push(_ui.get());

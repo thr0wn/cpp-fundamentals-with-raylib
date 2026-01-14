@@ -11,11 +11,11 @@ Start::Start() {
 
 void Start::onInit() {
   _textNewGame.position() = Vector2{0.025f * config::WINDOW_WIDTH,
-                             0.7f * config::WINDOW_HEIGHT};
+                             0.6f * config::WINDOW_HEIGHT};
 
   _textQuit.position() = Vector2{0.025f * config::WINDOW_WIDTH,
                           _textNewGame.position().y + _textNewGame.height()};
-  _log->info("(start-ui) Start UI initialized.");
+  _log->info("(start-ui) Initialized.");
 }
 
 void Start::onRender() {
