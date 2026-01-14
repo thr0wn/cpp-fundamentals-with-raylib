@@ -8,6 +8,7 @@ set(CMAKE_CXX_EXTENSIONS        OFF)
 # library and executable name definitions
 set(LIBRARY_NAME game-lib)
 set(EXECUTABLE_NAME exe)
+set(EXECUTABLE_STARTED_NAME exe-started)
 
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

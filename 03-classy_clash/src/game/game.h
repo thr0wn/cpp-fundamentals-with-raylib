@@ -1,22 +1,27 @@
 #pragma once
-#include "config/config.h"
 #include "async/async-pointer.h"
+#include "config/config.h"
+#include "database/database.h"
 #include "event/emitter.h"
 #include "event/event.h"
 #include "event/listener.h"
 #include "game/game-state.h"
 #include "log/log.h"
-#include "texture/texture-loader.h"
-#include "database/database.h"
-#include "world/world.h"
 #include "player/player.h"
 #include "raylib.h"
+#include "texture/texture-loader.h"
 #include "ui/ui.h"
+#include "world/world.h"
 #include <memory>
 
 namespace game {
+typedef struct {
+  bool autoStartGame;
+} StartOptions;
+inline StartOptions defaultStartOptions{false};
+
 void init();
-void start();
+void start(StartOptions options = defaultStartOptions);
 void stop();
 void deinit();
 } // namespace game

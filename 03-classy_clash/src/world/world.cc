@@ -8,13 +8,17 @@ World::World() {
 
 void World::onAfterInit() {
   _texture = _textureLoader->textures()[GAME_TEXTURE_WORLD];
-  _log->info("(world) Initialized.");  
+  _log->info("(world) Initialized.");
 }
 
 void World::onRender() {
   if (!_gameState->started()) {
     return;
   }
-  DrawTexture(_texture, 0, 0, WHITE);
+  _color = _gameState->paused() ? GRAY : WHITE;
+  DrawTextureEx(_texture, _position, 0, 4.0f, _color);
 }
+
+Vector2 &World::position() { return _position; };
+const Vector2 &World::position() const { return _position; };
 } // namespace game

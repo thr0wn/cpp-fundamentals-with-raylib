@@ -1,4 +1,5 @@
 #include "player/player.h"
+#include "raymath.h"
 
 namespace game {
 Player::Player() {
@@ -10,12 +11,12 @@ Player::Player() {
 
 void Player::onInit() {
   Rectangle collisionRectangle{0, 0, 0.5f * config::PLAYER_TILE_WIDTH,
-                                  0.5f * config::PLAYER_TILE_HEIGHT};
+                               0.5f * config::PLAYER_TILE_HEIGHT};
   _player.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
   _player.collisionGeometry().raw() = collisionRectangle;
 
-  _player.center().x = _tile.destiny().width/2;
-  _player.center().y = _tile.destiny().height/2;
+  _player.center().x = _tile.destiny().width / 2;
+  _player.center().y = _tile.destiny().height / 2;
 
   _player.position() =
       Vector2{config::WINDOW_WIDTH / 2 - _tile.destiny().width / 2,
@@ -36,46 +37,63 @@ void Player::onUpdate() {
     return;
   }
 
-  if (IsKeyDown(KEY_SPACE) && !jumping()) {
-    _velocity = _jumpVelocity;
-  } else {
-    _velocity += _gravity * GetFrameTime();
-  }
+  doTranslate();  
 
-  _player.position().y += _velocity * GetFrameTime();
+  // if (IsKeyDown(KEY_SPACE) && !jumping()) {
+  //   _velocity = _jumpVelocity;
+  // } else {
+  //   _velocity += _gravity * GetFrameTime();
+  // }
 
-  // y borders
-  if (_player.position().y < 0) {
-    _player.position().y = 0;
-  }
-  if (_player.position().y > (config::WINDOW_HEIGHT - _tile.destiny().height)) {
-    _player.position().y = config::WINDOW_HEIGHT - _tile.destiny().height;
-  }
+  // _player.position().y += _velocity * GetFrameTime();
 
-  if (!_animationTimer.active()) {
-    if (!jumping()) {
-      _tile.source().x = _tileAnimation.tile().x * _tile.source().width;
-      _tileAnimation.next();
-    }
-    _animationTimer.start();
-  }
+  // // y borders
+  // if (_player.position().y < 0) {
+  //   _player.position().y = 0;
+  // }
+  // if (_player.position().y > (config::WINDOW_HEIGHT -
+  // _tile.destiny().height)) {
+  //   _player.position().y = config::WINDOW_HEIGHT - _tile.destiny().height;
+  // }
 
-  _player.update();
+  // if (!_animationTimer.active()) {
+  //   if (!jumping()) {
+  //     _tile.source().x = _tileAnimation.tile().x * _tile.source().width;
+  //     _tileAnimation.next();
+  //   }
+  //   _animationTimer.start();
+  // }
 
-  _tile.destiny().x = _player.position().x;  
-  _tile.destiny().y = _player.position().y;
+  // _player.update();
+
+  // _tile.destiny().x = _player.position().x;
+  // _tile.destiny().y = _player.position().y;
 }
 
 void Player::onRender() {
   if (!_gameState->started()) {
     return;
   }
-  _tile.color() = _gameState->running() ? WHITE : GRAY;
-  _tile.render();
+  // _tile.color() = _gameState->running() ? WHITE : GRAY;
+  // _tile.render();
 }
 
-bool Player::jumping() {
-  return _player.position().y <
-         (config::WINDOW_HEIGHT - _tile.destiny().height);
+void Player::doTranslate() {
+  _translate.x = 0;
+  _translate.y = 0;
+  
+  if (IsKeyDown(KEY_A)) {
+    _translate.x += 1.0;
+  } else if (IsKeyDown(KEY_D)) {
+    _translate.x -= 1.0;
+  }
+  if (IsKeyDown(KEY_W)) {
+    _translate.y += 1.0;
+  } else if (IsKeyDown(KEY_S)) {
+    _translate.y -= 1.0;
+  }
+
+  _translate = Vector2Scale(Vector2Normalize(_translate), _velocity * GetFrameTime());
+  _world->position() = Vector2Add(_world->position(), _translate);    
 }
 } // namespace game

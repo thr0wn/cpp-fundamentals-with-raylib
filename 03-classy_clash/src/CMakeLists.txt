@@ -82,11 +82,8 @@ target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_BINARY_DIR}")
 
 # executable setup
 # ----------------------------------------------------------------------------------------
-set(EXECUTABLE_SOURCE_FILES
-  "${CMAKE_SOURCE_DIR}/src/main.cc"
-)
 add_executable(${EXECUTABLE_NAME}
-  ${EXECUTABLE_SOURCE_FILES}
+  "${CMAKE_SOURCE_DIR}/src/main.cc"
 )
 target_link_libraries(${EXECUTABLE_NAME} PUBLIC
   ${LIBRARY_NAME}
@@ -102,4 +99,18 @@ set_property(TARGET ${EXECUTABLE_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY $<
 add_custom_command(
   TARGET ${EXECUTABLE_NAME} POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${EXECUTABLE_NAME}>/resources
+)
+
+# executable_started (with game alredy started) setup
+# ----------------------------------------------------------------------------------------
+add_executable(${EXECUTABLE_STARTED_NAME}
+  "${CMAKE_SOURCE_DIR}/src/main-started.cc"
+)
+target_link_libraries(${EXECUTABLE_STARTED_NAME} PUBLIC
+  ${LIBRARY_NAME}
+)
+
+# output dir
+set_target_properties(${EXECUTABLE_STARTED_NAME} PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/fast-debug
 )

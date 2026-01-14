@@ -13,8 +13,8 @@ namespace config {
   constexpr std::int32_t project_version_patch{@PROJECT_VERSION_PATCH@};
 
   // Game constants
-  const std::string GAME_NAME = "Dapper Dasher";  
-  
+  const std::string GAME_NAME = "Classy Clash";  
+
   // Window constants
   constexpr const int WINDOW_WIDTH = 384;
   constexpr const int WINDOW_HEIGHT = 384;
@@ -30,7 +30,7 @@ namespace config {
   // database
   const std::string DATABASE_LOCATION = "./database";
 
-  //
+  // Total number of textures
   const int NUMBER_OF_TEXTURES = 5;  
   
   // Start UI constants
@@ -42,23 +42,14 @@ namespace config {
   const std::string PAUSE_TEXT_RESTART = "Restart";
   const std::string PAUSE_TEXT_QUIT = "Quit";
 
-  // Score UI constants
-  const std::string SCORE_TEXT_SCORE = "Score";
-  const std::string SCORE_TEXT_HIGH_SCORE = "High score";
-  const std::string SCORE_TEXT_PRESS_SPACE = "Press space to jump";
-
   // GameOver UI constants
   const std::string GAMEOVER_TEXT = "Game Over";
   const std::string GAMEOVER_TEXT_RESTART = "Restart";
   const std::string GAMEOVER_TEXT_QUIT = "Quit";
 
-  // Background
-  const float BACKGROUND_FAR_VELOCITY = -30.0f;
-  const float BACKGROUND_MID_VELOCITY = -60.0f;
-  const float BACKGROUND_NEAR_VELOCITY = -90.0f;
-
   // Player
   // movement
+  const float PLAYER_VELOCITY = 50;
   const float PLAYER_ANIMATION_TIME = .125f;
   const float PLAYER_INITIAL_GRAVITY = 1000.0f;
   const float PLAYER_JUMP_VELOCITY = -500.0f;
@@ -70,15 +61,4 @@ namespace config {
   // Service
   constexpr const int PLAYER_SERVICE_SCORE_INTERVAL = 1;
   const std::string PLAYER_SERVICE_DATABASE_HIGHSCORE_KEY = "highScore";
-
-  // Nebula
-  // movement
-  const float NEBULA_ANIMATION_TIME = .125f;
-  const float INITIAL_VELOCITY = -300.0f;
-  // tile
-  const float NEBULA_TILE_WIDTH = 100.0f;
-  const float  NEBULA_TILE_HEIGHT = 100.0f;
-  // tile animation
-  const int NEBULA_SPRITE_TOTAL = 60;
-  const int NEBULA_SPRITE_ROW_SIZE = 8;
 }

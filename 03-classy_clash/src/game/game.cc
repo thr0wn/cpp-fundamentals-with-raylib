@@ -31,6 +31,9 @@ void createInstances() {
   _world = std::make_unique<World>();
   AsyncPointer::push(_world.get());
 
+  _player = std::make_unique<Player>();
+  AsyncPointer::push(_player.get());
+
   _ui = std::make_unique<UI>();
   AsyncPointer::push(_ui.get());
 }
@@ -46,7 +49,10 @@ void init() {
   SetExitKey(KEY_NULL);
   _gameState->init();
 }
-void start() {
+void start(StartOptions options) {
+  if (options.autoStartGame) {
+    _gameState->start();    
+  }
   while (!(_gameState->stopped() || WindowShouldClose())) {
     _gameState->update();
     BeginDrawing();
@@ -62,7 +68,7 @@ void start() {
 void stop() { _gameState->stop(); }
 
 void deinit() {
-  _gameState->deinit();  
+  _gameState->deinit();
   CloseWindow();
 }
 } // namespace game

@@ -6,26 +6,28 @@
 #include "game/game-state.h"
 #include "log/log.h"
 #include "raylib.h"
+#include "raymath.h"
 #include "texture/tile.h"
 #include "texture/texture-loader.h"
 #include "timer/timer.h"
 #include "geometry/vector.h"
+#include "world/world.h"
 #include <cmath>
 #include <cstdio>
 #include <map>
 
 namespace game {
 class Player {
-private:  
+private:
   GameNode2D _player{"player-node"};
-  const float _gravity = config::PLAYER_INITIAL_GRAVITY;
-  float _velocity = 0;
-  const float _jumpVelocity = config::PLAYER_JUMP_VELOCITY;
+  Vector2 _translate{0, 0};  
+  float _velocity = config::PLAYER_VELOCITY;
 
   Tile _tile{Rectangle{0, 0 ,config::PLAYER_TILE_WIDTH, config::PLAYER_TILE_HEIGHT}};  
   TileAnimation _tileAnimation{config::PLAYER_SPRITE_TOTAL};
   Timer _animationTimer{config::PLAYER_ANIMATION_TIME};
 
+  World *_world = AsyncPointer::get<World>();  
   Emitter *_emitter = AsyncPointer::get<Emitter>();  
   GameState *_gameState = AsyncPointer::get<GameState>();
   TextureLoader *_textureLoader = AsyncPointer::get<TextureLoader>();
@@ -39,6 +41,6 @@ public:
   void onUpdate();
   void onRender();
 
-  bool jumping();
+  void doTranslate();  
 };
 } // namespace game
