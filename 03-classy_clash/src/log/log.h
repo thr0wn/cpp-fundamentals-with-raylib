@@ -1,5 +1,4 @@
 #pragma once
-#include "async/async-pointer.h"
 #include <iostream>
 #include <string>
 #include <fmt/format.h>
