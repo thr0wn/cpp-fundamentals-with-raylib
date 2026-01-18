@@ -18,6 +18,7 @@ set(RAYLIB_VERSION 5.0)
 set(RAYGUI_VERSION 4.0)
 set(FMT_VERSION 9.1.0)
 set(CATCH2_VERSION v3.5.3)
+set(LEVELDB_VERSION 1.23)
 
 # compile options
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU") 
@@ -68,6 +69,18 @@ if(ENABLE_TESTING)
         GIT_SHALLOW TRUE)
     FetchContent_MakeAvailable(Catch2)
 endif()
+
+# remove some not used build targets from leveldb
+option(LEVELDB_BUILD_TESTS "Build LevelDB's unit tests" OFF)
+option(LEVELDB_BUILD_BENCHMARKS "Build LevelDB's benchmarks" OFF)
+option(LEVELDB_INSTALL "Install LevelDB's header and library" OFF)
+
+FetchContent_Declare(
+    leveldb
+    GIT_REPOSITORY https://github.com/google/leveldb
+    GIT_TAG ${LEVELDB_VERSION}
+    GIT_SHALLOW TRUE)
+FetchContent_MakeAvailable(leveldb)
 
 add_subdirectory(src)
 add_subdirectory(tests)
