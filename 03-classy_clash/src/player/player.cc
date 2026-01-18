@@ -95,9 +95,9 @@ void Player::updateTile() {
     _idleAnimationTimer.start();
   }
 
-  if (_translate.x >= 0) {
+  if (_translate.x > 0) {
     _idleTile.source().width = std::abs(_idleTile.source().width);
-  } else {
+  } else if(_translate.x < 0) {
     _idleTile.source().width = -std::abs(_idleTile.source().width);    
   }
 }
