@@ -17,6 +17,7 @@ public:
   void init();
   void update();
   void render();
+  void render2d();
   void start();
   void restart();
   void pause();  

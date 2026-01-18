@@ -6,18 +6,19 @@
 #include "log/log.h"
 #include "texture/tile.h"
 #include <any>
+#include <cstring>
 #include <map>
 
 namespace game {
 typedef enum GameTexture {
-  GAME_TEXTURE_WORLD = 0,
+  GAME_TEXTURE_WORLD_FOREST = 0,
+  GAME_TEXTURE_CHARACTER_KNIGHT_IDLE,
 } GameTexture;
 
 class TextureLoader {
 private:
-  const char *_textureUrls[config::NUMBER_OF_TEXTURES] = {
-      "resources/textures/tilemap.png"};
-  Texture2D _textures[config::NUMBER_OF_TEXTURES];
+  char *_textureUrls[config::TEXTURES_SIZE];
+  Texture2D _textures[config::TEXTURES_SIZE];
 
   Emitter *_emitter = AsyncPointer::get<Emitter>();
   Log *_log = AsyncPointer::get<Log>();

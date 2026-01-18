@@ -46,6 +46,8 @@ class Geometry {
 private:
   RawGeometry _raw;
   GeometryPivot _pivot;
+  Vector2 _origin;
+  Vector2 _position;
 
 public:
   RawGeometry &raw();
@@ -54,9 +56,14 @@ public:
   GeometryPivot &pivot();
   const GeometryPivot &pivot() const;
 
+  Vector2 &origin();
+  const Vector2 &origin() const;
+  
+  Vector2 &position();
+  const Vector2 &position() const;
+
   bool checkCollision(const Geometry &other) const;
-  void translate(const Vector2 &center, const Vector2 &translation,
-                 Geometry &out) const;
+  void update() const;
   void render() const;
 };
 } // namespace game

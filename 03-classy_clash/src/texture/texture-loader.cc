@@ -4,23 +4,25 @@ namespace game {
 TextureLoader::TextureLoader() {
   _emitter->on("game/init", [this](Event event) { onInit(); });
   _emitter->on("game/deinit", [this](Event event) { onDeinit(); });
+
+  memcpy(_textureUrls, config::TEXTURE_URLS, sizeof(config::TEXTURE_URLS));
 };
 
 void TextureLoader::onInit() {
-  for (int i = 0; i < config::NUMBER_OF_TEXTURES; i++) {
+  for (int i = 0; i < config::TEXTURES_SIZE; i++) {
     _textures[i] = LoadTexture(_textureUrls[i]);
   }
   _log->info("(texture-loader) Loaded textures.");
 }
 
 void TextureLoader::onDeinit() {
-  for (int i = 0; i < config::NUMBER_OF_TEXTURES; i++) {
+  for (int i = 0; i < config::TEXTURES_SIZE; i++) {
     UnloadTexture(_textures[i]);
   }
   _log->info("(texture-loader) Unloaded textures.");
 }
 
-const char * const *TextureLoader::textureUrls() const { return _textureUrls; };
+const char *const *TextureLoader::textureUrls() const { return _textureUrls; };
 const Texture2D *TextureLoader::textures() const { return _textures; };
 
 } // namespace game

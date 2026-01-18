@@ -1,5 +1,6 @@
 #pragma once
 #include "geometry/geometry.h"
+#include "geometry/vector.h"
 #include "texture/tile.h"
 #include <fmt/format.h>
 #include <list>
@@ -33,9 +34,7 @@ private:
   Vector2 _position{0};
 
   // collision
-  Vector2 _center;
   Geometry _collisionGeometry;
-  Geometry _updatedCollisionGeometry;
 
 public:
   GameNode2D(const std::string &name);
@@ -43,14 +42,8 @@ public:
   Vector2 &position();
   const Vector2 &position() const;
 
-  Vector2 &center();
-  const Vector2 &center() const;
-
   Geometry &collisionGeometry();
   const Geometry &collisionGeometry() const;
-
-  Geometry &updatedCollisionGeometry();
-  const Geometry &updatedCollisionGeometry() const;
 
   bool checkCollision(const GameNode2D &other);
 

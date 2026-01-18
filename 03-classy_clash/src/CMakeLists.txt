@@ -14,14 +14,13 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/vector.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.cc"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/database/database.cc"
-
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/texture-loader.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile-animation.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
 
@@ -46,14 +45,13 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/vector.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/geometry/geometry.h"
 
-  "${CMAKE_CURRENT_SOURCE_DIR}/database/database.h"
-
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/texture-loader.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile-animation.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/timer/timer.cc"
 
@@ -73,7 +71,6 @@ target_link_libraries(${LIBRARY_NAME} PUBLIC
   raygui
   raylib
   fmt::fmt
-  leveldb
 )
 
 # enable #include without relative path

@@ -13,6 +13,10 @@ void GameState::render() {
   _emitter->emit({"game/render", {}},
                 {{"log", false}, {"before", true}, {"after", true}});
 };
+void GameState::render2d() {
+  _emitter->emit({"game/render2d", {}},
+                {{"log", false}, {"before", true}, {"after", true}});
+};
 void GameState::start() {
   _started = true;
   _emitter->emit({"game/start", {}}, {{"before", true}, {"after", true}});

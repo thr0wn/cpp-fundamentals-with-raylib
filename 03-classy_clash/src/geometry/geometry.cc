@@ -7,6 +7,12 @@ const RawGeometry &Geometry::raw() const { return _raw; }
 GeometryPivot &Geometry::pivot() { return _pivot; }
 const GeometryPivot &Geometry::pivot() const { return _pivot; }
 
+Vector2 &Geometry::position() { return _position; }
+const Vector2 &Geometry::position() const { return _position; }
+
+Vector2 &Geometry::origin() { return _origin; }
+const Vector2 &Geometry::origin() const { return _origin; }
+
 bool Geometry::checkCollision(const Geometry &other) const {
   if (std::holds_alternative<Rectangle>(_raw) &&
       std::holds_alternative<Rectangle>(other._raw)) {
@@ -34,34 +40,23 @@ bool Geometry::checkCollision(const Geometry &other) const {
   return false;
 }
 
-void Geometry::translate(const Vector2 &center, const Vector2 &translation,
-                         Geometry &out) const {
+void Geometry::update() const {
   if (std::holds_alternative<Rectangle>(_raw)) {
-    if (!std::holds_alternative<Rectangle>(out._raw)) {
-      out._raw = std::get<Rectangle>(_raw);
-    }
-    const Rectangle &rec = std::get<Rectangle>(_raw);
-    Rectangle &recOut = std::get<Rectangle>(out._raw);
-    recOut.x = rec.x + translation.x;
-    recOut.y = rec.y + translation.y;
-    recOut.width = rec.width;
-    recOut.height = rec.height;
+    Rectangle rec = std::get<Rectangle>(_raw);
+    rec.x = _origin.x + _position.x;
+    rec.y = _origin.y + _position.y;
     if (_pivot == GEOMETRY_PIVOT_CENTER) {
-      recOut.x += center.x - recOut.width / 2;
-      recOut.y += center.y - recOut.height / 2;
+      rec.x -= rec.width / 2;
+      rec.y -= rec.height / 2;
     }
   } else if (std::holds_alternative<Circle>(_raw)) {
-    if (!std::holds_alternative<Circle>(out._raw)) {
-      out._raw = std::get<Circle>(_raw);
-    }
-    const Circle &circle = std::get<Circle>(_raw);
-    Circle &circleOut = std::get<Circle>(out._raw);
-    circleOut.center.x = circle.center.x + translation.x;
-    circleOut.center.y = circle.center.y + translation.y;
-    circleOut.radius = circle.radius;
+    Circle circle = std::get<Circle>(_raw);
+    circle.center.x = _origin.x + _position.x;
+    circle.center.y = _origin.y + _position.y;
+    circle.radius = circle.radius;
     if (_pivot == GEOMETRY_PIVOT_CENTER) {
-      circleOut.center.x += center.x - circleOut.radius / 2;
-      circleOut.center.y += center.y - circleOut.radius / 2;
+      circle.center.x -= circle.radius / 2;
+      circle.center.y -= circle.radius / 2;
     }
   } else {
     std::cout << "GAMEINFO: (geometry) translate not implemented!!!\n";

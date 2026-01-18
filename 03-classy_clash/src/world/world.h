@@ -22,9 +22,6 @@ public:
   World();
 
   void onAfterInit();
-  void onRender();
-
-  Vector2 &position();  
-  const Vector2 &position() const;  
+  void onRender2d();
 };
 }

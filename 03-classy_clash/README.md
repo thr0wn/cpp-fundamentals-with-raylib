@@ -25,5 +25,5 @@ cmake -S . -B build && cmake --build build --target unit-tests && ./build/tests/
 
 ### Watch with nodemon
 ```shell
-npx nodemon --exec "cmake -S . -B build && cmake --build build && ./build/classy_clash/exe" --watch src -e cpp,hpp,txt
+npx nodemon --exec "cmake -S . -B build && cmake --build build && ./build/classy_clash/exe" --watch src -e cc,h,txt
 ```

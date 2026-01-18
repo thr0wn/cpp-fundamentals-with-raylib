@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22.0)
 
 project(classy_clash)
-set(CMAKE_CXX_STANDARD          17)
+set(CMAKE_CXX_STANDARD          20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
@@ -17,7 +17,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(RAYLIB_VERSION 5.0)
 set(RAYGUI_VERSION 4.0)
 set(FMT_VERSION 9.1.0)
-set(LEVELDB_VERSION 1.23)
 set(CATCH2_VERSION v3.5.3)
 
 # compile options
@@ -59,18 +58,6 @@ FetchContent_Declare(
     GIT_TAG ${FMT_VERSION}
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(fmt)
-
-# remove some not used build targets from leveldb
-option(LEVELDB_BUILD_TESTS "Build LevelDB's unit tests" OFF)
-option(LEVELDB_BUILD_BENCHMARKS "Build LevelDB's benchmarks" OFF)
-option(LEVELDB_INSTALL "Install LevelDB's header and library" OFF)
-
-FetchContent_Declare(
-    leveldb
-    GIT_REPOSITORY https://github.com/google/leveldb
-    GIT_TAG ${LEVELDB_VERSION}
-    GIT_SHALLOW TRUE)
-FetchContent_MakeAvailable(leveldb)
 
 # fetch catch2
 if(ENABLE_TESTING)

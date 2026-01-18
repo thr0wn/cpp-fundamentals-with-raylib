@@ -5,7 +5,6 @@ namespace {
 std::unique_ptr<Emitter> _emitter;
 std::unique_ptr<Log> _log;
 std::unique_ptr<GameState> _gameState;
-std::unique_ptr<Database> _database;
 std::unique_ptr<TextureLoader> _textureLoader;
 
 std::unique_ptr<World> _world;
@@ -21,9 +20,6 @@ void createInstances() {
 
   _gameState = std::make_unique<GameState>();
   AsyncPointer::push(_gameState.get());
-
-  _database = std::make_unique<Database>();
-  AsyncPointer::push(_database.get());
 
   _textureLoader = std::make_unique<TextureLoader>();
   AsyncPointer::push(_textureLoader.get());
@@ -57,7 +53,13 @@ void start(StartOptions options) {
     _gameState->update();
     BeginDrawing();
     ClearBackground(BLACK);
-    _gameState->render();
+
+    BeginMode2D(_player->camera());
+    _gameState->render2d();
+    EndMode2D();
+
+    _gameState->render();    
+
     EndDrawing();
   }
   if (WindowShouldClose()) {
