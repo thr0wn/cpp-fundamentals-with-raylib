@@ -32,11 +32,12 @@ namespace config {
 
   // Textures 
   // Total number of textures
-  const int TEXTURES_SIZE = 2;
+  const int TEXTURES_SIZE = 3;
   // Texture urls
   inline const char *TEXTURE_URLS[TEXTURES_SIZE] = {
       "resources/textures/world/forest.png",
-      "resources/textures/characters/knight_idle_spritesheet.png"
+      "resources/textures/characters/knight_idle_spritesheet.png",
+      "resources/textures/characters/knight_run_spritesheet.png"
   };
 
   // Start UI constants

@@ -31,10 +31,11 @@ public:
 
 class GameNode2D : public GameNode {
 private:
-  Vector2 _position{0};
-
-  // collision
-  Geometry _collisionGeometry;
+  Vector2 _position = Vector2{0};
+  float _rotation = 0;  
+  Tile *_tile;
+  Geometry *_geometry;
+  bool _debug;
 
 public:
   GameNode2D(const std::string &name);
@@ -42,11 +43,20 @@ public:
   Vector2 &position();
   const Vector2 &position() const;
 
-  Geometry &collisionGeometry();
-  const Geometry &collisionGeometry() const;
+  float &rotation();
+  const float &rotation() const;
+
+  Tile *&tile();
+  const Tile * const tile() const;
+
+  Geometry *&geometry();
+  const Geometry * const geometry() const;
+
+  bool &debug();
+  const bool &debug() const;
 
   bool checkCollision(const GameNode2D &other);
-
   void update();
+  void render() const;  
 };
 } // namespace game

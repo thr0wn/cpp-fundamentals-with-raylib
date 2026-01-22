@@ -13,6 +13,7 @@ namespace game {
 typedef enum GameTexture {
   GAME_TEXTURE_WORLD_FOREST = 0,
   GAME_TEXTURE_CHARACTER_KNIGHT_IDLE,
+  GAME_TEXTURE_CHARACTER_KNIGHT_RUN,
 } GameTexture;
 
 class TextureLoader {
@@ -28,8 +29,8 @@ public:
 
   void onInit();
   void onDeinit();
-
-  const char * const*textureUrls() const;
-  const Texture2D *textures() const;
+    
+  char **textureUrls();
+  Texture2D *textures();
 };
 } // namespace game

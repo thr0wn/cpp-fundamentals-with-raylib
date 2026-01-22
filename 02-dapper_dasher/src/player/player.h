@@ -21,8 +21,8 @@ private:
   const float _gravity = config::PLAYER_INITIAL_GRAVITY;
   float _velocity = 0;
   const float _jumpVelocity = config::PLAYER_JUMP_VELOCITY;
-  TileAnimation _idleTileAnimation{config::PLAYER_SPRITE_TOTAL};
-  Timer _idleAnimationTimer{config::PLAYER_ANIMATION_TIME};
+  TileAnimation _tileAnimation{config::PLAYER_SPRITE_TOTAL};
+  Timer _animationTimer{config::PLAYER_ANIMATION_TIME};
 
   Nebula *_nebula = AsyncPointer::get<Nebula>();
   Emitter *_emitter = AsyncPointer::get<Emitter>();  

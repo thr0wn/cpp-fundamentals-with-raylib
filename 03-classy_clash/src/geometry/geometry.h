@@ -35,8 +35,7 @@ typedef struct Poly {
   int pointCount;
 } Poly;
 
-typedef std::variant<Rectangle, Circle, Triangle, Poly, Line, BoundingBox,
-                     Sphere>
+typedef std::variant<Rectangle*, Circle*, Triangle*, Poly*, Line*, BoundingBox*, Sphere*>
     RawGeometry;
 typedef enum GeometryPivot {
   GEOMETRY_PIVOT_TOP_LEFT = 0,
@@ -46,8 +45,9 @@ class Geometry {
 private:
   RawGeometry _raw;
   GeometryPivot _pivot;
-  Vector2 _origin;
-  Vector2 _position;
+  Vector2 _origin = Vector2{0};
+  Vector2 _position = Vector2{0};
+  float _rotation = 0;
 
 public:
   RawGeometry &raw();
@@ -61,6 +61,9 @@ public:
   
   Vector2 &position();
   const Vector2 &position() const;
+
+  float &rotation();
+  const float &rotation() const;  
 
   bool checkCollision(const Geometry &other) const;
   void update() const;

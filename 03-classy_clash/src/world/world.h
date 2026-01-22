@@ -10,8 +10,8 @@ namespace game {
 class World {
 private:
   Color _color{WHITE};
-  Texture2D _texture;
-  Vector2 _position{0,0};  
+  Texture2D *_texture;
+  Vector2 _position{0,0};
 
   GameState *_gameState = AsyncPointer::get<GameState>();
   TextureLoader *_textureLoader = AsyncPointer::get<TextureLoader>();

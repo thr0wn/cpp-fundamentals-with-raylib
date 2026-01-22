@@ -1,4 +1,5 @@
 #include "player/player.h"
+#include "raylib.h"
 
 namespace game {
 Player::Player() {
@@ -8,24 +9,29 @@ Player::Player() {
   _emitter->on("game/render2d", [this](Event event) { onRender2d(); });
 };
 
+const Camera2D &Player::camera() const { return _camera; };
+
 void Player::onInit() {
   // collision
-  Rectangle collisionRectangle{0, 0, 0.5f * config::PLAYER_TILE_WIDTH,
-                               0.5f * config::PLAYER_TILE_HEIGHT};
-  _player.collisionGeometry().pivot() = GEOMETRY_PIVOT_CENTER;
-  _player.collisionGeometry().raw() = collisionRectangle;
-  _player.collisionGeometry().origin().x = _idleTile.destiny().width / 2;
-  _player.collisionGeometry().origin().y = _idleTile.destiny().height / 2;
+  _collisionGeometry.pivot() = GEOMETRY_PIVOT_CENTER;
+  _collisionGeometry.raw() = &_collisionRectangle;
+  _collisionGeometry.origin().x = _tile.destiny().width / 2;
+  _collisionGeometry.origin().y = _tile.destiny().height / 2;
+  _player.geometry() = &_collisionGeometry;
 
   // position and zoom
-  float zoom = 2; // todo: move it to config  
-  Vector2 halfScreen = Vector2{config::WINDOW_WIDTH / 2.0f, config::WINDOW_HEIGHT / 2.0f};  
-  vector::copy(Vector2Scale(halfScreen, 1.0f/zoom), _player.position());
+  float zoom = 2; // todo: move it to config
+  Vector2 halfScreen =
+      Vector2{config::WINDOW_WIDTH / 2.0f, config::WINDOW_HEIGHT / 2.0f};
+  vector::copy(Vector2Scale(halfScreen, 1.0f / zoom), _player.position());
 
   // tile
-  _idleTile.texture() =
-      _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
-  _idleAnimationTimer.start();
+  _tileAnimation.timer() = &_animationTimer;
+  _tile.animation() = &_tileAnimation;
+  _tile.texture() =
+      &_textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
+  _animationTimer.start();
+  _player.tile() = &_tile;
 
   // camera
   vector::copy(_player.position(), _camera.target);
@@ -45,20 +51,21 @@ void Player::onUpdate() {
     return;
   }
 
-  updatePosition();
+  updateTranslate();
   updateCamera();
   updateTile();
+  updateGameObject();
 }
 
 void Player::onRender2d() {
   if (!_gameState->started()) {
     return;
   }
-  _idleTile.color() = _gameState->running() ? WHITE : GRAY;
-  _idleTile.render();
+  _tile.color() = _gameState->running() ? WHITE : GRAY;
+  _player.render();
 }
 
-void Player::updatePosition() {
+void Player::updateTranslate() {
   _translate.x = 0;
   _translate.y = 0;
 
@@ -83,25 +90,21 @@ void Player::updateCamera() {
 }
 
 void Player::updateTile() {
-  // tile move
-  _idleTile.destiny().x = _player.position().x;
-  _idleTile.destiny().y = _player.position().y;
+  if (Vector2Length(_translate) > 0) {
+    _tile.texture() =
+        &_textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_RUN];
 
-  // tile animation  
-  if (!_idleAnimationTimer.active()) {
-    _idleTile.source().x =
-        _idleTileAnimation.position().x * _idleTile.source().width;
-    _idleTileAnimation.next();
-    _idleAnimationTimer.start();
-  }
-
-  if (_translate.x > 0) {
-    _idleTile.source().width = std::abs(_idleTile.source().width);
-  } else if(_translate.x < 0) {
-    _idleTile.source().width = -std::abs(_idleTile.source().width);    
+    if (_translate.x > 0) {
+      _tile.source().width = std::abs(_tile.source().width);
+    } else if (_translate.x < 0) {
+      _tile.source().width = -std::abs(_tile.source().width);
+    }
+  } else {
+    _tile.texture() =
+        &_textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
   }
 }
 
-const Camera2D &Player::camera() const { return _camera; };
+void Player::updateGameObject() { _player.update(); }
 
 } // namespace game
