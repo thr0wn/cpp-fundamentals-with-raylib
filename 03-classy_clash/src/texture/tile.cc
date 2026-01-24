@@ -14,8 +14,8 @@ const Rectangle &Tile::source() const { return _source; };
 Rectangle &Tile::destiny() { return _destiny; };
 const Rectangle &Tile::destiny() const { return _destiny; };
 
-Texture2D *&Tile::texture() { return _texture; };
-const Texture2D * const Tile::texture() const { return _texture; };
+Texture2D &Tile::texture() { return _texture; };
+const Texture2D Tile::texture() const { return _texture; };
 
 Vector2 &Tile::origin() { return _origin; };
 const Vector2 &Tile::origin() const { return _origin; };
@@ -44,8 +44,6 @@ void Tile::update() {
 }
 
 void Tile::render() const {
-  if (_texture) {
-    DrawTexturePro(*_texture, _source, _destiny, _origin, _rotation, _color);
-  }
+  DrawTexturePro(_texture, _source, _destiny, _origin, _rotation, _color);
 }
 } // namespace game

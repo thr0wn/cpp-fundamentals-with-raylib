@@ -29,7 +29,7 @@ void Player::onInit() {
   _tileAnimation.timer() = &_animationTimer;
   _tile.animation() = &_tileAnimation;
   _tile.texture() =
-      &_textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
+      _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
   _animationTimer.start();
   _player.tile() = &_tile;
 
@@ -92,7 +92,7 @@ void Player::updateCamera() {
 void Player::updateTile() {
   if (Vector2Length(_translate) > 0) {
     _tile.texture() =
-        &_textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_RUN];
+        _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_RUN];
 
     if (_translate.x > 0) {
       _tile.source().width = std::abs(_tile.source().width);
@@ -101,7 +101,7 @@ void Player::updateTile() {
     }
   } else {
     _tile.texture() =
-        &_textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
+        _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
   }
 }
 

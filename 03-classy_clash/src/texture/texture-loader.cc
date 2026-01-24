@@ -22,8 +22,8 @@ void TextureLoader::onDeinit() {
   _log->info("(texture-loader) Unloaded textures.");
 }
 
-char **TextureLoader::textureUrls() { return _textureUrls; };
-Texture2D *TextureLoader::textures() { return _textures; };
+const char * const *TextureLoader::textureUrls() const { return _textureUrls; };
+const Texture2D * const TextureLoader::textures() const { return _textures; };
 
 } // namespace game
   

@@ -7,16 +7,16 @@ World::World() {
 }
 
 void World::onAfterInit() {
-  _texture = &_textureLoader->textures()[GAME_TEXTURE_WORLD_FOREST];
+  _texture = _textureLoader->textures()[GAME_TEXTURE_WORLD_FOREST];
   _log->info("(world) Initialized.");
 }
 
 void World::onRender2d() {
-  if (!_gameState->started() || !_texture) {
+  if (!_gameState->started()) {
     return;
   }
   _color = _gameState->paused() ? GRAY : WHITE;
-  DrawTextureEx(*_texture, _position, 0, 1.0f, _color);
+  DrawTextureEx(_texture, _position, 0, 1.0f, _color);
 }
 
 } // namespace game

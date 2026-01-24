@@ -8,7 +8,7 @@ class Tile {
 private:
   Rectangle _source;
   Rectangle _destiny;
-  Texture2D *_texture;
+  Texture2D _texture;
   Vector2 _origin = Vector2{0};
   Vector2 _position = Vector2{0};  
   float _rotation = 0;  
@@ -26,8 +26,8 @@ public:
   Rectangle &destiny();
   const Rectangle &destiny() const;
 
-  Texture2D *&texture();
-  const Texture2D * const texture() const;
+  Texture2D &texture();
+  const Texture2D texture() const;
 
   Vector2 &origin();
   const Vector2 &origin() const;
