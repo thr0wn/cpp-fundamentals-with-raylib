@@ -16,8 +16,8 @@ namespace config {
   const std::string GAME_NAME = "Classy Clash";  
 
   // Window constants
-  constexpr const int WINDOW_WIDTH = 384;
-  constexpr const int WINDOW_HEIGHT = 384;
+  constexpr const int WINDOW_WIDTH = 512;
+  constexpr const int WINDOW_HEIGHT = 512;
 
   // Text constants
   constexpr const int TEXT_SIZE_LARGE = 48;

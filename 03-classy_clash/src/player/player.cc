@@ -20,7 +20,7 @@ void Player::onInit() {
   _player.geometry() = &_collisionGeometry;
 
   // position and zoom
-  float zoom = 2; // todo: move it to config
+  float zoom = 4; // todo: move it to config
   Vector2 halfScreen =
       Vector2{config::WINDOW_WIDTH / 2.0f, config::WINDOW_HEIGHT / 2.0f};
   vector::copy(Vector2Scale(halfScreen, 1.0f / zoom), _player.position());
