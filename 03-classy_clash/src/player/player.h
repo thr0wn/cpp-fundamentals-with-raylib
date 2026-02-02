@@ -21,7 +21,7 @@
 namespace game {
 class Player {
 private:
-  GameNode2D _player{"player-node"};
+  GameNode2D _player;
   Vector2 _translate{0, 0};
   float _velocity = config::PLAYER_VELOCITY;
   Camera2D _camera;

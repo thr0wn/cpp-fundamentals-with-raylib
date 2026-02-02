@@ -12,19 +12,15 @@ class GameNode {
 protected:
   inline static uint _idCounter = 0;
   uint _id;
-  std::string _name;
   std::list<GameNode> _children;
 
 public:
-  GameNode(const std::string &name);
-
-  std::string &name();
-  const std::string &name() const;
+  GameNode();
 
   const uint id() const;
 
-  void push(GameNode gameNode);
-  void erase(GameNode gameNode);
+  void add(GameNode gameNode);
+  void remove(GameNode gameNode);
 
   virtual void update(){};
 };
@@ -38,7 +34,7 @@ private:
   bool _debug;
 
 public:
-  GameNode2D(const std::string &name);
+  GameNode2D();
 
   Vector2 &position();
   const Vector2 &position() const;

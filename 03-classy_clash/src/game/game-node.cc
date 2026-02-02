@@ -1,22 +1,19 @@
 #include "game/game-node.h"
 
 namespace game {
-GameNode::GameNode(const std::string &name) : _name(name) {
+GameNode::GameNode() {
   _id = _idCounter++;
 }
 
-std::string &GameNode::name() { return _name; }
-const std::string &GameNode::name() const { return _name; }
-
 const uint GameNode::id() const { return _id; }
 
-void GameNode::push(GameNode gameNode) { _children.push_back(gameNode); }
-void GameNode::erase(GameNode gameNode) {
+void GameNode::add(GameNode gameNode) { _children.push_back(gameNode); }
+void GameNode::remove(GameNode gameNode) {
   _children.remove_if(
       [gameNode](auto child) { return child.id() == gameNode.id(); });
 }
 
-GameNode2D::GameNode2D(const std::string &name) : GameNode(name) {}
+GameNode2D::GameNode2D() : GameNode() {}
 
 Vector2 &GameNode2D::position() { return _position; }
 const Vector2 &GameNode2D::position() const { return _position; }
