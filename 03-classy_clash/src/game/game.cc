@@ -38,7 +38,7 @@ void createInstances() {
 void init() {
   createInstances();
   InitWindow(config::WINDOW_WIDTH, config::WINDOW_HEIGHT,
-             config::GAME_NAME.data());
+             config::GAME_NAME.c_str());
   SetTargetFPS(60);
 
   // Disable default close with
