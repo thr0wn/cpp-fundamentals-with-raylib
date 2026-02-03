@@ -1,6 +1,9 @@
 #include "geometry/geometry.h"
 
 namespace game {
+Geometry::Geometry() {};
+Geometry::Geometry(RawGeometry raw): _raw(raw) {};
+
 RawGeometry &Geometry::raw() { return _raw; }
 const RawGeometry &Geometry::raw() const { return _raw; }
 

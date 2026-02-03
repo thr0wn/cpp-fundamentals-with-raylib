@@ -2,7 +2,6 @@
 #include "config/config.h"
 #include "async/async-pointer.h"
 #include "event/emitter.h"
-#include "game/game-node.h"
 #include "log/log.h"
 #include "texture/tile.h"
 #include <any>

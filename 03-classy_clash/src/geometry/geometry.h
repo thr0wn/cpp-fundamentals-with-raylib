@@ -50,6 +50,9 @@ private:
   float _rotation = 0;
 
 public:
+  Geometry();
+  Geometry(RawGeometry raw);
+  
   RawGeometry &raw();
   const RawGeometry &raw() const;
 

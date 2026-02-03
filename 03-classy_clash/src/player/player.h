@@ -2,7 +2,7 @@
 #include "async/async-pointer.h"
 #include "config/config.h"
 #include "event/emitter.h"
-#include "game/game-node-2d.h"
+#include "node/node-2d.h"
 #include "game/game-state.h"
 #include "geometry/vector.h"
 #include "log/log.h"
@@ -21,7 +21,7 @@
 namespace game {
 class Player {
 private:
-  GameNode2D _player;
+  Node2D _player;
   Vector2 _translate{0, 0};
   float _velocity = config::PLAYER_VELOCITY;
   Camera2D _camera;
@@ -30,10 +30,10 @@ private:
   TileAnimation _tileAnimation{config::PLAYER_TILE_ANIMATION_IDLE_SIZE};
   Timer _animationTimer{config::PLAYER_ANIMATION_TIME};
 
-  Geometry _collisionGeometry;
   Rectangle _collisionRectangle =
       Rectangle{0, 0, 0.5f * config::PLAYER_TILE_WIDTH,
                 0.5f * config::PLAYER_TILE_HEIGHT};
+  Geometry _collisionGeometry{&_collisionRectangle};  
 
   World *_world = AsyncPointer::get<World>();
   Emitter *_emitter = AsyncPointer::get<Emitter>();

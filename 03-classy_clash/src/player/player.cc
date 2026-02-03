@@ -14,13 +14,12 @@ const Camera2D &Player::camera() const { return _camera; };
 void Player::onInit() {
   // collision
   _collisionGeometry.pivot() = GEOMETRY_PIVOT_CENTER;
-  _collisionGeometry.raw() = &_collisionRectangle;
   _collisionGeometry.origin().x = _tile.destiny().width / 2;
   _collisionGeometry.origin().y = _tile.destiny().height / 2;
   _player.geometry() = &_collisionGeometry;
 
   // position and zoom
-  float zoom = 4; // todo: move it to config
+  float zoom = 2; // todo: move it to config
   Vector2 halfScreen =
       Vector2{config::WINDOW_WIDTH / 2.0f, config::WINDOW_HEIGHT / 2.0f};
   vector::copy(Vector2Scale(halfScreen, 1.0f / zoom), _player.position());

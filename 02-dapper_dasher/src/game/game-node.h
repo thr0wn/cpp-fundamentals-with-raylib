@@ -7,28 +7,28 @@
 #include <sys/types.h>
 
 namespace game {
-class GameNode {
+class Node {
 protected:
   inline static uint _idCounter = 0;
   uint _id;
   std::string _name;
-  std::list<GameNode> _children;
+  std::list<Node> _children;
 
 public:
-  GameNode(const std::string &name);
+  Node(const std::string &name);
 
   std::string &name();
   const std::string &name() const;
 
   const uint id() const;
 
-  void push(GameNode gameNode);
-  void erase(GameNode gameNode);
+  void push(Node gameNode);
+  void erase(Node gameNode);
 
   virtual void update(){};
 };
 
-class GameNode2D : public GameNode {
+class GameNode2D : public Node {
 private:
   Tile _tile;
   Vector2 _position{0};

@@ -4,10 +4,10 @@
 #include "texture/tile.h"
 #include <fmt/format.h>
 #include <string>
-#include "game-node.h"
+#include "node/node.h"
 
 namespace game {
-class GameNode2D : public GameNode {
+class Node2D : public Node {
 private:
   Vector2 _position = Vector2{0};
   float _rotation = 0;  
@@ -16,7 +16,7 @@ private:
   bool _debug;
 
 public:
-  GameNode2D();
+  Node2D();
 
   Vector2 &position();
   const Vector2 &position() const;
@@ -33,7 +33,7 @@ public:
   bool &debug();
   const bool &debug() const;
 
-  bool checkCollision(const GameNode2D &other);
+  bool checkCollision(const Node2D &other);
   void update();
   void render() const;  
 };
