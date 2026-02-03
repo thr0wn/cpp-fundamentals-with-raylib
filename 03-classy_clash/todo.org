@@ -3,48 +3,95 @@
 #+STARTUP: indent
 #+TODO: TODO DOING WAITING CANCELED | DONE
 
-* 1. Create Vector2, Vector3, Vector4
-** a. Vector
+* Tiled as level editor
+Enable tiled as a level editor.
+
+** Update GameNode2D, Tile and Geometry
+Define the relation between GameNode2D, Tile and Geometry.
+*** Transformable
+- Objective
+  - Class with position and rotation inherited by others
+*** Geometry
+- Objectives
+  - Remove origin or pivot
+    It seems that origin and pivot persist the same information.
+** Create Tile Loader (Strategy + Factory)
+*** a. TileLoader
+- Objectives
+  - Load tiles and geometries on 'game/init'
+  - Throw error if some image (tileset) is not configured
+
+- Attributes
+  size (Struct with width and height)
+  tileSize (Struct with width and height)
+  tiles (list of Tile)
+  geometries (list of Geometries)
+- Methods
+  -
+#+begin_src c++
+  // Definition
+  TileLoader* tileLoader = TileLoaderFactory.create<TMXLoader>();
+#+end_src
+*** b. Tile Loader strategies
+- TMXLoader (Tiled loader)
+*** c. Tile Loader Factory
+- Objectives
+  - Create the right Tile Loader strategy
+- Method
+  create<TileLoaderStrategy>
+** GameNodeManager
+- Attributes
+  List of GameNode
+- Methods
+  add(GameNode2D), remove(GameNode2D)
+  GameNode2D * collides(GameNode2D) (check if it collides with any of its owned nodes)
+* Game engine foundation
+** Entity Component Framework
+- Objectives
+  - Entities have components (similar to decorators)
+  - Tile and Geometry are components
+** Create Vector2, Vector3, Vector4
+*** a. Vector
 - Attributes
   None
 - Methods
   add, subtract, multiply, divide, normalize, dot, cross, angle,
   length 
-** b. Vector2 extends Vector
+*** b. Vector2 extends Vector
 - Attributes
   x, y
 - Methods
-  Same as Vector
-** c. Vector3 extends Vector
+  -
+*** c. Vector3 extends Vector
 - Attributes
-  Same as Vector2 plus z
+  z
 - Attributes
-  Same as Vector
-** d. Vector4 extends Vector
+  -
+*** d. Vector4 extends Vector
 - Attributes
-  Same as Vector3 plus w
+  w
 - Attributes
-  Same as Vector
-* 2. Create Matrix2, Matrix3, Matrix4
-** a. Matrix
+  -
+** Create Matrix2, Matrix3, Matrix4
+*** a. Matrix
 - Attributes
   None
 - Methods
   add, subtract, multiply, divide, determinant
-** b. Matrix2 extends Matrix
+*** b. Matrix2 extends Matrix
 - Attributes
   | x0 | x1 |
   | y0 | y1 |
 - Methods
   Same as Matrix
-** c. Matrix3 extends Matrix
+*** c. Matrix3 extends Matrix
 - Attributes
   | x0 | x1 | x2 |
   | y0 | y1 | y2 |
   | z0 | z1 | z3 |
 - Methods
   Same as Matrix
-** d. Matrix4 extends Matrix
+*** d. Matrix4 extends Matrix
 - Attributes
   | x0 | x1 | x2 | x3 |
   | y0 | y1 | y2 | y3 |
@@ -52,35 +99,19 @@
   | w0 | w1 | w3 | w4 |
 - Methods
   Same as Matrix
-* 3. Geometry without raylib
-** a. Geometry
+** Geometry without raylib
+*** a. Geometry
 - Attributes
   List of Vector
   origin, position, rotation
 - Methods
   collides, render
-** b. RaylibGeometry extends Geometry
+*** b. RaylibGeometry extends Geometry
 - Attributes
-  
-* 3. Create Tile Loader (Strategy + Factory)
-** a. TileLoader
-- Characteristics
-  - Load tiles on 'game/init'
-  - Load geometries on 'game/init'
-  - Throw error if some image (tileset) is not loaded
-
-- Attributes
-  size (Struct with width, height, tileWidth and tileHeight)
-  tiles (list of Tile)
-  geometries (list of Geometries)
-#+begin_src c++
-  // Definition
-  TileLoader* tileLoader = TileLoaderFactory.create<TMXLoader>();
-#+end_src
-** b. Tile Loader strategies
-- TMXLoader (Tiled loader)
-* 4. Create a Renderer (Strategy + Factory)
-** a. Renderer usage
+  rawGeometry
+- Methods
+** Create a Renderer (Strategy + Factory)
+*** a. Renderer usage
 #+begin_src c++
   /*
     1. Setup window before 'game/init'
@@ -91,5 +122,5 @@
   // Render
   renderer.render(GameNode2D or Tile or Geometry);
 #+end_src
-** b. Render strategies
+*** b. Render strategies
 - RaylibRender
