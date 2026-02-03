@@ -2,7 +2,7 @@
 #include "async/async-pointer.h"
 #include "config/config.h"
 #include "event/emitter.h"
-#include "game/game-node.h"
+#include "game/game-node-2d.h"
 #include "game/game-state.h"
 #include "geometry/vector.h"
 #include "log/log.h"

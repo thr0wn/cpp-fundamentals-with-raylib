@@ -38,7 +38,7 @@ bool Geometry::checkCollision(const Geometry &other) const {
     Circle *circleOther = std::get<Circle *>(other._raw);
     return CheckCollisionCircles(circle->center, circle->radius,
                                  circleOther->center, circle->radius);
-  }
+  }  
   std::cout << "GAMEINFO: (geometry) checkCollision not implemented!!!\n";
   return false;
 }
