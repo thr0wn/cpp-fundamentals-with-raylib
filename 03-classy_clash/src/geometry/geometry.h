@@ -38,15 +38,15 @@ typedef struct Poly {
 
 typedef std::variant<Rectangle*, Circle*, Triangle*, Poly*, Line*, BoundingBox*, Sphere*>
     RawGeometry;
-typedef enum GeometryPivot {
-  GEOMETRY_PIVOT_TOP_LEFT = 0,
-  GEOMETRY_PIVOT_CENTER
-} GeometryPivot;
+typedef enum GeometryOrigin {
+  GEOMETRY_ORIGIN_TOP_LEFT = 0,
+  GEOMETRY_ORIGIN_CENTER
+} GeometryOrigin;
 
 class Geometry: public Node2D {
 private:
   RawGeometry _raw;
-  GeometryPivot _pivot;
+  GeometryOrigin _originType;
 
 public:
   Geometry();
@@ -55,8 +55,8 @@ public:
   RawGeometry &raw();
   const RawGeometry &raw() const;
 
-  GeometryPivot &pivot();
-  const GeometryPivot &pivot() const;
+  GeometryOrigin &originType();
+  const GeometryOrigin &originType() const;
 
   bool collides(const Geometry &other) const;
   void update() override;

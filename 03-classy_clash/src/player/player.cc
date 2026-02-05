@@ -12,7 +12,7 @@ const Camera2D &Player::camera() const { return _camera; };
 
 void Player::onInit() {
   // collision
-  _collisionGeometry.pivot() = GEOMETRY_PIVOT_CENTER;
+  _collisionGeometry.originType() = GEOMETRY_ORIGIN_CENTER;
   _collisionGeometry.origin().x = _tile.destiny().width / 2;
   _collisionGeometry.origin().y = _tile.destiny().height / 2;
   _collisionGeometry.enabled() = false;

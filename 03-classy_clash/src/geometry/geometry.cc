@@ -7,8 +7,8 @@ Geometry::Geometry(RawGeometry raw): _raw(raw) {};
 RawGeometry &Geometry::raw() { return _raw; }
 const RawGeometry &Geometry::raw() const { return _raw; }
 
-GeometryPivot &Geometry::pivot() { return _pivot; }
-const GeometryPivot &Geometry::pivot() const { return _pivot; }
+GeometryOrigin &Geometry::originType() { return _originType; }
+const GeometryOrigin &Geometry::originType() const { return _originType; }
 
 bool Geometry::collides(const Geometry &other) const {
   if (std::holds_alternative<Rectangle *>(_raw) &&
@@ -41,18 +41,18 @@ void Geometry::update() {
   Node2D::update();  
   if (std::holds_alternative<Rectangle *>(_raw)) {
     Rectangle *rec = std::get<Rectangle *>(_raw);
-    rec->x = _origin.x + _position.x;
-    rec->y = _origin.y + _position.y;
-    if (_pivot == GEOMETRY_PIVOT_CENTER) {
+    rec->x = _origin.x + _worldPosition.x;
+    rec->y = _origin.y + _worldPosition.y;
+    if (_originType == GEOMETRY_ORIGIN_CENTER) {
       rec->x -= rec->width / 2;
       rec->y -= rec->height / 2;
     }
   } else if (std::holds_alternative<Circle *>(_raw)) {
     Circle *circle = std::get<Circle *>(_raw);
-    circle->center.x = _origin.x + _position.x;
-    circle->center.y = _origin.y + _position.y;
+    circle->center.x = _origin.x + _worldPosition.x;
+    circle->center.y = _origin.y + _worldPosition.y;
     circle->radius = circle->radius;
-    if (_pivot == GEOMETRY_PIVOT_CENTER) {
+    if (_originType == GEOMETRY_ORIGIN_CENTER) {
       circle->center.x -= circle->radius / 2;
       circle->center.y -= circle->radius / 2;
     }
@@ -62,7 +62,7 @@ void Geometry::update() {
 }
 
 void Geometry::render() const {
-  Node2D::render();  
+  Node2D::render();
   if (std::holds_alternative<Rectangle *>(_raw)) {
     Rectangle *rec = std::get<Rectangle *>(_raw);
     DrawRectangleLinesEx(*rec, 1.0, GREEN);
