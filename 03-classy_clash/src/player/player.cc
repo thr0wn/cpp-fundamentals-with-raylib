@@ -1,5 +1,4 @@
 #include "player/player.h"
-#include "raylib.h"
 
 namespace game {
 Player::Player() {
@@ -16,8 +15,8 @@ void Player::onInit() {
   _collisionGeometry.pivot() = GEOMETRY_PIVOT_CENTER;
   _collisionGeometry.origin().x = _tile.destiny().width / 2;
   _collisionGeometry.origin().y = _tile.destiny().height / 2;
-  _player.geometry() = &_collisionGeometry;
-
+  _collisionGeometry.enabled() = false;
+  
   // position and zoom
   float zoom = 2; // todo: move it to config
   Vector2 halfScreen =
@@ -30,12 +29,15 @@ void Player::onInit() {
   _tile.texture() =
       _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
   _animationTimer.start();
-  _player.tile() = &_tile;
 
   // camera
   vector::copy(_player.position(), _camera.target);
   vector::copy(halfScreen, _camera.offset);
   _camera.zoom = zoom;
+
+  // player root node
+  _player.addChild(&_tile);  
+  _player.addChild(&_collisionGeometry);  
 
   _log->info("(player) Initialized.");
 };
@@ -53,7 +55,7 @@ void Player::onUpdate() {
   updateTranslate();
   updateCamera();
   updateTile();
-  updateGameObject();
+  updateNode();
 }
 
 void Player::onRender2d() {
@@ -85,7 +87,7 @@ void Player::updateTranslate() {
 }
 
 void Player::updateCamera() {
-  vector::copy(_player.position(), _camera.target);
+  vector::copy(_player.worldPosition(), _camera.target);
 }
 
 void Player::updateTile() {
@@ -104,6 +106,6 @@ void Player::updateTile() {
   }
 }
 
-void Player::updateGameObject() { _player.update(); }
+void Player::updateNode() { _player.update(); }
 
 } // namespace game

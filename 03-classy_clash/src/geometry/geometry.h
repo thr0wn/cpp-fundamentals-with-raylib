@@ -1,5 +1,6 @@
 #pragma once
 
+#include "node/node-2d.h"
 #include "raylib.h"
 #include <iostream>
 #include <variant>
@@ -41,13 +42,11 @@ typedef enum GeometryPivot {
   GEOMETRY_PIVOT_TOP_LEFT = 0,
   GEOMETRY_PIVOT_CENTER
 } GeometryPivot;
-class Geometry {
+
+class Geometry: public Node2D {
 private:
   RawGeometry _raw;
   GeometryPivot _pivot;
-  Vector2 _origin = Vector2{0};
-  Vector2 _position = Vector2{0};
-  float _rotation = 0;
 
 public:
   Geometry();
@@ -59,17 +58,8 @@ public:
   GeometryPivot &pivot();
   const GeometryPivot &pivot() const;
 
-  Vector2 &origin();
-  const Vector2 &origin() const;
-  
-  Vector2 &position();
-  const Vector2 &position() const;
-
-  float &rotation();
-  const float &rotation() const;  
-
-  bool checkCollision(const Geometry &other) const;
-  void update() const;
-  void render() const;
+  bool collides(const Geometry &other) const;
+  void update() override;
+  void render() const override;
 };
 } // namespace game

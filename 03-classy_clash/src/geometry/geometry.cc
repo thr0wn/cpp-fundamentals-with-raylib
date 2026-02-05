@@ -10,16 +10,7 @@ const RawGeometry &Geometry::raw() const { return _raw; }
 GeometryPivot &Geometry::pivot() { return _pivot; }
 const GeometryPivot &Geometry::pivot() const { return _pivot; }
 
-Vector2 &Geometry::origin() { return _origin; }
-const Vector2 &Geometry::origin() const { return _origin; }
-
-Vector2 &Geometry::position() { return _position; }
-const Vector2 &Geometry::position() const { return _position; }
-
-float &Geometry::rotation() { return _rotation; }
-const float &Geometry::rotation() const { return _rotation; }
-
-bool Geometry::checkCollision(const Geometry &other) const {
+bool Geometry::collides(const Geometry &other) const {
   if (std::holds_alternative<Rectangle *>(_raw) &&
       std::holds_alternative<Rectangle *>(other._raw)) {
     Rectangle *rectangle = std::get<Rectangle *>(_raw);
@@ -41,12 +32,13 @@ bool Geometry::checkCollision(const Geometry &other) const {
     Circle *circleOther = std::get<Circle *>(other._raw);
     return CheckCollisionCircles(circle->center, circle->radius,
                                  circleOther->center, circle->radius);
-  }  
+  }
   std::cout << "GAMEINFO: (geometry) checkCollision not implemented!!!\n";
   return false;
 }
 
-void Geometry::update() const {
+void Geometry::update() {
+  Node2D::update();  
   if (std::holds_alternative<Rectangle *>(_raw)) {
     Rectangle *rec = std::get<Rectangle *>(_raw);
     rec->x = _origin.x + _position.x;
@@ -70,6 +62,7 @@ void Geometry::update() const {
 }
 
 void Geometry::render() const {
+  Node2D::render();  
   if (std::holds_alternative<Rectangle *>(_raw)) {
     Rectangle *rec = std::get<Rectangle *>(_raw);
     DrawRectangleLinesEx(*rec, 1.0, GREEN);

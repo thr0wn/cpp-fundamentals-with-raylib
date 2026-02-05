@@ -1,17 +1,15 @@
 #pragma once
+#include "node/node-2d.h"
 #include "raylib.h"
 #include "texture/tile-animation.h"
 #include <map>
 
 namespace game {
-class Tile {
+class Tile : public Node2D {
 private:
   Rectangle _source;
   Rectangle _destiny;
   Texture2D _texture;
-  Vector2 _origin = Vector2{0};
-  Vector2 _position = Vector2{0};  
-  float _rotation = 0;  
   Color _color = WHITE;
   TileAnimation *_animation;
 
@@ -29,23 +27,13 @@ public:
   Texture2D &texture();
   const Texture2D texture() const;
 
-  Vector2 &origin();
-  const Vector2 &origin() const;
-
-  Vector2 &position();
-  const Vector2 &position() const;
- 
-  float &rotation();
-  const float &rotation() const;
-
   Color &color();
   const Color &color() const;
 
   TileAnimation *&animation();
   const TileAnimation * const animation() const;
 
-  void update();
-
-  void render() const;
+  void update() override;
+  void render() const override;
 };
 } // namespace game

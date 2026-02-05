@@ -4,6 +4,7 @@
 #include "event/emitter.h"
 #include "node/node-2d.h"
 #include "game/game-state.h"
+#include "geometry/geometry.h"
 #include "geometry/vector.h"
 #include "log/log.h"
 #include "raylib.h"
@@ -54,7 +55,7 @@ public:
   void updateTranslate();
   void updateCamera();
   void updateTile();
-  void updateGameObject();
+  void updateNode();
 
 };
 } // namespace game

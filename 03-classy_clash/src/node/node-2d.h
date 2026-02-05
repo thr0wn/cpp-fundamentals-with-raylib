@@ -1,40 +1,44 @@
 #pragma once
-#include "geometry/geometry.h"
+
 #include "geometry/vector.h"
-#include "texture/tile.h"
 #include <fmt/format.h>
 #include <string>
 #include "node/node.h"
+#include "raymath.h"
 
 namespace game {
 class Node2D : public Node {
-private:
+protected:
   Vector2 _position = Vector2{0};
-  float _rotation = 0;  
-  Tile *_tile;
-  Geometry *_geometry;
-  bool _debug;
+  Vector2 _localPosition = Vector2{0};
+  Vector2 _worldPosition = Vector2{0};
+  float _rotation = 0;
+  float _localRotation = 0;
+  float _worldRotation = 0;
 
+  Vector2 _origin = Vector2{0};
 public:
   Node2D();
 
   Vector2 &position();
   const Vector2 &position() const;
 
+  Vector2 &localPosition();
+  const Vector2 &localPosition() const;
+
+  const Vector2 &worldPosition() const;
+  
   float &rotation();
   const float &rotation() const;
 
-  Tile *&tile();
-  const Tile * const tile() const;
+  float &localRotation();
+  const float &localRotation() const;
 
-  Geometry *&geometry();
-  const Geometry * const geometry() const;
+  const float &worldRotation() const;
 
-  bool &debug();
-  const bool &debug() const;
+  Vector2 &origin();
+  const Vector2 &origin() const;
 
-  bool checkCollision(const Node2D &other);
-  void update();
-  void render() const;  
+  void update() override;
 };
 } // namespace game
