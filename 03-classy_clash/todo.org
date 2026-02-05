@@ -8,13 +8,25 @@ Enable tiled as a level editor.
 
 ** Update GameNode2D, Tile and Geometry
 Define the relation between GameNode2D, Tile and Geometry.
-*** Transformable
+*** DONE Use composite with GameNode
+- Objective
+  - Nested Nodes
+*** DONE Tile and Geometry as Node
+- Objectives
+  - Transform those in Node derived classes
+*** CANCELED Transformable
 - Objective
   - Class with position and rotation inherited by others
-*** Geometry
+*** CANCELED Geometry
 - Objectives
   - Remove origin or pivot
     It seems that origin and pivot persist the same information.
+** GameNodeManager
+- Attributes
+  List of GameNode
+- Methods
+  add(GameNode2D), remove(GameNode2D)
+  GameNode2D * collides(GameNode2D) (check if it collides with any of its owned nodes)
 ** Create Tile Loader (Strategy + Factory)
 *** a. TileLoader
 - Objectives
@@ -39,12 +51,6 @@ Define the relation between GameNode2D, Tile and Geometry.
   - Create the right Tile Loader strategy
 - Method
   create<TileLoaderStrategy>
-** GameNodeManager
-- Attributes
-  List of GameNode
-- Methods
-  add(GameNode2D), remove(GameNode2D)
-  GameNode2D * collides(GameNode2D) (check if it collides with any of its owned nodes)
 * Game engine foundation
 ** Entity Component Framework
 - Objectives
