@@ -27,6 +27,9 @@ Define the relation between GameNode2D, Tile and Geometry.
 - Methods
   add(GameNode2D), remove(GameNode2D)
   GameNode2D * collides(GameNode2D) (check if it collides with any of its owned nodes)
+** Properties
+Objectives
+- Run time attributes to allow flexibility
 ** Create Tile Loader (Strategy + Factory)
 *** a. TileLoader
 - Objectives
