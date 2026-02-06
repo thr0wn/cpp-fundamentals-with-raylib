@@ -7,7 +7,7 @@ World::World() {
 }
 
 void World::onAfterInit() {
-  _texture = _textureLoader->textures()[GAME_TEXTURE_WORLD_FOREST];
+  _texture = _textureLoader->getTextures()[GAME_TEXTURE_WORLD_FOREST];
   _log->info("(world) Initialized.");
 }
 
@@ -16,7 +16,7 @@ void World::onRender2d() {
     return;
   }
   _color = _gameState->paused() ? GRAY : WHITE;
-  DrawTextureEx(_texture, _position, 0, 1.0f, _color);
+  //DrawTextureEx(_texture, _position, 0, 1.0f, _color);
 }
 
 } // namespace game

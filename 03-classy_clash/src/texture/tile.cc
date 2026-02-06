@@ -8,35 +8,35 @@ Tile::Tile(float width, float height) {
   _destiny = rect;
 }
 
-Rectangle &Tile::source() { return _source; };
-const Rectangle &Tile::source() const { return _source; };
+void Tile::setSource(const Rectangle &source) { _source = source; };
+Rectangle &Tile::getSource() { return _source; };
 
-Rectangle &Tile::destiny() { return _destiny; };
-const Rectangle &Tile::destiny() const { return _destiny; };
+void Tile::setDestiny(const Rectangle &destiny) { _destiny = destiny; };
+Rectangle &Tile::getDestiny() { return _destiny; };
 
-Texture2D &Tile::texture() { return _texture; };
-const Texture2D Tile::texture() const { return _texture; };
+void Tile::setTexture(const Texture2D &texture) { _texture = texture; };
+const Texture2D &Tile::getTexture() const { return _texture; };
 
-Color &Tile::color() { return _color; };
-const Color &Tile::color() const { return _color; };
+void Tile::setColor(const Color &color) { _color = color; };
+const Color &Tile::getColor() const { return _color; };
 
-TileAnimation *&Tile::animation() { return _animation; };
-const TileAnimation *const Tile::animation() const { return _animation; };
+void Tile::setAnimation(TileAnimation *animation) { _animation = animation; };
+TileAnimation *Tile::getAnimation() const { return _animation; };
 
 void Tile::update() {
   Node2D::update();
-  _destiny.x = position().x;
-  _destiny.y = position().y;
+  _destiny.x = _worldPosition.x;
+  _destiny.y = _worldPosition.y;
 
   if (_animation) {
-    _source.x = _animation->frame().x * _source.width;
-    _source.y = _animation->frame().y * _source.height;
+    _source.x = _animation->getFrame().x * _source.width;
+    _source.y = _animation->getFrame().y * _source.height;
     _animation->update();
   }
 }
 
-void Tile::render() const {
-  Node2D::render();  
-  DrawTexturePro(_texture, _source, _destiny, origin(), rotation(), _color);
+void Tile::render() {
+  Node2D::render();
+  DrawTexturePro(_texture, _source, _destiny, _origin, _worldRotation, _color);
 }
 } // namespace game

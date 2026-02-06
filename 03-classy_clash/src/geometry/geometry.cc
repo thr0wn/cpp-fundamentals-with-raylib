@@ -1,35 +1,35 @@
 #include "geometry/geometry.h"
 
 namespace game {
-Geometry::Geometry() {};
-Geometry::Geometry(RawGeometry raw): _raw(raw) {};
+Geometry::Geometry(){};
+Geometry::Geometry(RawGeometry raw) : _raw(raw){};
 
-RawGeometry &Geometry::raw() { return _raw; }
-const RawGeometry &Geometry::raw() const { return _raw; }
+void Geometry::setRaw(const RawGeometry &raw) { _raw = raw; }
+const RawGeometry &Geometry::getRaw() const { return _raw; }
 
-GeometryOrigin &Geometry::originType() { return _originType; }
-const GeometryOrigin &Geometry::originType() const { return _originType; }
+void Geometry::setOriginType(GeometryOrigin originType) { _originType = originType; }
+GeometryOrigin Geometry::getOriginType() const { return _originType; }
 
-bool Geometry::collides(const Geometry &other) const {
+bool Geometry::collides(Geometry *other) const {
   if (std::holds_alternative<Rectangle *>(_raw) &&
-      std::holds_alternative<Rectangle *>(other._raw)) {
+      std::holds_alternative<Rectangle *>(other->_raw)) {
     Rectangle *rectangle = std::get<Rectangle *>(_raw);
-    Rectangle *rectangleOther = std::get<Rectangle *>(other._raw);
+    Rectangle *rectangleOther = std::get<Rectangle *>(other->_raw);
     return CheckCollisionRecs(*rectangle, *rectangleOther);
   } else if (std::holds_alternative<Rectangle *>(_raw) &&
-             std::holds_alternative<Circle *>(other._raw)) {
+             std::holds_alternative<Circle *>(other->_raw)) {
     Rectangle *rectangle = std::get<Rectangle *>(_raw);
-    Circle *circle = std::get<Circle *>(other._raw);
+    Circle *circle = std::get<Circle *>(other->_raw);
     return CheckCollisionCircleRec(circle->center, circle->radius, *rectangle);
   } else if (std::holds_alternative<Circle *>(_raw) &&
-             std::holds_alternative<Rectangle *>(other._raw)) {
+             std::holds_alternative<Rectangle *>(other->_raw)) {
     Circle *circle = std::get<Circle *>(_raw);
-    Rectangle *rectangle = std::get<Rectangle *>(other._raw);
+    Rectangle *rectangle = std::get<Rectangle *>(other->_raw);
     return CheckCollisionCircleRec(circle->center, circle->radius, *rectangle);
   } else if (std::holds_alternative<Circle *>(_raw) &&
-             std::holds_alternative<Circle *>(other._raw)) {
+             std::holds_alternative<Circle *>(other->_raw)) {
     Circle *circle = std::get<Circle *>(_raw);
-    Circle *circleOther = std::get<Circle *>(other._raw);
+    Circle *circleOther = std::get<Circle *>(other->_raw);
     return CheckCollisionCircles(circle->center, circle->radius,
                                  circleOther->center, circle->radius);
   }
@@ -61,7 +61,7 @@ void Geometry::update() {
   }
 }
 
-void Geometry::render() const {
+void Geometry::render() {
   Node2D::render();
   if (std::holds_alternative<Rectangle *>(_raw)) {
     Rectangle *rec = std::get<Rectangle *>(_raw);

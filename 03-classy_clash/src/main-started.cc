@@ -2,7 +2,7 @@
 
 int main() {
   game::init();
-  game::start({true});
+  game::start({{"autoStart", true}});
   game::deinit();
   return 0;
 }

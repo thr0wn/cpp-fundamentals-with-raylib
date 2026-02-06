@@ -7,13 +7,12 @@
 #include "geometry/geometry.h"
 #include "geometry/vector.h"
 #include "log/log.h"
+#include "node/node-manager.h"
 #include "raylib.h"
 #include "raymath.h"
 #include "texture/texture-loader.h"
 #include "texture/tile-animation.h"
 #include "texture/tile.h"
-#include "timer/timer.h"
-#include "world/world.h"
 #include <cmath>
 #include <cstdio>
 #include <map>
@@ -22,6 +21,7 @@
 namespace game {
 class Player {
 private:
+  NodeManager _nodeManager;
   Node2D _player;
   Vector2 _translate{0, 0};
   float _velocity = config::PLAYER_VELOCITY;
@@ -36,7 +36,6 @@ private:
                 0.5f * config::PLAYER_TILE_HEIGHT};
   Geometry _collisionGeometry{&_collisionRectangle};  
 
-  World *_world = AsyncPointer::get<World>();
   Emitter *_emitter = AsyncPointer::get<Emitter>();
   GameState *_gameState = AsyncPointer::get<GameState>();
   TextureLoader *_textureLoader = AsyncPointer::get<TextureLoader>();

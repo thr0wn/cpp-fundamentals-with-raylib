@@ -18,6 +18,7 @@ set(LIBRARY_SOURCE_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/node/node-2d.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/node/node-manager.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/node/node.cc"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
@@ -53,6 +54,7 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/log/log.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/node/node-2d.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/node/node-manager.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/node/node.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.h"

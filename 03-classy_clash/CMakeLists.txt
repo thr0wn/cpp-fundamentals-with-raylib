@@ -18,7 +18,8 @@ set(RAYLIB_VERSION 5.0)
 set(RAYGUI_VERSION 4.0)
 set(FMT_VERSION 9.1.0)
 set(CATCH2_VERSION v3.5.3)
-set(LEVELDB_VERSION ac691084fdc5546421a55b25e7653d450e5a25fb) # use commit hash
+set(LEVELDB_VERSION ac691084fdc5546421a55b25e7653d450e5a25fb)
+set(TMXLITE_VERSION 8f58c711442bb55c1f09274f066820b3fed1a1eb)
 
 # compile options
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU") 
@@ -82,5 +83,16 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(leveldb)
 
+# tmxlite
+FetchContent_Declare(
+  tmxlite
+  GIT_REPOSITORY https://github.com/fallahn/tmxlite
+  GIT_TAG ${TMXLITE_VERSION}
+  GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(tmxlite)
+add_subdirectory(${tmxlite_SOURCE_DIR}/tmxlite)
+
+# sub directories
 add_subdirectory(src)
 add_subdirectory(tests)

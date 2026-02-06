@@ -10,7 +10,7 @@ private:
 public:
   void info(const std::string &message);
 
-  bool &enabled();
-  const bool &enabled() const;  
+  void setEnabled(bool enabled);
+  bool getEnabled() const;  
 };
 } // namespace game

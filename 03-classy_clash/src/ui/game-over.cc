@@ -7,18 +7,19 @@ GameOver::GameOver() {
 };
 
 void GameOver::onInit() {
-  _textGameOver.position() = 
-      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT};
-  _textGameOver.align() = GAME_TEXT_ALIGN_CENTER;
-  
-  _textRestart.position() = 
+  _textGameOver.setPosition(
+      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
+  _textGameOver.setAlign(GAME_TEXT_ALIGN_CENTER);
+
+  _textRestart.setPosition(
       {0.5f * config::WINDOW_WIDTH,
-       _textGameOver.position().y + _textGameOver.height()};
-  _textRestart.align() = GAME_TEXT_ALIGN_CENTER;
-  
-  _textQuit.position() = {0.5 * config::WINDOW_WIDTH,
-                        _textRestart.position().y + _textRestart.height()};
-  _textQuit.align() = GAME_TEXT_ALIGN_CENTER;
+       _textGameOver.getPosition().y + _textGameOver.getHeight()});
+  _textRestart.setAlign(GAME_TEXT_ALIGN_CENTER);
+
+  _textQuit.setPosition(
+      {0.5 * config::WINDOW_WIDTH,
+       _textRestart.getPosition().y + _textRestart.getHeight()});
+  _textQuit.setAlign(GAME_TEXT_ALIGN_CENTER);
   _log->info("(game-over-ui) Game Over UI initialized.");
 }
 
@@ -29,13 +30,13 @@ void GameOver::onRender() {
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
 
-  GuiLabel(_textGameOver.rectangle(), _textGameOver.c_str());
+  GuiLabel(_textGameOver.getRectangle(), _textGameOver.getC_str());
 
   _textRestartIsPressed =
-      GuiLabelButton(_textRestart.rectangle(), _textRestart.c_str());
+      GuiLabelButton(_textRestart.getRectangle(), _textRestart.getC_str());
 
   _textQuitIsPressed =
-      GuiLabelButton(_textQuit.rectangle(), _textQuit.c_str());
+      GuiLabelButton(_textQuit.getRectangle(), _textQuit.getC_str());
 
   if (_textRestartIsPressed) {
     _gameState->restart();

@@ -52,14 +52,14 @@ public:
   Geometry();
   Geometry(RawGeometry raw);
   
-  RawGeometry &raw();
-  const RawGeometry &raw() const;
+  void setRaw(const RawGeometry &raw);
+  const RawGeometry &getRaw() const;
 
-  GeometryOrigin &originType();
-  const GeometryOrigin &originType() const;
+  void setOriginType(GeometryOrigin originType);
+  GeometryOrigin getOriginType() const;
 
-  bool collides(const Geometry &other) const;
+  bool collides(Geometry *other) const;
   void update() override;
-  void render() const override;
+  void render() override;
 };
 } // namespace game

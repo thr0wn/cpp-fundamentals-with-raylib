@@ -11,13 +11,15 @@
 #include "texture/texture-loader.h"
 #include "ui/ui.h"
 #include "world/world.h"
+#include "node/node-manager.h"
 #include <memory>
+#include <variant>
+#include <string>
 
 namespace game {
-typedef struct {
-  bool autoStartGame;
-} StartOptions;
-inline StartOptions defaultStartOptions{false};
+typedef std::variant<bool, int, float, std::string> Option;
+typedef std::map<std::string, Option> StartOptions;
+inline StartOptions defaultStartOptions{{"autoStart", false}};
 
 void init();
 void start(StartOptions options = defaultStartOptions);

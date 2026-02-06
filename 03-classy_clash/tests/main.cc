@@ -4,6 +4,7 @@
 #include <string>
 
 #include "game/game.h"
+#include "geometry/geometry.h"
 
 TEST_CASE("Emitter should work properly", "[event][emitter]") {
   game::Emitter emitter;
@@ -19,7 +20,7 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
 
   SECTION("when adding a listener") {
     emitter.on(eventName0, listener0);
-    REQUIRE(emitter.listeners().size() == 1);
+    REQUIRE(emitter.getListeners().size() == 1);
   };
 
   SECTION("when emitting events") {
@@ -35,9 +36,9 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
 
   SECTION("when removing a listener") {
     game::Listener listener = emitter.on(eventName0, listener0);
-    REQUIRE(emitter.listeners().size() == 1);
+    REQUIRE(emitter.getListeners().size() == 1);
     emitter.off(listener);
-    REQUIRE(emitter.listeners().size() == 0);
+    REQUIRE(emitter.getListeners().size() == 0);
   };
 }
 
@@ -69,4 +70,48 @@ TEST_CASE("Async-pointer should work properly", "[asyn-pointer]") {
     REQUIRE(*a0 == *b0);
     REQUIRE(*a1 == *b1);
   }
+}
+
+TEST_CASE("Node should work properly", "[node]") {
+  SECTION("should add child correctly") {
+    game::Node parent;
+    game::Node child;
+
+    REQUIRE(parent.getChildren().size() == 0);
+
+    parent.addChild(&child);
+
+    REQUIRE(parent.getChildren().size() == 1);
+  }
+  SECTION("should remove child correctly") {
+    game::Node parent;
+    game::Node childA;
+    game::Node childB;
+
+    parent.addChild(&childA);
+    parent.addChild(&childB);
+
+    REQUIRE(parent.getChildren().size() == 2);
+
+    parent.removeChild(&childB);
+
+    REQUIRE(parent.getChildren().front() == &childA);
+    REQUIRE(parent.getChildren().size() == 1);
+  }
+}
+
+TEST_CASE("NodeManager should work properly", "[node] [node-manager]") {
+  SECTION("should collides correctly") {
+    game::NodeManager nodeManager;
+    Rectangle rectA{0, 0, 1, 1};    
+    game::Geometry childA{&rectA};
+    Rectangle rectB{0.5, 0.5, 1, 1};
+    game::Geometry childB{&rectB};
+
+    nodeManager.addChild(&childA);
+    nodeManager.addChild(&childB);
+
+    REQUIRE(nodeManager.collides(&childA) == &childB);
+    REQUIRE(nodeManager.collides(&childB) == &childA);
+  }  
 }

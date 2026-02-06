@@ -18,22 +18,22 @@ public:
 
   Tile(float width, float height);
 
-  Rectangle &source();
-  const Rectangle &source() const;
+  void setSource(const Rectangle &source);
+  Rectangle &getSource();
 
-  Rectangle &destiny();
-  const Rectangle &destiny() const;
+  void setDestiny(const Rectangle &destiny);
+  Rectangle &getDestiny();
 
-  Texture2D &texture();
-  const Texture2D texture() const;
+  void setTexture(const Texture2D &texture);
+  const Texture2D &getTexture() const;
 
-  Color &color();
-  const Color &color() const;
+  void setColor(const Color &color);
+  const Color &getColor() const;
 
-  TileAnimation *&animation();
-  const TileAnimation * const animation() const;
+  void setAnimation(TileAnimation *animation);
+  TileAnimation *getAnimation() const;
 
   void update() override;
-  void render() const override;
+  void render() override;
 };
 } // namespace game

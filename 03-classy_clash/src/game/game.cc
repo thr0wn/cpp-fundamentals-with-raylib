@@ -46,7 +46,8 @@ void init() {
   _gameState->init();
 }
 void start(StartOptions options) {
-  if (options.autoStartGame) {
+  auto autoStart = std::get_if<bool>(&options["autoStart"]);  
+  if (autoStart && *autoStart) {
     _gameState->start();    
   }
   while (!(_gameState->stopped() || WindowShouldClose())) {

@@ -16,10 +16,10 @@ private:
 public:
   Listener(const std::string &eventName, const ListenerFunction &function);
 
-  const std::uint32_t &id() const;
+  const std::uint32_t &getId() const;
 
-  const std::string &eventName() const;
+  const std::string &getEventName() const;
 
-  const ListenerFunction &function() const;
+  const ListenerFunction &getFunction() const;
 };
 } // namespace game

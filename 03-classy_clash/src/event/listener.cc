@@ -7,10 +7,10 @@ Listener::Listener(const std::string &eventName,
   _id = _idCounter++;
 }
 
-const std::uint32_t &Listener::id() const { return _id; };
+const std::uint32_t &Listener::getId() const { return _id; };
 
-const std::string &Listener::eventName() const { return _eventName; }
+const std::string &Listener::getEventName() const { return _eventName; }
 
-const ListenerFunction &Listener::function() const { return _function; }
+const ListenerFunction &Listener::getFunction() const { return _function; }
 
 } // namespace game

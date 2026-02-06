@@ -14,18 +14,18 @@ private:
   Timer *_timer;  
 
 public:
-  TileAnimation(const int &size);
-  TileAnimation(const int &size, const int &rowSize);
+  TileAnimation(int size);
+  TileAnimation(int size, int rowSize);
 
-  Timer *&timer();
-  const Timer * const timer() const;
+  void setTimer(Timer *timer);
+  Timer * getTimer() const;
 
-  const Vector2 &frame() const;
+  const Vector2 &getFrame() const;
 
-  const int &size() const;
+  int getSize() const;
 
-  const int &rowSize() const;
-  
+  int getRowSize() const;
+
   void update();
 };
 }

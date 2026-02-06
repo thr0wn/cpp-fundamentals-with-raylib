@@ -1,8 +1,6 @@
 #pragma once
 
-#include "geometry/vector.h"
 #include <fmt/format.h>
-#include <string>
 #include "node/node.h"
 #include "raymath.h"
 
@@ -17,27 +15,32 @@ protected:
   float _worldRotation = 0;
 
   Vector2 _origin = Vector2{0};
+
+  uint _layer = 0; 
 public:
   Node2D();
 
-  Vector2 &position();
-  const Vector2 &position() const;
+  void setPosition(const Vector2 &position);
+  const Vector2 &getPosition() const;
 
-  Vector2 &localPosition();
-  const Vector2 &localPosition() const;
+  void setLocalPosition(const Vector2 &localPosition);
+  const Vector2 &getLocalPosition() const;
 
-  const Vector2 &worldPosition() const;
+  const Vector2 &getWorldPosition() const;
   
-  float &rotation();
-  const float &rotation() const;
+  void setRotation(float rotation);
+  float getRotation() const;
 
-  float &localRotation();
-  const float &localRotation() const;
+  void setLocalRotation(float localRotation);
+  float getLocalRotation() const;
 
-  const float &worldRotation() const;
+  float getWorldRotation() const;
 
-  Vector2 &origin();
-  const Vector2 &origin() const;
+  void setOrigin(const Vector2 &origin);
+  const Vector2 &getOrigin() const;
+
+  void setLayer(uint layer);
+  uint getLayer() const;
 
   void update() override;
 };

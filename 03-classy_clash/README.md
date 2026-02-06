@@ -5,12 +5,15 @@ Game developed at course "Udemy: Cpp fundamentals".
 
 ### Build
 ```shell
-cmake -DCXX=g++ -S . -B ./build && cmake --build build
+cmake -DCXX=g++ -S . -B ./build -G "Ninja"
+cmake --build build
 ```
 
 ### Debug
 ```shell
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && gdb ./build/classy_clash/exe
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+gdb ./build/classy_clash/exe
 ```
 
 ### Build tests

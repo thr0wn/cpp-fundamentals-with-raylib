@@ -1,5 +1,6 @@
 #pragma once
 #include "config/config.h"
+#include "geometry/vector.h"
 #include "raylib.h"
 
 namespace game {
@@ -19,34 +20,30 @@ private:
   Vector2 _position;
   GameTextAlign _align;
 
-  const float lineHeight() const;
-  const float charWidth() const;
+  const float getLineHeight() const;
+  const float getCharWidth() const;
 
 public:
   Text(const std::string &text);
   Text(const std::string &text, const int &size);
 
-  std::string &string();
-  const std::string &string() const;
+  void setText(std::string &text);
+  const std::string &getText() const;
 
-  const char *c_str() const;
+  const char *getC_str() const;
 
-  const float width() const;
-  const float height() const;
+  float getWidth() const;
+  float getHeight() const;
 
-  const Rectangle rectangle();
+  const Rectangle &getRectangle();
 
-  Vector2 &position();
-  const Vector2 &position() const;
+  void setPosition(const Vector2 &position);
+  const Vector2 &getPosition() const;
 
-  GameTextAlign &align();
-  const GameTextAlign &align() const;
+  void setAlign(GameTextAlign align);
+  GameTextAlign getAlign() const;
 
-  int &size();
-  const int &size() const;
-
-  void alignCenter();
-  void alignLeft();
-  void alignRight();
+  void setSize(int size);
+  int getSize() const;
 };
 } // namespace game

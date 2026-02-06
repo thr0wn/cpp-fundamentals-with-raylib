@@ -12,32 +12,35 @@ const Camera2D &Player::camera() const { return _camera; };
 
 void Player::onInit() {
   // collision
-  _collisionGeometry.originType() = GEOMETRY_ORIGIN_CENTER;
-  _collisionGeometry.origin().x = _tile.destiny().width / 2;
-  _collisionGeometry.origin().y = _tile.destiny().height / 2;
-  _collisionGeometry.enabled() = false;
-  
+  _collisionGeometry.setOriginType(GEOMETRY_ORIGIN_CENTER);
+  _collisionGeometry.setOrigin(
+      Vector2{_tile.getDestiny().width / 2, _tile.getDestiny().height / 2});
+  _collisionGeometry.setEnabled(false);
+
   // position and zoom
   float zoom = 2; // todo: move it to config
   Vector2 halfScreen =
       Vector2{config::WINDOW_WIDTH / 2.0f, config::WINDOW_HEIGHT / 2.0f};
-  vector::copy(Vector2Scale(halfScreen, 1.0f / zoom), _player.position());
+  _player.setPosition(Vector2Scale(halfScreen, 1.0f / zoom));
 
   // tile
-  _tileAnimation.timer() = &_animationTimer;
-  _tile.animation() = &_tileAnimation;
-  _tile.texture() =
-      _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
+  _tileAnimation.setTimer(&_animationTimer);
+  _tile.setAnimation(&_tileAnimation);
+  _tile.setTexture(
+      _textureLoader->getTextures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE]);
   _animationTimer.start();
 
   // camera
-  vector::copy(_player.position(), _camera.target);
+  vector::copy(_player.getPosition(), _camera.target);
   vector::copy(halfScreen, _camera.offset);
   _camera.zoom = zoom;
 
-  // player root node
-  _player.addChild(&_tile);  
-  _player.addChild(&_collisionGeometry);  
+  // player
+  _player.addChild(&_tile);
+  _player.addChild(&_collisionGeometry);
+
+  // node manager
+  _nodeManager.addChild(&_player);
 
   _log->info("(player) Initialized.");
 };
@@ -62,8 +65,8 @@ void Player::onRender2d() {
   if (!_gameState->started()) {
     return;
   }
-  _tile.color() = _gameState->running() ? WHITE : GRAY;
-  _player.render();
+  _tile.setColor(_gameState->running() ? WHITE : GRAY);
+  _nodeManager.render();
 }
 
 void Player::updateTranslate() {
@@ -83,29 +86,29 @@ void Player::updateTranslate() {
 
   _translate =
       Vector2Scale(Vector2Normalize(_translate), _velocity * GetFrameTime());
-  vector::copy(Vector2Add(_player.position(), _translate), _player.position());
+  _player.setPosition(Vector2Add(_player.getPosition(), _translate));
 }
 
 void Player::updateCamera() {
-  vector::copy(_player.worldPosition(), _camera.target);
+  vector::copy(_player.getWorldPosition(), _camera.target);
 }
 
 void Player::updateTile() {
   if (Vector2Length(_translate) > 0) {
-    _tile.texture() =
-        _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_RUN];
+    _tile.setTexture(
+        _textureLoader->getTextures()[GAME_TEXTURE_CHARACTER_KNIGHT_RUN]);
 
     if (_translate.x > 0) {
-      _tile.source().width = std::abs(_tile.source().width);
+      _tile.getSource().width = std::abs(_tile.getSource().width);
     } else if (_translate.x < 0) {
-      _tile.source().width = -std::abs(_tile.source().width);
+      _tile.getSource().width = -std::abs(_tile.getSource().width);
     }
   } else {
-    _tile.texture() =
-        _textureLoader->textures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE];
+    _tile.setTexture(
+        _textureLoader->getTextures()[GAME_TEXTURE_CHARACTER_KNIGHT_IDLE]);
   }
 }
 
-void Player::updateNode() { _player.update(); }
+void Player::updateNode() { _nodeManager.update(); }
 
 } // namespace game

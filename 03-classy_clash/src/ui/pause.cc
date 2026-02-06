@@ -8,18 +8,19 @@ Pause::Pause() {
 };
 
 void Pause::onInit() {
-  _textResume.position() = 
-      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT};
-  _textResume.align() = GAME_TEXT_ALIGN_CENTER;
+  _textResume.setPosition(
+      {0.5f * config::WINDOW_WIDTH, 0.35 * config::WINDOW_HEIGHT});
+  _textResume.setAlign(GAME_TEXT_ALIGN_CENTER);
 
-  _textRestart.position() = 
+  _textRestart.setPosition(
       {0.5f * config::WINDOW_WIDTH,
-       _textResume.position().y + _textResume.height()};
-  _textRestart.align() = GAME_TEXT_ALIGN_CENTER;
+       _textResume.getPosition().y + _textResume.getHeight()});
+  _textRestart.setAlign(GAME_TEXT_ALIGN_CENTER);
 
-  _textQuit.position() = {0.5 * config::WINDOW_WIDTH,
-                          _textRestart.position().y + _textRestart.height()};
-  _textQuit.align() = GAME_TEXT_ALIGN_CENTER;
+  _textQuit.setPosition(
+      {0.5 * config::WINDOW_WIDTH,
+       _textRestart.getPosition().y + _textRestart.getHeight()});
+  _textQuit.setAlign(GAME_TEXT_ALIGN_CENTER);
   _log->info("(pause-ui) Pause UI initialized.");
 }
 
@@ -37,11 +38,11 @@ void Pause::onRender() {
   GuiSetStyle(DEFAULT, TEXT_SIZE, config::TEXT_SIZE_LARGE);
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, config::TEXT_COLOR);
   _textResumeIsPressed =
-      GuiLabelButton(_textResume.rectangle(), _textResume.c_str());
+      GuiLabelButton(_textResume.getRectangle(), _textResume.getC_str());
   _textRestartIsPressed =
-      GuiLabelButton(_textRestart.rectangle(), _textRestart.c_str());
+      GuiLabelButton(_textRestart.getRectangle(), _textRestart.getC_str());
   _textQuitIsPressed =
-      GuiLabelButton(_textQuit.rectangle(), _textQuit.c_str());
+      GuiLabelButton(_textQuit.getRectangle(), _textQuit.getC_str());
 
   if (_textResumeIsPressed) {
     _gameState->resume();

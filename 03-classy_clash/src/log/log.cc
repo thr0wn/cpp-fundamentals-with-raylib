@@ -6,6 +6,6 @@ void Log::info(const std::string &message) {
     std::cout << fmt::format("GAMEINFO: {}\n", message);
 }
 
-bool &Log::enabled() { return _enabled; }
-const bool &Log::enabled() const { return _enabled; }
+void Log::setEnabled(bool enabled) { _enabled = enabled; }
+bool Log::getEnabled() const { return _enabled; }
 } // namespace game

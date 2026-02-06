@@ -29,7 +29,7 @@ public:
   void onInit();
   void onDeinit();
 
-  const char * const *textureUrls() const;
-  const Texture2D * const textures() const;
+  const char * const *getTextureUrls() const;
+  const Texture2D * const getTextures() const;
 };
 } // namespace game

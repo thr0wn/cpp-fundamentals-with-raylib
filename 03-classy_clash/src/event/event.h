@@ -12,8 +12,8 @@ private:
 public:
   Event(const std::string &name, const std::any &value);
 
-  const std::string &name() const;
+  const std::string &getName() const;
 
-  const std::any &value() const;
+  const std::any &getValue() const;
 };
 } // namespace game
