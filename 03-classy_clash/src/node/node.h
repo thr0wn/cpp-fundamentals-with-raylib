@@ -2,7 +2,7 @@
 #include "geometry/vector.h"
 #include <fmt/format.h>
 #include <functional>
-w#include <list>
+#include <list>
 #include <string>
 
 namespace game {

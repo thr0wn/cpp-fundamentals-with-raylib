@@ -12,6 +12,7 @@
 #include "ui/ui.h"
 #include "world/world.h"
 #include "node/node-manager.h"
+#include "property/properties.h"
 #include <memory>
 #include <variant>
 #include <string>

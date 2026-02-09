@@ -23,6 +23,9 @@ set(LIBRARY_SOURCE_FILES
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.cc"
 
+  "${CMAKE_CURRENT_SOURCE_DIR}/property/property.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/property/properties.cc"
+
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/texture-loader.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile-animation.cc"
@@ -58,6 +61,9 @@ set(LIBRARY_HEADER_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/node/node.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/player/player.h"
+
+  "${CMAKE_CURRENT_SOURCE_DIR}/property/property.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/property/properties.h"
 
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/texture-loader.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/texture/tile.h"

@@ -6,7 +6,7 @@
 #include "game/game.h"
 #include "geometry/geometry.h"
 
-TEST_CASE("Emitter should work properly", "[event][emitter]") {
+TEST_CASE("Emitter should work correctly", "[event][emitter]") {
   game::Emitter emitter;
   std::string eventName0 = "event-0";
   std::string eventName1 = "event-1";
@@ -42,7 +42,7 @@ TEST_CASE("Emitter should work properly", "[event][emitter]") {
   };
 }
 
-TEST_CASE("Async-pointer should work properly", "[asyn-pointer]") {
+TEST_CASE("Async-pointer should work correctly", "[asyn-pointer]") {
   SECTION("with inline definition") {
     std::shared_ptr<int> a0(new int{1});
     std::shared_ptr<float> a1(new float{2.0});
@@ -72,7 +72,7 @@ TEST_CASE("Async-pointer should work properly", "[asyn-pointer]") {
   }
 }
 
-TEST_CASE("Node should work properly", "[node]") {
+TEST_CASE("Node should work correctly", "[node]") {
   SECTION("should add child correctly") {
     game::Node parent;
     game::Node child;
@@ -100,7 +100,7 @@ TEST_CASE("Node should work properly", "[node]") {
   }
 }
 
-TEST_CASE("NodeManager should work properly", "[node] [node-manager]") {
+TEST_CASE("NodeManager should work correctly", "[node] [node-manager]") {
   SECTION("should collides correctly") {
     game::NodeManager nodeManager;
     Rectangle rectA{0, 0, 1, 1};    
@@ -114,4 +114,15 @@ TEST_CASE("NodeManager should work properly", "[node] [node-manager]") {
     REQUIRE(nodeManager.collides(&childA) == &childB);
     REQUIRE(nodeManager.collides(&childB) == &childA);
   }  
+}
+
+TEST_CASE("Properties should work correctly", "[node] [node-manager]") {
+  SECTION("should set properties correctly") {
+    game::Properties props;
+    props.set("key1", 0);
+    props.set("key2", "string");
+
+    REQUIRE(*props.get<int>("key1") == 0);
+    REQUIRE(*props.get<std::string>("key2") == "string");
+  }
 }
