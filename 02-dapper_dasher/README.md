@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/c++-black?logo=c++&style=for-the-badge)](https://learnxinyminutes.com/c++/)
+[![](https://img.shields.io/badge/c++-black?logo=cplusplus&style=for-the-badge)](https://learnxinyminutes.com/c++/)
 
 ![gamelplay](https://github.com/user-attachments/assets/7e43affc-78b2-411a-9f99-e98e0138c67e)
 
